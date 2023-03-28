@@ -28,3 +28,31 @@ CREATE TABLE affetti_svil.assegnatario (
 	data_insert date NOT NULL,
 	data_update date NOT NULL
 );
+CREATE TABLE affetti_svil.contraente (
+	id serial4 NOT NULL,
+	nome varchar NOT NULL,
+	cognome varchar NOT NULL,
+	telefono int4 NOT NULL,
+	indirizzo_residenza varchar NOT NULL,
+	indirizzo_domicilio varchar NOT NULL,
+	codice_fiscale varchar NOT NULL,
+	cap int4 NOT NULL,
+	email varchar NOT NULL,
+	utenti varchar NOT NULL,
+	data_insert date NOT NULL,
+	data_update date NOT NULL,
+	CONSTRAINT contraente_pkey PRIMARY KEY (id)
+);
+CREATE TABLE affetti_svil.utenti (
+	username varchar NOT NULL,
+	"password" varchar NOT NULL
+);
+CREATE TABLE affetti_svil.posto (
+	id serial4 NOT NULL,
+	loculo int4 NOT NULL,
+	fornice int4 NOT NULL,
+	tipo varchar NOT NULL,
+	utenti varchar NOT NULL,
+	data_insert date NOT NULL,
+	data_update date NOT NULL
+);
