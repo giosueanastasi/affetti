@@ -10,8 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.pittysoft.affetti.entity.Posto;
 import it.pittysoft.affetti.entity.Users;
+import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
+import it.pittysoft.affetti.service.PostoService;
 import it.pittysoft.affetti.service.UsersService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -23,17 +26,34 @@ public class UsersController {
 	@Autowired
 	UsersService usersService;
 	
+	@Autowired
+	PostoService postoService;
+	
 	@GetMapping(path = UserLinks.LIST_USERS)
     public ResponseEntity<?> listUsers() {
-        log.info("UsersController:  list users");
+        log.info("ApiController:  list users");
         List<Users> resource = usersService.getUsers();
         return ResponseEntity.ok(resource);
     }
 	
 	@PostMapping(path = UserLinks.ADD_USER)
 	public ResponseEntity<?> saveUser(@RequestBody Users user) {
-        log.info("UsersController:  list users");
+        log.info("ApiController:  list users");
         Users resource = usersService.saveUser(user);
+        return ResponseEntity.ok(resource);
+    }
+	
+	@GetMapping(path = PostoLinks.LIST_POSTI)
+    public ResponseEntity<?> listPosti() {
+        log.info("ApiController:  list posti");
+        List<Posto> resource = postoService.getPosti();
+        return ResponseEntity.ok(resource);
+    }
+	
+	@PostMapping(path = PostoLinks.ADD_POSTO)
+	public ResponseEntity<?> savePosto(@RequestBody Posto posto) {
+        log.info("ApiController:  list posti");
+        Posto resource = postoService.savePosto(posto);
         return ResponseEntity.ok(resource);
     }
 }
