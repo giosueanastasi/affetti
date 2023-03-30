@@ -10,35 +10,36 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Posto {
+public class Domanda {
 	
 	@Id
 	@Column
     private long id;
 
     @Column
-    @NotNull(message="{NotNull.Posto.fornice}")
-    private String fornice;
+    @NotNull(message="{NotNull.Domanda.protocollo}")
+    private long protocollo;
     
     @Column
-    @NotNull(message="{NotNull.Posto.loculo}")
-    private String loculo;
-   
-    @Column
-    @Null(message="{Null.Posto.tipo}")
-    private String tipo;
+    @Null(message="{Null.Domanda.stato}")
+    private String stato;
     
     @Column
-    @NotNull(message="{NotNull.Posto.utenti}")
+    @NotNull(message="{NotNull.Domanda.utenti}")
     private String utenti;
     
     @Column
-    @Null(message="{Null.Posto.data_insert}")
+    @NotNull(message="{NotNull.Domanda.data_insert}")
     private String data_insert;
+   
+    @Column
+    @NotNull(message="{NotNull.Domanda.data_update}")
+    private String data_update;
     
     @Column
-    @NotNull(message="{NotNull.Posto.data_update}")
-    private String data_update;
+    @NotNull(message="{NotNull.Domanda.fk_contraente}")
+    private long fk_contraentet;
+    
     
 
 }
