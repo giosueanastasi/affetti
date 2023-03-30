@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import it.pittysoft.affetti.entity.Contraente;
 import it.pittysoft.affetti.entity.Posto;
 import it.pittysoft.affetti.entity.Users;
+import it.pittysoft.affetti.links.ContraenteLinks;
 import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
+import it.pittysoft.affetti.service.ContraenteService;
 import it.pittysoft.affetti.service.PostoService;
 import it.pittysoft.affetti.service.UsersService;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +31,9 @@ public class UsersController {
 	
 	@Autowired
 	PostoService postoService;
+	
+	@Autowired
+	ContraenteService contraenteService;
 	
 	@GetMapping(path = UserLinks.LIST_USERS)
     public ResponseEntity<?> listUsers() {
@@ -54,6 +60,21 @@ public class UsersController {
 	public ResponseEntity<?> savePosto(@RequestBody Posto posto) {
         log.info("ApiController:  list posti");
         Posto resource = postoService.savePosto(posto);
+        return ResponseEntity.ok(resource);
+    }
+	
+	
+	@GetMapping(path = ContraenteLinks.LIST_CONTRAENTI)
+    public ResponseEntity<?> listContraenti() {
+        log.info("ApiController:  list contraenti");
+        List<Contraente> resource = contraenteService.getContraenti();
+        return ResponseEntity.ok(resource);
+    }
+	
+	@PostMapping(path = ContraenteLinks.ADD_CONTRAENTE)
+	public ResponseEntity<?> saveContraente(@RequestBody Contraente contraente) {
+        log.info("ApiController:  list posti");
+        Contraente resource = contraenteService.saveContraente(contraente);
         return ResponseEntity.ok(resource);
     }
 }

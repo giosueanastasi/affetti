@@ -17,12 +17,23 @@ public class Posto {
     private long id;
 
     @Column
+    @NotNull(message="{NotNull.Posto.fornice}")
+    private String fornice;
+    
+    @Column
     @NotNull(message="{NotNull.Posto.loculo}")
     private String loculo;
     
     @Column
-    @NotNull(message="{NotNull.Posto.loculo}")
-    private String fornice;
+    @NotNull(message="{NotNull.Posto.utenti}")
+    private String utenti;
     
+    @Column
+    @NotNull(message="{NotNull.Posto.data_insert}")
+    private int data_insert;
+    
+    @Column
+    @NotNull(message="{NotNull.Posto.data_update}")
+    private int data_update;
 
 }
