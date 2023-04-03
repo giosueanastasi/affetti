@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,7 +17,7 @@ import { HomeComponent } from './guest/home/home.component';
 import { AdminComponent } from './admin/admin/admin.component';
 import { NotFoundComponent } from './error/not-found/not-found.component';
 import { UnauthorizedComponent } from './error/unauthorized/unauthorized.component';
-import { PostiComponent } from './anagrafiche/posto/posto.component';
+import { PostiComponent } from './anagrafiche/posto/posti.component';
 
 // state related imports
 // import { StoreModule } from '@ngrx/store';

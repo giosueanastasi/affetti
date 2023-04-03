@@ -19,18 +19,18 @@
             <input type="text" class="form-control" formControlName="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
           </div>
         </div>
+        <app-display-board
+        [userCount]="userCount"
+        (getUsersEvent)="getAllUsers()"
+       >
+       </app-display-board>
         <button type="submit" [disabled]="!userForm.valid" class="btn btn-danger">Create</button>
       </form>
     </div>
     <div class="col-md-4 mrgnbtm">
-      <app-display-board
-       [userCount]="userCount"
-       (getUsersEvent)="getAllUsers()"
-      >
-      </app-display-board>
     </div>
   </div>
-
+  
   <h2>Users</h2>
   <table class="table table-bordered">
     <thead>

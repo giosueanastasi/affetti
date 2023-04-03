@@ -1,28 +1,48 @@
-<div>
-<h2>Users</h2>
-  <table class="table table-bordered">
+<div class="container">
+  <div class="row">
+    <div class="col-md-7 mrgnbtm">
+      <h2>Create Posto</h2>
+      <form [formGroup]="postoForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="loculo">ID</label>
+            <input type="text" class="form-control" formControlName="id" id="loculo" aria-describedby="loculolHelp" placeholder="id">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="id">Loculo</label>
+            <input type="text" class="form-control" formControlName="loculo" id="id" aria-describedby="idlHelp" placeholder="loculo">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="loculo">Fornice</label>
+            <input type="text" class="form-control" formControlName="fornice" id="loculo" aria-describedby="loculolHelp" placeholder="fornice">
+          </div>
+        </div>
+        <button type="submit" [disabled]="!postoForm.valid" class="btn btn-danger">Create</button>
+      </form>
+    </div>
+    <div class="col-md-4 mrgnbtm">
+    </div>
+   </div>
+
+
+    <h2>Posti</h2>
+    <table class="table table-bordered">
     <thead>
       <tr>
         <th>Id</th>
         <th>loculo</th>
         <th>fornice</th>
-        <th>tipo</th>
-        <th>user</th>
-        <th>data update</th>
-        <th>data insert</th>
       </tr>
     </thead>
     <tbody>
-        <tr>
-        <th>posto.id</th>
-        <th>posto.loculo</th>
-        <th>posto.fornice</th>
-        <th>posto.tipo</th>
-        <th>posto.user</th>
-        <th>posto.data_update</th>
-        <th>posto.data_insert</th>
+      <tr *ngFor="let posto of posti; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{posto.id}}</td>
+        <td>{{posto.loculo}}</td>
+        <td>{{posto.fornice}}</td>
       </tr>
     </tbody>
-  </table>
-</div>
+    </table>
+ </div>
+
 

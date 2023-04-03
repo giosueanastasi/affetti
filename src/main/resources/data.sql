@@ -21,7 +21,7 @@ CREATE TABLE posto (
 	fornice VARCHAR(250) NOT NULL
 );
 
-INSERT INTO posto (ID, LOCULO,fornice) VALUES
+INSERT INTO posto (Id, loculo,fornice) VALUES
   (1, 'first', 'last 1'),
   (2, 'first', 'last 2'),
   (3, 'first', 'last 3');
@@ -36,9 +36,10 @@ CREATE TABLE domanda (
 	utenti varchar NOT NULL,
 	data_insert date NOT NULL,
 	data_update date NOT NULL,
-	fk_contraente INT NOT NULL,
+	fk_contraente INT NOT NULL
+	);
 
 INSERT INTO domanda (id, protocollo, data_domanda,stato,utenti, data_insert, data_update, fk_contraente) VALUES
-  (1, 55430, 2022-02-01, 2022-01-08, 'lavorazione','tommaso', 2022-01-08, 2022-01-08, 010),
-  (2, 54789, 2022-02-05, 2022-01-07, 'lavorazione', 'tommaso', 2022-01-07, 2022-01-07, 020),
-  (3, 42587, 2022-02-07, 2022-01-01, 'accolta', 'tommaso', 2022-01-01, 2022-01-01, 008);
+  (1, 55430, '2022-02-01',  'lavorazione','tommaso', '2022-01-08', '2022-01-08', 010),
+  (2, 54789, '2022-02-05',  'lavorazione', 'tommaso', '2022-01-07', '2022-01-07', 020),
+  (3, 42587, '2022-02-07',  'accolta', 'tommaso', '2022-01-01', '2022-01-01', 008);
