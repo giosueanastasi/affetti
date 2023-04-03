@@ -16,7 +16,7 @@ import { HomeComponent } from './guest/home/home.component';
 import { AdminComponent } from './admin/admin/admin.component';
 import { NotFoundComponent } from './error/not-found/not-found.component';
 import { UnauthorizedComponent } from './error/unauthorized/unauthorized.component';
-import { PostoComponent } from './anagrafiche/posto/posto.component';
+import { PostiComponent } from './anagrafiche/posto/posto.component';
 
 // state related imports
 // import { StoreModule } from '@ngrx/store';
@@ -37,7 +37,7 @@ import { PostoComponent } from './anagrafiche/posto/posto.component';
     AdminComponent,
     NotFoundComponent,
     UnauthorizedComponent,
-    PostoComponent
+    PostiComponent
   ],
   imports: [
     BrowserModule,

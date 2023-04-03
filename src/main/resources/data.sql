@@ -29,14 +29,14 @@ INSERT INTO posto (ID, LOCULO,fornice) VALUES
 DROP TABLE IF EXISTS domanda;
 
 CREATE TABLE domanda (
-	id serial4 NOT NULL,
-	protocollo int4 NOT NULL,
+	id INT NOT NULL,
+	protocollo int NOT NULL,
 	data_domanda date NOT NULL,
 	stato varchar,
 	utenti varchar NOT NULL,
 	data_insert date NOT NULL,
 	data_update date NOT NULL,
-	fk_contraente serial4 NOT NULL,
+	fk_contraente INT NOT NULL,
 
 INSERT INTO domanda (id, protocollo, data_domanda,stato,utenti, data_insert, data_update, fk_contraente) VALUES
   (1, 55430, 2022-02-01, 2022-01-08, 'lavorazione','tommaso', 2022-01-08, 2022-01-08, 010),
