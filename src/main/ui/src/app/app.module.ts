@@ -8,8 +8,15 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
 import { DisplayBoardComponent } from './display-board.component';
-import { UsersComponent } from './users.component';
+import { UsersComponent } from './anagrafiche/user/users.component';
 import { environment } from '../environments/environment';
+import { LoginComponent } from './guest/login/login.component';
+import { RegisterComponent } from './guest/register/register.component';
+import { HomeComponent } from './guest/home/home.component';
+import { AdminComponent } from './admin/admin/admin.component';
+import { NotFoundComponent } from './error/not-found/not-found.component';
+import { UnauthorizedComponent } from './error/unauthorized/unauthorized.component';
+import { PostoComponent } from './anagrafiche/posto/posto.component';
 
 // state related imports
 // import { StoreModule } from '@ngrx/store';
@@ -23,7 +30,14 @@ import { environment } from '../environments/environment';
     AppComponent,
     HeaderComponent,
     DisplayBoardComponent,
-    UsersComponent
+    UsersComponent,
+    LoginComponent,
+    RegisterComponent,
+    HomeComponent,
+    AdminComponent,
+    NotFoundComponent,
+    UnauthorizedComponent,
+    PostoComponent
   ],
   imports: [
     BrowserModule,
