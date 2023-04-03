@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PostiComponent } from './posto.component';
+import { PostiComponent } from './posti.component';
 
 describe('PostoComponent', () => {
   let component: PostiComponent;
