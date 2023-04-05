@@ -29,4 +29,23 @@ export class AppService {
 	return this.http.post(this.rootURL + '/posto', posto);
   }
 
+  getAssegnatari() {
+    return this.http.get(this.rootURL + '/assegnari');
+  }
+
+  addAssegnatario(assegnario: any, id: number) {
+    assegnario.id = id;
+	return this.http.post(this.rootURL + '/assegnario', assegnario);
+  }
+
+  getContratti() {
+    return this.http.get(this.rootURL + '/contratti');
+  }
+
+  addContratto(contratto: any, id: number) {
+    contratto.id = id;
+	return this.http.post(this.rootURL + '/contratto', contratto);
+  }
+
+
 }

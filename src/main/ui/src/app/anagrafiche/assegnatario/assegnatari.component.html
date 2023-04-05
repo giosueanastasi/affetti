@@ -1,0 +1,71 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-7 mrgnbtm">
+      <h2>Create Assegnatario</h2>
+      <form [formGroup]="assegnatarioForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" formControlName="id" id="id" aria-describedby="idlHelp" placeholder="id">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="nome">nome</label>
+            <input type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp" placeholder="nome">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="cognome">cognome</label>
+            <input type="text" class="form-control" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp" placeholder="cognome">
+          </div>
+          <div class="form-group col-md-6">
+          <label for="data_decesso">data_decesso</label>
+          <input type="text" class="form-control" formControlName="data_decesso" id="data_decesso" aria-describedby="data_decessolHelp" placeholder="data_decesso">
+          </div>
+          <div class="form-group col-md-6">
+          <label for="fk_user_modifier">fk_user_modifier</label>
+          <input type="text" class="form-control" formControlName="fk_user_modifier" id="fk_user_modifier" aria-describedby="fk_user_modifierHelp" placeholder="fk_user_modifier">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="data_update">data_update</label>
+          <input type="text" class="form-control" formControlName="data_update" id="data_update" aria-describedby="data_updatelHelp" placeholder="data_update">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="data_insert">data_insert</label>
+          <input type="text" class="form-control" formControlName="data_insert" id="data_insert" aria-describedby="data_insertlHelp" placeholder="data_insert">
+        </div>
+      </div>
+        <button type="submit" [disabled]="!assegnatarioForm.valid" class="btn btn-danger">Create</button>
+      </form>
+      </div>
+      <div class="col-md-4 mrgnbtm">
+      </div>
+   </div>
+
+    <h2>Assegnatari</h2>
+    <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>nome</th>
+        <th>cognome</th>
+        <th>data_decesso</th>
+        <th>comune_decesso</th>
+        <th>fk_user_modifier</th>
+        <th>data_update</th>
+        <th>data_insert</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let assegnatario of assegnatari; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{assegnatario.nome}}</td>
+        <td>{{assegnatario.cognome}}</td>
+        <td>{{assegnatario.data_decesso}}</td>
+        <td>{{assegnatario.comune_decesso}}</td>
+        <td>{{assegnatario.fk_user_modifier}}</td>
+        <td>{{assegnatario.data_update}}</td>
+        <td>{{assegnatario.data_insert}}</td>
+      </tr>
+    </tbody>
+    </table>
+   </div>
+

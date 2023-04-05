@@ -1,0 +1,86 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-7 mrgnbtm">
+      <h2>Create Contratto</h2>
+      <form [formGroup]="contrattoForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" formControlName="id" id="id" aria-describedby="idlHelp" placeholder="id">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="protocollo">protocollo</label>
+            <input type="text" class="form-control" formControlName="protocollo" id="protocollo" aria-describedby="protocollolHelp" placeholder="protocollo">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="data_inizio">data_inizio</label>
+            <input type="text" class="form-control" formControlName="data_inizio" id="data_inizio" aria-describedby="data_iniziolHelp" placeholder="data_inizio">
+          </div>
+          <div class="form-group col-md-6">
+          <label for="data_scadenza">data_scadenza</label>
+          <input type="text" class="form-control" formControlName="data_scadenza" id="data_scadenza" aria-describedby="data_scadenzalHelp" placeholder="data_scadenza">
+          </div>
+          <div class="form-group col-md-6">
+          <label for="stato">stato</label>
+          <input type="text" class="form-control" formControlName="stato" id="stato" aria-describedby="statoHelp" placeholder="stato">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="fk_domanda_loculo">fk_domanda_loculo</label>
+          <input type="text" class="form-control" formControlName="fk_domanda_loculo" id="fk_domanda_loculo" aria-describedby="fk_domanda_loculolHelp" placeholder="fk_domanda_loculo">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="fk_domanda_disposizione">fk_domanda_disposizione</label>
+          <input type="text" class="form-control" formControlName="fk_domanda_disposizione" id="fk_domanda_disposizione" aria-describedby="fk_domanda_disposizionelHelp" placeholder="fk_domanda_disposizione">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="fk_user_modifier">fk_user_modifier</label>
+          <input type="text" class="form-control" formControlName="fk_user_modifier" id="fk_user_modifier" aria-describedby="fk_user_modifierlHelp" placeholder="fk_user_modifier">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="data_update">data_update</label>
+          <input type="text" class="form-control" formControlName="data_update" id="data_update" aria-describedby="data_updatelHelp" placeholder="data_update">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="data_insert">data_insert</label>
+          <input type="text" class="form-control" formControlName="data_insert" id="data_insert" aria-describedby="data_insertlHelp" placeholder="data_insert">
+        </div>
+        </div>
+        <button type="submit" [disabled]="!contrattoForm.valid" class="btn btn-danger">Create</button>
+      </form>
+    </div>
+    <div class="col-md-4 mrgnbtm">
+    </div>
+   </div>
+
+  <h2>Contratti</h2>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>protocollo</th>
+        <th>data_inizio</th>
+        <th>data_scadenza</th>
+        <th>stato</th>
+        <th>fk_domanda_loculo</th>
+        <th>fk_domanda_disposizione</th>
+        <th>fk_user_modifier</th>
+        <th>data_update</th>
+        <th>data_insert</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contratto of contratti; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{contratto.protocollo}}</td>
+        <td>{{contratto.data_inizio}}</td>
+        <td>{{contratto.data_scadenza}}</td>
+        <td>{{contratto.stato}}</td>
+        <td>{{contratto.fk_domanda_loculo}}</td>
+        <td>{{contratto.fk_domanda_disposizione}}</td>
+        <td>{{contratto.fk_user_modifier}}</td>
+        <td>{{contratto.data_update}}</td>
+        <td>{{contratto.data_insert}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>

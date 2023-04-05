@@ -6,7 +6,7 @@
         <div class="row">
           <div class="form-group col-md-6">
             <label for="id">ID</label>
-            <input type="text" class="form-control" formControlName="id" id="loculo" aria-describedby="idlHelp" placeholder="id">
+            <input type="text" class="form-control" formControlName="id" id="id" aria-describedby="idlHelp" placeholder="id">
           </div>
           <div class="form-group col-md-6">
             <label for="loculo">Loculo</label>
@@ -56,6 +56,7 @@
     </thead>
     <tbody>
       <tr *ngFor="let posto of posti; let i = index">
+        <td>{{i + 1}}</td>
         <td>{{posto.id}}</td>
         <td>{{posto.loculo}}</td>
         <td>{{posto.fornice}}</td>
