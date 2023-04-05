@@ -10,13 +10,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import it.pittysoft.affetti.entity.Domanda;
+
 import it.pittysoft.affetti.entity.Posti;
 import it.pittysoft.affetti.entity.Users;
-import it.pittysoft.affetti.links.DomandaLinks;
 import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
-import it.pittysoft.affetti.service.DomandaService;
 import it.pittysoft.affetti.service.PostiService;
 import it.pittysoft.affetti.service.UsersService;
 import lombok.extern.slf4j.Slf4j;
@@ -32,8 +30,6 @@ public class Controller {
 	@Autowired
 	PostiService postiService;
 	
-	@Autowired
-	DomandaService domandaService;
 	
 	@GetMapping(path = UserLinks.LIST_USERS)
     public ResponseEntity<?> listUsers() {
@@ -62,7 +58,5 @@ public class Controller {
         Posti resource = postiService.savePosto(posto);
         return ResponseEntity.ok(resource);
     }
-	
-
     
 }

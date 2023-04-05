@@ -27,5 +27,10 @@ public class Users {
     @Column
     @NotNull(message="{NotNull.User.email}")
     private String email;
+    
+    @Column
+    @NotNull(message="{NotNull.User.fk_comune}")
+    private String fk_comune;
+
 
 }

@@ -41,6 +41,10 @@ public class Posti {
     @NotNull(message="{NotNull.Posto.data_update}")
     private String data_update;
     
+    @Column
+    @NotNull(message="{NotNull.Posto.fk_user_modifier}")
+    private String fk_user_modifier;
+    
     
     
 
