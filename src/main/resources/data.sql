@@ -65,6 +65,7 @@ CREATE TABLE posto (
 	FOREIGN key(fk_user_modifier ) references users (id)
 );
 
+<<<<<<< HEAD
 INSERT INTO posto (id, loculo,fornice,tipo,fk_user_modifier ,data_update,data_insert) VALUES
   (1, 15, 150, 'intermedia' ,2, '2023-09-25','2023-09-25'),
   (2, 1, 8, 'monumentale',3,'2023-03-04','2020-02-8'),
@@ -150,3 +151,27 @@ INSERT INTO contratto (id, protocollo,data_inizio,data_scadenza,stato,fk_domanda
   (1,106,'2023-09-25','2058-09-25','in lavorazione',2,3,1, '2023-09-25','2023-09-25'),
   (2,405, '2023-03-4','2058-03-4','eseguito',1,2,2,'2023-03-04','2020-02-8'),
   (3, 450, '2023-04-8', '2058-04-8','sto elaborando',3,1,3, '2023-04-08','2023-04-8'); 
+=======
+INSERT INTO posto (Id, loculo,fornice) VALUES
+  (1, 'first', 'last 1'),
+  (2, 'first', 'last 2'),
+  (3, 'first', 'last 3');
+  
+DROP TABLE IF EXISTS domanda;
+
+CREATE TABLE domanda (
+	id INT NOT NULL,
+	protocollo int NOT NULL,
+	data_domanda date NOT NULL,
+	stato varchar,
+	utenti varchar NOT NULL,
+	data_insert date NOT NULL,
+	data_update date NOT NULL,
+	fk_contraente INT NOT NULL
+	);
+
+INSERT INTO domanda (id, protocollo, data_domanda,stato,utenti, data_insert, data_update, fk_contraente) VALUES
+  (1, 55430, '2022-02-01',  'lavorazione','tommaso', '2022-01-08', '2022-01-08', 010),
+  (2, 54789, '2022-02-05',  'lavorazione', 'tommaso', '2022-01-07', '2022-01-07', 020),
+  (3, 42587, '2022-02-07',  'accolta', 'tommaso', '2022-01-01', '2022-01-01', 008);
+>>>>>>> refs/heads/dev_2stefano

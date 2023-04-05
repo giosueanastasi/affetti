@@ -5,9 +5,10 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
-import it.pittysoft.affetti.entity.Posto;
+import it.pittysoft.affetti.entity.Domanda;
+import it.pittysoft.affetti.entity.Posti;
 import it.pittysoft.affetti.entity.Users;
 
 
 @RepositoryRestResource()
-public interface PostoRepository extends JpaRepository<Posto, Integer>, JpaSpecificationExecutor<Posto>, QuerydslPredicateExecutor<Posto> {}
+public interface DomandaRepository extends JpaRepository<Domanda, Integer>, JpaSpecificationExecutor<Domanda>, QuerydslPredicateExecutor<Domanda> {}

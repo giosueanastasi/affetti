@@ -1,3 +1,23 @@
 .mrgnbtm {
   margin-top: 20px;
 }
+
+/* navigate menu*/
+.sidebar-content {
+  display: flex;
+  left: 0;
+  float: left;
+  bottom : 0;
+  align-items: stretch;
+  justify-content: space-around;
+  flex-direction: column;
+  color: rgb(0, 0, 0);
+  background-color: #ff0d0d;
+  font-size: 16px;
+  padding: 16px;
+  height: 100%;
+  margin-left:initial;
+}
+
+
+

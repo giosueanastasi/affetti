@@ -11,15 +11,12 @@
     <li class="nav-item">
       <a [routerLink]="['/admin']" class="nav-link">Admin</a>
     </li>
-    <li class="nav-item">
-      <a [routerLink]="['/user']" class="nav-link">User</a>
-    </li>
+    
     <li class="nav-item">
       <a [routerLink]="['/home']" class="nav-link">Home</a>
     </li>
-    
+  
   </div>
-
   <div class="navbar-nav ms-auto">
     <li class="nav-item">
       <a href="" class="nav-link">Sing up</a>
@@ -32,5 +29,15 @@
 
 
 <app-header></app-header>
+
+
+
+<div class="sidebar-content">
+    <h2>Menu</h2>
+  <ul>
+      <li><a [routerLink]="['/posto']" >Posto</a></li>
+    <li><a [routerLink]="['/user']" >User</a></li>
+  </ul>
+</div>
 
 <router-outlet></router-outlet>

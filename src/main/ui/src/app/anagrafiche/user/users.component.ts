@@ -1,8 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from '../../app.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+
+
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -46,9 +49,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }
-
-
-
   
 /*
   @Input() users: any[];
