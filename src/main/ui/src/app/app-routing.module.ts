@@ -6,6 +6,7 @@ import { UsersComponent } from './anagrafiche/user/users.component';
 import { PostiComponent } from './anagrafiche/posto/posti.component';
 
 
+
 const routes: Routes = [
   {path:'home', component: HomeComponent},
   {path:'admin', component: AdminComponent},

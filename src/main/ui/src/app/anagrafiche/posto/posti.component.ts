@@ -20,7 +20,12 @@ title = 'angular-nodejs-example';
 postoForm = new FormGroup({
   id: new FormControl('', Validators.nullValidator && Validators.required),
   loculo: new FormControl('', Validators.nullValidator && Validators.required),
-  fornice: new FormControl('', Validators.nullValidator && Validators.required)
+  fornice: new FormControl('', Validators.nullValidator && Validators.required),
+  data_insert: new FormControl('', Validators.nullValidator && Validators.required),
+  data_update: new FormControl('', Validators.nullValidator && Validators.required),
+  tipo: new FormControl('', Validators.nullValidator && Validators.required),
+  utenti: new FormControl('', Validators.nullValidator && Validators.required),
+
 });
 
 posti: any[] = [];

@@ -3,6 +3,8 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
+
+
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
@@ -39,6 +41,7 @@ import { PostiComponent } from './anagrafiche/posto/posti.component';
     NotFoundComponent,
     UnauthorizedComponent,
     PostiComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -46,6 +49,8 @@ import { PostiComponent } from './anagrafiche/posto/posti.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    
+
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
      * function or object map of reducer functions. If passed an object of

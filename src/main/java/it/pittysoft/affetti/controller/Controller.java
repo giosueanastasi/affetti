@@ -11,26 +11,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import it.pittysoft.affetti.entity.Domanda;
-import it.pittysoft.affetti.entity.Posto;
+import it.pittysoft.affetti.entity.Posti;
 import it.pittysoft.affetti.entity.Users;
 import it.pittysoft.affetti.links.DomandaLinks;
 import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
 import it.pittysoft.affetti.service.DomandaService;
-import it.pittysoft.affetti.service.PostoService;
+import it.pittysoft.affetti.service.PostiService;
 import it.pittysoft.affetti.service.UsersService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @RestController
 @RequestMapping("/api/")
-public class UsersController {
+public class Controller {
 	
 	@Autowired
 	UsersService usersService;
 	
 	@Autowired
-	PostoService postoService;
+	PostiService postiService;
 	
 	@Autowired
 	DomandaService domandaService;
@@ -52,28 +52,17 @@ public class UsersController {
 	@GetMapping(path = PostoLinks.LIST_POSTI)
     public ResponseEntity<?> listPosti() {
         log.info("ApiController:  list posti");
-        List<Posto> resource = postoService.getPosti();
+        List<Posti> resource = postiService.getPosti();
         return ResponseEntity.ok(resource);
     }
 	
 	@PostMapping(path = PostoLinks.ADD_POSTO)
-	public ResponseEntity<?> savePosto(@RequestBody Posto posto) {
+	public ResponseEntity<?> savePosto(@RequestBody Posti posto) {
         log.info("ApiController:  list posti");
-        Posto resource = postoService.savePosto(posto);
+        Posti resource = postiService.savePosto(posto);
         return ResponseEntity.ok(resource);
     }
 	
-	@GetMapping(path = DomandaLinks.LIST_DOMANDE)
-    public ResponseEntity<?> listDomande() {
-        log.info("ApiController:  list domande");
-        List<Domanda> resource = domandaService.getDomande();
-        return ResponseEntity.ok(resource);
-    }
-	
-	@PostMapping(path = DomandaLinks.ADD_DOMANDA)
-	public ResponseEntity<?> saveDomanda(@RequestBody Domanda domanda) {
-        log.info("ApiController:  list domande");
-        Domanda resource = domandaService.saveDomanda(domanda);
-        return ResponseEntity.ok(resource);
-    }
+
+    
 }

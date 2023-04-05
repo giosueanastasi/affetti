@@ -10,7 +10,8 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Posto {
+public class Posti {
+	
 	
 	@Id
 	@Column
@@ -23,9 +24,9 @@ public class Posto {
     @Column
     @NotNull(message="{NotNull.Posto.loculo}")
     private String loculo;
-   
+    
     @Column
-    @Null(message="{Null.Posto.tipo}")
+    @NotNull(message="{NotNull.Posto.tipo}")
     private String tipo;
     
     @Column
@@ -33,12 +34,14 @@ public class Posto {
     private String utenti;
     
     @Column
-    @Null(message="{Null.Posto.data_insert}")
+    @NotNull(message="{NotNull.Posto.data_insert}")
     private String data_insert;
     
     @Column
     @NotNull(message="{NotNull.Posto.data_update}")
     private String data_update;
+    
+    
     
 
 }
