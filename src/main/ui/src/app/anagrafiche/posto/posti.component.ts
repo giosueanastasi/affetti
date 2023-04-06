@@ -24,7 +24,7 @@ postoForm = new FormGroup({
   data_insert: new FormControl('', Validators.nullValidator && Validators.required),
   data_update: new FormControl('', Validators.nullValidator && Validators.required),
   tipo: new FormControl('', Validators.nullValidator && Validators.required),
-  fk_users_modifier: new FormControl('', Validators.nullValidator && Validators.required)
+  fk_user_modifier: new FormControl('', Validators.nullValidator && Validators.required),
 
 });
 
