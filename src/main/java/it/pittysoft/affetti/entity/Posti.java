@@ -29,9 +29,6 @@ public class Posti {
     @NotNull(message="{NotNull.Posto.tipo}")
     private String tipo;
     
-    @Column
-    @NotNull(message="{NotNull.Posto.utenti}")
-    private String utenti;
     
     @Column
     @NotNull(message="{NotNull.Posto.data_insert}")

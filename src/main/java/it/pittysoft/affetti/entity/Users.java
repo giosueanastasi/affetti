@@ -17,16 +17,16 @@ public class Users {
     private long id;
 
     @Column
-    @NotNull(message="{NotNull.User.firstName}")
-    private String firstName;
+    @NotNull(message="{NotNull.User.username}")
+    private String username;
     
     @Column
-    @NotNull(message="{NotNull.User.lastName}")
-    private String lastName;
+    @NotNull(message="{NotNull.User.password}")
+    private String password;
     
     @Column
-    @NotNull(message="{NotNull.User.email}")
-    private String email;
+    @NotNull(message="{NotNull.User.ruolo}")
+    private String ruolo;
     
     @Column
     @NotNull(message="{NotNull.User.fk_comune}")
