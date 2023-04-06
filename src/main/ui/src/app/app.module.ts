@@ -20,6 +20,9 @@ import { AdminComponent } from './admin/admin/admin.component';
 import { NotFoundComponent } from './error/not-found/not-found.component';
 import { UnauthorizedComponent } from './error/unauthorized/unauthorized.component';
 import { PostiComponent } from './anagrafiche/posto/posti.component';
+import { ComuniComponent } from './anagrafiche/comune/comuni.component';
+import { ContraentiComponent } from './anagrafiche/contraente/contraenti.component';
+
 
 // state related imports
 // import { StoreModule } from '@ngrx/store';
@@ -40,8 +43,9 @@ import { PostiComponent } from './anagrafiche/posto/posti.component';
     AdminComponent,
     NotFoundComponent,
     UnauthorizedComponent,
-    PostiComponent
-    
+    PostiComponent,
+    ContraentiComponent,
+    ComuniComponent
   ],
   imports: [
     BrowserModule,

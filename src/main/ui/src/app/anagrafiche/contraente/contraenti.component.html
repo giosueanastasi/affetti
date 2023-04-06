@@ -1,0 +1,157 @@
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-7 mrgnbtm">
+      <h2>Create Contraente</h2>
+      <form [formGroup]="contraenteForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" formControlName="id" id="id" aria-describedby="idlHelp" placeholder="id">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="nome">nome</label>
+            <input type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp" placeholder="nome">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="cognome">cognome</label>
+            <input type="text" class="form-control" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp" placeholder="cognome">
+          </div>
+          <div class="form-group col-md-6">
+          <label for="comune_nascita">comune_nascita</label>
+          <input type="text" class="form-control" formControlName="comune_nascita" id="comune_nascita" aria-describedby="comune_nascitalHelp" placeholder="comune_nascita">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="provincia_nascita">provincia_nascita</label>
+            <input type="text" class="form-control" formControlName="provincia_nascita" id="provincia_nascita" aria-describedby="provincia_nascitalHelp" placeholder="provincia_nascita">
+            </div>
+  
+  
+            <div class="form-group col-md-6">
+            <label for="stato_nascita">stato_nascita</label>
+            <input type="text" class="form-control" formControlName="stato_nascita" id="stato_nascita" aria-describedby="stato_nascitalHelp" placeholder="stato_nascita">
+            </div>
+  
+            <div class="form-group col-md-6">
+            <label for="data_nascita">data_nascita</label>
+            <input type="text" class="form-control" formControlName="data_nascita" id="data_nascita" aria-describedby="data_nascitalHelp" placeholder="data_nascita">
+            </div>
+  
+  
+            <div class="form-group col-md-6">
+            <label for="comune_residenza">comune_residenza</label>
+            <input type="text" class="form-control" formControlName="comune_residenza" id="comune_residenza" aria-describedby="comune_residenzalHelp" placeholder="comune_residenza">
+            </div>
+  
+            <div class="form-group col-md-6">
+            <label for="provincia_residenza">provincia_residenza</label>
+            <input type="text" class="form-control" formControlName="provincia_residenza" id="provincia_residenza" aria-describedby="provincia_residenzalHelp" placeholder="provincia_residenza">
+            </div>
+  
+  
+              <div class="form-group col-md-6">
+            <label for="via_residenza">via_residenza</label>
+            <input type="text" class="form-control" formControlName="via_residenza" id="via_residenza" aria-describedby="via_residenzalHelp" placeholder="via_residenza">
+            </div>
+  
+  
+          <div class="form-group col-md-6">
+            <label for="civico_residenza">civico_residenza</label>
+            <input type="text" class="form-control" formControlName="civico_residenza" id="civico_residenza" aria-describedby="civico_residenzalHelp" placeholder="civico_residenza">
+            </div>
+  
+            <div class="form-group col-md-6">
+            <label for="cap_residenza">cap_residenza</label>
+            <input type="text" class="form-control" formControlName="cap_residenza" id="cap_residenza" aria-describedby="cap_residenzalHelp" placeholder="cap_residenza">
+            </div>
+  
+            <div class="form-group col-md-6">
+            <label for="telefono">telefono</label>
+            <input type="text" class="form-control" formControlName="telefono" id="telefono" aria-describedby="telefonolHelp" placeholder="telefono">
+            </div>
+  
+            <div class="form-group col-md-6">
+            <label for="codice_fiscale">codice_fiscale</label>
+            <input type="text" class="form-control" formControlName="codice_fiscale" id="codice_fiscale" aria-describedby="codice_fiscalelHelp" placeholder="codice_fiscale">
+            </div>
+  
+           <div class="form-group col-md-6">
+            <label for="email">email</label>
+            <input type="text" class="form-control" formControlName="email" id="email" aria-describedby="emaillHelp" placeholder="email">
+            </div>
+  
+            <div class="form-group col-md-6">
+            <label for="note">note</label>
+            <input type="text" class="form-control" formControlName="note" id="note" aria-describedby="notelHelp" placeholder="note">
+            </div>
+  
+          <div class="form-group col-md-6">
+          <label for="fk_user_modifier">fk_user_modifier</label>
+          <input type="text" class="form-control" formControlName="fk_user_modifier" id="fk_user_modifier" aria-describedby="fk_user_modifierHelp" placeholder="fk_user_modifier">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="data_update">data_update</label>
+          <input type="text" class="form-control" formControlName="data_update" id="data_update" aria-describedby="data_updatelHelp" placeholder="data_update">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="data_insert">data_insert</label>
+          <input type="text" class="form-control" formControlName="data_insert" id="data_insert" aria-describedby="data_insertlHelp" placeholder="data_insert">
+        </div>
+      </div>
+        <button type="submit" [disabled]="!contraenteForm.valid" class="btn btn-danger">Create</button>
+      </form>
+      </div>
+      <div class="col-md-4 mrgnbtm">
+      </div>
+   </div>
+    <h2>Contraente</h2>
+    <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>nome</th>
+        <th>cognome</th>
+        <th>comune_nascita</th>
+       <th>provincia_nascita</th>
+       <th>stato_nascita</th>
+       <th>data_nascita</th>
+       <th>comune_residenza</th>
+       <th>provincia_residenza</th>
+       <th>via_residenza</th>
+       <th>civico_residenza</th>
+       <th>cap_residenza</th>
+        <th>telefono</th>
+       <th>codice_fiscale</th>
+       <th>email</th>
+       <th>note</th>
+        <th>fk_user_modifier</th>
+        <th>data_update</th>
+        <th>data_insert</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let contraente of contraenti; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{contraente.nome}}</td>
+        <td>{{contraente.cognome}}</td>
+        <td>{{contraente.comune_nascita}}</td>
+        <td>{{contraente.provincia_nascita}}</td>
+        <td>{{contraente.stato_nascita}}</td>
+        <td>{{contraente.data_nascita}}</td>
+        <td>{{contraente.comune_residenza}}</td>
+        <td>{{contraente.provincia_residenza}}</td>
+        <td>{{contraente.via_residenza}}</td>
+        <td>{{contraente.civico_residenza}}</td>
+        <td>{{contraente.cap_residenza}}</td>
+        <td>{{contraente.telefono}}</td>
+        <td>{{contraente.codice_fiscale}}</td>
+        <td>{{contraente.email}}</td>
+        <td>{{contraente.note}}</td>
+        <td>{{contraente.fk_user_modifier}}</td>
+        <td>{{contraente.data_update}}</td>
+        <td>{{contraente.data_insert}}</td>
+      </tr>
+    </tbody>
+    </table>
+   </div>
+

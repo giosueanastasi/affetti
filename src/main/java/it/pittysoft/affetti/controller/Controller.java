@@ -10,11 +10,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import it.pittysoft.affetti.entity.Comuni;
+import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Posti;
 import it.pittysoft.affetti.entity.Users;
+import it.pittysoft.affetti.links.ComuneLinks;
+import it.pittysoft.affetti.links.ContraenteLinks;
 import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
+import it.pittysoft.affetti.service.ComuniService;
+import it.pittysoft.affetti.service.ContraentiService;
 import it.pittysoft.affetti.service.PostiService;
 import it.pittysoft.affetti.service.UsersService;
 import lombok.extern.slf4j.Slf4j;
@@ -30,6 +35,11 @@ public class Controller {
 	@Autowired
 	PostiService postiService;
 	
+	@Autowired
+	ContraentiService contraentiService;
+	
+	@Autowired
+	ComuniService comuniService;
 	
 	@GetMapping(path = UserLinks.LIST_USERS)
     public ResponseEntity<?> listUsers() {
@@ -59,4 +69,32 @@ public class Controller {
         return ResponseEntity.ok(resource);
     }
     
+	
+	@GetMapping(path = ContraenteLinks.LIST_CONTRAENTI)
+    public ResponseEntity<?> listContraenti() {
+        log.info("ApiController:  list contraenti");
+        List<Contraenti> resource = contraentiService.getContraenti();
+        return ResponseEntity.ok(resource);
+    }
+	
+	@PostMapping(path = ContraenteLinks.ADD_CONTRAENTE)
+	public ResponseEntity<?> saveContraente(@RequestBody Contraenti contraente) {
+        log.info("ApiController:  list contraenti");
+        Contraenti resource = contraentiService.saveContraente(contraente);
+        return ResponseEntity.ok(resource);
+    }
+	
+	@GetMapping(path = ComuneLinks.LIST_COMUNI)
+    public ResponseEntity<?> listComuni() {
+        log.info("ApiController:  list Comuni");
+        List<Comuni> resource = comuniService.getComuni();
+        return ResponseEntity.ok(resource);
+    }
+	
+	@PostMapping(path = ComuneLinks.ADD_COMUNE)
+	public ResponseEntity<?> saveComune(@RequestBody Comuni comune) {
+        log.info("ApiController:  list comuni");
+        Comuni resource = comuniService.saveComune(comune);
+        return ResponseEntity.ok(resource);
+	}
 }
