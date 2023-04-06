@@ -5,7 +5,7 @@
       <form [formGroup]="assegnatarioForm" (ngSubmit)="onSubmit()">
         <div class="row">
           <div class="form-group col-md-6">
-            <label for="id">ID</label>
+            <label for="id">id</label>
             <input type="text" class="form-control" formControlName="id" id="id" aria-describedby="idlHelp" placeholder="id">
           </div>
           <div class="form-group col-md-6">
@@ -21,9 +21,9 @@
           <input type="text" class="form-control" formControlName="data_decesso" id="data_decesso" aria-describedby="data_decessolHelp" placeholder="data_decesso">
           </div>
           <div class="form-group col-md-6">
-          <label for="fk_user_modifier">fk_user_modifier</label>
-          <input type="text" class="form-control" formControlName="fk_user_modifier" id="fk_user_modifier" aria-describedby="fk_user_modifierHelp" placeholder="fk_user_modifier">
-        </div>
+            <label for="comune_decesso">comune_decesso</label>
+            <input type="text" class="form-control" formControlName="comune_decesso" id="comune_decesso" aria-describedby="comune_decessolHelp" placeholder="comune_decesso">
+          </div>
         <div class="form-group col-md-6">
           <label for="data_update">data_update</label>
           <input type="text" class="form-control" formControlName="data_update" id="data_update" aria-describedby="data_updatelHelp" placeholder="data_update">
@@ -31,6 +31,10 @@
         <div class="form-group col-md-6">
           <label for="data_insert">data_insert</label>
           <input type="text" class="form-control" formControlName="data_insert" id="data_insert" aria-describedby="data_insertlHelp" placeholder="data_insert">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="fk_user_modifier">fk_user_modifier</label>
+          <input type="text" class="form-control" formControlName="fk_user_modifier" id="fk_user_modifier" aria-describedby="fk_user_modifierHelp" placeholder="fk_user_modifier">
         </div>
       </div>
         <button type="submit" [disabled]="!assegnatarioForm.valid" class="btn btn-danger">Create</button>
@@ -49,9 +53,10 @@
         <th>cognome</th>
         <th>data_decesso</th>
         <th>comune_decesso</th>
-        <th>fk_user_modifier</th>
         <th>data_update</th>
         <th>data_insert</th>
+        <th>fk_user_modifier</th>
+
       </tr>
     </thead>
     <tbody>
@@ -61,9 +66,9 @@
         <td>{{assegnatario.cognome}}</td>
         <td>{{assegnatario.data_decesso}}</td>
         <td>{{assegnatario.comune_decesso}}</td>
-        <td>{{assegnatario.fk_user_modifier}}</td>
         <td>{{assegnatario.data_update}}</td>
         <td>{{assegnatario.data_insert}}</td>
+        <td>{{assegnatario.fk_user_modifier}}</td>
       </tr>
     </tbody>
     </table>

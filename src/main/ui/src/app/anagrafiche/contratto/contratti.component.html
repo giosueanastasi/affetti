@@ -25,6 +25,14 @@
           <input type="text" class="form-control" formControlName="stato" id="stato" aria-describedby="statoHelp" placeholder="stato">
         </div>
         <div class="form-group col-md-6">
+          <label for="data_update">data_update</label>
+          <input type="text" class="form-control" formControlName="data_update" id="data_update" aria-describedby="data_updatelHelp" placeholder="data_update">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="data_insert">data_insert</label>
+          <input type="text" class="form-control" formControlName="data_insert" id="data_insert" aria-describedby="data_insertlHelp" placeholder="data_insert">
+        </div>
+        <div class="form-group col-md-6">
           <label for="fk_domanda_loculo">fk_domanda_loculo</label>
           <input type="text" class="form-control" formControlName="fk_domanda_loculo" id="fk_domanda_loculo" aria-describedby="fk_domanda_loculolHelp" placeholder="fk_domanda_loculo">
         </div>
@@ -35,14 +43,6 @@
         <div class="form-group col-md-6">
           <label for="fk_user_modifier">fk_user_modifier</label>
           <input type="text" class="form-control" formControlName="fk_user_modifier" id="fk_user_modifier" aria-describedby="fk_user_modifierlHelp" placeholder="fk_user_modifier">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="data_update">data_update</label>
-          <input type="text" class="form-control" formControlName="data_update" id="data_update" aria-describedby="data_updatelHelp" placeholder="data_update">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="data_insert">data_insert</label>
-          <input type="text" class="form-control" formControlName="data_insert" id="data_insert" aria-describedby="data_insertlHelp" placeholder="data_insert">
         </div>
         </div>
         <button type="submit" [disabled]="!contrattoForm.valid" class="btn btn-danger">Create</button>
@@ -61,11 +61,12 @@
         <th>data_inizio</th>
         <th>data_scadenza</th>
         <th>stato</th>
+        <th>data_update</th>
+        <th>data_insert</th>
         <th>fk_domanda_loculo</th>
         <th>fk_domanda_disposizione</th>
         <th>fk_user_modifier</th>
-        <th>data_update</th>
-        <th>data_insert</th>
+
       </tr>
     </thead>
     <tbody>
@@ -75,11 +76,11 @@
         <td>{{contratto.data_inizio}}</td>
         <td>{{contratto.data_scadenza}}</td>
         <td>{{contratto.stato}}</td>
+        <td>{{contratto.data_update}}</td>
+        <td>{{contratto.data_insert}}</td>
         <td>{{contratto.fk_domanda_loculo}}</td>
         <td>{{contratto.fk_domanda_disposizione}}</td>
         <td>{{contratto.fk_user_modifier}}</td>
-        <td>{{contratto.data_update}}</td>
-        <td>{{contratto.data_insert}}</td>
       </tr>
     </tbody>
   </table>

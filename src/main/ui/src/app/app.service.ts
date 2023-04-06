@@ -30,12 +30,12 @@ export class AppService {
   }
 
   getAssegnatari() {
-    return this.http.get(this.rootURL + '/assegnari');
+    return this.http.get(this.rootURL + '/assegnatari');
   }
 
-  addAssegnatario(assegnario: any, id: number) {
-    assegnario.id = id;
-	return this.http.post(this.rootURL + '/assegnario', assegnario);
+  addAssegnatario(assegnatario: any, id: number) {
+    assegnatario.id = id;
+	return this.http.post(this.rootURL + '/assegnatario', assegnatario);
   }
 
   getContratti() {

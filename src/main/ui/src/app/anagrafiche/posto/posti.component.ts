@@ -24,7 +24,7 @@ postoForm = new FormGroup({
   data_insert: new FormControl('', Validators.nullValidator && Validators.required),
   data_update: new FormControl('', Validators.nullValidator && Validators.required),
   tipo: new FormControl('', Validators.nullValidator && Validators.required),
-  fk_users_modifier: new FormControl('', Validators.nullValidator && Validators.required),
+  fk_users_modifier: new FormControl('', Validators.nullValidator && Validators.required)
 
 });
 
@@ -62,7 +62,7 @@ ngOnDestroy() {
 @Input() posti: any[];
 */
 ngOnInit() {
-  console.log('esegui all posti on init');
+  console.log('esegui all posto on init');
   this.getAllPosti();
   }
 
