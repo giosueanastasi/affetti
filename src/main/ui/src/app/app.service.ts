@@ -48,8 +48,6 @@ export class AppService {
     return this.http.post(this.rootURL + '/contraente', contraente);
   }
 
- 
-
   getAssegnatari() {
     return this.http.get(this.rootURL + '/assegnatari');
   }
@@ -67,6 +65,14 @@ export class AppService {
     contratto.id = id;
 	return this.http.post(this.rootURL + '/contratto', contratto);
   }
+  
+  getDomande() {
+    return this.http.get(this.rootURL + '/domande');
+  }
 
+  addDomanda(domanda: any, id: number) {
+    domanda.id = id;
+	return this.http.post(this.rootURL + '/domanda', domanda);
+  }
 
 }

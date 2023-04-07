@@ -4,3 +4,4 @@
 // export { ContrattoEffects } from './contratto.effects';
 // export { ComuneEffects } from './comune.effects';
 // export { ContraenteEffects } from './contraente.effects';
+// export { ContraenteEffects } from './domanda.effects';

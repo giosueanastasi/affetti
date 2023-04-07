@@ -18,15 +18,18 @@ import it.pittysoft.affetti.links.ComuneLinks;
 import it.pittysoft.affetti.links.ContraenteLinks;
 import it.pittysoft.affetti.entity.Assegnatari;
 import it.pittysoft.affetti.entity.Contratti;
+import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
 import it.pittysoft.affetti.service.ComuniService;
 import it.pittysoft.affetti.service.ContraentiService;
 import it.pittysoft.affetti.links.ContrattoLinks;
+import it.pittysoft.affetti.links.DomandaLinks;
 import it.pittysoft.affetti.links.AssegnatarioLinks;
 import it.pittysoft.affetti.service.PostiService;
 import it.pittysoft.affetti.service.UsersService;
 import it.pittysoft.affetti.service.ContrattiService;
+import it.pittysoft.affetti.service.DomandeService;
 import it.pittysoft.affetti.service.AssegnatariService;
 import lombok.extern.slf4j.Slf4j;
 
@@ -53,6 +56,8 @@ public class ControllerPrincipale {
 	@Autowired
 	ContrattiService contrattiService;
 	
+	@Autowired
+	DomandeService domandeService;
 	
 	@GetMapping(path = UserLinks.LIST_USERS)
     public ResponseEntity<?> listUsers() {
@@ -136,4 +141,19 @@ public class ControllerPrincipale {
         Comuni resource = comuniService.saveComune(comune);
         return ResponseEntity.ok(resource);
 	}
+	
+	
+	@GetMapping(path = DomandaLinks.LIST_DOMANDE)
+    public ResponseEntity<?> listDomande() {
+        log.info("ApiController:  list domande");
+        List<Domande> resource = domandeService.getDomande();
+        return ResponseEntity.ok(resource);
+    }
+	
+	@PostMapping(path = DomandaLinks.ADD_DOMANDA)
+	public ResponseEntity<?> saveDomanda(@RequestBody Domande domanda) {
+        log.info("ApiController:  list domande");
+        Domande resource = domandeService.saveDomanda(domanda);
+        return ResponseEntity.ok(resource);
+    }
 }

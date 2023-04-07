@@ -8,7 +8,7 @@ import { ComuniComponent } from './anagrafiche/comune/comuni.component';
 import { ContraentiComponent } from './anagrafiche/contraente/contraenti.component';
 import { ContrattiComponent } from './anagrafiche/contratto/contratti.component';
 import { AssegnatariComponent } from './anagrafiche/assegnatario/assegnatari.component';
-
+import { DomandeComponent } from './anagrafiche/domanda/domande.component';
 
 
 const routes: Routes = [
@@ -19,7 +19,8 @@ const routes: Routes = [
   {path:'contraente', component: ContraentiComponent},
   {path:'posto', component: PostiComponent},
   {path:'assegnatario', component: AssegnatariComponent},
-  {path:'contratto', component: ContrattiComponent}
+  {path:'contratto', component: ContrattiComponent},
+  {path:'domanda', component: DomandeComponent}
 ];
 
 @NgModule({

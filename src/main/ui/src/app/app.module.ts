@@ -22,7 +22,7 @@ import { UnauthorizedComponent } from './error/unauthorized/unauthorized.compone
 import { PostiComponent } from './anagrafiche/posto/posti.component';
 import { ComuniComponent } from './anagrafiche/comune/comuni.component';
 import { ContraentiComponent } from './anagrafiche/contraente/contraenti.component';
-
+import { DomandeComponent } from './anagrafiche/domanda/domande.component';
 import { AssegnatariComponent } from './anagrafiche/assegnatario/assegnatari.component';
 import { ContrattiComponent } from './anagrafiche/contratto/contratti.component';
 
@@ -49,8 +49,10 @@ import { ContrattiComponent } from './anagrafiche/contratto/contratti.component'
     ComuniComponent,
     PostiComponent,
     AssegnatariComponent,
-    ContrattiComponent
+    ContrattiComponent,
+    DomandeComponent
   ],
+  
   imports: [
     BrowserModule,
     AppRoutingModule,

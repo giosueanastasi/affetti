@@ -4,3 +4,4 @@ export { Comune } from './comune.model';
 export { Contraente } from './contraente.model';
 export { Assegnatario } from './assegnatario.model';
 export { Contratto } from './contratto.model';
+export { Domanda } from './domanda.model';
