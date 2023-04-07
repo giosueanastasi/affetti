@@ -46,7 +46,7 @@ import { ContrattiComponent } from './anagrafiche/contratto/contratti.component'
     NotFoundComponent,
     UnauthorizedComponent,
     ContraentiComponent,
-    ComuniComponent
+    ComuniComponent,
     PostiComponent,
     AssegnatariComponent,
     ContrattiComponent

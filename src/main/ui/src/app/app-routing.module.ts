@@ -16,7 +16,7 @@ const routes: Routes = [
   {path:'admin', component: AdminComponent},
   {path:'user', component: UsersComponent},
   {path:'comune', component: ComuniComponent},
-  {path:'contraente', component: ContraentiComponent}
+  {path:'contraente', component: ContraentiComponent},
   {path:'posto', component: PostiComponent},
   {path:'assegnatario', component: AssegnatariComponent},
   {path:'contratto', component: ContrattiComponent}
