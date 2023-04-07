@@ -26,23 +26,18 @@ public class Assegnatari {
     private String cognome;
     
     @Column
-    @NotNull(message="{NotNull.Assegnatario.data_decesso}")
     private String data_decesso;
     
     @Column
-    @NotNull(message="{NotNull.Assegnatario.comune_decesso}")
     private String comune_decesso;
     
     @Column
-    @NotNull(message="{NotNull.Assegnatario.fk_user_modifier}")
     private String fk_user_modifier;
     
     @Column
-    @NotNull(message="{NotNull.Assegnatario.data_update}")
     private String data_update;
     
     @Column
-    @NotNull(message="{NotNull.Assegnatario.data_insert}")
     private String data_insert; 
 
 }

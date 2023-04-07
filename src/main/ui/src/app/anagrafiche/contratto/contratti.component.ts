@@ -18,15 +18,15 @@ export class ContrattiComponent implements OnInit, OnDestroy {
   title = 'angular-nodejs-example';
 
   contrattoForm = new FormGroup({
-    protocollo: new FormControl('', Validators.nullValidator && Validators.required),
+    protocollo: new FormControl('', Validators.nullValidator ),
     data_inizio: new FormControl('', Validators.nullValidator && Validators.required),
-    data_scadenza: new FormControl('', Validators.nullValidator && Validators.required),
+    data_scadenza: new FormControl('', Validators.nullValidator),
     stato: new FormControl('', Validators.nullValidator && Validators.required),
     fk_domanda_loculo: new FormControl('', Validators.nullValidator && Validators.required),
-    fk_domanda_disposizione: new FormControl('', Validators.nullValidator && Validators.required),
-    fk_user_modifier: new FormControl('', Validators.nullValidator && Validators.required),
-    data_update: new FormControl('', Validators.nullValidator && Validators.required),
-    data_insert: new FormControl('', Validators.nullValidator && Validators.required)
+    fk_domanda_disposizione: new FormControl('', Validators.nullValidator ),
+    fk_user_modifier: new FormControl('', Validators.nullValidator ),
+    data_update: new FormControl('', Validators.nullValidator ),
+    data_insert: new FormControl('', Validators.nullValidator)
   });
 
   contratti: any[] = [];

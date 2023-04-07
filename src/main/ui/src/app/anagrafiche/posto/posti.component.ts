@@ -21,10 +21,10 @@ postoForm = new FormGroup({
   id: new FormControl('', Validators.nullValidator && Validators.required),
   loculo: new FormControl('', Validators.nullValidator && Validators.required),
   fornice: new FormControl('', Validators.nullValidator && Validators.required),
-  data_insert: new FormControl('', Validators.nullValidator && Validators.required),
-  data_update: new FormControl('', Validators.nullValidator && Validators.required),
+  data_insert: new FormControl('', Validators.nullValidator),
+  data_update: new FormControl('', Validators.nullValidator),
   tipo: new FormControl('', Validators.nullValidator && Validators.required),
-  fk_user_modifier: new FormControl('', Validators.nullValidator && Validators.required),
+  fk_user_modifier: new FormControl('', Validators.nullValidator),
 
 });
 

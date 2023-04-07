@@ -31,15 +31,12 @@ public class Posti {
     
     
     @Column
-    @NotNull(message="{NotNull.Posto.data_insert}")
     private String data_insert;
     
     @Column
-    @NotNull(message="{NotNull.Posto.data_update}")
     private String data_update;
     
     @Column
-    @NotNull(message="{NotNull.Posto.fk_user_modifier}")
     private String fk_user_modifier;
     
     
