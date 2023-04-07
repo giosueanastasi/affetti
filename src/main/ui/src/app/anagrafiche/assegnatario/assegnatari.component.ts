@@ -21,11 +21,11 @@ assegnatarioForm = new FormGroup({
   id: new FormControl('', Validators.nullValidator && Validators.required),
   nome: new FormControl('', Validators.nullValidator && Validators.required),
   cognome: new FormControl('', Validators.nullValidator && Validators.required),
-  data_decesso: new FormControl('', Validators.nullValidator && Validators.required),
-  comune_decesso: new FormControl('', Validators.nullValidator && Validators.required),
-  fk_user_modifier: new FormControl('', Validators.nullValidator && Validators.required),
-  data_update: new FormControl('', Validators.nullValidator && Validators.required),
-  data_insert: new FormControl('', Validators.nullValidator && Validators.required)
+  data_decesso: new FormControl('', Validators.nullValidator),
+  comune_decesso: new FormControl('', Validators.nullValidator),
+  fk_user_modifier: new FormControl('', Validators.nullValidator),
+  data_update: new FormControl('', Validators.nullValidator),
+  data_insert: new FormControl('', Validators.nullValidator)
 
 
 });

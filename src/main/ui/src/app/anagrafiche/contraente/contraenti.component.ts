@@ -32,11 +32,11 @@ contraenteForm = new FormGroup({
   cap_residenza: new FormControl('', Validators.nullValidator && Validators.required),
   telefono: new FormControl('', Validators.nullValidator && Validators.required),
   codice_fiscale: new FormControl('', Validators.nullValidator && Validators.required),
-  email: new FormControl('', Validators.nullValidator && Validators.required),
-  note: new FormControl('', Validators.nullValidator && Validators.required),
-  fk_user_modifier: new FormControl('', Validators.nullValidator && Validators.required),
-  data_insert: new FormControl('', Validators.nullValidator && Validators.required),
-  data_update: new FormControl('', Validators.nullValidator && Validators.required),
+  email: new FormControl('', Validators.nullValidator ),
+  note: new FormControl('', Validators.nullValidator ),
+  fk_user_modifier: new FormControl('', Validators.nullValidator ),
+  data_insert: new FormControl('', Validators.nullValidator ),
+  data_update: new FormControl('', Validators.nullValidator ),
 
 });
 
