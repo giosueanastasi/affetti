@@ -4,7 +4,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
 
 import lombok.Data;
 
@@ -69,23 +68,18 @@ public class Contraenti {
     private String codice_fiscale;
     
     @Column
-    @NotNull(message="{NotNull.Contraente.email}")
     private String email;
     
     @Column
-    @NotNull(message="{NotNull.Contraente.note}")
     private String note;
     
     @Column
-    @NotNull(message="{NotNull.Contraente.fk_user_modifier}")
     private int fk_user_modifier;
 
     @Column
-    @NotNull(message="{NotNull.Contraente.data_insert}")
     private String data_insert;
     
     @Column
-    @NotNull(message="{NotNull.Contraente.data_update}")
     private String data_update;
 
 }
