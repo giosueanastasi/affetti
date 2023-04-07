@@ -45,7 +45,7 @@ export class AppService {
 
   addContraente(contraente: any, id: number) {
     contraente.id = id;
-    return this.http.get(this.rootURL + '/contraente', contraente);
+    return this.http.post(this.rootURL + '/contraente', contraente);
   }
 
  

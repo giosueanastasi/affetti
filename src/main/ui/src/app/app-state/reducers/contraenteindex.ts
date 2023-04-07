@@ -32,7 +32,7 @@ import * as fromCreateContraente from './createcontraente';
  * our top level state interface is just a map of keys to inner state types.
  */
 export interface State {
-    createUser: fromCreateContraente.State;
+    createContraente: fromCreateContraente.State;
     routerReducer: fromRouter.RouterReducerState<RouterStateUrl>;
 }
 
@@ -42,7 +42,7 @@ export interface State {
  * and the current or initial state and return a new immutable state.
  */
 export const reducers: ActionReducerMap<State> = {
-    createUser: fromCreateContraente.reducer,
+    createContraente: fromCreateContraente.reducer,
     routerReducer: fromRouter.routerReducer,
 };
 

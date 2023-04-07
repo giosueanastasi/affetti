@@ -46,7 +46,7 @@ contraenteCount = 0;
 destroy$: Subject<boolean> = new Subject<boolean>();
 
 onSubmit() {
-  this.appService.addComune(this.contraenteForm.value, this.contraenteCount + 1).pipe(takeUntil(this.destroy$)).subscribe(data => {
+  this.appService.addContraente(this.contraenteForm.value, this.contraenteCount + 1).pipe(takeUntil(this.destroy$)).subscribe(data => {
     console.log('message::::', data);
     this.contraenteCount = this.contraenteCount + 1;
     console.log(this.contraenteCount);

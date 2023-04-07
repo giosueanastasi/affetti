@@ -57,7 +57,7 @@ ngOnDestroy() {
 @Input() comuni: any[];
 */
 ngOnInit() {
-  console.log('esegui all posti on init');
+  console.log('esegui all comuni on init');
   this.getAllComuni();
   }
 

@@ -69,23 +69,23 @@ public class Contraenti {
     private String codice_fiscale;
     
     @Column
-    @Null(message="{NotNull.Contraente.email}")
+    @NotNull(message="{NotNull.Contraente.email}")
     private String email;
     
     @Column
-    @Null(message="{NotNull.Contraente.note}")
+    @NotNull(message="{NotNull.Contraente.note}")
     private String note;
     
     @Column
-    @Null(message="{NotNull.Contraente.fk_user_modifier}")
+    @NotNull(message="{NotNull.Contraente.fk_user_modifier}")
     private int fk_user_modifier;
 
     @Column
-    @Null(message="{NotNull.Contraente.data_insert}")
+    @NotNull(message="{NotNull.Contraente.data_insert}")
     private String data_insert;
     
     @Column
-    @Null(message="{NotNull.Contraente.data_update}")
+    @NotNull(message="{NotNull.Contraente.data_update}")
     private String data_update;
 
 }

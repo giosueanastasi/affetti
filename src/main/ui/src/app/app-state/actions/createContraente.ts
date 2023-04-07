@@ -1,7 +1,7 @@
 import { createAction, props } from '@ngrx/store';
 import { Contraente } from '../models';
 
-export const CREATE_CONTRAENTE = '[CREATE CONTRAENTE] Create Contraente  ';
+export const CREATE_CONTRAENTE = '[CREATE CONTRAENTE] Create Contraente API ';
 export const CREATE_CONTRAENTE_SUCCESS = '[CREATE CONTRAENTE] Create Contraente API Success';
 export const CREATE_CONTRAENTE_FAILURE = '[CREATE CONTRAENTE] Create Contraente API Failure';
 
