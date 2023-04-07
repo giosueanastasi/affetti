@@ -18,9 +18,10 @@ export class UsersComponent implements OnInit, OnDestroy {
   title = 'angular-nodejs-example';
 
   userForm = new FormGroup({
-    firstName: new FormControl('', Validators.nullValidator && Validators.required),
-    lastName: new FormControl('', Validators.nullValidator && Validators.required),
-    email: new FormControl('', Validators.nullValidator && Validators.required)
+    username: new FormControl('', Validators.nullValidator && Validators.required),
+    password: new FormControl('', Validators.nullValidator && Validators.required),
+    ruolo: new FormControl('', Validators.nullValidator && Validators.required),
+    fk_comune: new FormControl('', Validators.nullValidator && Validators.required)
   });
 
   users: any[] = [];

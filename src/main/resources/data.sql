@@ -58,18 +58,18 @@ CREATE TABLE posti (
 	loculo VARCHAR(10) NOT NULL,
 	fornice VARCHAR(10) NOT NULL,
 	tipo VARCHAR (15) NOT NULL,
-	fk_user_modifier  int NULL,
 	data_update date NULL,
 	data_insert date NULL,
+	fk_user_modifier  int NULL,
 	PRIMARY KEY (id),
 	FOREIGN key(fk_user_modifier ) references users (id)
 );
 
 
-INSERT INTO posti (id, loculo,fornice,tipo,fk_user_modifier ,data_update,data_insert) VALUES
-  (1, 15, 150, 'intermedia' ,2, '2023-09-25','2023-09-25'),
-  (2, 1, 8, 'monumentale',3,'2023-03-04','2020-02-8'),
-  (3, 8,120, 'nuova',1, '2023-04-8','2023-04-8'); 
+INSERT INTO posti (id, loculo,fornice,tipo,data_update,data_insert,fk_user_modifier) VALUES
+  (1, 15, 150, 'intermedia', '2023-09-25','2023-09-25',1),
+  (2, 1, 8, 'monumentale','2023-03-04','2020-02-8',2),
+  (3, 8,120, 'nuova', '2023-04-8','2023-04-8',3); 
 	
 
 

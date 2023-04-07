@@ -23,6 +23,8 @@ import { PostiComponent } from './anagrafiche/posto/posti.component';
 import { ComuniComponent } from './anagrafiche/comune/comuni.component';
 import { ContraentiComponent } from './anagrafiche/contraente/contraenti.component';
 
+import { AssegnatariComponent } from './anagrafiche/assegnatario/assegnatari.component';
+import { ContrattiComponent } from './anagrafiche/contratto/contratti.component';
 
 // state related imports
 // import { StoreModule } from '@ngrx/store';
@@ -43,9 +45,11 @@ import { ContraentiComponent } from './anagrafiche/contraente/contraenti.compone
     AdminComponent,
     NotFoundComponent,
     UnauthorizedComponent,
-    PostiComponent,
     ContraentiComponent,
     ComuniComponent
+    PostiComponent,
+    AssegnatariComponent,
+    ContrattiComponent
   ],
   imports: [
     BrowserModule,

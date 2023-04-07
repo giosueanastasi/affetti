@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Contraente } from './app-state/models';
+
 
 @Injectable({
   providedIn: 'root'
@@ -49,5 +49,24 @@ export class AppService {
   }
 
  
+
+  getAssegnatari() {
+    return this.http.get(this.rootURL + '/assegnatari');
+  }
+
+  addAssegnatario(assegnatario: any, id: number) {
+    assegnatario.id = id;
+	return this.http.post(this.rootURL + '/assegnatario', assegnatario);
+  }
+
+  getContratti() {
+    return this.http.get(this.rootURL + '/contratti');
+  }
+
+  addContratto(contratto: any, id: number) {
+    contratto.id = id;
+	return this.http.post(this.rootURL + '/contratto', contratto);
+  }
+
 
 }

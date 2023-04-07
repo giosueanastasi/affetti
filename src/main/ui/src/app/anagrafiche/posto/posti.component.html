@@ -1,0 +1,70 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-7 mrgnbtm">
+      <h2>Create Posto</h2>
+      <form [formGroup]="postoForm" (ngSubmit)="onSubmit()">
+        <div class="row">
+          <div class="form-group col-md-6">
+            <label for="id">id</label>
+            <input type="text" class="form-control" formControlName="id" id="id" aria-describedby="idHelp" placeholder="id">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="loculo">loculo</label>
+            <input type="text" class="form-control" formControlName="loculo" id="loculo" aria-describedby="loculoHelp" placeholder="loculo">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="fornice">fornice</label>
+            <input type="text" class="form-control" formControlName="fornice" id="fornice" aria-describedby="forniceHelp" placeholder="fornice">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="data_insert">data_insert</label>
+            <input type="text" class="form-control" formControlName="data_insert" id="data_insert" aria-describedby="data_insertHelp" placeholder="data_insert">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="data_update">data_update</label>
+            <input type="text" class="form-control" formControlName="data_update" id="data_update" aria-describedby="data_updateHelp" placeholder="data_update">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="tipo">tipo</label>
+            <input type="text" class="form-control" formControlName="tipo" id="tipo" aria-describedby="tipoHelp" placeholder="tipo">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="fk_user_modifier">fk_user_modifier</label>
+            <input type="text" class="form-control" formControlName="fk_user_modifier" id="fk_user_modifier" aria-describedby="fk_user_modifierHelp" placeholder="fk_user_modifier">
+          </div>
+        </div>
+        <button type="submit" [disabled]="!postoForm.valid" class="btn btn-danger">Create</button>
+      </form>
+    </div>
+    <div class="col-md-4 mrgnbtm">
+    </div>
+  </div>
+
+    <h2>Posti</h2>
+    <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Id</th>
+        <th>loculo</th>
+        <th>fornice</th>
+        <th>data_insert</th>
+        <th>data_update</th>
+        <th>tipo</th>
+        <th>fk_user_modifier</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let posto of posti; let i = index">
+        <td>{{i + 1}}</td>
+        <td>{{posto.loculo}}</td>
+        <td>{{posto.fornice}}</td>
+        <td>{{posto.data_insert}}</td>
+        <td>{{posto.data_update}}</td>
+        <td>{{posto.tipo}}</td>
+        <td>{{posto.fk_user_modifier}}</td>
+      </tr>
+    </tbody>
+    </table>
+ </div>
+
+
