@@ -1,0 +1,299 @@
+<div class="modal fade" id="contranetiModal" tabIndex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form #f="ngForm" (ngSubmit)="f.form.valid && saveContraente()">
+                <div class="modal-header">
+                    <h5 class="modal-title">Contraente</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="alert alert-danger" *ngIf="errorMessage">
+                        <strong>Error!</strong>{{errorMessage}}
+                    </div>
+                    <div class="form-group">
+                        <label for="cognome">Cognome</label>
+                        <input 
+                            type="text" 
+                            id="cognome" 
+                            name="cognome"
+                            class="form-control" 
+                            [(ngModel)]="contraente.cognome"
+                            #cognome="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !cognome.valid">
+                            E' necessario inserire il Cognome
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input 
+                            type="text" 
+                            id="nome" 
+                            name="nome"
+                            class="form-control" 
+                            [(ngModel)]="contraente.nome"
+                            #nome="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !nome.valid">
+                            E' necessario inserire il nome
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comune_nascita">comune_nascita</label>
+                        <input 
+                            type="text" 
+                            id="comune_nascita" 
+                            name="comune_nascita"
+                            class="form-control" 
+                            [(ngModel)]="contraente.comune_nascita"
+                            #comune_nascita="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !comune_nascita.valid">
+                            E' necessario inserire il comune_nascita
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="provincia_nascita">provincia_nascita</label>
+                        <input 
+                            type="text" 
+                            id="provincia_nascita" 
+                            name="provincia_nascita"
+                            class="form-control" 
+                            [(ngModel)]="contraente.provincia_nascita"
+                            #provincia_nascita="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !provincia_nascita.valid">
+                            E' necessario inserire il provincia_nascita
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stato_nascita">stato_nascita</label>
+                        <input 
+                            type="text" 
+                            id="stato_nascita" 
+                            name="stato_nascita"
+                            class="form-control" 
+                            [(ngModel)]="contraente.stato_nascita"
+                            #stato_nascita="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !stato_nascita.valid">
+                            E' necessario inserire il stato_nascita
+                        </div>
+                    </div>
+
+                     <div class="form-group">
+                        <label for="data_nascita">data_nascita</label>
+                        <input 
+                            type="text" 
+                            id="data_nascita" 
+                            name="data_nascita"
+                            class="form-control" 
+                            [(ngModel)]="contraente.data_nascita"
+                            #data_nascita="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !data_nascita.valid">
+                            E' necessario inserire il data_nascita
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="comune_residenza">comune_residenza</label>
+                        <input 
+                            type="text" 
+                            id="comune_residenza" 
+                            name="comune_residenza"
+                            class="form-control" 
+                            [(ngModel)]="contraente.comune_residenza"
+                            #comune_residenza="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !comune_residenza.valid">
+                            E' necessario inserire il comune_residenza
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="provincia_residenza">provincia_residenza</label>
+                        <input 
+                            type="text" 
+                            id="provincia_residenza" 
+                            name="provincia_residenza"
+                            class="form-control" 
+                            [(ngModel)]="contraente.provincia_residenza"
+                            #provincia_residenza="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !provincia_residenza.valid">
+                            E' necessario inserire il provincia_residenza
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="provincia_residenza">provincia_residenza</label>
+                        <input 
+                            type="text" 
+                            id="provincia_residenza" 
+                            name="provincia_residenza"
+                            class="form-control" 
+                            [(ngModel)]="contraente.provincia_residenza"
+                            #provincia_residenza="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !provincia_residenza.valid">
+                            E' necessario inserire il provincia_residenza
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="via_residenza">via_residenza</label>
+                        <input 
+                            type="text" 
+                            id="via_residenza" 
+                            name="via_residenza"
+                            class="form-control" 
+                            [(ngModel)]="contraente.via_residenza"
+                            #via_residenza="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !via_residenza.valid">
+                            E' necessario inserire il via_residenza
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="civico_residenza">civico_residenza</label>
+                        <input 
+                            type="text" 
+                            id="civico_residenza" 
+                            name="civico_residenza"
+                            class="form-control" 
+                            [(ngModel)]="contraente.civico_residenza"
+                            #civico_residenza="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !civico_residenza.valid">
+                            E' necessario inserire il civico_residenza
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cap_residenza">cap_residenza</label>
+                        <input 
+                            type="text" 
+                            id="cap_residenza" 
+                            name="cap_residenza"
+                            class="form-control" 
+                            [(ngModel)]="contraente.cap_residenza"
+                            #cap_residenza="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !cap_residenza.valid">
+                            E' necessario inserire il cap_residenza
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">telefono</label>
+                        <input 
+                            type="text" 
+                            id="telefono" 
+                            name="telefono"
+                            class="form-control" 
+                            [(ngModel)]="contraente.telefono"
+                            #telefono="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !telefono.valid">
+                            E' necessario inserire il telefono
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="codice_fiscale">codice_fiscale</label>
+                        <input 
+                            type="text" 
+                            id="codice_fiscale" 
+                            name="codice_fiscale"
+                            class="form-control" 
+                            [(ngModel)]="contraente.codice_fiscale"
+                            #codice_fiscale="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !codice_fiscale.valid">
+                            E' necessario inserire il codice_fiscale
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">email</label>
+                        <input 
+                            type="text" 
+                            id="email" 
+                            name="email"
+                            class="form-control" 
+                            [(ngModel)]="contraente.email"
+                            #email="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !email.valid">
+                            E' necessario inserire il email
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="note">note</label>
+                        <input 
+                            type="text" 
+                            id="note" 
+                            name="note"
+                            class="form-control" 
+                            [(ngModel)]="contraente.note"
+                            #note="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !note.valid">
+                            E' necessario inserire il note
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="note">note</label>
+                        <input 
+                            type="text" 
+                            id="note" 
+                            name="note"
+                            class="form-control" 
+                            [(ngModel)]="contraente.note"
+                            #note="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !note.valid">
+                            E' necessario inserire il note
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                    <button class="btn btn-primary" type="submit">Salva modifiche</button></div>
+            </form>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,60 @@
+<div class="container">
+    <div class="row">
+      <div class="col-md-7 mrgnbtm">
+        <h2>Create Domanda</h2>
+        <div class="col-6 text-end"><button class="btn btn-primary" (click)="creaContraente()">Agg Contraente</button></div>
+
+
+        <form [formGroup]="domandaFullForm" (ngSubmit)="onSubmit()">
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label for="protocollo">protocollo</label>
+              <input type="text" class="form-control" formControlName="protocollo" id="protocollo" aria-describedby="protocollolHelp" placeholder="protocollo">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="data_protocollo">data_protocollo</label>
+              <input type="text" class="form-control" formControlName="data_protocollo" id="data_protocollo" aria-describedby="data_protocollolHelp" placeholder="data_protocollo">
+            </div>
+              <div class="form-group col-md-6">
+              <label for="stato">stato</label>
+              <input type="text" class="form-control" formControlName="stato" id="stato" aria-describedby="statolHelp" placeholder="stato">
+            </div>
+            <div class="form-group col-md-6">
+             <label for="fk_posto">fk_posto</label>
+             <input type="text" class="form-control" formControlName="fk_posto" id="fk_posto" aria-describedby="fk_postolHelp" placeholder="fk_posto">
+            </div>
+            <div class="form-group col-md-6">
+             <label for="fk_contraente">fk_contraente</label>
+              <input type="text" class="form-control" formControlName="fk_contraente" id="fk_contraente" aria-describedby="fk_contraentelHelp" placeholder="fk_contraente">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="nomeAss">Nome Assegnatario</label>
+                 <input type="text" class="form-control" formControlName="nomeAss" id="nomeAss" aria-describedby="nomeAssHelp" placeholder="nomeAss">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="cognomeAss">Cognome Assegnatario</label>
+                 <input type="text" class="form-control" formControlName="cognomeAss" id="cognomeAss" aria-describedby="cognomeAssHelp" placeholder="cognomeAss">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="comuneAss">Comune Assegnatario</label>
+                 <input type="text" class="form-control" formControlName="comuneAss" id="comuneAss" aria-describedby="comuneAssHelp" placeholder="comuneAss">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="provinciaAss">Provincia Assegnatario</label>
+                 <input type="text" class="form-control" formControlName="provAss" id="provAss" aria-describedby="provAssHelp" placeholder="provAss">
+            </div>
+            <div class="form-group col-md-6">
+                <label for="dataDecesso">Data Decesso</label>
+                 <input type="text" class="form-control" formControlName="dataDecesso" id="dataDecesso" aria-describedby="dataDecessoHelp" placeholder="dataDecesso">
+            </div>
+            
+          </div>
+          <button type="submit" [disabled]="!domandaFullForm.valid" class="btn btn-danger">Create</button>
+        </form>
+        </div>
+        <div class="col-md-4 mrgnbtm">
+        </div>
+     </div>
+      
+</div>
+<app-contraenti-model (save)="saveContraenteWatcher($event)"></app-contraenti-model>

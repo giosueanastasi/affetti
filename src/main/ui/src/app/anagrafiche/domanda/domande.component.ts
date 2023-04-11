@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from '../../app.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { ContraentiModelComponent } from '../contraenti-model/contraenti-model.component';
 
 
 @Component({
@@ -67,5 +68,7 @@ ngOnInit() {
   console.log('esegui all domande on init');
   this.getAllDomande();
   }
+
+
 
 }

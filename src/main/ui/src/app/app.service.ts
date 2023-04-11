@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { DomandaFull } from './app-state/models/domandaFull.model';
+import { Domanda } from './app-state/models';
 
 
 @Injectable({
@@ -48,6 +50,10 @@ export class AppService {
     return this.http.post(this.rootURL + '/contraente', contraente);
   }
 
+  saveContraente(contraente: any) {
+    return this.http.post(this.rootURL + '/contraente', contraente);
+  }
+
   getAssegnatari() {
     return this.http.get(this.rootURL + '/assegnatari');
   }
@@ -75,4 +81,33 @@ export class AppService {
 	return this.http.post(this.rootURL + '/domanda', domanda);
   }
 
+
+  addDomandaFull(domandaFullForm: any) {
+    let domanda = new Domanda;
+    domanda.id = domandaFullForm.id;
+    domanda.protocollo = domandaFullForm.protocollo;
+    domanda.data_protocollo = domandaFullForm.data_protocollo;
+    domanda.stato = domandaFullForm.stato;
+    domanda.fk_posto = domandaFullForm.fk_posto;
+    domanda.fk_contraente = domandaFullForm.fk_contraente;
+
+    let  df = new DomandaFull();
+    df.domanda = domanda;
+    df.nomeAss = domandaFullForm.nomeAss;
+    df.cognomeAss = domandaFullForm.cognomeAss;
+    df.comuneAss = domandaFullForm.comuneAss;
+    df.provAss = domandaFullForm.provAss;
+    df.dataDecesso = domandaFullForm.dataDecesso;
+
+	return this.http.post(this.rootURL + '/domandaFull', df);
+  }
+
 }
+/**
+ * 
+ *       nomeAss: string;
+	cognomeAss: string;
+	comuneAss: string;
+	provAss: string;
+	dataDecesso: string;
+ */

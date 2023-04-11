@@ -2,6 +2,8 @@ package it.pittysoft.affetti.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
@@ -11,9 +13,11 @@ import lombok.Data;
 @Data
 public class Contraenti {
 	
+
 	@Id
 	@Column
-    private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column
     @NotNull(message="{NotNull.Contraente.nome}")
@@ -74,7 +78,7 @@ public class Contraenti {
     private String note;
     
     @Column
-    private int fk_user_modifier;
+    private Long fk_user_modifier;
 
     @Column
     private String data_insert;

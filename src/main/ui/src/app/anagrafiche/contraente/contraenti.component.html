@@ -3,7 +3,7 @@
   <div class="row">
     <div class="col-md-7 mrgnbtm">
       <h2>Create Contraente</h2>
-      <form [formGroup]="contraenteForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="contraenteForm">
         <div class="row">
           <div class="form-group col-md-6">
             <label for="id">ID</label>
@@ -98,7 +98,8 @@
           <input type="text" class="form-control" formControlName="data_insert" id="data_insert" aria-describedby="data_insertlHelp" placeholder="data_insert">
         </div>
       </div>
-        <button type="submit" [disabled]="!contraenteForm.valid" class="btn btn-danger">Create</button>
+        <button (click)="onSubmit()" type="submit" [disabled]="!contraenteForm.valid" class="btn btn-danger">Create</button>
+        <button (click)="filtraContraneti(contraenteForm)">Filtra Risultati</button>
       </form>
       </div>
       <div class="col-md-4 mrgnbtm">

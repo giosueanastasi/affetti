@@ -3,6 +3,7 @@ package it.pittysoft.affetti.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,6 +22,9 @@ import it.pittysoft.affetti.entity.Contratti;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
+import it.pittysoft.affetti.model.DomandaRequest;
+import it.pittysoft.affetti.model.DomandaResponse;
+import it.pittysoft.affetti.model.Response;
 import it.pittysoft.affetti.service.ComuniService;
 import it.pittysoft.affetti.service.ContraentiService;
 import it.pittysoft.affetti.links.ContrattoLinks;
@@ -121,6 +125,14 @@ public class ControllerPrincipale {
         return ResponseEntity.ok(resource);
     }
 	
+	
+	@PostMapping(path = ContraenteLinks.SEARCH_CONTRAENTI)
+    public ResponseEntity<?> searchContraenti(@RequestBody Contraenti contraenti) {
+        log.info("ApiController:  search contraenti");
+        List<Contraenti> resource = contraentiService.getContraenti(contraenti);
+        return ResponseEntity.ok(resource);
+    }
+	
 	@PostMapping(path = ContraenteLinks.ADD_CONTRAENTE)
 	public ResponseEntity<?> saveContraente(@RequestBody Contraenti contraente) {
         log.info("ApiController:  list contraenti");
@@ -155,5 +167,17 @@ public class ControllerPrincipale {
         log.info("ApiController:  list domande");
         Domande resource = domandeService.saveDomanda(domanda);
         return ResponseEntity.ok(resource);
+    }
+	
+	@PostMapping(path = DomandaLinks.ADD_DOMANDA_FULL)
+	public ResponseEntity<?> addDomandaFull(@RequestBody DomandaRequest request) {
+        log.info("ApiController:  aggiungi domanda full");
+        DomandaResponse resource = domandeService.addDomandaFull(request);
+        if (resource.getReturnCode()==Response.OK) {
+        	return ResponseEntity.ok(resource);
+        } else  {
+        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Errore imprevisto, contattare l'assistenza");
+		}
     }
 }

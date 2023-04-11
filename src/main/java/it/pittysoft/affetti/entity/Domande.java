@@ -2,6 +2,8 @@ package it.pittysoft.affetti.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
@@ -14,7 +16,8 @@ public class Domande {
 	
 	@Id
 	@Column
-    private long id;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @Column
     @NotNull(message="{NotNull.Contraente.protocollo}")
@@ -30,18 +33,18 @@ public class Domande {
     
     @Column
     @NotNull(message="{NotNull.Contraente.fk_posto}")
-    private int fk_posto;
+    private Long fk_posto;
     
     @Column
     @NotNull(message="{NotNull.Contraente.fk_assegnatario}")
-    private int fk_assegnatario;
+    private Long fk_assegnatario;
     
     @Column
     @NotNull(message="{NotNull.Contraente.fk_contraente}")
-    private int fk_contraente;
+    private Long fk_contraente;
     
     @Column
-    private int fk_user_modifier;
+    private Long fk_user_modifier;
     
     @Column
     private String data_insert;

@@ -25,6 +25,8 @@ import { ContraentiComponent } from './anagrafiche/contraente/contraenti.compone
 import { DomandeComponent } from './anagrafiche/domanda/domande.component';
 import { AssegnatariComponent } from './anagrafiche/assegnatario/assegnatari.component';
 import { ContrattiComponent } from './anagrafiche/contratto/contratti.component';
+import { DomandaFullComponent } from './anagrafiche/domanda-full/domanda-full.component';
+import { ContraentiModelComponent } from './anagrafiche/contraenti-model/contraenti-model.component';
 
 // state related imports
 // import { StoreModule } from '@ngrx/store';
@@ -50,7 +52,10 @@ import { ContrattiComponent } from './anagrafiche/contratto/contratti.component'
     PostiComponent,
     AssegnatariComponent,
     ContrattiComponent,
-    DomandeComponent
+    DomandeComponent,
+    ContraentiModelComponent,
+    DomandaFullComponent,
+    
   ],
   
   imports: [
@@ -59,6 +64,8 @@ import { ContrattiComponent } from './anagrafiche/contratto/contratti.component'
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    FormsModule,
+
     
 
     /**

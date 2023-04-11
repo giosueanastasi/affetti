@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from '../../app.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { ContraentiModelComponent } from '../contraenti-model/contraenti-model.component';
 
 
 @Component({
@@ -12,7 +13,6 @@ import { Subject } from 'rxjs';
 })
 
 export class ContraentiComponent implements OnInit, OnDestroy {
-
 constructor(private appService: AppService) {}
 
 title = 'angular-nodejs-example';
@@ -62,6 +62,10 @@ getAllContraenti() {
   });
 }
 
+filtraContraneti(contraenteFormPar: FormGroup) {
+  console.log(contraenteFormPar);
+}
+
 ngOnDestroy() {
   this.destroy$.next(true);
   this.destroy$.unsubscribe();
@@ -77,5 +81,7 @@ ngOnInit() {
   console.log('esegui all contraenti on init');
   this.getAllContraenti();
   }
+
+
 
 }

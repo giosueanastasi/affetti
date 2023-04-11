@@ -20,9 +20,14 @@ public class ContraentiService {
     public List<Contraenti> getContraenti() {
         return contraentiRepository.findAll();
     }
+ 
     
     public Contraenti saveContraente(Contraenti contraenti) {
     	return contraentiRepository.save(contraenti);
     }
+
+	public List<Contraenti> getContraenti(Contraenti contraenti) {
+		 return contraentiRepository.findContraentiByCognomeAndNome(contraenti);
+	}
 
 }
