@@ -1,51 +1,43 @@
 <div class="container">
     <div class="row">
-      <div class="col-md-7 mrgnbtm">
-        <h2>Create Domanda</h2>
-        <form [formGroup]="domandaForm" (ngSubmit)="onSubmit()">
+      <div class=" mrgnbtm">
+        <h2>Domande</h2>
+        <div class="text-end"><button [routerLink]="['/domandaFull']">Nuova Domanda</button> </div>
+        <h4>Cerca</h4>
+        <form [formGroup]="domandaForm">
           <div class="row">
-            <div class="form-group col-md-6">
-              <label for="id">ID</label>
-              <input type="text" class="form-control" formControlName="id" id="id" aria-describedby="idlHelp" placeholder="id">
+            <div class="form-group col-md-4">
+              <input type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp" placeholder="nome">
             </div>
-            <div class="form-group col-md-6">
-              <label for="protocollo">protocollo</label>
-              <input type="text" class="form-control" formControlName="protocollo" id="protocollo" aria-describedby="protocollolHelp" placeholder="protocollo">
+            <div class="form-group col-md-4">
+              <input type="text" class="form-control" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp" placeholder="cognome">
             </div>
-            <div class="form-group col-md-6">
-              <label for="data_protocollo">data_protocollo</label>
-              <input type="text" class="form-control" formControlName="data_protocollo" id="data_protocollo" aria-describedby="data_protocollolHelp" placeholder="data_protocollo">
+            <div class="form-group col-md-4">
+              <input type="text" class="form-control" formControlName="codice_fiscale" id="codice_fiscale" aria-describedby="codice_fiscalelHelp" placeholder="codice_fiscale">
             </div>
-              <div class="form-group col-md-6">
-              <label for="stato">stato</label>
-              <input type="text" class="form-control" formControlName="stato" id="stato" aria-describedby="statolHelp" placeholder="stato">
+              <div class="form-group col-md-4">
+              <input type="text" class="form-control" formControlName="email" id="email" aria-describedby="emaillHelp" placeholder="email">
             </div>
-            <div class="form-group col-md-6">
-             <label for="fk_posto">fk_posto</label>
-             <input type="text" class="form-control" formControlName="fk_posto" id="fk_posto" aria-describedby="fk_postolHelp" placeholder="fk_posto">
+
+            <fieldset>
+              <legend><h5>Tipologia</h5></legend>
+              Loculo <input type="radio" name="linguaggio" value="Loculo"/>
+              Tenuta a Disposizione <input type="radio" name="linguaggio" value="Tenuta a Disposizione"/>
+            </fieldset>
+
+            <h6>Intervallo Ricerca</h6>
+            <div class="form-group col-md-2">
+             da <input type="text" class="form-control" formControlName="data_protocollo_iniziale" id="data_protocollo_iniziale" aria-describedby="data_protocollo_inizialelHelp" placeholder="data_protocollo_iniziale">
             </div>
-            <div class="form-group col-md-6">
-              <label for="fk_assegnatario">fk_assegnatario</label>
-              <input type="text" class="form-control" formControlName="fk_assegnatario" id="fk_assegnatario" aria-describedby="fk_assegnatariolHelp" placeholder="fk_assegnatario">
+            <div class="form-group col-md-2">
+             a <input type="text" class="form-control" formControlName="data_protocollo_finale" id="data_protocollo_finale" aria-describedby="data_protocollo_finalelHelp" placeholder="data_protocollo_finale">
             </div>
-            <div class="form-group col-md-6">
-             <label for="fk_contraente">fk_contraente</label>
-              <input type="text" class="form-control" formControlName="fk_contraente" id="fk_contraente" aria-describedby="fk_contraentelHelp" placeholder="fk_contraente">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="fk_user_modifier">fk_user_modifier</label>
-              <input type="text" class="form-control" formControlName="fk_user_modifier" id="fk_user_modifier" aria-describedby="fk_user_modifierlHelp" placeholder="fk_user_modifier">
-            </div>
-            <div class="form-group col-md-6">
-             <label for="data_update">data_update</label>
-              <input type="text" class="form-control" formControlName="data_update" id="data_update" aria-describedby="data_updatelHelp" placeholder="data_update">
-            </div>
-            <div class="form-group col-md-6">
-              <label for="data_insert">data_insert</label>
-               <input type="text" class="form-control" formControlName="data_insert" id="data_insert" aria-describedby="data_insertlHelp" placeholder="data_insert">
+            <div class="form-group col-md-2">
+              <input type="text" class="form-control" formControlName="numero_protocollo" id="numero_protocollo" aria-describedby="numero_protocollolHelp" placeholder="numero_protocollo">
             </div>
           </div>
-          <button type="submit" [disabled]="!domandaForm.valid" class="btn btn-danger">Create</button>
+          <button (click)="cercaDomande(domandaForm)">Cerca</button>
+          <button (click)="svuotaDomanda(domandaForm)">Svuota Filtri</button>
         </form>
         </div>
         <div class="col-md-4 mrgnbtm">

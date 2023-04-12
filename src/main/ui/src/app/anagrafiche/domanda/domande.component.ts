@@ -19,13 +19,13 @@ constructor(private appService: AppService) {}
 title = 'angular-nodejs-example';
 
 domandaForm = new FormGroup({
-  id: new FormControl('', Validators.nullValidator && Validators.required),
-  protocollo: new FormControl('', Validators.nullValidator && Validators.required),
-  data_protocollo: new FormControl('', Validators.nullValidator && Validators.required),
-  stato: new FormControl('', Validators.nullValidator && Validators.required),
-  fk_posto: new FormControl('', Validators.nullValidator && Validators.required),
-  fk_assegnatario: new FormControl('', Validators.nullValidator && Validators.required),
-  fk_contraente: new FormControl('', Validators.nullValidator && Validators.required),
+  nome: new FormControl('', Validators.nullValidator),
+  cognome: new FormControl('', Validators.nullValidator),
+  codice_fiscale: new FormControl('', Validators.nullValidator),
+  email: new FormControl('', Validators.nullValidator),
+  data_protocollo_iniziale: new FormControl('', Validators.nullValidator),
+  data_protocollo_finale: new FormControl('', Validators.nullValidator),
+  numero_protocollo: new FormControl('', Validators.nullValidator),
   fk_user_modifier: new FormControl('', Validators.nullValidator),
   data_insert: new FormControl('', Validators.nullValidator),
   data_update: new FormControl('', Validators.nullValidator)
@@ -58,8 +58,13 @@ ngOnDestroy() {
   this.destroy$.unsubscribe();
 }
 
+svuotaDomanda(svuotadomandeForm: FormGroup) {
+  console.log(svuotadomandeForm);
+}
 
-
+cercaDomande(cercaDomandeForm: FormGroup) {
+  console.log(cercaDomandeForm);
+}
 
 /*
 @Input() domande: any[];
