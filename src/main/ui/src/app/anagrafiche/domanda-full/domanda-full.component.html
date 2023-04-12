@@ -1,56 +1,102 @@
 <div class="container">
     <div class="row">
-      <div class="col-md-7 mrgnbtm">
-        <h2>Create Domanda</h2>
-        <div class="col-6 text-end"><button class="btn btn-primary" (click)="creaContraente()">Agg Contraente</button></div>
-
+      <div class=" mrgnbtm">
+        <h2>Creazione Nuova Domanda</h2>
+        <div class="text-end"><button class="btn btn-info" (click)="creaContraente()">Agg Contraente</button></div>
 
         <form [formGroup]="domandaFullForm" (ngSubmit)="onSubmit()">
           <div class="row">
+            <h4>Dati Contraente</h4>
+            <div class="form-group col-md-4">
+              <input type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp" placeholder="nome" readonly>
+            </div>
+            <div class="form-group col-md-4">
+              <input type="text" class="form-control" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp" placeholder="cognome" readonly>
+            </div>
+
+            <h4>Dati Nascita</h4>
+            <div class="form-group col-sm-3">
+              <input type="text" class="form-control" formControlName="comune_nascita" id="comune_nascita" aria-describedby="comune_nascitalHelp" placeholder="comune_nascita" readonly>
+            </div>
+            <div class="form-group col-sm-1">
+              <input type="text" class="form-control" formControlName="provincia_nascita" id="provincia_nascita" aria-describedby="provincia_nascitalHelp" placeholder="provincia_nascita" readonly>
+            </div>
+            <div class="form-group col-sm-2">
+              <input type="text" class="form-control" formControlName="stato_nascita" id="stato_nascita" aria-describedby="stato_nascitalHelp" placeholder="stato_nascita" readonly>
+            </div>
+            <div class="form-group col-sm-2">
+              <input type="text" class="form-control" formControlName="data_nascita" id="data_nascita" aria-describedby="data_nascitalHelp" placeholder="data_nascita" readonly>
+            </div>
+
+            <h4>Dati Residenza</h4>
+            <div class="form-group col-sm-3">
+              <input type="text" class="form-control" formControlName="comune_residenza" id="comune_residenza" aria-describedby="comune_residenzalHelp" placeholder="comune_residenza" readonly>
+            </div>
+            <div class="form-group col-sm-1">
+              <input type="text" class="form-control" formControlName="provincia_residenza" id="provincia_residenza" aria-describedby="provincia_residenzalHelp" placeholder="provincia_residenza" readonly>
+            </div>
+            <div class="form-group col-sm-3">
+              <input type="text" class="form-control" formControlName="via_residenza" id="via_residenza" aria-describedby="via_residenzalHelp" placeholder="via_residenza" readonly>
+            </div>
+            <div class="form-group col-sm-1">
+              <input type="text" class="form-control" formControlName="civico_residenza" id="civico_residenza" aria-describedby="civico_residenzalHelp" placeholder="civico_residenza" readonly>
+            </div>
+            <div class="form-group col-sm-2">
+              <input type="text" class="form-control" formControlName="cap_residenza" id="cap_residenza" aria-describedby="cap_residenzalHelp" placeholder="cap_residenza" readonly>
+            </div>
+
+            <h4>Altri Dati </h4>
             <div class="form-group col-md-6">
-              <label for="protocollo">protocollo</label>
+              <input type="text" class="form-control" formControlName="codice_fiscale" id="codice_fiscale" aria-describedby="codice_fiscalelHelp" placeholder="codice_fiscale" readonly>
+            </div>
+            <div class="form-group col-md-6">
+              <input type="text" class="form-control" formControlName="email" id="email" aria-describedby="emaillHelp" placeholder="email" readonly>
+            </div>
+            <br>
+            <br>
+              <div class="form-group col-md-6">
+              <input type="text" class="form-control" formControlName="note" id="note" aria-describedby="notelHelp" placeholder="note" readonly>
+            </div>
+
+            <h4>Richiesta </h4>
+            <div class="form-group col-sm-3">
               <input type="text" class="form-control" formControlName="protocollo" id="protocollo" aria-describedby="protocollolHelp" placeholder="protocollo">
             </div>
-            <div class="form-group col-md-6">
-              <label for="data_protocollo">data_protocollo</label>
+            <div class="form-group col-sm-2">
               <input type="text" class="form-control" formControlName="data_protocollo" id="data_protocollo" aria-describedby="data_protocollolHelp" placeholder="data_protocollo">
             </div>
-              <div class="form-group col-md-6">
-              <label for="stato">stato</label>
-              <input type="text" class="form-control" formControlName="stato" id="stato" aria-describedby="statolHelp" placeholder="stato">
+
+            <div class="text-end"><button class="btn btn-info" (click)="cercaPosto()">Cerca Posto</button></div>
+
+            <h6>Tipologia </h6>
+              <div class="form-group col-sm-3">
+              <input type="text" class="form-control" formControlName="loculo" id="loculo" aria-describedby="loculolHelp" placeholder="loculo">
             </div>
-            <div class="form-group col-md-6">
-             <label for="fk_posto">fk_posto</label>
-             <input type="text" class="form-control" formControlName="fk_posto" id="fk_posto" aria-describedby="fk_postolHelp" placeholder="fk_posto">
+            <div class="form-group col-sm-3">
+             <input type="text" class="form-control" formControlName="fornice" id="fornice" aria-describedby="fornicelHelp" placeholder="fornice">
             </div>
-            <div class="form-group col-md-6">
-             <label for="fk_contraente">fk_contraente</label>
-              <input type="text" class="form-control" formControlName="fk_contraente" id="fk_contraente" aria-describedby="fk_contraentelHelp" placeholder="fk_contraente">
-            </div>
-            <div class="form-group col-md-6">
-                <label for="nomeAss">Nome Assegnatario</label>
+
+            <h6>Assegnatario </h6>
+            <div class="form-group col-sm-4">
                  <input type="text" class="form-control" formControlName="nomeAss" id="nomeAss" aria-describedby="nomeAssHelp" placeholder="nomeAss">
             </div>
-            <div class="form-group col-md-6">
-                <label for="cognomeAss">Cognome Assegnatario</label>
+            <div class="form-group col-md-4">
                  <input type="text" class="form-control" formControlName="cognomeAss" id="cognomeAss" aria-describedby="cognomeAssHelp" placeholder="cognomeAss">
             </div>
-            <div class="form-group col-md-6">
-                <label for="comuneAss">Comune Assegnatario</label>
-                 <input type="text" class="form-control" formControlName="comuneAss" id="comuneAss" aria-describedby="comuneAssHelp" placeholder="comuneAss">
+            <h6>Dati Decesso </h6>
+            <div class="form-group col-sm-3">
+                 <input type="text" class="form-control" formControlName="comune_decesso" id="comune_decesso" aria-describedby="comune_decessoHelp" placeholder="comune_decesso">
             </div>
-            <div class="form-group col-md-6">
-                <label for="provinciaAss">Provincia Assegnatario</label>
-                 <input type="text" class="form-control" formControlName="provAss" id="provAss" aria-describedby="provAssHelp" placeholder="provAss">
+            <div class="form-group col-sm-2">
+                 <input type="text" class="form-control" formControlName="data_decesso" id="data_decesso" aria-describedby="data_decessoHelp" placeholder="data_decesso">
             </div>
-            <div class="form-group col-md-6">
-                <label for="dataDecesso">Data Decesso</label>
-                 <input type="text" class="form-control" formControlName="dataDecesso" id="dataDecesso" aria-describedby="dataDecessoHelp" placeholder="dataDecesso">
-            </div>
-            
           </div>
-          <button type="submit" [disabled]="!domandaFullForm.valid" class="btn btn-danger">Create</button>
-        </form>
+          <br>
+
+           <button input type="reset" value="cancella" class="btn btn-info">Cancella</button>
+           <button type="submit" [disabled]="!domandaFullForm.valid" class="btn btn-primary">Salva</button>
+
+          </form>
         </div>
         <div class="col-md-4 mrgnbtm">
         </div>
@@ -58,3 +104,4 @@
       
 </div>
 <app-contraenti-model (save)="saveContraenteWatcher($event)"></app-contraenti-model>
+<app-posti-model (save)="savePostoWatcher($event)"></app-posti-model>

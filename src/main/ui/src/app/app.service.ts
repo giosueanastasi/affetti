@@ -54,6 +54,10 @@ export class AppService {
     return this.http.post(this.rootURL + '/contraente', contraente);
   }
 
+  savePosto(posto1: any) {
+    return this.http.post(this.rootURL + '/posto1', posto1);
+  }
+
   getAssegnatari() {
     return this.http.get(this.rootURL + '/assegnatari');
   }

@@ -1,0 +1,88 @@
+<div class="modal fade" id="postiModal" tabIndex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form #f="ngForm" >
+                 <div class="modal-header">
+                    <h5 class="modal-title">Posto</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                 </div>
+                 <div class="modal-body">
+
+                    <div class="alert alert-danger" *ngIf="errorMessage">
+                        <strong>Error!</strong>{{errorMessage}}
+                    </div>
+                    <div class="form-group">
+                        <label for="nome">nome</label>
+                        <input 
+                            type="text" 
+                            id="nome" 
+                            name="nome"
+                            class="form-control" 
+                            [(ngModel)]="posto1.nome"
+                            #nome="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !nome.valid">
+                            Campo Obbligatorio
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cognome">cognome</label>
+                        <input 
+                            type="text" 
+                            id="cognome" 
+                            name="cognome"
+                            class="form-control" 
+                            [(ngModel)]="posto1.cognome"
+                            #cognome="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !cognome.valid">
+                            Campo Obbligatorio
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loculo">loculo</label>
+                        <input 
+                            type="text" 
+                            id="loculo" 
+                            name="loculo"
+                            class="form-control" 
+                            [(ngModel)]="posto1.loculo"
+                            #loculo="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !loculo.valid">
+                            Campo Obbligatorio
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fornice">fornice</label>
+                        <input 
+                            type="text" 
+                            id="fornice" 
+                            name="fornice"
+                            class="form-control" 
+                            [(ngModel)]="posto1.fornice"
+                            #fornice="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !fornice.valid">
+                            Campo Obbligatorio
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                  <button class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                  <button (click)="filtraPosti(postoForm)">Cerca</button>
+                </div>
+          </form>
+      </div>
+  </div>
+</div>
+
+
