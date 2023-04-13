@@ -4,7 +4,7 @@
         <h2>Creazione Nuova Domanda</h2>
         <div class="text-end"><button class="btn btn-info" (click)="creaContraente()">Agg Contraente</button></div>
 
-        <form [formGroup]="domandaFullForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="domandaFullForm" >
           <div class="row">
             <h4>Dati Contraente</h4>
             <div class="form-group col-md-4">
@@ -94,7 +94,7 @@
           <br>
 
            <button input type="reset" value="cancella" class="btn btn-info">Cancella</button>
-           <button type="submit" [disabled]="!domandaFullForm.valid" class="btn btn-primary">Salva</button>
+           <button (click)="addDomanda()" [disabled]="!domandaFullForm.valid" class="btn btn-primary">Salva</button>
 
           </form>
         </div>

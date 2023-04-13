@@ -13,7 +13,7 @@ import { PostiModelComponent } from '../posti-model/posti-model.component';
   templateUrl: './domanda-full.component.html',
   styleUrls: ['./domanda-full.component.css']
 })
-export class DomandaFullComponent implements OnInit {
+export class DomandaFullComponent  {
 
   @ViewChild(ContraentiModelComponent) child: ContraentiModelComponent|undefined;
   
@@ -41,7 +41,7 @@ export class DomandaFullComponent implements OnInit {
     protocollo: new FormControl('', Validators.nullValidator && Validators.required),
     data_protocollo: new FormControl('', Validators.nullValidator && Validators.required),
 
-    luculo: new FormControl('', Validators.nullValidator && Validators.required),
+    loculo: new FormControl('', Validators.nullValidator && Validators.required),
     fornice: new FormControl('', Validators.nullValidator && Validators.required),
 
     nomeAss: new FormControl('', Validators.nullValidator && Validators.required),
@@ -51,13 +51,12 @@ export class DomandaFullComponent implements OnInit {
     data_decesso: new FormControl('', Validators.nullValidator ),
   });
 
-  ngOnInit(): void {
-  }
+
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
 
-  onSubmit() {
+  addDomanda() {
     this.appService.addDomandaFull(this.domandaFullForm.value).pipe(takeUntil(this.destroy$)).subscribe(data => {
       console.log('message::::', data);
       

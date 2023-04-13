@@ -18,11 +18,9 @@ posto1: Posto1 = new Posto1();
 
   @Output() save =  new EventEmitter<any>();
   constructor(private appService: AppService) { }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
 
-  filtraPosti(postoForm: FormGroup) {
+
+  filtraPosti(postoForm: Posto1) {
     console.log(postoForm);
   }
 
