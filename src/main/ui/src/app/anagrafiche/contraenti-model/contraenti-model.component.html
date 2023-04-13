@@ -2,11 +2,11 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <form #f="ngForm" (ngSubmit)="f.form.valid && saveContraente()">
-                <div class="modal-header">
+                 <div class="modal-header">
                     <h5 class="modal-title">Contraente</h5>
                     <button class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
+                 </div>
+                 <div class="modal-body">
 
                     <div class="alert alert-danger" *ngIf="errorMessage">
                         <strong>Error!</strong>{{errorMessage}}
@@ -23,7 +23,7 @@
                             required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !cognome.valid">
-                            E' necessario inserire il Cognome
+                            Campo Obbligatorio
                         </div>
                     </div>
 
@@ -40,7 +40,7 @@
                             required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !nome.valid">
-                            E' necessario inserire il nome
+                            Campo Obbligatorio
                         </div>
                     </div>
 
@@ -56,7 +56,7 @@
                             required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !comune_nascita.valid">
-                            E' necessario inserire il comune_nascita
+                            Campo Obbligatorio
                         </div>
                     </div>
 
@@ -72,7 +72,7 @@
                             required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !provincia_nascita.valid">
-                            E' necessario inserire il provincia_nascita
+                            Campo Obbligatorio
                         </div>
                     </div>
 
@@ -88,7 +88,7 @@
                             required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !stato_nascita.valid">
-                            E' necessario inserire il stato_nascita
+                            Campo Obbligatorio
                         </div>
                     </div>
 
@@ -104,7 +104,7 @@
                             required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !data_nascita.valid">
-                            E' necessario inserire il data_nascita
+                            Campo Obbligatorio
                         </div>
                     </div>
 
@@ -120,7 +120,7 @@
                             required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !comune_residenza.valid">
-                            E' necessario inserire il comune_residenza
+                            Campo Obbligatorio
                         </div>
                     </div>
 
@@ -136,23 +136,7 @@
                             required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !provincia_residenza.valid">
-                            E' necessario inserire il provincia_residenza
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="provincia_residenza">provincia_residenza</label>
-                        <input 
-                            type="text" 
-                            id="provincia_residenza" 
-                            name="provincia_residenza"
-                            class="form-control" 
-                            [(ngModel)]="contraente.provincia_residenza"
-                            #provincia_residenza="ngModel"
-                            required
-                            >
-                        <div class="alert-danger" *ngIf="f.submitted && !provincia_residenza.valid">
-                            E' necessario inserire il provincia_residenza
+                            Campo Obbligatorio
                         </div>
                     </div>
 
@@ -168,7 +152,7 @@
                             required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !via_residenza.valid">
-                            E' necessario inserire il via_residenza
+                            Campo Obbligatorio
                         </div>
                     </div>
 
@@ -184,7 +168,7 @@
                             required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !civico_residenza.valid">
-                            E' necessario inserire il civico_residenza
+                            Campo Obbligatorio
                         </div>
                     </div>
 
@@ -200,7 +184,7 @@
                             required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !cap_residenza.valid">
-                            E' necessario inserire il cap_residenza
+                            Campo Obbligatorio
                         </div>
                     </div>
 
@@ -216,7 +200,7 @@
                             required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !telefono.valid">
-                            E' necessario inserire il telefono
+                            Campo Obbligatorio
                         </div>
                     </div>
 
@@ -232,7 +216,7 @@
                             required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !codice_fiscale.valid">
-                            E' necessario inserire il codice_fiscale
+                            Campo Obbligatorio
                         </div>
                     </div>
 
@@ -245,10 +229,8 @@
                             class="form-control" 
                             [(ngModel)]="contraente.email"
                             #email="ngModel"
-                            required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !email.valid">
-                            E' necessario inserire il email
                         </div>
                     </div>
 
@@ -261,35 +243,41 @@
                             class="form-control" 
                             [(ngModel)]="contraente.note"
                             #note="ngModel"
-                            required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !note.valid">
-                            E' necessario inserire il note
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label for="note">note</label>
+                        <label for="data_insert">data_insert</label>
                         <input 
                             type="text" 
-                            id="note" 
-                            name="note"
+                            id="data_insert" 
+                            name="data_insert"
                             class="form-control" 
-                            [(ngModel)]="contraente.note"
-                            #note="ngModel"
-                            required
+                            [(ngModel)]="contraente.data_insert"
+                            #data_insert="ngModel"
                             >
-                        <div class="alert-danger" *ngIf="f.submitted && !note.valid">
-                            E' necessario inserire il note
+                        <div class="alert-danger" *ngIf="f.submitted && !data_insert.valid">
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="data_update">data_update</label>
+                        <input 
+                            type="text" 
+                            id="data_update" 
+                            name="data_update"
+                            class="form-control" 
+                            [(ngModel)]="contraente.data_update"
+                            #data_update="ngModel"
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !data_update.valid">
+                        </div>
+                    </div>
+                 </div>
 
-
-
-                </div>
-
-                <div class="modal-footer">
+                  <div class="modal-footer">
                     <button class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
                     <button class="btn btn-primary" type="submit">Salva modifiche</button></div>
             </form>
