@@ -13,6 +13,7 @@ CREATE TABLE comuni(
   ( 'Giulianova', 'TE'); 
 	
   
+  DROP TABLE IF EXISTS contraenti;
   DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
@@ -73,7 +74,7 @@ INSERT INTO posti ( loculo,fornice,tipo,data_update,data_insert,fk_user_modifier
 	
 
 
-DROP TABLE IF EXISTS contraenti;
+
 
 CREATE TABLE contraenti (
 	id int NOT NULL IDENTITY,

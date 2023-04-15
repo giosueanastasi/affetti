@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -77,8 +79,9 @@ public class Contraenti {
     @Column
     private String note;
     
-    @Column
-    private Long fk_user_modifier;
+    @ManyToOne
+    @JoinColumn(name = "fk_user_modifier")
+    private Users user;
 
     @Column
     private String data_insert;
