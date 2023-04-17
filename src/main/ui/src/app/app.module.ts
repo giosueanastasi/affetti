@@ -28,6 +28,7 @@ import { ContrattiComponent } from './anagrafiche/contratto/contratti.component'
 import { DomandaFullComponent } from './anagrafiche/domanda-full/domanda-full.component';
 import { ContraentiModelComponent } from './anagrafiche/contraenti-model/contraenti-model.component';
 import { PostiModelComponent } from './anagrafiche/posti-model/posti-model.component';
+import { PostoPipe } from './anagrafiche/posti-model/posto.pipe';
 
 // state related imports
 // import { StoreModule } from '@ngrx/store';
@@ -57,6 +58,7 @@ import { PostiModelComponent } from './anagrafiche/posti-model/posti-model.compo
     ContraentiModelComponent,
     DomandaFullComponent,
     PostiModelComponent,
+    PostoPipe,
     
   ],
   

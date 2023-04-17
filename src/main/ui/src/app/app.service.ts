@@ -91,7 +91,7 @@ export class AppService {
     domanda.id = domandaFullForm.id;
     domanda.protocollo = domandaFullForm.protocollo;
     domanda.data_protocollo = domandaFullForm.data_protocollo;
-    domanda.stato = domandaFullForm.stato;
+    domanda.stato = 'bozza';
     domanda.fk_posto = domandaFullForm.fk_posto;
     domanda.fk_contraente = domandaFullForm.fk_contraente;
 

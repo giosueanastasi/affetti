@@ -1,4 +1,5 @@
 export class Posto {
+
   id: number;
   loculo: string;
   fornice: string;

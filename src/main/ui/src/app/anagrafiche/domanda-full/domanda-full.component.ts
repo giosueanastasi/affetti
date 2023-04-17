@@ -49,6 +49,9 @@ export class DomandaFullComponent  {
 
     comune_decesso: new FormControl('', Validators.nullValidator ),
     data_decesso: new FormControl('', Validators.nullValidator ),
+
+    fk_contraente: new FormControl('', Validators.nullValidator && Validators.required),
+    fk_posto: new FormControl('', Validators.nullValidator && Validators.required),
   });
 
 
@@ -71,6 +74,7 @@ export class DomandaFullComponent  {
   }
   
   saveContraenteWatcher(contraente: Contraente){
+     this.domandaFullForm.controls['fk_contraente'].setValue(contraente.id);
     this.domandaFullForm.controls['nome'].setValue(contraente.nome);
     this.domandaFullForm.controls['cognome'].setValue(contraente.cognome);
     this.domandaFullForm.controls['comune_nascita'].setValue(contraente.comune_nascita);

@@ -25,5 +25,9 @@ public class PostiService {
     public Posti savePosto(Posti posti) {
     	return postiRepository.save(posti);
     }
+    
+    public List<Posti> getPosti(Posti posti) {
+		 return postiRepository.findtPostiByLoculoAndFornice(posti);
+	}
 
 }

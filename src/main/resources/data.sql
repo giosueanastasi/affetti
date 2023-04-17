@@ -30,6 +30,26 @@ INSERT INTO users ( username,password,ruolo,fk_comune) VALUES
   ( 'Stefano24', 'qecwebckw','utente',1),
   ( 'Giovanna98', 'ugcywie', 'utente',3); 
   
+  DROP TABLE IF EXISTS posti;
+
+CREATE TABLE posti (
+	id INT NOT NULL IDENTITY,
+	loculo VARCHAR(10) NOT NULL,
+	fornice VARCHAR(10) NOT NULL,
+	tipo VARCHAR (15) NOT NULL,
+	data_update date NULL,
+	data_insert date NULL,
+	fk_user_modifier  int NULL,
+	PRIMARY KEY (id),
+	FOREIGN key(fk_user_modifier ) references users (id)
+);
+
+
+ INSERT INTO posti ( loculo,fornice,tipo,data_update,data_insert,fk_user_modifier) VALUES
+  ( 15, 150, 'intermedia', '2023-09-25','2023-09-25',1),
+  ( 1, 8, 'monumentale','2023-03-04','2020-02-8',2),
+  ( 8,120, 'nuova', '2023-04-8','2023-04-8',3); 
+  
 	DROP TABLE IF EXISTS assegnatari;
 
 	CREATE TABLE assegnatari (
@@ -50,28 +70,6 @@ INSERT INTO assegnatari ( nome,cognome,data_decesso,comune_decesso,data_update,d
   ( 'Vincenzo','D Auri', '2020-02-4','Ascoli Piceno','2023-03-5','2020-02-8',3),
   ( 'Samuel','Feliciani', '2023-04-5','Giulianova', '2023-04-8','2023-04-8',2); 
 	
-
-DROP TABLE IF EXISTS posti;
-
-CREATE TABLE posti (
-	id INT NOT NULL IDENTITY,
-	loculo VARCHAR(10) NOT NULL,
-	fornice VARCHAR(10) NOT NULL,
-	tipo VARCHAR (15) NOT NULL,
-	data_update date NULL,
-	data_insert date NULL,
-	fk_user_modifier  int NULL,
-	PRIMARY KEY (id),
-	FOREIGN key(fk_user_modifier ) references users (id)
-);
-
-
-INSERT INTO posti ( loculo,fornice,tipo,data_update,data_insert,fk_user_modifier) VALUES
-  ( 15, 150, 'intermedia', '2023-09-25','2023-09-25',1),
-  ( 1, 8, 'monumentale','2023-03-04','2020-02-8',2),
-  ( 8,120, 'nuova', '2023-04-8','2023-04-8',3); 
-	
-
 
 DROP TABLE IF EXISTS contraenti;
 
@@ -124,11 +122,11 @@ CREATE TABLE domande (
 	FOREIGN key(fk_contraente) references contraenti (id)
 	);
 	
-	INSERT INTO domande (protocollo,data_protocollo,stato,fk_posto,fk_assegnatario,fk_contraente,fk_user_modifier ,data_insert,data_update) VALUES
+  INSERT INTO domande (protocollo,data_protocollo,stato,fk_posto,fk_assegnatario,fk_contraente,fk_user_modifier ,data_insert,data_update) VALUES
   (506,'2023-09-25','in lavorazione',2,1,3,2, '2023-09-25','2023-09-25'),
   (204, '2023-03-04','eseguito',1,2,1,3,'2023-03-04','2020-02-8'),
   (890, '2023-04-8', 'sto elaborando',3,3,2,1, '2023-04-8','2023-04-8'); 
-	
+  
 	DROP TABLE IF EXISTS contratti;
 	
 	CREATE TABLE contratti (

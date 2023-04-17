@@ -7,6 +7,9 @@
         <form [formGroup]="domandaFullForm" >
           <div class="row">
             <h4>Dati Contraente</h4>
+            <div class="form-group col-sm-2">
+              <input type="text" class="form-control" formControlName="fk_contraente" id="fk_contraente" aria-describedby="fk_contraente" placeholder="fk_contraente" readonly>
+             </div>
             <div class="form-group col-md-4">
               <input type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp" placeholder="nome" readonly>
             </div>
@@ -69,6 +72,9 @@
             <div class="text-end"><button class="btn btn-info" (click)="cercaPosto()">Cerca Posto</button></div>
 
             <h6>Tipologia </h6>
+            <div class="form-group col-sm-2">
+              <input type="text" class="form-control" formControlName="fk_posto" id="fk_posto" aria-describedby="fk_postoHelp" placeholder="fk_posto" readonly>
+            </div>
               <div class="form-group col-sm-3">
               <input type="text" class="form-control" formControlName="loculo" id="loculo" aria-describedby="loculolHelp" placeholder="loculo">
             </div>
@@ -90,6 +96,8 @@
             <div class="form-group col-sm-2">
                  <input type="text" class="form-control" formControlName="data_decesso" id="data_decesso" aria-describedby="data_decessoHelp" placeholder="data_decesso">
             </div>
+
+
           </div>
           <br>
 

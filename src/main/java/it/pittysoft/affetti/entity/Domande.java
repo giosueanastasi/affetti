@@ -5,6 +5,10 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 
@@ -31,9 +35,7 @@ public class Domande {
     @NotNull(message="{NotNull.Contraente.stato}")
     private String stato;
     
-    @Column
-    @NotNull(message="{NotNull.Contraente.fk_posto}")
-    private Long fk_posto;
+
     
     @Column
     @NotNull(message="{NotNull.Contraente.fk_assegnatario}")
@@ -51,6 +53,10 @@ public class Domande {
     
     @Column
     private String data_update;
+    
+    @ManyToOne
+    @JoinColumn(name = "fk_posto")
+    private Posti posto;
     
    
 }

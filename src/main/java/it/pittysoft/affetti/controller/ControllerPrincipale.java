@@ -133,6 +133,13 @@ public class ControllerPrincipale {
         return ResponseEntity.ok(resource);
     }
 	
+	@PostMapping(path = PostoLinks.SEARCH_POSTI)
+    public ResponseEntity<?> searchPosti(@RequestBody Posti posti) {
+        log.info("ApiController:  search posti");
+        List<Posti> resource = postiService.getPosti(posti);
+        return ResponseEntity.ok(resource);
+	}
+	
 	@PostMapping(path = ContraenteLinks.ADD_CONTRAENTE)
 	public ResponseEntity<?> saveContraente(@RequestBody Contraenti contraente) {
         log.info("ApiController:  list contraenti");
