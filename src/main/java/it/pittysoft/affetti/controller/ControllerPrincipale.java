@@ -23,6 +23,7 @@ import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
 import it.pittysoft.affetti.model.DomandaRequest;
+import it.pittysoft.affetti.model.DomandaRequestSearch;
 import it.pittysoft.affetti.model.DomandaResponse;
 import it.pittysoft.affetti.model.Response;
 import it.pittysoft.affetti.service.ComuniService;
@@ -179,5 +180,12 @@ public class ControllerPrincipale {
         	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Errore imprevisto, contattare l'assistenza");
 		}
+    }
+	
+	@PostMapping(path = DomandaLinks.SEARCH_DOMANDE)
+    public ResponseEntity<?> searchDomande(@RequestBody DomandaRequestSearch resquestSearch) {
+        log.info("ApiController:  search domande");
+        List<Domande> resource = domandeService.getDomande(resquestSearch);
+        return ResponseEntity.ok(resource);
     }
 }

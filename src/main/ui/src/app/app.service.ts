@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomandaFull } from './app-state/models/domandaFull.model';
 import { Domanda } from './app-state/models';
+import { DomandaSearch } from './app-state/models/domandaSearch.model';
 
 
 @Injectable({
@@ -85,7 +86,6 @@ export class AppService {
 	return this.http.post(this.rootURL + '/domanda', domanda);
   }
 
-
   addDomandaFull(domandaFullForm: any) {
     let domanda = new Domanda;
     domanda.id = domandaFullForm.id;
@@ -106,12 +106,21 @@ export class AppService {
 	return this.http.post(this.rootURL + '/domandaFull', df);
   }
 
+
+  cercaDomandeService(domandaForm: any) {
+    let domanda = new Domanda;
+    domanda.protocollo = domandaForm.protocollo;
+    domanda.data_protocollo = domandaForm.data_protocollo;
+    domanda.stato = domandaForm.stato;
+
+    let  ds = new DomandaSearch();
+    ds.domanda = domanda;
+    ds.nomeC = domandaForm.nomeC;
+    ds.cognomeC = domandaForm.cognomeC;
+    ds.codice_fiscaleC = domandaForm.codice_fiscaleC;
+    ds.emailC = domandaForm.emailC;
+    
+	return this.http.post(this.rootURL + '/domanda', ds);
+  }
+  
 }
-/**
- * 
- *       nomeAss: string;
-	cognomeAss: string;
-	comuneAss: string;
-	provAss: string;
-	dataDecesso: string;
- */

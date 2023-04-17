@@ -78,7 +78,7 @@ public class Contraenti {
     private String note;
     
     @Column
-    private Long fk_user_modifier;
+    private String fk_user_modifier;
 
     @Column
     private String data_insert;

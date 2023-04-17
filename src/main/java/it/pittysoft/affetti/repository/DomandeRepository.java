@@ -11,7 +11,7 @@ import it.pittysoft.affetti.entity.Domande;
 
 
 @RepositoryRestResource()
-public interface DomandeRepository extends JpaRepository<Domande, Integer>, JpaSpecificationExecutor<Domande>, QuerydslPredicateExecutor<Domande> {
+public interface DomandeRepository extends JpaRepository<Domande, Integer>, JpaSpecificationExecutor<Domande>, QuerydslPredicateExecutor<Domande>{
 	
 	
 }
