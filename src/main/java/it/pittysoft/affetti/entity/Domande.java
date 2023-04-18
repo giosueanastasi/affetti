@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,7 +46,7 @@ public class Domande {
     @NotNull(message="{NotNull.Contraente.fk_contraente}")
     private Long fk_contraente;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_assegnatario")
     private Assegnatari assegnatario;
     
@@ -58,7 +59,7 @@ public class Domande {
     @Column
     private String data_update;
     
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_posto")
     private Posti posto;
     

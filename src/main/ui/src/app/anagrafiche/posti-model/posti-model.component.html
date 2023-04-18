@@ -59,9 +59,9 @@
           </thead>
           <tbody>
           
-            <tr *ngFor="let posto1 of posti  | SearchPostoPipe :searchValue">
-              <td>{{posto1.loculo}}</td>
-              <td>{{posto1.fornice}}</td>
+            <tr *ngFor="let postoTab of posti ">
+              <td>{{postoTab.loculo}}</td>
+              <td>{{postoTab.fornice}}</td>
             </tr>
             </tbody>
           </table>

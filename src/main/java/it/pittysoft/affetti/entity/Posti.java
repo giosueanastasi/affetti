@@ -2,6 +2,8 @@ package it.pittysoft.affetti.entity;
 
 
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -12,6 +14,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
@@ -50,8 +53,10 @@ public class Posti {
     private String fk_user_modifier;
     
 
-    @OneToMany(mappedBy="posto")
-    private Set<Domande> domande;
+    @OneToMany(mappedBy = "posto")
+    private List<Domande> domande  = new ArrayList<>();
+    
+
     
 
 

@@ -28,9 +28,9 @@ posto1: Posto1 = new Posto1();
   searchValue : string;
 
   filtraPosti(postoForm: Posto1) {
-    this.appService.cercaPosti(postoForm).pipe(takeUntil(this.destroy$)).subscribe((posti: any[]) => {
-      this.postoCount =posti.length;
-      this.posti = posti;
+    this.appService.cercaPosti(postoForm).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+      this.postoCount =data.length;
+      this.posti = data.posti;
       });
   }
 
