@@ -10,7 +10,6 @@ import it.pittysoft.affetti.entity.Assegnatari;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.model.DomandaRequest;
 import it.pittysoft.affetti.model.DomandaResponse;
-import it.pittysoft.affetti.repository.AssegnatariRepository;
 import it.pittysoft.affetti.repository.DomandeRepository;
 import it.pittysoft.affetti.repository.DomandeRepositoryCustom;
 
@@ -22,9 +21,7 @@ public class DomandeService {
 	@Autowired
 	private DomandeRepository domandeRepository;
 	
-	@Autowired
-	private AssegnatariRepository assegnatariRepository;
-	
+
 	@Autowired
 	private DomandaDao domandaDao;
 	

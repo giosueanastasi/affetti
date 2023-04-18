@@ -24,6 +24,8 @@ import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
 import it.pittysoft.affetti.model.DomandaRequest;
 import it.pittysoft.affetti.model.DomandaResponse;
+import it.pittysoft.affetti.model.PostiRequest;
+import it.pittysoft.affetti.model.PostiResponse;
 import it.pittysoft.affetti.model.Response;
 import it.pittysoft.affetti.service.ComuniService;
 import it.pittysoft.affetti.service.ContraentiService;
@@ -134,10 +136,15 @@ public class ControllerPrincipale {
     }
 	
 	@PostMapping(path = PostoLinks.SEARCH_POSTI)
-    public ResponseEntity<?> searchPosti(@RequestBody Posti posti) {
+    public ResponseEntity<?> searchPosti(@RequestBody PostiRequest posti) {
         log.info("ApiController:  search posti");
-        List<Posti> resource = postiService.getPosti(posti);
-        return ResponseEntity.ok(resource);
+        PostiResponse resource = postiService.getPosti(posti);
+        if (resource.getReturnCode()==Response.OK) {
+        	return ResponseEntity.ok(resource);
+        } else  {
+        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Errore imprevisto, contattare l'assistenza");
+		}
 	}
 	
 	@PostMapping(path = ContraenteLinks.ADD_CONTRAENTE)

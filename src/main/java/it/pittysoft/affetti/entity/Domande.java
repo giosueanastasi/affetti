@@ -1,5 +1,7 @@
 package it.pittysoft.affetti.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -35,15 +37,17 @@ public class Domande {
     @NotNull(message="{NotNull.Contraente.stato}")
     private String stato;
     
-
-    
-    @Column
-    @NotNull(message="{NotNull.Contraente.fk_assegnatario}")
-    private Long fk_assegnatario;
+//    @Column
+//    @NotNull(message="{NotNull.Contraente.fk_assegnatario}")
+//    private Long fk_assegnatario;
     
     @Column
     @NotNull(message="{NotNull.Contraente.fk_contraente}")
     private Long fk_contraente;
+    
+    @ManyToOne
+    @JoinColumn(name = "fk_assegnatario")
+    private Assegnatari assegnatario;
     
     @Column
     private Long fk_user_modifier;
@@ -57,6 +61,7 @@ public class Domande {
     @ManyToOne
     @JoinColumn(name = "fk_posto")
     private Posti posto;
+    
     
    
 }

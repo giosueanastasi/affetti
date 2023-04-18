@@ -30,7 +30,10 @@ INSERT INTO users ( username,password,ruolo,fk_comune) VALUES
   ( 'Stefano24', 'qecwebckw','utente',1),
   ( 'Giovanna98', 'ugcywie', 'utente',3); 
   
-  DROP TABLE IF EXISTS posti;
+  
+  
+DROP TABLE IF EXISTS domande;
+DROP TABLE IF EXISTS posti;
 
 CREATE TABLE posti (
 	id INT NOT NULL IDENTITY,
@@ -102,7 +105,7 @@ INSERT INTO contraenti ( nome,cognome,comune_nascita,provincia_nascita,stato_nas
   ( 'Antonietta', 'Di Giuseppe','Ascoli Piceno','AP','Italia','1990-08-15','Monticelli','AP','Via dei Sanniti',3,63100,3277665754,'DGPANT90P15L387J','','',1,'2023-03-4','2020-02-8'),
   ( 'Giovanna','Di Saverio','Giulianova','TE','Italia','1970-01-31','Giulianova','TE','Via Liguria',2,64021,3475700123,'DSRGVN70P31I351S','','',3,'2023-04-8','2023-04-8'); 
 
-DROP TABLE IF EXISTS domande;
+
 
 CREATE TABLE domande (
 	id int NOT NULL IDENTITY,

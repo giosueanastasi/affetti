@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomandaFull } from './app-state/models/domandaFull.model';
-import { Domanda } from './app-state/models';
+import { Domanda, Posto1 } from './app-state/models';
 
 
 @Injectable({
@@ -21,6 +21,10 @@ export class AppService {
   addUser(user: any, id: number) {
 	user.id = id;
 	return this.http.post(this.rootURL + '/user', user);
+  }
+
+  cercaPosti(posti1: any) {
+    return this.http.post(this.rootURL + '/search_posti',posti1);
   }
 
   getPosti() {

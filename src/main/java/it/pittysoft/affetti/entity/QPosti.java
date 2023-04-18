@@ -7,6 +7,7 @@ import com.querydsl.core.types.dsl.*;
 import com.querydsl.core.types.PathMetadata;
 import javax.annotation.Generated;
 import com.querydsl.core.types.Path;
+import com.querydsl.core.types.dsl.PathInits;
 
 
 /**
@@ -22,6 +23,8 @@ public class QPosti extends EntityPathBase<Posti> {
     public final StringPath data_insert = createString("data_insert");
 
     public final StringPath data_update = createString("data_update");
+
+    public final SetPath<Domande, QDomande> domande = this.<Domande, QDomande>createSet("domande", Domande.class, QDomande.class, PathInits.DIRECT2);
 
     public final StringPath fk_user_modifier = createString("fk_user_modifier");
 

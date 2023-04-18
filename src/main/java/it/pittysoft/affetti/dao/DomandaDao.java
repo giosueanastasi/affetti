@@ -13,14 +13,11 @@ import it.pittysoft.affetti.repository.DomandeRepository;
 public class DomandaDao {
 	@Autowired
 	private DomandeRepository domandeRepository;
-	
-	@Autowired
-	private AssegnatariRepository assegnatariRepository;
+
 	
 	@Transactional
 	public void addDomandaFull(Domande domanda, Assegnatari assegnatario) {
-		Assegnatari ass = assegnatariRepository.save(assegnatario);
-		domanda.setFk_assegnatario( ass.getId());
+		domanda.setAssegnatario(assegnatario);
 		domandeRepository.save(domanda);
 	}
 	

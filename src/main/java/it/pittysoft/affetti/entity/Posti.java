@@ -3,9 +3,12 @@ package it.pittysoft.affetti.entity;
 
 
 import java.util.List;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,10 +49,9 @@ public class Posti {
     @Column
     private String fk_user_modifier;
     
-    @OneToMany
-    private List <Domande> domande ;
-    
-    
+
+    @OneToMany(mappedBy="posto")
+    private Set<Domande> domande;
     
 
 
