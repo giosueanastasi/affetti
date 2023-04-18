@@ -64,10 +64,9 @@ svuotaDomanda(svuotadomandeForm: FormGroup) {
   console.log(svuotadomandeForm);
 }
 
-cercaDomande() {
-    this.appService.cercaDomandeService(this.domandaForm.value).pipe(takeUntil(this.destroy$)).subscribe(data => {
-      console.log('message::::', data);
-      
+cercaDomande(cercaDomandaForm: FormGroup) {
+    this.appService.cercaDomandeService(cercaDomandaForm.value).pipe(takeUntil(this.destroy$)).subscribe((data: any[]) => {
+      this.domande = data;
     }); 
 }
 

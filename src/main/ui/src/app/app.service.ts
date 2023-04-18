@@ -109,18 +109,18 @@ export class AppService {
 
   cercaDomandeService(domandaForm: any) {
     let domanda = new Domanda;
-    domanda.protocollo = domandaForm.protocollo;
+    domanda.protocollo = domandaForm.numero_protocollo;
     domanda.data_protocollo = domandaForm.data_protocollo;
     domanda.stato = domandaForm.stato;
 
     let  ds = new DomandaSearch();
     ds.domanda = domanda;
-    ds.nomeC = domandaForm.nomeC;
-    ds.cognomeC = domandaForm.cognomeC;
-    ds.codice_fiscaleC = domandaForm.codice_fiscaleC;
-    ds.emailC = domandaForm.emailC;
+    ds.nomeC = domandaForm.nome;
+    ds.cognomeC = domandaForm.cognome;
+    ds.codice_fiscaleC = domandaForm.codice_fiscale;
+    ds.emailC = domandaForm.email;
     
-	return this.http.post(this.rootURL + '/domanda', ds);
+	return this.http.post(this.rootURL + '/search_domande', ds);
   }
   
 }
