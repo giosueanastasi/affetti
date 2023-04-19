@@ -4,6 +4,7 @@ import { AppService } from '../../app.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ContraentiModelComponent } from '../contraenti-model/contraenti-model.component';
+import { Domanda } from 'src/app/app-state/models';
 
 
 @Component({
@@ -26,6 +27,7 @@ domandaForm = new FormGroup({
   data_protocollo_iniziale: new FormControl('', Validators.nullValidator),
   data_protocollo_finale: new FormControl('', Validators.nullValidator),
   numero_protocollo: new FormControl('', Validators.nullValidator),
+  
   fk_user_modifier: new FormControl('', Validators.nullValidator),
   data_insert: new FormControl('', Validators.nullValidator),
   data_update: new FormControl('', Validators.nullValidator)
@@ -62,9 +64,12 @@ svuotaDomanda(svuotadomandeForm: FormGroup) {
   console.log(svuotadomandeForm);
 }
 
-cercaDomande(cercaDomandeForm: FormGroup) {
-  console.log(cercaDomandeForm);
+cercaDomande(cercaDomandaForm: FormGroup) {
+    this.appService.cercaDomandeService(cercaDomandaForm.value).pipe(takeUntil(this.destroy$)).subscribe((data: any[]) => {
+      this.domande = data;
+    }); 
 }
+
 
 /*
 @Input() domande: any[];
