@@ -16,5 +16,4 @@ public interface DomandeRepositoryCustom {
 	 @Transactional
 	 Domande addDomandaFull(Domande domanda, Assegnatari assegnatario);
 	 
-	 //List<Domande> findDomandeByCognomeAndNome(DomandaRequestSearch resquestSearch);
 }

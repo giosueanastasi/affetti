@@ -28,49 +28,6 @@ public class DomandeRepositoryCustomImpl implements DomandeRepositoryCustom {
 	@Autowired
 	private AssegnatariRepository assegnatariRepository;
 	
-	/*@Autowired
-	EntityManager em;
-
-	@Override
-	public List<Domande> findDomandeByCognomeAndNome(DomandaRequestSearch resquestSearch) {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-	    CriteriaQuery<Domande> cq = cb.createQuery(Domande.class);
-
-	    Root<Domande> book = cq.from(Domande.class);
-	    List<Predicate> predicates = new ArrayList<>();
-	    
-	    if (resquestSearch.getNomeC() != null) {
-	    	predicates.add(cb.like(
-	    			cb.upper(
-	    					book.get("Nome")
-	    			)
-	    			, "%" + resquestSearch.getNomeC().toUpperCase() + "%"));
-	    }
-	    if (resquestSearch.getCognomeC() != null) {
-	    	predicates.add(cb.like(
-	    			cb.upper(
-	    					book.get("cognome")
-	    			)
-	    			, "%" + resquestSearch.getCognomeC().toUpperCase() + "%"));
-	    }
-	    if (resquestSearch.getCodice_fiscaleC() != null) {
-	    	predicates.add(cb.like(
-	    			cb.upper(
-	    					book.get("codice fiscale")
-	    			)
-	    			, "%" + resquestSearch.getCodice_fiscaleC().toUpperCase() + "%"));
-	    }
-	    if (resquestSearch.getEmailC() != null) {
-	    	predicates.add(cb.like(
-	    			cb.upper(
-	    					book.get("email")
-	    			)
-	    			, "%" + resquestSearch.getEmailC().toUpperCase() + "%"));
-	    }
-	    cq.where(predicates.toArray(new Predicate[0]));
-
-	    return em.createQuery(cq).getResultList();
-	}*/
 
 	@Override
 	public Domande addDomandaFull(Domande domanda, Assegnatari assegnatario) {

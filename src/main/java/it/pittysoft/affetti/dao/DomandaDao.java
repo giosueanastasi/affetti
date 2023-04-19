@@ -47,6 +47,14 @@ public class DomandaDao {
 	    			, "%" + resquestSearch.getDomanda().getProtocollo().toUpperCase() + "%"));
 	    }
 	    
+	    if (resquestSearch.getDomanda().getStato() != null) {
+	    	predicates.add(cb.like(
+	    			cb.upper(
+	    					book.get("stato")
+	    			)
+	    			, "%" + resquestSearch.getDomanda().getStato().toUpperCase() + "%"));
+	    }
+	    
 	    cq.where(predicates.toArray(new Predicate[0]));
 
 	    return em.createQuery(cq).getResultList();
