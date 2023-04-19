@@ -1,10 +1,12 @@
 /target/
 .classpath
 .project
-<<<<<<< HEAD
 .settings
 .springBeans
 .sts4-cache
+.angular/cache
+!**/src/main/ui/.angular/cache
+src/main/ui/.angular/
 
 ### IntelliJ IDEA ###
 .idea
@@ -27,4 +29,3 @@ build/
 /bin/
 =======
 .settings/
->>>>>>> origin/main

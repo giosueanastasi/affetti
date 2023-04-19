@@ -74,21 +74,21 @@ export class DomandaFullComponent  {
   }
   
   saveContraenteWatcher(contraente: Contraente){
-     this.domandaFullForm.controls['fk_contraente'].setValue(contraente.id);
-    this.domandaFullForm.controls['nome'].setValue(contraente.nome);
-    this.domandaFullForm.controls['cognome'].setValue(contraente.cognome);
-    this.domandaFullForm.controls['comune_nascita'].setValue(contraente.comune_nascita);
-    this.domandaFullForm.controls['provincia_nascita'].setValue(contraente.provincia_nascita);
-    this.domandaFullForm.controls['stato_nascita'].setValue(contraente.stato_nascita);
-    this.domandaFullForm.controls['data_nascita'].setValue(contraente.data_nascita);
-    this.domandaFullForm.controls['comune_residenza'].setValue(contraente.comune_residenza);
-    this.domandaFullForm.controls['provincia_residenza'].setValue(contraente.provincia_residenza);
-    this.domandaFullForm.controls['via_residenza'].setValue(contraente.via_residenza);
-    this.domandaFullForm.controls['civico_residenza'].setValue(contraente.civico_residenza);
-    this.domandaFullForm.controls['cap_residenza'].setValue(contraente.cap_residenza);
-    this.domandaFullForm.controls['codice_fiscale'].setValue(contraente.codice_fiscale);
-    this.domandaFullForm.controls['email'].setValue(contraente.email);
-    this.domandaFullForm.controls['note'].setValue(contraente.note);
+     this.domandaFullForm.controls['fk_contraente'].setValue((contraente.id).toString());
+    this.domandaFullForm.controls['nome'].setValue((contraente.nome).toString());
+    this.domandaFullForm.controls['cognome'].setValue((contraente.cognome).toString());
+    this.domandaFullForm.controls['comune_nascita'].setValue(contraente.comune_nascita.toString());
+    this.domandaFullForm.controls['provincia_nascita'].setValue(contraente.provincia_nascita.toString());
+    this.domandaFullForm.controls['stato_nascita'].setValue(contraente.stato_nascita.toString());
+    this.domandaFullForm.controls['data_nascita'].setValue(contraente.data_nascita.toString());
+    this.domandaFullForm.controls['comune_residenza'].setValue(contraente.comune_residenza.toString());
+    this.domandaFullForm.controls['provincia_residenza'].setValue(contraente.provincia_residenza.toString());
+    this.domandaFullForm.controls['via_residenza'].setValue(contraente.via_residenza.toString());
+    this.domandaFullForm.controls['civico_residenza'].setValue(contraente.civico_residenza.toString());
+    this.domandaFullForm.controls['cap_residenza'].setValue(contraente.cap_residenza.toString());
+    this.domandaFullForm.controls['codice_fiscale'].setValue(contraente.codice_fiscale.toString());
+    this.domandaFullForm.controls['email'].setValue(contraente.email.toString());
+    this.domandaFullForm.controls['note'].setValue(contraente.note.toString());
   }
 
   savePostoWatcher(posto: Posto){
