@@ -1,12 +1,23 @@
 package it.pittysoft.affetti.entity;
 
+
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Null;
+
 
 import lombok.Data;
 
@@ -32,7 +43,6 @@ public class Posti {
     @NotNull(message="{NotNull.Posto.tipo}")
     private String tipo;
     
-    
     @Column
     private String data_insert;
     
@@ -42,6 +52,14 @@ public class Posti {
     @Column
     private String fk_user_modifier;
     
+
+    @OneToMany(mappedBy = "posto")
+    private List<Domande> domande  = new ArrayList<>();
+    
+
+    
+
+
     
     
 

@@ -11,42 +11,11 @@
                     <div class="alert alert-danger" *ngIf="errorMessage">
                         <strong>Error!</strong>{{errorMessage}}
                     </div>
-                    <div class="form-group">
-                        <label for="nome">nome</label>
-                        <input 
-                            type="text" 
-                            id="nome" 
-                            name="nome"
-                            class="form-control" 
-                            [(ngModel)]="posto1.nome"
-                            #nome="ngModel"
-                            required
-                            >
-                        <div class="alert-danger" *ngIf="f.submitted && !nome.valid">
-                            Campo Obbligatorio
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="cognome">cognome</label>
-                        <input 
-                            type="text" 
-                            id="cognome" 
-                            name="cognome"
-                            class="form-control" 
-                            [(ngModel)]="posto1.cognome"
-                            #cognome="ngModel"
-                            required
-                            >
-                        <div class="alert-danger" *ngIf="f.submitted && !cognome.valid">
-                            Campo Obbligatorio
-                        </div>
-                    </div>
 
                     <div class="form-group">
                         <label for="loculo">loculo</label>
                         <input 
-                            type="text" 
+                            type="searchValue" 
                             id="loculo" 
                             name="loculo"
                             class="form-control" 
@@ -62,17 +31,16 @@
                     <div class="form-group">
                         <label for="fornice">fornice</label>
                         <input 
-                            type="text" 
+                            type="searchValue" 
                             id="fornice" 
                             name="fornice"
                             class="form-control" 
                             [(ngModel)]="posto1.fornice"
                             #fornice="ngModel"
-                            required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !fornice.valid">
-                            Campo Obbligatorio
                         </div>
+
                     </div>
                 </div>
 
@@ -81,6 +49,22 @@
                   <button (click)="filtraPosti(posto1)">Cerca</button>
                 </div>
           </form>
+          <h2>Posti Liberi</h2>
+          <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>loculo</th>
+              <th>fornice</th>
+            </tr>
+          </thead>
+          <tbody>
+          
+            <tr *ngFor="let postoTab of posti ">
+              <td>{{postoTab.loculo}}</td>
+              <td>{{postoTab.fornice}}</td>
+            </tr>
+            </tbody>
+          </table>
       </div>
   </div>
 </div>

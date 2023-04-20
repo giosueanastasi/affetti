@@ -25,20 +25,11 @@ public class DomandeService {
 	@Autowired
 	private DomandeRepository domandeRepository;
 	
-	@Autowired
-	private AssegnatariRepository assegnatariRepository;
-	
+
 	@Autowired
 	private DomandaDao domandaDao;
 	
 
-    public DomandeService(DomandeRepository domandeRepository, AssegnatariRepository assegnatariRepository,
-			DomandaDao domandaDao) {
-		super();
-		this.domandeRepository = domandeRepository;
-		this.assegnatariRepository = assegnatariRepository;
-		this.domandaDao = domandaDao;
-	}
 
 	public List<Domande> getDomande() {
         return domandeRepository.findAll();

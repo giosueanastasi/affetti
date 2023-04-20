@@ -1,10 +1,17 @@
 package it.pittysoft.affetti.entity;
 
+import java.util.Set;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 
@@ -31,17 +38,17 @@ public class Domande {
     @NotNull(message="{NotNull.Contraente.stato}")
     private String stato;
     
-    @Column
-    @NotNull(message="{NotNull.Contraente.fk_posto}")
-    private Long fk_posto;
-    
-    @Column
-    @NotNull(message="{NotNull.Contraente.fk_assegnatario}")
-    private Long fk_assegnatario;
+//    @Column
+//    @NotNull(message="{NotNull.Contraente.fk_assegnatario}")
+//    private Long fk_assegnatario;
     
     @Column
     @NotNull(message="{NotNull.Contraente.fk_contraente}")
     private Long fk_contraente;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_assegnatario")
+    private Assegnatari assegnatario;
     
     @Column
     private Long fk_user_modifier;
@@ -51,6 +58,11 @@ public class Domande {
     
     @Column
     private String data_update;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_posto")
+    private Posti posto;
+    
     
    
 }

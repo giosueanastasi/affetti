@@ -36,7 +36,7 @@
               <input type="text" class="form-control" formControlName="numero_protocollo" id="numero_protocollo" aria-describedby="numero_protocollolHelp" placeholder="numero_protocollo">
             </div>
           </div>
-          <button (click)="cercaDomande(domandaForm)">Cerca</button>
+          <button  (click)="cercaDomande(domandaForm)" [disabled]="!domandaForm.valid">Cerca</button>
           <button (click)="svuotaDomanda(domandaForm)">Svuota Filtri</button>
         </form>
         </div>
@@ -47,30 +47,24 @@
       <table class="table table-bordered">
       <thead>
         <tr>
-          <th>Id</th>
           <th>protocollo</th>
-          <th>data_protocollo</th>
+          <th>data protocollo</th>
           <th>stato</th>
-          <th>fk_posto</th>
-          <th>fk_assegnatario</th>
-          <th>fk_contraente</th>
-          <th>fk_user_modifier</th>
-          <th>data_insert</th>
-          <th>data_update</th>
+          <th>nome</th>
+          <th>cognome</th>
+          <th>codice fiscale</th>
+          <th>email</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let domanda of domande; let i = index">
-          <td>{{i + 1}}</td>
           <td>{{domanda.protocollo}}</td>
           <td>{{domanda.data_protocollo}}</td>
           <td>{{domanda.stato}}</td>
-          <td>{{domanda.fk_posto}}</td>
-          <td>{{domanda.fk_assegnatario}}</td>
-          <td>{{domanda.fk_contraente}}</td>
-          <td>{{domanda.fk_user_modifier}}</td>
-          <td>{{domanda.data_insert}}</td>
-          <td>{{domanda.data_update}}</td>
+          <td>{{domanda.nome}}</td>
+          <td>{{domanda.cognome}}</td>
+          <td>{{domanda.codice_fiscale}}</td>
+          <td>{{domanda.email}}</td>
         </tr>
       </tbody>
       </table>

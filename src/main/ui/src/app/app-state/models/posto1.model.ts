@@ -1,7 +1,6 @@
 export class Posto1 {
-  nome: string;
+  nome: string; 
   cognome: string;
   loculo: string;
   fornice: string;
-
 }

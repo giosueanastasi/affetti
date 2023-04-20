@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomandaFull } from './app-state/models/domandaFull.model';
-import { Domanda } from './app-state/models';
+import { Domanda, Posto1 } from './app-state/models';
 import { DomandaSearch } from './app-state/models/domandaSearch.model';
+
 
 
 @Injectable({
@@ -22,6 +23,10 @@ export class AppService {
   addUser(user: any, id: number) {
 	user.id = id;
 	return this.http.post(this.rootURL + '/user', user);
+  }
+
+  cercaPosti(posti1: any) {
+    return this.http.post(this.rootURL + '/search_posti',posti1);
   }
 
   getPosti() {
@@ -91,7 +96,7 @@ export class AppService {
     domanda.id = domandaFullForm.id;
     domanda.protocollo = domandaFullForm.protocollo;
     domanda.data_protocollo = domandaFullForm.data_protocollo;
-    domanda.stato = domandaFullForm.stato;
+    domanda.stato = 'bozza';
     domanda.fk_posto = domandaFullForm.fk_posto;
     domanda.fk_contraente = domandaFullForm.fk_contraente;
 
