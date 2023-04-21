@@ -1,1 +1,121 @@
-<p>cercacontraenti-model works!</p>
+<div class="modal fade" id="cercacontraentiModal" tabIndex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form #f="ngForm" >
+                 <div class="modal-header">
+                    <h5 class="modal-title"> Cerca Contraenti</h5>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                 </div>
+                 <div class="modal-body">
+
+                    <div class="alert alert-danger" *ngIf="errorMessage">
+                        <strong>Error!</strong>{{errorMessage}}
+                    </div>
+
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input 
+                            type="search" 
+                            id="nome" 
+                            name="nome"
+                            class="form-control" 
+                            [(ngModel)]="contraente1.nome"
+                            #nome="ngModel"
+                            required
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !nome.valid">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cognome">Cognome</label>
+                        <input 
+                            type="search" 
+                            id="cognome" 
+                            name="cognome"
+                            class="form-control" 
+                            [(ngModel)]="contraente1.cognome"
+                            #cognome="ngModel"
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !cognome.valid">
+                        </div>
+                    </div>
+
+                    <h6>Assegnatario </h6>
+                    <div class="form-group ">
+                        <label for="codice_fiscale">Cod. Fisc.</label>
+                        <input 
+                            type="search" 
+                            id="codice_fiscale" 
+                            name="codice_fiscale"
+                            class="form-control" 
+                            [(ngModel)]="contraente1.codice_fiscale"
+                            #codice_fiscale="ngModel"
+                            
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !codice_fiscale.valid">
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="protocollo">N. protocollo</label>
+                        <input 
+                            type="search" 
+                            id="protocollo" 
+                            name="protocollo"
+                            class="form-control" 
+                            [(ngModel)]="contraente1.protocollo"
+                            #protocollo="ngModel"
+                            
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !protocollo.valid">
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+
+                  <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">svuota</button>
+                  <button class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                  <button (click)="filtraCercacontraenti(contraente1)">Cerca</button>
+                </div>
+          </form>
+          <h2>Contraenti</h2>
+          <table class="table table-bordered">
+          <thead>
+            <tr>
+            <th> </th>
+              <th>Nome</th>
+              <th>Cognome</th>
+              <th>Codice Fiscale</th>
+              <th>Comune Residenza</th>
+              <th>Via Residenza</th>
+              <th>Provincia Residenza</th>
+              <th>Nome Assegnatario</th>
+              <th>Cognome Assegnatario</th>
+              <th>Contratto</th>
+            </tr>
+          </thead>
+          <tbody>
+          
+            <tr *ngFor="let contraentiTab of contraenti;">
+              <td><input type="checkbox"  [(ngModel)]="contraentiTab.checked"></td>
+              <td>{{contraentiTab.Nome}}</td>
+              <td>{{contraentiTab.Cognome}}</td>
+              <td>{{contraentiTab.codice_fiscale}}</td>
+              <td>{{contraentiTab.comune_residenza}}</td>
+              <td>{{contraentiTab.via_residenza}}</td>
+              <td>{{contraentiTab.provincia_residenza}}</td>
+              <td>{{contraentiTab.nomeAss}}</td>
+              <td>{{contraentiTab.cognomeAss}}</td>
+              <td>{{contraentiTab.contratto}}</td>
+            </tr>
+            </tbody>
+          </table>
+          <button (click)="assegnaContraente(contraenti)">Seleziona</button>
+      </div>
+  </div>
+</div>
+
+
