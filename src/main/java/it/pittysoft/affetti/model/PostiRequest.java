@@ -8,4 +8,7 @@ public class PostiRequest extends Request{
 	private String cognome;
 	private String loculo;
 	private String fornice;
+	private String scadenza;
+	private String stato;
+	
 }

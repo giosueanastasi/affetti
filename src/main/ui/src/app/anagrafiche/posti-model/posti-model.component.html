@@ -16,7 +16,7 @@
                     <div class="form-group">
                         <label for="loculo">loculo</label>
                         <input 
-                            type="searchValue" 
+                            type="search" 
                             id="loculo" 
                             name="loculo"
                             class="form-control" 
@@ -31,7 +31,7 @@
                     <div class="form-group">
                         <label for="fornice">fornice</label>
                         <input 
-                            type="searchValue" 
+                            type="search" 
                             id="fornice" 
                             name="fornice"
                             class="form-control" 
@@ -46,7 +46,7 @@
                     <div class="form-group ">
                         <label for="nome">Nome</label>
                         <input 
-                            type="text" 
+                            type="search" 
                             id="nome" 
                             name="nome"
                             class="form-control" 
@@ -61,7 +61,7 @@
                     <div class="form-group ">
                         <label for="cognome">Cognome</label>
                         <input 
-                            type="text" 
+                            type="search" 
                             id="cognome" 
                             name="cognome"
                             class="form-control" 
@@ -76,6 +76,8 @@
                 </div>
 
                 <div class="modal-footer">
+
+                <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">svuota</button>
                   <button class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
                   <button (click)="filtraPosti(posto1)">Cerca</button>
                 </div>
@@ -84,29 +86,25 @@
           <table class="table table-bordered">
           <thead>
             <tr>
-<<<<<<< HEAD
+            <th> </th>
               <th>Stato</th>
-=======
-              <th></th>
->>>>>>> refs/remotes/origin/main
-              <th></th>
               <th>loculo</th>
               <th>fornice</th>
               <th>Nome</th>
-              <th>Cognome</th>
+
               <th>Scadenza</th>
             </tr>
           </thead>
           <tbody>
           
-<<<<<<< HEAD
             <tr *ngFor="let postoTab of posti;">
               <td><input type="checkbox"  [(ngModel)]="postoTab.checked"></td>
+              <td>{{postoTab.stato}}</td>
               <td>{{postoTab.loculo}}</td>
               <td>{{postoTab.fornice}}</td>
-              <td>{{postoTab.nomeAss}}</td>
-              <td>{{postoTab.cognomeAss}}</td>
-              <td>{{postoTab.Scadenza}}</td>
+              <td>{{postoTab.nome.cognome}}</td>
+              
+              <td>{{postoTab.scadenza}}</td>
             </tr>
             </tbody>
           </table>

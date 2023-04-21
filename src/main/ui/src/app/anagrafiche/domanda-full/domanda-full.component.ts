@@ -4,10 +4,11 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AppService } from 'src/app/app.service';
 import { ContraentiModelComponent } from '../contraenti-model/contraenti-model.component';
-import { Contraente } from 'src/app/app-state/models';
+import { Contraente, Posto1 } from 'src/app/app-state/models';
 import { Posto } from 'src/app/app-state/models';
 import { PostiModelComponent } from '../posti-model/posti-model.component';
 import { each } from 'jquery';
+import { CercacontraentiModelComponent } from '../cercacontraenti-model/cercacontraenti-model.component';
 
 @Component({
   selector: 'app-domanda-full',
@@ -17,9 +18,9 @@ import { each } from 'jquery';
 export class DomandaFullComponent  {
 
   @ViewChild(ContraentiModelComponent) child: ContraentiModelComponent|undefined;
-  
   @ViewChild(PostiModelComponent) child1: PostiModelComponent|undefined;
-  
+  @ViewChild(CercacontraentiModelComponent) child2: CercacontraentiModelComponent|undefined;
+
   constructor(private appService: AppService) {}
 
   domandaFullForm = new FormGroup({
@@ -72,6 +73,10 @@ export class DomandaFullComponent  {
   cercaPosto(){
     this.child1?.showPostiModal();
   }
+
+  cercaContraente(){
+    this.child2?.showCercacontraentiModal();
+  }
   
   saveContraenteWatcher(contraente: Contraente){
     this.domandaFullForm.controls['nome'].setValue((contraente.nome).toString());
@@ -90,23 +95,39 @@ export class DomandaFullComponent  {
     this.domandaFullForm.controls['note'].setValue(contraente.note.toString());
   }
 
-  savePostoWatcher(posto: Posto){
+  savePostoWatcher(posto: Posto1){
     this.domandaFullForm.controls['loculo'].setValue(posto.loculo);
     this.domandaFullForm.controls['fornice'].setValue(posto.fornice);
+    this.domandaFullForm.controls['nomeA'].setValue(posto.nome);
+    this.domandaFullForm.controls['cognomeA'].setValue(posto.cognome);
+    this.domandaFullForm.controls['scadenza'].setValue(posto.scadenza);
     
   }
 
   assegnaPostoWatcher(posti: any[]){
+
     let loculo;
     let fornice;
+    let nome;
+    let cognome;
+    let scadenza;
+
     posti.forEach(function (value) {
       if(value.checked){
+
         loculo = value.loculo;
         fornice = value.fornice;
+        nome = value.nome;
+        cognome = value.cognome;
+        scadenza = value.scadenza;
+
       }
     });
     this.domandaFullForm.controls['loculo'].setValue(loculo);
     this.domandaFullForm.controls['fornice'].setValue(fornice);
+    this.domandaFullForm.controls['nomeAss'].setValue(nome);
+    this.domandaFullForm.controls['cognomeAss'].setValue(cognome);
+    this.domandaFullForm.controls['scadenza'].setValue(scadenza);
   
     
   }

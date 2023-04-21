@@ -21,6 +21,7 @@ import org.springframework.stereotype.Repository;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.entity.Posti;
 import it.pittysoft.affetti.entity.QAssegnatari;
+import it.pittysoft.affetti.entity.QContratti;
 import it.pittysoft.affetti.entity.QDomande;
 import it.pittysoft.affetti.entity.QPosti;
 import it.pittysoft.affetti.model.PostiRequest;
@@ -37,20 +38,27 @@ public class PostiRepositoryCustomImpl implements PostiRepositoryCustom {
 		QPosti qPosti = QPosti.posti;
 		QDomande qDomande = QDomande.domande;
 		QAssegnatari qAssegnatari = QAssegnatari.assegnatari;
+		QContratti qContratti = QContratti.contratti;
 		
 		BooleanBuilder builder = new BooleanBuilder();
 		if(posti.getNome()!=null) {
-			builder.and(qAssegnatari.nome.upper().like("%"+posti.getNome().toUpperCase()+"%"));
+			builder.and(qAssegnatari.nome.upper().like(posti.getNome().toUpperCase()));
 		}
 		if(posti.getCognome()!=null) {
-			builder.and(qAssegnatari.cognome.upper().like("%"+posti.getCognome().toUpperCase()+"%"));
+			builder.and(qAssegnatari.cognome.upper().like(posti.getCognome().toUpperCase()));
 			
 		}
 		if(posti.getFornice()!=null) {
-			builder.and(qPosti.fornice.upper().like("%"+posti.getFornice().toUpperCase()+"%"));
+			builder.and(qPosti.fornice.upper().like(posti.getFornice().toUpperCase()));
 		}
 		if(posti.getLoculo()!=null) {
-			builder.and(qPosti.loculo.upper().like("%"+posti.getLoculo().toUpperCase()+"%"));
+			builder.and(qPosti.loculo.upper().like(posti.getLoculo().toUpperCase()));
+		}
+		if(posti.getScadenza()!=null) {
+			builder.and(qContratti.data_scadenza.upper().like(posti.getScadenza().toUpperCase()));
+		}
+		if(posti.getStato()!=null) {
+			builder.and(qPosti.stato.upper().like(posti.getStato().toUpperCase()));
 		}
 		
 		
@@ -58,6 +66,7 @@ public class PostiRepositoryCustomImpl implements PostiRepositoryCustom {
 		                               .from(qPosti)
 		                               .innerJoin(qPosti.domande,qDomande)
 		                               .innerJoin(qDomande.assegnatario,qAssegnatari)
+		                               .innerJoin(qDomande.contratto,qContratti)
 		                               .where(builder
 		                            		    ).fetch();
 		

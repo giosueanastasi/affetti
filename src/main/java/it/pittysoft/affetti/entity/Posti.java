@@ -44,6 +44,11 @@ public class Posti {
     private String tipo;
     
     @Column
+    @NotNull(message="{NotNull.Posto.stato}")
+    private String stato;
+
+    
+    @Column
     private String data_insert;
     
     @Column

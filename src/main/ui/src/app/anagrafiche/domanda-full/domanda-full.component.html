@@ -17,10 +17,10 @@
 
         <label class="col-sm-1 "for="Data">Data</label>
         <div class="form-group col-sm-3">
-          <input type="text" class="form-control" formControlName="data_protocollo" id="data_protocollo" aria-describedby="data_protocollolHelp" >
+          <input ng-model="answers.dob" type="date" class="form-control" formControlName="data_protocollo" id="data_protocollo" aria-describedby="data_protocollolHelp" >
         </div>
 
-        <div class="form-group col-sm-3"  ><button  class="btn btn-info" >Cerca Contraente</button></div>
+        <div class="form-group col-sm-3"  ><button  class="btn btn-info" (click)="cercaContraente()" >Cerca Contraente</button></div>
         <h6>Tipologia </h6>
 
         <div class="form-check" class="form-group col-sm-3">
@@ -42,11 +42,11 @@
            <h4>Dati Contraente</h4>
             <label class="col-sm-1 "for="nome">Nome</label>
             <div class="form-group col-sm-4">
-              <input type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp"  readonly>
+              <input  type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp"  readonly>
             </div>
             <label class="col-sm-1 "for="cognome">Cognome</label>
             <div class="form-group col-sm-4">
-              <input type="text" class="form-control" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp" placeholder="cognome" readonly>
+              <input type="text" class="form-control" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp"  readonly>
             </div>
 
             <h5>Dati Nascita</h5>
@@ -64,7 +64,7 @@
             </div>
             <label class="col-sm-1 "for="data_nascita">Data</label>
             <div class="form-group col-sm-2">
-              <input type="text" class="form-control" formControlName="data_nascita" id="data_nascita" aria-describedby="data_nascitalHelp"  readonly>
+              <input  type="text" class="form-control" formControlName="data_nascita" id="data_nascita" aria-describedby="data_nascitalHelp"  readonly>
             </div>
 
             <h5>Dati Residenza</h5>
@@ -143,8 +143,9 @@
             </div>
             <label class="col-sm-1" for="data_decesso">Data</label>
             <div class="form-group col-sm-2">
-                 <input type="text" class="form-control" formControlName="data_decesso" id="data_decesso" aria-describedby="data_decessoHelp" >
-            </div>
+                 <input  ng-model="answers.dob" type="date" class="form-control" formControlName="data_decesso" id="data_decesso" aria-describedby="data_decessoHelp" >
+
+                </div>
 
           </div>
           <div class="text-end">
