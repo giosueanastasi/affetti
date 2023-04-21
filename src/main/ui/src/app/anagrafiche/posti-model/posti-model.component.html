@@ -53,18 +53,21 @@
           <table class="table table-bordered">
           <thead>
             <tr>
+              <th></th>
               <th>loculo</th>
               <th>fornice</th>
             </tr>
           </thead>
           <tbody>
           
-            <tr *ngFor="let postoTab of posti ">
+            <tr *ngFor="let postoTab of posti;">
+              <td><input type="checkbox"  [(ngModel)]="postoTab.checked"></td>
               <td>{{postoTab.loculo}}</td>
               <td>{{postoTab.fornice}}</td>
             </tr>
             </tbody>
           </table>
+          <button (click)="assegnaPosto(posti)">Seleziona</button>
       </div>
   </div>
 </div>
