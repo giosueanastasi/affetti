@@ -39,11 +39,11 @@ public class PostiRepositoryCustomImpl implements PostiRepositoryCustom {
 		QAssegnatari qAssegnatari = QAssegnatari.assegnatari;
 		
 		BooleanBuilder builder = new BooleanBuilder();
-		if(posti.getCognome()!=null) {
-			builder.and(qAssegnatari.nome.like("%"+posti.getNome().toUpperCase()+"%"));
-		}
 		if(posti.getNome()!=null) {
-			builder.and(qAssegnatari.cognome.like("%"+posti.getCognome().toUpperCase()+"%"));
+			builder.and(qAssegnatari.nome.upper().like("%"+posti.getNome().toUpperCase()+"%"));
+		}
+		if(posti.getCognome()!=null) {
+			builder.and(qAssegnatari.cognome.upper().like("%"+posti.getCognome().toUpperCase()+"%"));
 			
 		}
 		if(posti.getFornice()!=null) {
