@@ -3,7 +3,7 @@
         <div class="modal-content">
             <form #f="ngForm" >
                  <div class="modal-header">
-                    <h5 class="modal-title">Posto</h5>
+                    <h4 class="modal-title"> Cerca Posto</h4>
                     <button class="btn-close" data-bs-dismiss="modal"></button>
                  </div>
                  <div class="modal-body">
@@ -12,6 +12,7 @@
                         <strong>Error!</strong>{{errorMessage}}
                     </div>
 
+                    <h6>Dati posto </h6>
                     <div class="form-group">
                         <label for="loculo">loculo</label>
                         <input 
@@ -21,14 +22,12 @@
                             class="form-control" 
                             [(ngModel)]="posto1.loculo"
                             #loculo="ngModel"
-                            required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !loculo.valid">
-                            Campo Obbligatorio
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group ">
                         <label for="fornice">fornice</label>
                         <input 
                             type="searchValue" 
@@ -39,6 +38,37 @@
                             #fornice="ngModel"
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !fornice.valid">
+                        </div>
+                    </div>
+
+                    <h6>Assegnatario </h6>
+                    <div class="form-group ">
+                        <label for="nome">Nome</label>
+                        <input 
+                            type="text" 
+                            id="nome" 
+                            name="nome"
+                            class="form-control" 
+                            [(ngModel)]="posto1.nome"
+                            #nome="ngModel"
+                            
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !nome.valid">
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="cognome">Cognome</label>
+                        <input 
+                            type="text" 
+                            id="cognome" 
+                            name="cognome"
+                            class="form-control" 
+                            [(ngModel)]="posto1.cognome"
+                            #cognome="ngModel"
+                            
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !cognome.valid">
                         </div>
 
                     </div>
@@ -53,15 +83,23 @@
           <table class="table table-bordered">
           <thead>
             <tr>
+              <th>Stato</th>
               <th>loculo</th>
               <th>fornice</th>
+              <th>Nome</th>
+              <th>Cognome</th>
+              <th>Scadenza</th>
             </tr>
           </thead>
           <tbody>
           
             <tr *ngFor="let postoTab of posti ">
+              <td>{{postoTab.Stato}}</td>
               <td>{{postoTab.loculo}}</td>
               <td>{{postoTab.fornice}}</td>
+              <td>{{postoTab.nomeAss}}</td>
+              <td>{{postoTab.cognomeAss}}</td>
+              <td>{{postoTab.Scadenza}}</td>
             </tr>
             </tbody>
           </table>
