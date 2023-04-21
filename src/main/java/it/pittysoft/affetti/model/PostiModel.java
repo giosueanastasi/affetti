@@ -8,4 +8,5 @@ public class PostiModel {
 	private String cognome;
 	private String loculo;
 	private String fornice;
+	private Boolean checked = false; 
 }

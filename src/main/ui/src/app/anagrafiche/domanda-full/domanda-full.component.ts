@@ -7,6 +7,7 @@ import { ContraentiModelComponent } from '../contraenti-model/contraenti-model.c
 import { Contraente } from 'src/app/app-state/models';
 import { Posto } from 'src/app/app-state/models';
 import { PostiModelComponent } from '../posti-model/posti-model.component';
+import { each } from 'jquery';
 
 @Component({
   selector: 'app-domanda-full',
@@ -94,6 +95,21 @@ export class DomandaFullComponent  {
   savePostoWatcher(posto: Posto){
     this.domandaFullForm.controls['loculo'].setValue(posto.loculo);
     this.domandaFullForm.controls['fornice'].setValue(posto.fornice);
+    
+  }
+
+  assegnaPostoWatcher(posti: any[]){
+    let loculo;
+    let fornice;
+    posti.forEach(function (value) {
+      if(value.checked){
+        loculo = value.loculo;
+        fornice = value.fornice;
+      }
+    });
+    this.domandaFullForm.controls['loculo'].setValue(loculo);
+    this.domandaFullForm.controls['fornice'].setValue(fornice);
+  
     
   }
 

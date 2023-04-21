@@ -50,5 +50,12 @@ posto1: Posto1 = new Posto1();
     showPostiModal(){
       $('#postiModal').modal('show');
     }
-  
+
+    assegnaPosto(posti: any[]){
+
+      this.save.emit(posti);
+      $('#postiModal').modal('hide');
+      
+    
+    }
 }

@@ -3,4 +3,5 @@ export class Posto1 {
   cognome: string;
   loculo: string;
   fornice: string;
+  checked: boolean;
 }
