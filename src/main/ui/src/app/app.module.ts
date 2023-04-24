@@ -2,6 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule} from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -29,6 +34,7 @@ import { DomandaFullComponent } from './anagrafiche/domanda-full/domanda-full.co
 import { ContraentiModelComponent } from './anagrafiche/contraenti-model/contraenti-model.component';
 import { PostiModelComponent } from './anagrafiche/posti-model/posti-model.component';
 import { CercacontraentiModelComponent } from './anagrafiche/cercacontraenti-model/cercacontraenti-model.component';
+
 
 
 // state related imports
@@ -60,6 +66,7 @@ import { CercacontraentiModelComponent } from './anagrafiche/cercacontraenti-mod
     DomandaFullComponent,
     PostiModelComponent,
     CercacontraentiModelComponent,
+    
 
     
   ],
@@ -71,6 +78,12 @@ import { CercacontraentiModelComponent } from './anagrafiche/cercacontraenti-mod
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule
+
 
     
 
