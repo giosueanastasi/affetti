@@ -62,6 +62,7 @@ public class PostiRepositoryCustomImpl implements PostiRepositoryCustom {
 		                            		    ).fetch();
 		
 		return postiPlayer;
+		
 		/*	CriteriaBuilder cb = em.getCriteriaBuilder();
 	    CriteriaQuery<Posti> cq = cb.createQuery(Posti.class);
 //	    Metamodel m = em.getMetamodel();

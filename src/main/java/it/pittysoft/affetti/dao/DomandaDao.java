@@ -13,10 +13,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.querydsl.core.BooleanBuilder;
+import com.querydsl.jpa.impl.JPAQuery;
+
 import it.pittysoft.affetti.entity.Assegnatari;
 import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Domande;
+import it.pittysoft.affetti.entity.Posti;
+import it.pittysoft.affetti.entity.QAssegnatari;
+import it.pittysoft.affetti.entity.QContraenti;
+import it.pittysoft.affetti.entity.QDomande;
+import it.pittysoft.affetti.entity.QPosti;
 import it.pittysoft.affetti.model.DomandaRequestSearch;
+import it.pittysoft.affetti.model.PostiRequest;
 import it.pittysoft.affetti.repository.AssegnatariRepository;
 import it.pittysoft.affetti.repository.DomandeRepository;
 
@@ -25,38 +34,43 @@ public class DomandaDao {
 	@Autowired
 	private DomandeRepository domandeRepository;
 
-	
 	@Autowired
 	EntityManager em;
 
 	
 	public List<Domande> findDomandeByCognomeAndNome(DomandaRequestSearch resquestSearch) {
-		CriteriaBuilder cb = em.getCriteriaBuilder();
-	    CriteriaQuery<Domande> cq = cb.createQuery(Domande.class);
-
-	    Root<Domande> book = cq.from(Domande.class);
-	    List<Predicate> predicates = new ArrayList<>();
-	    
-	    if (resquestSearch.getDomanda().getProtocollo() != null) {
-	    	predicates.add(cb.like(
-	    			cb.upper(
-	    					book.get("protocollo")
-	    			)
-	    			, "%" + resquestSearch.getDomanda().getProtocollo().toUpperCase() + "%"));
-	    }
-	    
-	    if (resquestSearch.getDomanda().getStato() != null) {
-	    	predicates.add(cb.like(
-	    			cb.upper(
-	    					book.get("stato")
-	    			)
-	    			, "%" + resquestSearch.getDomanda().getStato().toUpperCase() + "%"));
-	    }
-	    
-	    cq.where(predicates.toArray(new Predicate[0]));
-
-	    return em.createQuery(cq).getResultList();
-	}
+		JPAQuery<Domande> query = new JPAQuery<>(em);
+		QDomande qDomande = QDomande.domande;
+		QContraenti qContraenti = QContraenti.contraenti;
+		
+		BooleanBuilder builder = new BooleanBuilder();
+		
+		if(resquestSearch.getDomanda().getProtocollo()!=null) {
+			builder.and(qDomande.protocollo.upper().like("%"+resquestSearch.getDomanda().getProtocollo().toUpperCase()+"%"));
+		}
+		if(resquestSearch.getDomanda().getStato()!=null) {
+			builder.and(qDomande.stato.upper().like("%"+resquestSearch.getDomanda().getStato().toUpperCase()+"%"));
+			
+		}
+		if(resquestSearch.getNomeC()!=null) {
+			builder.and(qContraenti.nome.upper().like("%"+resquestSearch.getNomeC().toUpperCase()+"%"));
+		}
+		if(resquestSearch.getCognomeC()!=null) {
+			builder.and(qContraenti.cognome.upper().like("%"+resquestSearch.getCognomeC().toUpperCase()+"%"));
+		}
+		
+		if(resquestSearch.getCodice_fiscaleC()!=null) {
+			builder.and(qContraenti.codice_fiscale.upper().like("%"+ resquestSearch.getCodice_fiscaleC().toUpperCase()+"%"));
+		}
+		
+		List<Domande> domandePlayer = query.select(qDomande)
+		                               .from(qDomande)
+		                               .innerJoin(qDomande.contraente,qContraenti)
+		                               .where(builder
+		                            		    ).fetch();
+		
+		return domandePlayer;
+	}	
 	
 	
 	@Transactional

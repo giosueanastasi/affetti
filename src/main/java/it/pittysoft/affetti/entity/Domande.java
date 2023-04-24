@@ -42,9 +42,13 @@ public class Domande {
 //    @NotNull(message="{NotNull.Contraente.fk_assegnatario}")
 //    private Long fk_assegnatario;
     
-    @Column
-    @NotNull(message="{NotNull.Contraente.fk_contraente}")
-    private Long fk_contraente;
+   // @Column
+    //@NotNull(message="{NotNull.Contraente.fk_contraente}")
+   // private Long fk_contraente;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_contraente")
+    private Contraenti contraente;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_assegnatario")

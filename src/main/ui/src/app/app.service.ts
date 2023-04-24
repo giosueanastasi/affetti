@@ -123,7 +123,6 @@ export class AppService {
     ds.nomeC = domandaForm.nome;
     ds.cognomeC = domandaForm.cognome;
     ds.codice_fiscaleC = domandaForm.codice_fiscale;
-    ds.emailC = domandaForm.email;
     
 	return this.http.post(this.rootURL + '/search_domande', ds);
   }

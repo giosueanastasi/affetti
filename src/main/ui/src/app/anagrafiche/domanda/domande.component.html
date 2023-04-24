@@ -3,41 +3,57 @@
       <div class=" mrgnbtm">
         <h2>Domande</h2>
         <div class="text-end"><button [routerLink]="['/domandaFull']">Nuova Domanda</button> </div>
-        <h4>Cerca</h4>
+        <h4>Cerca Domande</h4>
+        <h6>Dati Contraente</h6>
         <form [formGroup]="domandaForm">
           <div class="row">
-            <div class="form-group col-md-4">
-              <input type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp" placeholder="nome">
+
+            <label class="col-sm-1 "for="nome">Nome</label>
+            <div class="form-group col-sm-2">
+              <input type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp">
             </div>
-            <div class="form-group col-md-4">
-              <input type="text" class="form-control" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp" placeholder="cognome">
-            </div>
-            <div class="form-group col-md-4">
-              <input type="text" class="form-control" formControlName="codice_fiscale" id="codice_fiscale" aria-describedby="codice_fiscalelHelp" placeholder="codice_fiscale">
-            </div>
-              <div class="form-group col-md-4">
-              <input type="text" class="form-control" formControlName="email" id="email" aria-describedby="emaillHelp" placeholder="email">
+            
+            <label class="col-sm-1 "for="cognome">Cognome</label>
+            <div class="form-group col-sm-2">
+              <input type="text" class="form-control" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp">
             </div>
 
+            <label class="col-sm-1 "for="codice_fiscale">Cod. Fis.</label>
+            <div class="form-group col-sm-2">
+              <input type="text" class="form-control" formControlName="codice_fiscale" id="codice_fiscale" aria-describedby="codice_fiscalelHelp">
+            </div>
+            
             <fieldset>
-              <legend><h5>Tipologia</h5></legend>
-              Loculo <input type="radio" name="linguaggio" value="Loculo"/>
-              Tenuta a Disposizione <input type="radio" name="linguaggio" value="Tenuta a Disposizione"/>
+              <label class="col-sm-1 "for="Tipologia"><h5>Tipologia</h5></label>
+                Loculo <input type="radio" name="linguaggio" value="Loculo"/>
+                Tenuta a Disposizione <input type="radio" name="linguaggio" value="Tenuta a Disposizione"/>
             </fieldset>
 
-            <h6>Intervallo Ricerca</h6>
+            <label class="col-sm-1 "for="numero_protocollo">N.Protocollo</label>
+            <div class="form-group col-md-2">
+              <input type="text" class="form-control" formControlName="numero_protocollo" id="numero_protocollo" aria-describedby="numero_protocollolHelp">
+            </div>
+
+            <label class="col-sm-1 "for="stato">Stato</label>
+             <div class="form-group col-md-2">
+                <select class="form-select" aria-label="Default select example">
+                  <option value="1">-----</option>
+                  <option value="2">Aperta</option>
+                  <option value="3">Chiusa</option>
+                </select>
+            </div>
+  
+            <h6>Cerca Intervallo</h6>
             <div class="form-group col-md-2">
              da <input type="text" class="form-control" formControlName="data_protocollo_iniziale" id="data_protocollo_iniziale" aria-describedby="data_protocollo_inizialelHelp" placeholder="data_protocollo_iniziale">
             </div>
             <div class="form-group col-md-2">
              a <input type="text" class="form-control" formControlName="data_protocollo_finale" id="data_protocollo_finale" aria-describedby="data_protocollo_finalelHelp" placeholder="data_protocollo_finale">
             </div>
-            <div class="form-group col-md-2">
-              <input type="text" class="form-control" formControlName="numero_protocollo" id="numero_protocollo" aria-describedby="numero_protocollolHelp" placeholder="numero_protocollo">
-            </div>
+  
           </div>
-          <button  (click)="cercaDomande(domandaForm)" [disabled]="!domandaForm.valid">Cerca</button>
-          <button (click)="svuotaDomanda(domandaForm)">Svuota Filtri</button>
+          <button  (click)="cercaDomande(domandaForm)">Cerca</button>
+          <button (click)="svuotaDomanda(domandaForm)" type="reset">Svuota Filtri</button>
         </form>
         </div>
         <div class="col-md-4 mrgnbtm">
@@ -47,24 +63,22 @@
       <table class="table table-bordered">
       <thead>
         <tr>
-          <th>protocollo</th>
-          <th>data protocollo</th>
-          <th>stato</th>
-          <th>nome</th>
-          <th>cognome</th>
+          <th>N.Protocollo</th>
+          <th>Stato</th>
+          <th>Data Protocollo</th>
+          <th>Nome Contraente</th>
+          <th>Cognome Contraente</th>
           <th>codice fiscale</th>
-          <th>email</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let domanda of domande; let i = index">
           <td>{{domanda.protocollo}}</td>
-          <td>{{domanda.data_protocollo}}</td>
           <td>{{domanda.stato}}</td>
+          <td>{{domanda.data_protocollo}}</td>
           <td>{{domanda.nome}}</td>
           <td>{{domanda.cognome}}</td>
           <td>{{domanda.codice_fiscale}}</td>
-          <td>{{domanda.email}}</td>
         </tr>
       </tbody>
       </table>
