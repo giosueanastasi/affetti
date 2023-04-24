@@ -31,7 +31,7 @@ INSERT INTO users ( username,password,ruolo,fk_comune) VALUES
   ( 'Giovanna98', 'ugcywie', 'utente',3); 
   
   
-  
+DROP TABLE IF EXISTS contratti; 
 DROP TABLE IF EXISTS domande;
 DROP TABLE IF EXISTS posti;
 
@@ -40,6 +40,7 @@ CREATE TABLE posti (
 	loculo VARCHAR(10) NOT NULL,
 	fornice VARCHAR(10) NOT NULL,
 	tipo VARCHAR (15) NOT NULL,
+	stato VARCHAR(15) NOT NULL,
 	data_update date NULL,
 	data_insert date NULL,
 	fk_user_modifier  int NULL,
@@ -48,10 +49,10 @@ CREATE TABLE posti (
 );
 
 
- INSERT INTO posti ( loculo,fornice,tipo,data_update,data_insert,fk_user_modifier) VALUES
-  ( 15, 150, 'intermedia', '2023-09-25','2023-09-25',1),
-  ( 1, 8, 'monumentale','2023-03-04','2020-02-8',2),
-  ( 8,120, 'nuova', '2023-04-8','2023-04-8',3); 
+ INSERT INTO posti ( loculo,fornice,tipo,stato,data_update,data_insert,fk_user_modifier) VALUES
+  ( 15, 150, 'intermedia','libero' ,'2023-09-25','2023-09-25',1),
+  ( 1, 8, 'monumentale','occupato' ,'2023-03-04','2020-02-8',2),
+  ( 8,120, 'nuova', 'prenotato','2023-04-8','2023-04-8',3); 
   
 	DROP TABLE IF EXISTS assegnatari;
 
@@ -130,7 +131,7 @@ CREATE TABLE domande (
   (204, '2023-03-04','eseguito',1,2,1,3,'2023-03-04','2020-02-8'),
   (890, '2023-04-8', 'sto elaborando',3,3,2,1, '2023-04-8','2023-04-8'); 
   
-	DROP TABLE IF EXISTS contratti;
+	
 	
 	CREATE TABLE contratti (
 	id int NOT NULL IDENTITY,
@@ -138,17 +139,15 @@ CREATE TABLE domande (
 	data_inizio date NOT NULL,
 	data_scadenza date  NULL,
 	stato varchar(50) NOT NULL,
-	fk_domanda_loculo int NOT NULL,
-	fk_domanda_disposizione int NULL,
+	fk_domanda int NULL,
 	fk_user_modifier int NULL,
 	data_update date NULL,
 	data_insert date NULL,
 	FOREIGN key(fk_user_modifier) references users (id),
-	FOREIGN key(fk_domanda_disposizione) references domande (id),
-	FOREIGN key(fk_domanda_disposizione) references domande (id)
+	FOREIGN key(fk_domanda) references domande (id)
 );
 
-INSERT INTO contratti ( protocollo,data_inizio,data_scadenza,stato,fk_domanda_loculo,fk_domanda_disposizione,fk_user_modifier,data_insert,data_update) VALUES
-  (106,'2023-09-25','2058-09-25','in lavorazione',2,3,1, '2023-09-25','2023-09-25'),
-  (405, '2023-03-4','2058-03-4','eseguito',1,2,2,'2023-03-04','2020-02-8'),
-  ( 450, '2023-04-8', '2058-04-8','sto elaborando',3,1,3, '2023-04-08','2023-04-8'); 
+INSERT INTO contratti ( protocollo,data_inizio,data_scadenza,stato,fk_domanda,fk_user_modifier,data_insert,data_update) VALUES
+  (106,'2023-09-25','2058-09-25','in lavorazione',3,1, '2023-09-25','2023-09-25'),
+  (405, '2023-03-4','2058-03-4','eseguito',2,2,'2023-03-04','2020-02-8'),
+  ( 450, '2023-04-8', '2058-04-8','sto elaborando',1,3, '2023-04-08','2023-04-8'); 

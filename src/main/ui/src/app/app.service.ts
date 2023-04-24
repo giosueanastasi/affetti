@@ -29,6 +29,10 @@ export class AppService {
     return this.http.post(this.rootURL + '/search_posti',posti1);
   }
 
+  cercaCercacontraenti(contraenti1: any) {
+    return this.http.post(this.rootURL + '/search_contraenti',contraenti1);
+  }
+
   getPosti() {
     return this.http.get(this.rootURL + '/posti');
   }

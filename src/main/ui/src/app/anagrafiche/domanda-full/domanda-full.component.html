@@ -2,107 +2,159 @@
     <div class="row">
       <div class=" mrgnbtm">
         <h2>Creazione Nuova Domanda</h2>
-        <div class="text-end"><button class="btn btn-info" (click)="creaContraente()">Agg Contraente</button></div>
+        
+        
 
-        <form [formGroup]="domandaFullForm" >
+
+        <form  [formGroup]="domandaFullForm" >
           <div class="row">
-            <h4>Dati Contraente</h4>
-            <div class="form-group col-sm-2">
-              <input type="text" class="form-control" formControlName="fk_contraente" id="fk_contraente" aria-describedby="fk_contraente" placeholder="fk_contraente" readonly>
-             </div>
-            <div class="form-group col-md-4">
-              <input type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp" placeholder="nome" readonly>
-            </div>
-            <div class="form-group col-md-4">
-              <input type="text" class="form-control" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp" placeholder="cognome" readonly>
-            </div>
 
-            <h4>Dati Nascita</h4>
-            <div class="form-group col-sm-3">
-              <input type="text" class="form-control" formControlName="comune_nascita" id="comune_nascita" aria-describedby="comune_nascitalHelp" placeholder="comune_nascita" readonly>
-            </div>
-            <div class="form-group col-sm-1">
-              <input type="text" class="form-control" formControlName="provincia_nascita" id="provincia_nascita" aria-describedby="provincia_nascitalHelp" placeholder="provincia_nascita" readonly>
-            </div>
-            <div class="form-group col-sm-2">
-              <input type="text" class="form-control" formControlName="stato_nascita" id="stato_nascita" aria-describedby="stato_nascitalHelp" placeholder="stato_nascita" readonly>
-            </div>
-            <div class="form-group col-sm-2">
-              <input type="text" class="form-control" formControlName="data_nascita" id="data_nascita" aria-describedby="data_nascitalHelp" placeholder="data_nascita" readonly>
-            </div>
+        <h4>Protocollo </h4>
+        <label class="col-sm-1 " for="Numero">Numero</label>
+        <div class="form-group col-sm-3 ">
+          <input type="text" class="form-control" formControlName="protocollo" id="protocollo" aria-describedby="protocollolHelp" >
+        </div>
 
-            <h4>Dati Residenza</h4>
-            <div class="form-group col-sm-3">
-              <input type="text" class="form-control" formControlName="comune_residenza" id="comune_residenza" aria-describedby="comune_residenzalHelp" placeholder="comune_residenza" readonly>
-            </div>
-            <div class="form-group col-sm-1">
-              <input type="text" class="form-control" formControlName="provincia_residenza" id="provincia_residenza" aria-describedby="provincia_residenzalHelp" placeholder="provincia_residenza" readonly>
-            </div>
-            <div class="form-group col-sm-3">
-              <input type="text" class="form-control" formControlName="via_residenza" id="via_residenza" aria-describedby="via_residenzalHelp" placeholder="via_residenza" readonly>
-            </div>
-            <div class="form-group col-sm-1">
-              <input type="text" class="form-control" formControlName="civico_residenza" id="civico_residenza" aria-describedby="civico_residenzalHelp" placeholder="civico_residenza" readonly>
-            </div>
-            <div class="form-group col-sm-2">
-              <input type="text" class="form-control" formControlName="cap_residenza" id="cap_residenza" aria-describedby="cap_residenzalHelp" placeholder="cap_residenza" readonly>
-            </div>
+        <label class="col-sm-1 "for="Data">Data</label>
+        <div class="form-group col-sm-3">
+          <input ng-model="answers.dob" type="date" class="form-control" formControlName="data_protocollo" id="data_protocollo" aria-describedby="data_protocollolHelp" >
+        </div>
 
-            <h4>Altri Dati </h4>
-            <div class="form-group col-md-6">
-              <input type="text" class="form-control" formControlName="codice_fiscale" id="codice_fiscale" aria-describedby="codice_fiscalelHelp" placeholder="codice_fiscale" readonly>
-            </div>
-            <div class="form-group col-md-6">
-              <input type="text" class="form-control" formControlName="email" id="email" aria-describedby="emaillHelp" placeholder="email" readonly>
-            </div>
-            <br>
-            <br>
-              <div class="form-group col-md-6">
-              <input type="text" class="form-control" formControlName="note" id="note" aria-describedby="notelHelp" placeholder="note" readonly>
-            </div>
+        <div class="form-group col-sm-3"  ><button  class="btn btn-info" (click)="cercaContraente()" >Cerca Contraente</button></div>
+        <h6>Tipologia </h6>
 
-            <h4>Richiesta </h4>
-            <div class="form-group col-sm-3">
-              <input type="text" class="form-control" formControlName="protocollo" id="protocollo" aria-describedby="protocollolHelp" placeholder="protocollo">
-            </div>
-            <div class="form-group col-sm-2">
-              <input type="text" class="form-control" formControlName="data_protocollo" id="data_protocollo" aria-describedby="data_protocollolHelp" placeholder="data_protocollo">
-            </div>
+        <div class="form-check" class="form-group col-sm-3">
+          <input class="form-check-input" type="radio" name="loculo" id="loculo" value="option1" checked>
+          <label class="form-check-label" for="loculo">
+            Loculo
+          </label>
+        </div>
 
-            <div class="text-end"><button class="btn btn-info" (click)="cercaPosto()">Cerca Posto</button></div>
-
-            <h6>Tipologia </h6>
-            <div class="form-group col-sm-2">
-              <input type="text" class="form-control" formControlName="fk_posto" id="fk_posto" aria-describedby="fk_postoHelp" placeholder="fk_posto" readonly>
-            </div>
-              <div class="form-group col-sm-3">
-              <input type="text" class="form-control" formControlName="loculo" id="loculo" aria-describedby="loculolHelp" placeholder="loculo">
-            </div>
-            <div class="form-group col-sm-3">
-             <input type="text" class="form-control" formControlName="fornice" id="fornice" aria-describedby="fornicelHelp" placeholder="fornice">
-            </div>
-
-            <h6>Assegnatario </h6>
+          <div class="form-check" class="form-group col-sm-3">
+            <input class="form-check-input" type="radio" name="Tenuta_a_disposizione" id="Tenuta_a_disposizione" value="option2" checked>
+            <label class="form-check-label" for="Tenuta_a_disposizione">
+              Tenuta a disposizione
+            </label>
+           </div>
+           <div class="form-group col-sm-2"  ></div>
+           <div class="form-group col-sm-3"><button class="btn btn-info" (click)="creaContraente()">Nuovo Contraente</button></div>
+            
+           <h4>Dati Contraente</h4>
+            <label class="col-sm-1 "for="nome">Nome</label>
             <div class="form-group col-sm-4">
-                 <input type="text" class="form-control" formControlName="nomeAss" id="nomeAss" aria-describedby="nomeAssHelp" placeholder="nomeAss">
+              <input  type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp"  readonly>
             </div>
-            <div class="form-group col-md-4">
-                 <input type="text" class="form-control" formControlName="cognomeAss" id="cognomeAss" aria-describedby="cognomeAssHelp" placeholder="cognomeAss">
-            </div>
-            <h6>Dati Decesso </h6>
-            <div class="form-group col-sm-3">
-                 <input type="text" class="form-control" formControlName="comune_decesso" id="comune_decesso" aria-describedby="comune_decessoHelp" placeholder="comune_decesso">
-            </div>
-            <div class="form-group col-sm-2">
-                 <input type="text" class="form-control" formControlName="data_decesso" id="data_decesso" aria-describedby="data_decessoHelp" placeholder="data_decesso">
+            <label class="col-sm-1 "for="cognome">Cognome</label>
+            <div class="form-group col-sm-4">
+              <input type="text" class="form-control" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp"  readonly>
             </div>
 
+            <h5>Dati Nascita</h5>
+            <label class="col-sm-1 "for="comune_nascita">Comune</label>
+            <div class="form-group col-sm-3">
+              <input type="text" class="form-control" formControlName="comune_nascita" id="comune_nascita" aria-describedby="comune_nascitalHelp"  readonly>
+            </div>
+            <label class="col-sm-1 "for="provincia_nascita">Provincia</label>
+            <div class="form-group col-sm-1">
+              <input type="text" class="form-control" formControlName="provincia_nascita" id="provincia_nascita" aria-describedby="provincia_nascitalHelp"  readonly>
+            </div>
+            <label class="col-sm-1 "for="stato_nascita">Stato</label>
+            <div class="form-group col-sm-2">
+              <input type="text" class="form-control" formControlName="stato_nascita" id="stato_nascita" aria-describedby="stato_nascitalHelp"  readonly>
+            </div>
+            <label class="col-sm-1 "for="data_nascita">Data</label>
+            <div class="form-group col-sm-2">
+              <input  type="text" class="form-control" formControlName="data_nascita" id="data_nascita" aria-describedby="data_nascitalHelp"  readonly>
+            </div>
+
+            <h5>Dati Residenza</h5>
+            <label class="col-sm-1 "for="comune_residenza">Comune</label>
+            <div class="form-group col-sm-3">
+              <input type="text" class="form-control" formControlName="comune_residenza" id="comune_residenza" aria-describedby="comune_residenzalHelp"  readonly>
+            </div>
+            <label class="col-sm-1 "for="provincia_residenza">Provincia</label>
+            <div class="form-group col-sm-1">
+              <input type="text" class="form-control" formControlName="provincia_residenza" id="provincia_residenza" aria-describedby="provincia_residenzalHelp"  readonly>
+            </div>
+            <label class="col-sm-1 "for="via_residenza">Indirizzo</label>
+            <div class="form-group col-sm-3">
+              <input type="text" class="form-control" formControlName="via_residenza" id="via_residenza" aria-describedby="via_residenzalHelp"  readonly>
+            </div>
+            <label class="col-sm-1 "for="civico_residenza">Civico</label>
+            <div class="form-group col-sm-1">
+              <input type="text" class="form-control" formControlName="civico_residenza" id="civico_residenza" aria-describedby="civico_residenzalHelp"  readonly>
+            </div>
+
+            <br>
+            <br>
+            <label class="col-sm-1 "for="cap_residenza">Cap</label>
+            <div class="form-group col-sm-2">
+              <input type="text" class="form-control" formControlName="cap_residenza" id="cap_residenza" aria-describedby="cap_residenzalHelp"  readonly>
+            </div>
+
+            <h5>Altri Dati </h5>
+            <label class="col-sm-2 "for="codice_fiscale">Codice Fiscale</label>
+            <div class="form-group col-sm-5">
+              <input type="text" class="form-control" formControlName="codice_fiscale" id="codice_fiscale" aria-describedby="codice_fiscalelHelp"  readonly>
+            </div>
+            <label class="col-sm-1 "for="email">Email</label>
+            <div class="form-group col-sm-4">
+              <input type="text" class="form-control" formControlName="email" id="email" aria-describedby="emaillHelp"  readonly>
+            </div>
+
+            <br>
+            <br>
+            <label class="col-sm-1 "for="note">Note</label>
+              <div class="form-group col-lg">
+              <textarea class="form-control" formControlName="note" id="note" rows="3" aria-describedby="notelHelp" readonly ></textarea>
+            </div>
+
+
+            
+
+            <h5>Dati Posto </h5>
+
+            <label class="col-sm-1 "for="loculo">Loculo</label>
+              <div class="form-group col-sm-3">
+              <input type="text" class="form-control" formControlName="loculo" id="loculo" aria-describedby="loculolHelp" >
+            </div>
+
+            <label class="col-sm-1 "for="fornice">Fornice</label>
+            <div class="form-group col-sm-3">
+             <input type="text" class="form-control" formControlName="fornice" id="fornice" aria-describedby="fornicelHelp" >
+            </div>
+            <div class="form-group col-sm-2"  ></div>
+            <div class="form-group col-sm-2" ><button  class="btn btn-info" (click)="cercaPosto()">Cerca Posto</button></div>
+
+            <h5>Assegnatario </h5>
+            <label class="col-sm-1 "for="nomeAss">Nome</label>
+            <div class="form-group col-sm-4">
+                 <input type="text" class="form-control" formControlName="nomeAss" id="nomeAss" aria-describedby="nomeAssHelp" >
+            </div>
+            <label class="col-sm-1 "for="cognomeAss">Cognome</label>
+            <div class="form-group col-sm-4">
+                 <input type="text" class="form-control" formControlName="cognomeAss" id="cognomeAss" aria-describedby="cognomeAssHelp" >
+            </div>
+
+            <h5>Dati Decesso </h5>
+            <label class="col-sm-1 "for="comune_decesso">Comune</label>
+            <div class="form-group col-sm-3">
+                 <input type="text" class="form-control" formControlName="comune_decesso" id="comune_decesso" aria-describedby="comune_decessoHelp" >
+            </div>
+            <label class="col-sm-1" for="data_decesso">Data</label>
+            <div class="form-group col-sm-2">
+                 <input  ng-model="answers.dob" type="date" class="form-control" formControlName="data_decesso" id="data_decesso" aria-describedby="data_decessoHelp" >
+
+                </div>
 
           </div>
-          <br>
+          <div class="text-end">
 
-           <button input type="reset" value="cancella" class="btn btn-info">Cancella</button>
-           <button (click)="addDomanda()" [disabled]="!domandaFullForm.valid" class="btn btn-primary">Salva</button>
+              <button  input type="reset" value="cancella" class="btn btn-info " >Annulla</button>
+           <button (click)="addDomanda()" [disabled]="!domandaFullForm.valid" class="btn btn-danger">Salva</button>
+ 
+        </div>
+
 
           </form>
         </div>

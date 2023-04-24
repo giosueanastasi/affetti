@@ -1,5 +1,7 @@
 package it.pittysoft.affetti.entity;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -66,6 +68,9 @@ public class Domande {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_posto")
     private Posti posto;
+    
+    @OneToOne(mappedBy = "domanda")
+    private Contratti contratto;
     
     
    

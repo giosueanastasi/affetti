@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import it.pittysoft.affetti.entity.Contratti;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.entity.Posti;
 import it.pittysoft.affetti.model.PostiModel;
@@ -51,17 +52,21 @@ public class PostiService {
 //			 }
 
 			 postiFiltrati.getDomande().size();
+			
 			 for (Domande domanda : postiFiltrati.getDomande()) {
 				 PostiModel pm = new PostiModel();
 				 pm.setCognome(domanda.getAssegnatario().getCognome());
 				 pm.setNome(domanda.getAssegnatario().getNome());
 				 pm.setLoculo(postiFiltrati.getLoculo());
 				 pm.setFornice(postiFiltrati.getFornice());
+				 pm.setStato(postiFiltrati.getStato());
+				 pm.setScadenza(domanda.getContratto().getData_scadenza());
 				 response.getPosti().add(pm);
-				}
+				
+			 }
 
 			 
-		}
+		 }
 		return response;
 	}
 

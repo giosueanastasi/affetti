@@ -2,9 +2,13 @@ package it.pittysoft.affetti.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
@@ -34,12 +38,8 @@ public class Contratti {
     @NotNull(message="{NotNull.Contratto.stato}")
     private String stato;
     
-    @Column
-    @NotNull(message="{NotNull.Contratto.fk_domanda_loculo}")
-    private String fk_domanda_loculo;
-    
-    @Column
-    private String fk_domanda_disposizione;
+    //@Column
+   // private String fk_domanda;
     
     @Column
     private String fk_user_modifier;
@@ -49,5 +49,9 @@ public class Contratti {
     
     @Column
     private String data_insert;
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_domanda")
+    private Domande domanda;
     
 }

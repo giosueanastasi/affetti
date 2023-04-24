@@ -2,6 +2,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule} from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
 
 
 
@@ -28,7 +33,9 @@ import { ContrattiComponent } from './anagrafiche/contratto/contratti.component'
 import { DomandaFullComponent } from './anagrafiche/domanda-full/domanda-full.component';
 import { ContraentiModelComponent } from './anagrafiche/contraenti-model/contraenti-model.component';
 import { PostiModelComponent } from './anagrafiche/posti-model/posti-model.component';
-import { PostoPipe } from './anagrafiche/posti-model/posto.pipe';
+import { CercacontraentiModelComponent } from './anagrafiche/cercacontraenti-model/cercacontraenti-model.component';
+
+
 
 // state related imports
 // import { StoreModule } from '@ngrx/store';
@@ -58,7 +65,9 @@ import { PostoPipe } from './anagrafiche/posti-model/posto.pipe';
     ContraentiModelComponent,
     DomandaFullComponent,
     PostiModelComponent,
-    PostoPipe,
+    CercacontraentiModelComponent,
+    
+
     
   ],
   
@@ -69,6 +78,12 @@ import { PostoPipe } from './anagrafiche/posti-model/posto.pipe';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule
+
 
     
 

@@ -3,7 +3,7 @@
         <div class="modal-content">
             <form #f="ngForm" >
                  <div class="modal-header">
-                    <h5 class="modal-title">Posto</h5>
+                    <h5 class="modal-title"> Cerca Posto</h5>
                     <button class="btn-close" data-bs-dismiss="modal"></button>
                  </div>
                  <div class="modal-body">
@@ -12,10 +12,11 @@
                         <strong>Error!</strong>{{errorMessage}}
                     </div>
 
+                    <h6>Dati posto </h6>
                     <div class="form-group">
                         <label for="loculo">loculo</label>
                         <input 
-                            type="searchValue" 
+                            type="search" 
                             id="loculo" 
                             name="loculo"
                             class="form-control" 
@@ -24,14 +25,13 @@
                             required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !loculo.valid">
-                            Campo Obbligatorio
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label for="fornice">fornice</label>
                         <input 
-                            type="searchValue" 
+                            type="search" 
                             id="fornice" 
                             name="fornice"
                             class="form-control" 
@@ -40,11 +40,44 @@
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !fornice.valid">
                         </div>
+                    </div>
+
+                    <h6>Assegnatario </h6>
+                    <div class="form-group ">
+                        <label for="nome">Nome</label>
+                        <input 
+                            type="search" 
+                            id="nome" 
+                            name="nome"
+                            class="form-control" 
+                            [(ngModel)]="posto1.nome"
+                            #nome="ngModel"
+                            
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !nome.valid">
+                        </div>
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="cognome">Cognome</label>
+                        <input 
+                            type="search" 
+                            id="cognome" 
+                            name="cognome"
+                            class="form-control" 
+                            [(ngModel)]="posto1.cognome"
+                            #cognome="ngModel"
+                            
+                            >
+                        <div class="alert-danger" *ngIf="f.submitted && !cognome.valid">
+                        </div>
 
                     </div>
                 </div>
 
                 <div class="modal-footer">
+
+                <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">svuota</button>
                   <button class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
                   <button (click)="filtraPosti(posto1)">Cerca</button>
                 </div>
@@ -53,17 +86,25 @@
           <table class="table table-bordered">
           <thead>
             <tr>
-              <th></th>
+            <th> </th>
+              <th>Stato</th>
               <th>loculo</th>
               <th>fornice</th>
+              <th>Nome</th>
+
+              <th>Scadenza</th>
             </tr>
           </thead>
           <tbody>
           
             <tr *ngFor="let postoTab of posti;">
               <td><input type="checkbox"  [(ngModel)]="postoTab.checked"></td>
+              <td>{{postoTab.stato}}</td>
               <td>{{postoTab.loculo}}</td>
               <td>{{postoTab.fornice}}</td>
+              <td>{{postoTab.nome.cognome}}</td>
+              
+              <td>{{postoTab.scadenza}}</td>
             </tr>
             </tbody>
           </table>
