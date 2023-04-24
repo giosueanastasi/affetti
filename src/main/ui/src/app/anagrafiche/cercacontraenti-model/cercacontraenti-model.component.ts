@@ -32,7 +32,7 @@ export class CercacontraentiModelComponent {
         });
     }
   
-    getAllCercaontraenti() {
+    getAllCercacontraenti() {
       this.appService.getContraenti().pipe(takeUntil(this.destroy$)).subscribe((contraenti: any[]) => {
       this.cercacontraenteCount =contraenti.length;
           this.contraenti = contraenti;
@@ -42,7 +42,7 @@ export class CercacontraentiModelComponent {
   
     ngOnInit() {
       console.log('esegui all contraente1 on init');
-      this.getAllCercaontraenti();
+      this.getAllCercacontraenti();
       }
   
       showCercacontraentiModal(){

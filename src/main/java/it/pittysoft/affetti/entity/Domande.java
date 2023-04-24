@@ -43,15 +43,8 @@ public class Domande {
 //    @Column
 //    @NotNull(message="{NotNull.Contraente.fk_assegnatario}")
 //    private Long fk_assegnatario;
-    
-    @Column
-    @NotNull(message="{NotNull.Contraente.fk_contraente}")
-    private Long fk_contraente;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fk_assegnatario")
-    private Assegnatari assegnatario;
-    
+        
+
     @Column
     private Long fk_user_modifier;
     
@@ -64,6 +57,15 @@ public class Domande {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_posto")
     private Posti posto;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_assegnatario")
+    private Assegnatari assegnatario;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_contraente")
+    private Contraenti contraente;
+    
     
     @OneToOne(mappedBy = "domanda")
     private Contratti contratto;

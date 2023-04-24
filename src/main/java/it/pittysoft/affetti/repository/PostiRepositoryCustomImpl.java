@@ -54,12 +54,6 @@ public class PostiRepositoryCustomImpl implements PostiRepositoryCustom {
 		if(posti.getLoculo()!=null) {
 			builder.and(qPosti.loculo.upper().like(posti.getLoculo().toUpperCase()));
 		}
-		if(posti.getScadenza()!=null) {
-			builder.and(qContratti.data_scadenza.upper().like(posti.getScadenza().toUpperCase()));
-		}
-		if(posti.getStato()!=null) {
-			builder.and(qPosti.stato.upper().like(posti.getStato().toUpperCase()));
-		}
 		
 		
 		List<Posti> postiPlayer = query.select(qPosti)

@@ -1,5 +1,5 @@
 <div class="modal fade" id="cercacontraentiModal" tabIndex="-1">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-xl">
         <div class="modal-content">
             <form #f="ngForm" >
                  <div class="modal-header">
@@ -41,7 +41,6 @@
                         </div>
                     </div>
 
-                    <h6>Assegnatario </h6>
                     <div class="form-group ">
                         <label for="codice_fiscale">Cod. Fisc.</label>
                         <input 
@@ -78,9 +77,10 @@
 
                   <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">svuota</button>
                   <button class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-                  <button (click)="filtraCercacontraenti(contraente1)">Cerca</button>
+                  <button class="btn btn-primary" (click)="filtraCercacontraenti(contraente1)">Cerca</button>
                 </div>
           </form>
+          
           <h2>Contraenti</h2>
           <table class="table table-bordered">
           <thead>
@@ -101,19 +101,19 @@
           
             <tr *ngFor="let contraentiTab of contraenti;">
               <td><input type="checkbox"  [(ngModel)]="contraentiTab.checked"></td>
-              <td>{{contraentiTab.Nome}}</td>
-              <td>{{contraentiTab.Cognome}}</td>
+              <td>{{contraentiTab.nome}}</td>
+              <td>{{contraentiTab.cognome}}</td>
               <td>{{contraentiTab.codice_fiscale}}</td>
               <td>{{contraentiTab.comune_residenza}}</td>
               <td>{{contraentiTab.via_residenza}}</td>
               <td>{{contraentiTab.provincia_residenza}}</td>
               <td>{{contraentiTab.nomeAss}}</td>
               <td>{{contraentiTab.cognomeAss}}</td>
-              <td>{{contraentiTab.contratto}}</td>
+              <td>{{contraentiTab.protocollo}}</td>
             </tr>
             </tbody>
           </table>
-          <button (click)="assegnaContraente(contraenti)">Seleziona</button>
+          <button class="btn btn-primary" (click)="assegnaContraente(contraenti)">Seleziona</button>
       </div>
   </div>
 </div>

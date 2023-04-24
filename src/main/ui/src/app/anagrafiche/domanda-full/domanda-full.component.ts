@@ -132,4 +132,64 @@ export class DomandaFullComponent  {
     
   }
 
+  assegnaContraenteWatcher(contraenti: any[]){
+
+    let nome;
+    let cognome;
+    let codice_fiscale;
+    let comune_nascita;
+    let provincia_nascita;
+    let stato_nascita;
+    let data_nascita;
+    let comune_residenza;
+    let provincia_residenza;
+    let via_residenza;
+    let civico_residenza;
+    let cap_residenza;
+    let email;
+    let note;
+
+ 
+
+    contraenti.forEach(function (value) {
+      if(value.checked){
+
+
+        nome = value.nome;
+        cognome = value.cognome;
+        codice_fiscale = value.codice_fiscale;
+        comune_nascita = value.comune_nascita;
+        provincia_nascita = value.provincia_nascita;
+        stato_nascita = value.stato_nascita;
+        data_nascita = value.data_nascita;
+        codice_fiscale = value.codice_fiscale;
+        comune_residenza = value.comune_residenza;
+        provincia_residenza = value.provincia_residenza;
+        via_residenza = value.via_residenza;
+        civico_residenza = value.civico_residenza;
+        cap_residenza = value.cap_residenza;
+        email = value.email;
+        note = value.note;
+
+      }
+    });
+    this.domandaFullForm.controls['nome'].setValue(nome);
+    this.domandaFullForm.controls['cognome'].setValue(cognome);
+    this.domandaFullForm.controls['comune_nascita'].setValue(comune_nascita);
+    this.domandaFullForm.controls['provincia_nascita'].setValue(provincia_nascita);
+    this.domandaFullForm.controls['stato_nascita'].setValue(stato_nascita);
+    this.domandaFullForm.controls['data_nascita'].setValue(data_nascita);
+    this.domandaFullForm.controls['comune_residenza'].setValue(comune_residenza);
+    this.domandaFullForm.controls['provincia_residenza'].setValue(provincia_residenza);
+    this.domandaFullForm.controls['via_residenza'].setValue(via_residenza);
+    this.domandaFullForm.controls['civico_residenza'].setValue(civico_residenza);
+    this.domandaFullForm.controls['cap_residenza'].setValue(cap_residenza);
+    this.domandaFullForm.controls['codice_fiscale'].setValue(codice_fiscale);
+    this.domandaFullForm.controls['email'].setValue(email);
+    this.domandaFullForm.controls['note'].setValue(note);
+
+  
+    
+  }
+
 }
