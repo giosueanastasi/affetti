@@ -1,5 +1,6 @@
 package it.pittysoft.affetti.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,10 +10,14 @@ import it.pittysoft.affetti.dao.DomandaDao;
 import it.pittysoft.affetti.entity.Assegnatari;
 import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Domande;
+import it.pittysoft.affetti.entity.Posti;
 import it.pittysoft.affetti.model.DomandaRequest;
 import it.pittysoft.affetti.model.DomandaRequestSearch;
 import it.pittysoft.affetti.model.DomandaResponse;
 import it.pittysoft.affetti.model.DomandaResponseSearch;
+import it.pittysoft.affetti.model.PostiModel;
+import it.pittysoft.affetti.model.PostiRequest;
+import it.pittysoft.affetti.model.PostiResponse;
 import it.pittysoft.affetti.repository.AssegnatariRepository;
 import it.pittysoft.affetti.repository.DomandeRepository;
 import it.pittysoft.affetti.repository.DomandeRepositoryCustom;
@@ -39,22 +44,37 @@ public class DomandeService {
     	return domandeRepository.save(domande);
     }
     
-    public List<Domande> getDomande(DomandaRequestSearch resquestSearch) {
+   /* public List<Domande> getDomande(DomandaRequestSearch resquestSearch) {
     	DomandaResponseSearch responseSearch = new DomandaResponseSearch();
     	if(resquestSearch.getNomeC()!=null &&
     			resquestSearch.getCognomeC()!=null && 
     			resquestSearch.getCodice_fiscaleC()!=null &&
-    			resquestSearch.getEmailC()!=null &&
     			resquestSearch.getData_protocollo_inizialeC()!=null &&
     			resquestSearch.getData_protocollo_finaleC()!=null &&
     			resquestSearch.getNumero_protocolloC()!=null
     			) {
-    		//errore, mancano i dati dell'assegnatario
     		responseSearch.setReturnCode(2);
     		responseSearch.setReasonCode("Inserire almeno un campo");
     	}
     	return domandaDao.findDomandeByCognomeAndNome(resquestSearch);
+	}*/
+    
+    public DomandaRequestSearch getDomande(DomandaRequestSearch resquestSearch) {
+		 List<Domande> findDomandeByCognomeAndNome = domandaDao.findDomandeByCognomeAndNome(resquestSearch);
+				
+		 for (Domande domanda : findDomandeByCognomeAndNome) {
+	
+			 resquestSearch.setCognomeC(domanda.getContraente().getCognome());
+			 resquestSearch.setNomeC(domanda.getContraente().getNome());
+			 resquestSearch.setCodice_fiscaleC(domanda.getContraente().getCodice_fiscale());
+			 resquestSearch.setNumero_protocolloC(domanda.getProtocollo());
+			 resquestSearch.setStatoC(domanda.getStato());				 	 
+		 } 
+ 	return resquestSearch;
+		
 	}
+
+    
     
     public DomandaResponse addDomandaFull(DomandaRequest request) {
     	DomandaResponse response = new DomandaResponse();

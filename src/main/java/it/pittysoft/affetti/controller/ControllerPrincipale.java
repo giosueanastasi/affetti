@@ -25,6 +25,7 @@ import it.pittysoft.affetti.links.UserLinks;
 import it.pittysoft.affetti.model.DomandaRequest;
 import it.pittysoft.affetti.model.DomandaRequestSearch;
 import it.pittysoft.affetti.model.DomandaResponse;
+import it.pittysoft.affetti.model.DomandaResponseSearch;
 import it.pittysoft.affetti.model.PostiRequest;
 import it.pittysoft.affetti.model.PostiResponse;
 import it.pittysoft.affetti.model.Response;
@@ -199,7 +200,7 @@ public class ControllerPrincipale {
 	@PostMapping(path = DomandaLinks.SEARCH_DOMANDE)
     public ResponseEntity<?> searchDomande(@RequestBody DomandaRequestSearch resquestSearch) {
         log.info("ApiController:  search domande");
-        List<Domande> resource = domandeService.getDomande(resquestSearch);
+        DomandaRequestSearch resource = domandeService.getDomande(resquestSearch);
         return ResponseEntity.ok(resource);
     }
 }

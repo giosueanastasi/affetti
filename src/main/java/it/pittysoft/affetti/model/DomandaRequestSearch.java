@@ -17,4 +17,5 @@ public class DomandaRequestSearch extends Request {
 	private String data_protocollo_inizialeC;//non presenti in contraente
 	private String data_protocollo_finaleC;//non presenti in contraente
 	private String numero_protocolloC;
+	private String statoC;
 }
