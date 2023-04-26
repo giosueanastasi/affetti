@@ -1,9 +1,10 @@
 <div class="modal fade" id="cercacontraentiModal" tabIndex="-1">
-    <div class="modal-dialog modal-xl">
-        <div class="modal-content">
+    <div class="modal-dialog">
+        <div class="modal-content ">
             <form #f="ngForm" >
                  <div class="modal-header">
-                    <h5 class="modal-title"> Cerca Contraenti</h5>
+                    
+                    <h4 class="modal-title"> Cerca Contraenti</h4>
                     <button class="btn-close" data-bs-dismiss="modal"></button>
                  </div>
                  <div class="modal-body">
@@ -75,14 +76,14 @@
 
                 <div class="modal-footer">
 
-                  <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">svuota</button>
-                  <button class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                  <button input type="reset" value="cancella" class="btn btn-secondary" data-bs-dismiss="modal">svuota</button>
+                  <button class="btn btn-danger" data-bs-dismiss="modal">Chiudi</button>
                   <button class="btn btn-primary" (click)="filtraCercacontraenti(contraente1)">Cerca</button>
                 </div>
           </form>
           
           <h2>Contraenti</h2>
-          <table class="table table-bordered">
+          <table class="table-bordered">
           <thead>
             <tr>
             <th> </th>
@@ -109,7 +110,7 @@
               <td>{{contraentiTab.provincia_residenza}}</td>
               <td>{{contraentiTab.nomeAss}}</td>
               <td>{{contraentiTab.cognomeAss}}</td>
-              <td>{{contraentiTab.protocollo}}</td>
+              <td>{{contraentiTab.protocolloC}}</td>
             </tr>
             </tbody>
           </table>

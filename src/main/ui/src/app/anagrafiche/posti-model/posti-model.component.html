@@ -77,7 +77,8 @@
 
                 <div class="modal-footer">
 
-                  <button class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                    <button input type="reset" value="cancella" class="btn btn-secondary" data-bs-dismiss="modal">svuota</button>
+                    <button class="btn btn-danger" data-bs-dismiss="modal">Chiudi</button>
                   <button class="btn btn-primary"(click)="filtraPosti(posto1)">Cerca</button>
                 </div>
           </form>
@@ -101,7 +102,7 @@
               <td>{{postoTab.stato}}</td>
               <td>{{postoTab.loculo}}</td>
               <td>{{postoTab.fornice}}</td>
-              <td>{{postoTab.nome.cognome}}</td>
+              <td>{{postoTab.nome}}</td>
               <td>{{postoTab.cognome}}</td>
               
               <td>{{postoTab.scadenza}}</td>
