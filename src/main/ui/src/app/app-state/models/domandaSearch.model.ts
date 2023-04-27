@@ -8,6 +8,8 @@ export class DomandaSearch {
 	data_protocollo_inizialeC: string;
 	data_protocollo_finaleC: string;
 	numero_protocolloC: string;
+	nomeA: string;
+	cognomeA: string;
   }
   
   

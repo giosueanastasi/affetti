@@ -120,13 +120,15 @@ export class AppService {
     let domanda = new Domanda;
     domanda.protocollo = domandaForm.numero_protocollo;
     domanda.data_protocollo = domandaForm.data_protocollo;
-    domanda.stato = domandaForm.nome;
+    domanda.stato = domandaForm.stato;
 
     let  ds = new DomandaSearch();
     ds.domanda = domanda;
     ds.nomeC = domandaForm.nome;
     ds.cognomeC = domandaForm.cognome;
     ds.codice_fiscaleC = domandaForm.codice_fiscale;
+    ds.nomeA = domandaForm.nomeA;
+    ds.cognomeA = domandaForm.cognomeA;
     
 	return this.http.post(this.rootURL + '/search_domande', ds);
   }

@@ -1,9 +1,9 @@
 <div class="container">
     <div class="row">
       <div class=" mrgnbtm">
-        <h2>Domande</h2>
+        <h2>Cerca Domande</h2>
         <div class="text-end"><button [routerLink]="['/domandaFull']">Nuova Domanda</button> </div>
-        <h4>Cerca Domande</h4>
+        
         <h6>Dati Contraente</h6>
         <form [formGroup]="domandaForm">
           <div class="row">
@@ -68,7 +68,9 @@
           <th>Data Protocollo</th>
           <th>Nome Contraente</th>
           <th>Cognome Contraente</th>
-          <th>codice fiscale</th>
+          <th>Assegnatario</th>
+          <th>Dettaglio</th>
+          <th>Contratto</th>
         </tr>
       </thead>
       <tbody>
@@ -78,7 +80,7 @@
           <td>{{domanda.data_protocollo}}</td>
           <td>{{domanda.nome}}</td>
           <td>{{domanda.cognome}}</td>
-          <td>{{domanda.codice_fiscale}}</td>
+          <td>{{domanda.nomeA && domanda.cognomeA }}</td>
         </tr>
       </tbody>
       </table>

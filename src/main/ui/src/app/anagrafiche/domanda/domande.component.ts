@@ -22,6 +22,8 @@ title = 'angular-nodejs-example';
 domandaForm = new FormGroup({
   nome: new FormControl('', Validators.nullValidator),
   cognome: new FormControl('', Validators.nullValidator),
+  nomeA: new FormControl('', Validators.nullValidator),
+  cognomeA: new FormControl('', Validators.nullValidator),
   codice_fiscale: new FormControl('', Validators.nullValidator),
   data_protocollo_iniziale: new FormControl('', Validators.nullValidator),
   data_protocollo_finale: new FormControl('', Validators.nullValidator),
@@ -65,6 +67,7 @@ svuotaDomanda(svuotadomandeForm: FormGroup) {
 cercaDomande(cercaDomandaForm: FormGroup) {
     this.appService.cercaDomandeService(cercaDomandaForm.value).pipe(takeUntil(this.destroy$)).subscribe((data: any[]) => {
       this.domande = data;
+      console.log('ciao');
     }); 
 }
 
