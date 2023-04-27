@@ -30,7 +30,7 @@ export class DomandaFullComponent  {
     provincia_nascita: new FormControl('', Validators.nullValidator && Validators.required),
     stato_nascita: new FormControl('', Validators.nullValidator && Validators.required),
     data_nascita: new FormControl('', Validators.nullValidator && Validators.required),
-
+    tipologia:new FormControl('', Validators.nullValidator && Validators.required),
     comune_residenza: new FormControl('', Validators.nullValidator && Validators.required),
     provincia_residenza: new FormControl('', Validators.nullValidator && Validators.required),
     via_residenza: new FormControl('', Validators.nullValidator && Validators.required),

@@ -41,26 +41,19 @@ public class ContraentiRepositoryCustomImpl implements ContraentiRepositoryCusto
 		BooleanBuilder builder = new BooleanBuilder();
 		
 		if(contraenti.getNome()!=null) {
-			builder.and(qContraenti.nome.upper().like(contraenti.getNome().toUpperCase()));
+			builder.and(qContraenti.nome.upper().like("%" + contraenti.getNome().toUpperCase()+"%" ));
 		}
 		if(contraenti.getCognome()!=null) {
-			builder.and(qContraenti.cognome.upper().like(contraenti.getCognome().toUpperCase()));
-			
-		}
-		if(contraenti.getNome()!=null) {
-			builder.and(qContraenti.nome.upper().like(contraenti.getNome().toUpperCase()));
-		}
-		if(contraenti.getCognome()!=null) {
-			builder.and(qContraenti.cognome.upper().like(contraenti.getCognome().toUpperCase()));
+			builder.and(qContraenti.cognome.upper().like("%" + contraenti.getCognome().toUpperCase()+ "%" ));
 			
 		}
 		if(contraenti.getCodice_fiscale()!=null) {
 			builder.and(qContraenti.codice_fiscale.upper().like(contraenti.getCodice_fiscale().toUpperCase()));
 		}
-	/*	if(contraenti.getCognome()!=null) {
-			builder.and(qContraenti.cognome.upper().like(contraenti.getCognome().toUpperCase()));
+		if(contraenti.getProtocolloC()!=null) {
+			builder.and(qContratti.protocollo.upper().like(contraenti.getProtocolloC().toUpperCase()));
 			
-		}*/
+		}
 		
 
 		

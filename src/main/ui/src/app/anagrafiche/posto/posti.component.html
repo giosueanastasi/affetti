@@ -1,39 +1,47 @@
 <div class="container">
   <div class="row">
     <div class="col-md-7 mrgnbtm">
-      <h2>Create Posto</h2>
-      <form [formGroup]="postoForm" (ngSubmit)="onSubmit()">
+      <h2>Cerca Posto</h2>
+
+      <form [formGroup]="postoForm">
         <div class="row">
-          <div class="form-group col-md-6">
-            <label for="id">id</label>
-            <input type="text" class="form-control" formControlName="id" id="id" aria-describedby="idHelp" placeholder="id">
+
+          <h4>Dati Posto</h4>
+          <label class="col-sm-2"for="loculo">Loculo</label>
+              <div class="form-group col-sm-3">
+              <input type="text" class="form-control" formControlName="loculo" id="loculo" aria-describedby="loculolHelp" >
+            </div>
+
+            <label class="col-sm-2 "for="fornice">Fornice</label>
+            <div class="form-group col-sm-3">
+             <input type="text" class="form-control" formControlName="fornice" id="fornice" aria-describedby="fornicelHelp" >
+            </div>
+
+            <h4>Intervallo scadenza</h4>
+            <label class="col-sm-1"for="data_inizio">Da</label>
+            <div class="form-group col-sm-3">
+            <input type="text" class="form-control" formControlName="data_inizio" id="data_inizio" aria-describedby="data_iniziolHelp" >
           </div>
-          <div class="form-group col-md-6">
-            <label for="loculo">loculo</label>
-            <input type="text" class="form-control" formControlName="loculo" id="loculo" aria-describedby="loculoHelp" placeholder="loculo">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="fornice">fornice</label>
-            <input type="text" class="form-control" formControlName="fornice" id="fornice" aria-describedby="forniceHelp" placeholder="fornice">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="data_insert">data_insert</label>
-            <input type="text" class="form-control" formControlName="data_insert" id="data_insert" aria-describedby="data_insertHelp" placeholder="data_insert">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="data_update">data_update</label>
-            <input type="text" class="form-control" formControlName="data_update" id="data_update" aria-describedby="data_updateHelp" placeholder="data_update">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="tipo">tipo</label>
-            <input type="text" class="form-control" formControlName="tipo" id="tipo" aria-describedby="tipoHelp" placeholder="tipo">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="fk_user_modifier">fk_user_modifier</label>
-            <input type="text" class="form-control" formControlName="fk_user_modifier" id="fk_user_modifier" aria-describedby="fk_user_modifierHelp" placeholder="fk_user_modifier">
-          </div>
+          <label class="col-sm-1"for="data_scadenza">a</label>
+              <div class="form-group col-sm-3">
+              <input type="text" class="form-control" formControlName="data_scadenza" id="data_scadenza" aria-describedby="data_scadenzalHelp" >
+            </div>
+        
+          <div class="form-group col-sm-4">
+            <label for="stato">Stato</label>
+          <select class="custom-select-lg">
+            <option selected></option>
+            <option value="LIBERO">Libero</option>
+            <option value="PRENOTATO">Prenotato</option>
+            <option value="OCCUPATO">Occupato</option>
+            <option value="DA_LIBERARE">Da Liberare</option>
+          </select>
         </div>
-        <button type="submit" [disabled]="!postoForm.valid" class="btn btn-danger">Create</button>
+        </div>
+        <br>
+        <br>
+        <button input type="reset" value="cancella" class="btn btn-secondary" data-bs-dismiss="modal">svuota</button>
+        <button class="btn btn-primary" >Cerca</button>
       </form>
     </div>
     <div class="col-md-4 mrgnbtm">
@@ -44,24 +52,24 @@
     <table class="table table-bordered">
     <thead>
       <tr>
-        <th>Id</th>
-        <th>loculo</th>
-        <th>fornice</th>
-        <th>data_insert</th>
-        <th>data_update</th>
-        <th>tipo</th>
-        <th>fk_user_modifier</th>
+        <th>Stato</th>
+        <th>Loculo</th>
+        <th>Fornice</th>
+        <th>Nome</th>
+        <th>Cognome</th>
+        <th>Scadenza</th>
+        <th>Contratto</th>
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let posto of posti; let i = index">
-        <td>{{i + 1}}</td>
-        <td>{{posto.loculo}}</td>
-        <td>{{posto.fornice}}</td>
-        <td>{{posto.data_insert}}</td>
-        <td>{{posto.data_update}}</td>
-        <td>{{posto.tipo}}</td>
-        <td>{{posto.fk_user_modifier}}</td>
+      <tr *ngFor="let postoTab of posti">
+        <td>{{postoTab.stato}}</td>
+        <td>{{postoTab.loculo}}</td>
+        <td>{{postoTab.fornice}}</td>
+        <td>{{postoTab.nomeAss}}</td>
+        <td>{{postoTab.cognomeAss}}</td>
+        <td>{{postoTab.scadenza}}</td>
+        <td>{{postoTab.protocolloC}}</td>
       </tr>
     </tbody>
     </table>

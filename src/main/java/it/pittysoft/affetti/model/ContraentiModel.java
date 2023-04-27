@@ -7,7 +7,6 @@ public class ContraentiModel {
 	private String nome;
 	private String cognome;
 	private String codice_fiscale;
-	private String protocolloD;
 	private String protocolloC;
 	private String comune_nascita;
 	private String provincia_nascita;

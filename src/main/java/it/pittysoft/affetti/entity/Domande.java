@@ -40,6 +40,7 @@ public class Domande {
     @NotNull(message="{NotNull.Contraente.stato}")
     private String stato;
     
+    
 //    @Column
 //    @NotNull(message="{NotNull.Contraente.fk_assegnatario}")
 //    private Long fk_assegnatario;

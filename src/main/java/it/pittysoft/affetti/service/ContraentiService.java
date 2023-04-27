@@ -57,7 +57,6 @@ public class ContraentiService {
 				 pm.setCap_residenza(contraentiFiltrati.getCap_residenza());
 				 pm.setEmail(contraentiFiltrati.getEmail());
 				 pm.setNote(contraentiFiltrati.getNote());
-				 pm.setProtocolloD(domanda.getProtocollo());
      			 pm.setProtocolloC(domanda.getContratto().getProtocollo());
 				 pm.setNomeAss(domanda.getAssegnatario().getNome());
 				 pm.setCognomeAss(domanda.getAssegnatario().getCognome());

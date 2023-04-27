@@ -7,7 +7,7 @@ public class ContraentiRequest extends Request{
 	private String nome;
 	private String cognome;
 	private String codice_fiscale;
-	private String protocollo;
+	private String protocolloC;
 	private String comune_nascita;
 	private String provincia_nascita;
 	private String stato_nascita;

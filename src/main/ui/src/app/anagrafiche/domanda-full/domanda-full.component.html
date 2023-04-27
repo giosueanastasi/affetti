@@ -20,25 +20,36 @@
         <div class="form-group col-sm-3"  ><button  class="btn btn-info" (click)="cercaContraente()" >Cerca Contraente</button></div>
         <h4>Tipologia </h4>
 
+
+
         <div class="form-check" class="form-group col-sm-3">
-          <input class="form-check-input" type="radio" name="loculo" id="loculo" value="option1" checked>
-          <label class="form-check-label" for="loculo">
-            Loculo
-          </label>
+          <input
+            id="loculo"
+            type="radio"
+            value="LOCULO"
+            name="tipologia"
+            formControlName="tipologia"
+          />
+          <label class="custom-control-label" for="loculo">Loculo</label>
+        </div>
+        <div class="form-check" class="form-group col-sm-3">
+          <input
+            id="tenuta_a_disposizione"
+            type="radio"
+            value="TENUTA_DISPOSIZIONE"
+            name="tipologia"
+            formControlName="tipologia"
+          />
+          <label class="custom-control-label" for="tenuta_a_disposizione">Tenuta a disposizione</label>
         </div>
 
-          <div class="form-check" class="form-group col-sm-3">
-            <input class="form-check-input" type="radio" name="Tenuta_a_disposizione" id="Tenuta_a_disposizione" value="option2" checked>
-            <label class="form-check-label" for="Tenuta_a_disposizione">
-              Tenuta a disposizione
-            </label>
-           </div>
+
            <div class="form-group col-sm-2"  ></div>
            <div class="form-group col-sm-3"><button class="btn btn-info" (click)="creaContraente()">Nuovo Contraente</button></div>
             
            <h4>Dati Contraente</h4>
             <label class="col-sm-1 "for="nome">Nome</label>
-            <div class="form-group col-sm-4">
+            <div class="form-group col-sm-3">
               <input  type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp"  readonly>
             </div>
             <label class="col-sm-1 "for="cognome">Cognome</label>
@@ -125,7 +136,7 @@
 
             <h4>Assegnatario </h4>
             <label class="col-sm-1 "for="nomeAss">Nome</label>
-            <div class="form-group col-sm-4">
+            <div class="form-group col-sm-3">
                  <input type="text" class="form-control" formControlName="nomeAss" id="nomeAss" aria-describedby="nomeAssHelp" >
             </div>
             <label class="col-sm-1 "for="cognomeAss">Cognome</label>

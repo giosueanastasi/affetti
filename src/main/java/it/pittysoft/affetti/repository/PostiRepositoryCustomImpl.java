@@ -39,20 +39,25 @@ public class PostiRepositoryCustomImpl implements PostiRepositoryCustom {
 		QDomande qDomande = QDomande.domande;
 		QAssegnatari qAssegnatari = QAssegnatari.assegnatari;
 		QContratti qContratti = QContratti.contratti;
+		/*
+		 * loculo fornice data inizio e data fine  stato*/
 		
 		BooleanBuilder builder = new BooleanBuilder();
-		if(posti.getNome()!=null) {
-			builder.and(qAssegnatari.nome.upper().like(posti.getNome().toUpperCase()));
-		}
-		if(posti.getCognome()!=null) {
-			builder.and(qAssegnatari.cognome.upper().like(posti.getCognome().toUpperCase()));
-			
-		}
+
 		if(posti.getFornice()!=null) {
 			builder.and(qPosti.fornice.upper().like(posti.getFornice().toUpperCase()));
 		}
 		if(posti.getLoculo()!=null) {
 			builder.and(qPosti.loculo.upper().like(posti.getLoculo().toUpperCase()));
+		}
+		if(posti.getStato()!=null) {
+			builder.and(qDomande.stato.upper().like(posti.getStato().toUpperCase()));
+		}
+		if(posti.getData_inizio()!=null) {
+			builder.and(qContratti.data_inizio.upper().like(posti.getData_inizio().toUpperCase()));
+		}
+		if(posti.getData_scadenza()!=null) {
+			builder.and(qContratti.data_scadenza.upper().like(posti.getData_scadenza().toUpperCase()));
 		}
 		
 		
@@ -65,34 +70,6 @@ public class PostiRepositoryCustomImpl implements PostiRepositoryCustom {
 		                            		    ).fetch();
 		
 		return postiPlayer;
-		/*	CriteriaBuilder cb = em.getCriteriaBuilder();
-	    CriteriaQuery<Posti> cq = cb.createQuery(Posti.class);
-//	    Metamodel m = em.getMetamodel();
-	//   EntityType<Posti> PostiMetaModel = m.entity(Posti.class);
-
-	    Root<Posti> postofrom = cq.from(Posti.class);
-	//    Join<Posti, Domande> domandeJoin = postofrom.join("fk_posto",JoinType.INNER);
-	    List<Predicate> predicates = new ArrayList<>();
-	    
-
-	    
-	    if (posti.getLoculo() != null) {
-	    	predicates.add(cb.like(
-	    			cb.upper(
-	    					postofrom.get("loculo")
-	    			)
-	    			, "%" + posti.getLoculo().toUpperCase() + "%"));
-	    }
-	    if (posti.getFornice() != null) {
-	    	predicates.add(cb.like(
-	    			cb.upper(
-	    					postofrom.get("fornice")
-	    			)
-	    			, "%" + posti.getFornice().toUpperCase() + "%"));
-	    }
-	    cq.where(predicates.toArray(new Predicate[0]));
-
-	    return em.createQuery(cq).getResultList();*/
 	}
 
 }
