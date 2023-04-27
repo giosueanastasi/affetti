@@ -44,11 +44,15 @@ public class PostiRepositoryCustomImpl implements PostiRepositoryCustom {
 		
 		BooleanBuilder builder = new BooleanBuilder();
 		
+			//posti.setData_inizio("2058-04-07");
+		//	posti.setData_scadenza("2058-04-09");
 		
-		posti.setData_inizio("2058-04-07");
-		posti.setData_scadenza("2058-04-09");
-		
-
+		if(posti.getNome()!=null && !posti.getNome().isEmpty()) {
+			builder.and(qAssegnatari.nome.upper().like(posti.getNome().toUpperCase()));
+		}
+		if(posti.getCognome()!=null && !posti.getCognome().isEmpty()) {
+			builder.and(qAssegnatari.cognome.upper().like(posti.getCognome().toUpperCase()));
+		}
 		if(posti.getFornice()!=null && !posti.getFornice().isEmpty()) {
 			builder.and(qPosti.fornice.upper().like(posti.getFornice().toUpperCase()));
 		}
@@ -56,8 +60,9 @@ public class PostiRepositoryCustomImpl implements PostiRepositoryCustom {
 			builder.and(qPosti.loculo.upper().like(posti.getLoculo().toUpperCase()));
 		}
 		if(posti.getStato()!=null&& !posti.getStato().isEmpty()) {
-			builder.and(qDomande.stato.upper().like(posti.getStato().toUpperCase()));
+			builder.and(qPosti.stato.upper().like(posti.getStato().toUpperCase()));
 		}
+		
 		if(posti.getData_inizio()!=null && posti.getData_scadenza()!=null) {
 			builder.and(qContratti.data_scadenza.between(posti.getData_inizio(), posti.getData_scadenza()));
 		}

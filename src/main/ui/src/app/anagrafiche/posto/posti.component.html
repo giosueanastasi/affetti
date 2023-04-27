@@ -27,10 +27,10 @@
               <input type="text" class="form-control" formControlName="data_scadenza" id="data_scadenza" aria-describedby="data_scadenzalHelp" >
             </div>
         
-          <div class="form-group col-sm-4">
+          <div class="form-group col-sm-1">
             <label for="stato">Stato</label>
-          <select class="custom-select-lg">
-            <option selected></option>
+          <select name="stato" id ="stato">
+            <option value=""></option>
             <option value="LIBERO">Libero</option>
             <option value="PRENOTATO">Prenotato</option>
             <option value="OCCUPATO">Occupato</option>
@@ -66,10 +66,10 @@
         <td>{{postoTab.stato}}</td>
         <td>{{postoTab.loculo}}</td>
         <td>{{postoTab.fornice}}</td>
-        <td>{{postoTab.nomeAss}}</td>
-        <td>{{postoTab.cognomeAss}}</td>
+        <td>{{postoTab.nome}}</td>
+        <td>{{postoTab.cognome}}</td>
         <td>{{postoTab.scadenza}}</td>
-        <td>{{postoTab.protocolloC}}</td>
+        <td>{{postoTab}}</td>
       </tr>
     </tbody>
     </table>

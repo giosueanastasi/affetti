@@ -14,12 +14,18 @@ import {  Posto1 } from 'src/app/app-state/models';
 
 export class PostiComponent implements OnInit {
 
+  
 title = 'angular-nodejs-example';
 
 postoForm = new FormGroup({
-  loculo: new FormControl('', Validators.nullValidator && Validators.required),
+  loculo: new FormControl('', Validators.nullValidator),
   fornice: new FormControl('', Validators.nullValidator),
   stato: new FormControl('', Validators.nullValidator),
+  data_inizio: new FormControl('', Validators.nullValidator),
+  data_scadenza: new FormControl('', Validators.nullValidator),
+
+  nomeAss: new FormControl('', Validators.nullValidator),
+  cognomeAss: new FormControl('', Validators.nullValidator),
 
 });
 
@@ -39,6 +45,11 @@ posto1: Posto1 = new Posto1();
   postoFiltrato.loculo = this.postoForm.controls['loculo'].value;
   postoFiltrato.fornice = this.postoForm.controls['fornice'].value;
   postoFiltrato.stato = this.postoForm.controls['stato'].value;
+  postoFiltrato.data_inizio = this.postoForm.controls['data_inizio'].value;
+  postoFiltrato.data_scadenza = this.postoForm.controls['data_scadenza'].value;
+  postoFiltrato.nome = this.postoForm.controls['nomeAss'].value;
+  postoFiltrato.cognome = this.postoForm.controls['cognomeAss'].value;
+
 
    this.appService.cercaPosti(postoFiltrato).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
      this.postoCount =data.length;
@@ -46,15 +57,6 @@ posto1: Posto1 = new Posto1();
      });
  }
 
-/*onSubmit() {
-  this.appService.addPosto(this.postoForm.value, this.postoCount + 1).pipe(takeUntil(this.destroy$)).subscribe(data => {
-    console.log('message::::', data);
-    this.postoCount = this.postoCount + 1;
-    console.log(this.postoCount);
-    this.postoForm.reset();
-    this.getAllPosti();
-  });
-}*/
 
 getAllPosti() {
   this.appService.getPosti().pipe(takeUntil(this.destroy$)).subscribe((posti: any[]) => {

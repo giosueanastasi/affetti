@@ -100,7 +100,6 @@ export class DomandaFullComponent  {
     this.domandaFullForm.controls['fornice'].setValue(posto.fornice);
     this.domandaFullForm.controls['nomeA'].setValue(posto.nome);
     this.domandaFullForm.controls['cognomeA'].setValue(posto.cognome);
-    this.domandaFullForm.controls['scadenza'].setValue(posto.scadenza);
     
   }
 
@@ -110,7 +109,6 @@ export class DomandaFullComponent  {
     let fornice;
     let nome;
     let cognome;
-    let scadenza;
 
     posti.forEach(function (value) {
       if(value.checked){
@@ -119,7 +117,7 @@ export class DomandaFullComponent  {
         fornice = value.fornice;
         nome = value.nome;
         cognome = value.cognome;
-        scadenza = value.scadenza;
+       
 
       }
     });
@@ -127,7 +125,6 @@ export class DomandaFullComponent  {
     this.domandaFullForm.controls['fornice'].setValue(fornice);
     this.domandaFullForm.controls['nomeAss'].setValue(nome);
     this.domandaFullForm.controls['cognomeAss'].setValue(cognome);
-    this.domandaFullForm.controls['scadenza'].setValue(scadenza);
   
     
   }
