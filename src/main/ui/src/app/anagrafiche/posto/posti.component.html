@@ -30,17 +30,17 @@
           <div class="form-group col-sm-1">
             <label for="stato">Stato</label>
           <select name="stato" id ="stato">
-            <option value=""></option>
-            <option value="LIBERO">Libero</option>
-            <option value="PRENOTATO">Prenotato</option>
-            <option value="OCCUPATO">Occupato</option>
-            <option value="DA_LIBERARE">Da Liberare</option>
+            <option selected></option>
+            <option  value="LIBERO">Libero</option>
+            <option  value="PRENOTATO">Prenotato</option>
+            <option  value="OCCUPATO">Occupato</option>
+            <option  value="DA_LIBERARE">Da Liberare</option>
           </select>
         </div>
         </div>
         <br>
         <br>
-        <button input type="reset" value="cancella" class="btn btn-secondary" data-bs-dismiss="modal">svuota</button>
+        <button input type="reset" value="cancella" class="btn btn-secondary me-1" data-bs-dismiss="modal">svuota</button>
         <button class="btn btn-primary" (click)="filtraPosti()">Cerca</button>
       </form>
     </div>
