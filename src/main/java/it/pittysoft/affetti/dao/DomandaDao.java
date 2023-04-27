@@ -42,15 +42,15 @@ public class DomandaDao {
 		JPAQuery<Domande> query = new JPAQuery<>(em);
 		QDomande qDomande = QDomande.domande;
 		QContraenti qContraenti = QContraenti.contraenti;
+		QAssegnatari qAssegnatari = QAssegnatari.assegnatari;
 		
 		BooleanBuilder builder = new BooleanBuilder();
 		
-		if(resquestSearch.getDomanda().getProtocollo()!=null) {
-			builder.and(qDomande.protocollo.upper().like("%"+resquestSearch.getDomanda().getProtocollo().toUpperCase()+"%"));
+		if(resquestSearch.getDomanda() !=null && resquestSearch.getDomanda().getProtocollo()!=null) {
+			builder.and(qDomande.protocollo.upper().like(resquestSearch.getDomanda().getProtocollo().toUpperCase()));
 		}
-		if(resquestSearch.getDomanda().getStato()!=null) {
-			builder.and(qDomande.stato.upper().like("%"+resquestSearch.getDomanda().getStato().toUpperCase()+"%"));
-			
+		if(resquestSearch.getDomanda() !=null && resquestSearch.getDomanda().getStato()!=null ) {
+			builder.and(qDomande.stato.upper().like(resquestSearch.getDomanda().getStato().toUpperCase()));
 		}
 		if(resquestSearch.getNomeC()!=null) {
 			builder.and(qContraenti.nome.upper().like("%"+resquestSearch.getNomeC().toUpperCase()+"%"));
@@ -59,12 +59,20 @@ public class DomandaDao {
 			builder.and(qContraenti.cognome.upper().like("%"+resquestSearch.getCognomeC().toUpperCase()+"%"));
 		}
 		
+		if(resquestSearch.getNomeA()!=null) {
+			builder.and(qAssegnatari.nome.upper().like("%"+resquestSearch.getNomeA().toUpperCase()+"%"));
+		}
+		if(resquestSearch.getCognomeA()!=null) {
+			builder.and(qAssegnatari.cognome.upper().like("%"+resquestSearch.getCognomeA().toUpperCase()+"%"));
+		}
+		
 		if(resquestSearch.getCodice_fiscaleC()!=null) {
-			builder.and(qContraenti.codice_fiscale.upper().like("%"+ resquestSearch.getCodice_fiscaleC().toUpperCase()+"%"));
+			builder.and(qContraenti.codice_fiscale.upper().like( resquestSearch.getCodice_fiscaleC().toUpperCase()));
 		}
 		
 		List<Domande> domandePlayer = query.select(qDomande)
 		                               .from(qDomande)
+		                               .innerJoin(qDomande.assegnatario,qAssegnatari)
 		                               .innerJoin(qDomande.contraente,qContraenti)
 		                               .where(builder
 		                            		    ).fetch();

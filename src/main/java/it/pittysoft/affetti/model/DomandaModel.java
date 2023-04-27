@@ -7,10 +7,8 @@ import it.pittysoft.affetti.entity.Domande;
 import lombok.Data;
 
 @Data
-public class DomandaRequestSearch extends Request {
-	
-	private Domande domanda; 
-	
+public class DomandaModel {
+
 	private String nomeA;
 	private String cognomeA;
 	private String nomeC;
@@ -20,4 +18,6 @@ public class DomandaRequestSearch extends Request {
 	private String data_protocollo_finaleC;//non presenti in contraente
 	private String numero_protocolloC;
 	private String statoC;
+	private Boolean checked = false; 
+
 }

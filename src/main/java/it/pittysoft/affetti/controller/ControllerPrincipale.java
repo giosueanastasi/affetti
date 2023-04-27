@@ -137,6 +137,18 @@ public class ControllerPrincipale {
         return ResponseEntity.ok(resource);
     }
 	
+	@PostMapping(path = DomandaLinks.SEARCH_DOMANDE)
+    public ResponseEntity<?> searchDomande(@RequestBody DomandaRequestSearch resquestSearch) {
+        log.info("ApiController:  search domande");
+        DomandaResponseSearch resource = domandeService.getDomande(resquestSearch);
+        if (resource.getReturnCode()==Response.OK) {
+        	return ResponseEntity.ok(resource);
+        } else  {
+        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Errore imprevisto, contattare l'assistenza");
+        }
+	}
+	
 	@PostMapping(path = PostoLinks.SEARCH_POSTI)
     public ResponseEntity<?> searchPosti(@RequestBody PostiRequest posti) {
         log.info("ApiController:  search posti");
@@ -195,12 +207,5 @@ public class ControllerPrincipale {
         	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Errore imprevisto, contattare l'assistenza");
 		}
-    }
-	
-	@PostMapping(path = DomandaLinks.SEARCH_DOMANDE)
-    public ResponseEntity<?> searchDomande(@RequestBody DomandaRequestSearch resquestSearch) {
-        log.info("ApiController:  search domande");
-        DomandaRequestSearch resource = domandeService.getDomande(resquestSearch);
-        return ResponseEntity.ok(resource);
     }
 }

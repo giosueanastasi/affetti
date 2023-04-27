@@ -29,24 +29,17 @@ public class Domande {
     private Long id;
 
     @Column
-    @NotNull(message="{NotNull.Contraente.protocollo}")
+    @NotNull(message="{NotNull.Domanda.protocollo}")
     private String protocollo;
     
     @Column
-    @NotNull(message="{NotNull.Contraente.data_protocollo}")
+    @NotNull(message="{NotNull.Domanda.data_protocollo}")
     private String data_protocollo;
     
     @Column
-    @NotNull(message="{NotNull.Contraente.stato}")
+    @NotNull(message="{NotNull.Domanda.stato}")
     private String stato;
-    
-//    @Column
-//    @NotNull(message="{NotNull.Contraente.fk_assegnatario}")
-//    private Long fk_assegnatario;
-    
-   // @Column
-    //@NotNull(message="{NotNull.Contraente.fk_contraente}")
-   // private Long fk_contraente;
+        
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_contraente")

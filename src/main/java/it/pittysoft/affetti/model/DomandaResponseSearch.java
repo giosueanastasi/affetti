@@ -7,4 +7,5 @@ import lombok.Data;
 
 @Data
 public class DomandaResponseSearch extends Response{
+	List<DomandaModel> domande = new ArrayList<>();
 }

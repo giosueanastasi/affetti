@@ -11,6 +11,7 @@ import it.pittysoft.affetti.entity.Assegnatari;
 import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.entity.Posti;
+import it.pittysoft.affetti.model.DomandaModel;
 import it.pittysoft.affetti.model.DomandaRequest;
 import it.pittysoft.affetti.model.DomandaRequestSearch;
 import it.pittysoft.affetti.model.DomandaResponse;
@@ -44,33 +45,24 @@ public class DomandeService {
     	return domandeRepository.save(domande);
     }
     
-   /* public List<Domande> getDomande(DomandaRequestSearch resquestSearch) {
-    	DomandaResponseSearch responseSearch = new DomandaResponseSearch();
-    	if(resquestSearch.getNomeC()!=null &&
-    			resquestSearch.getCognomeC()!=null && 
-    			resquestSearch.getCodice_fiscaleC()!=null &&
-    			resquestSearch.getData_protocollo_inizialeC()!=null &&
-    			resquestSearch.getData_protocollo_finaleC()!=null &&
-    			resquestSearch.getNumero_protocolloC()!=null
-    			) {
-    		responseSearch.setReturnCode(2);
-    		responseSearch.setReasonCode("Inserire almeno un campo");
-    	}
-    	return domandaDao.findDomandeByCognomeAndNome(resquestSearch);
-	}*/
+
     
-    public DomandaRequestSearch getDomande(DomandaRequestSearch resquestSearch) {
+    public DomandaResponseSearch getDomande(DomandaRequestSearch resquestSearch) {
 		 List<Domande> findDomandeByCognomeAndNome = domandaDao.findDomandeByCognomeAndNome(resquestSearch);
-				
+		 DomandaResponseSearch response = new DomandaResponseSearch();
+		  
 		 for (Domande domanda : findDomandeByCognomeAndNome) {
-	
-			 resquestSearch.setCognomeC(domanda.getContraente().getCognome());
-			 resquestSearch.setNomeC(domanda.getContraente().getNome());
-			 resquestSearch.setCodice_fiscaleC(domanda.getContraente().getCodice_fiscale());
-			 resquestSearch.setNumero_protocolloC(domanda.getProtocollo());
-			 resquestSearch.setStatoC(domanda.getStato());				 	 
+			 DomandaModel dm = new DomandaModel();
+			 dm.setCognomeA(domanda.getAssegnatario().getCognome());
+			 dm.setNomeA(domanda.getAssegnatario().getNome());
+			 dm.setCognomeC(domanda.getContraente().getCognome());
+			 dm.setNomeC(domanda.getContraente().getNome());
+			 dm.setCodice_fiscaleC(domanda.getContraente().getCodice_fiscale());
+			 dm.setNumero_protocolloC(domanda.getProtocollo());
+			 dm.setStatoC(domanda.getStato());	
+			 response.getDomande().add(dm);
 		 } 
- 	return resquestSearch;
+ 	return response;
 		
 	}
 
