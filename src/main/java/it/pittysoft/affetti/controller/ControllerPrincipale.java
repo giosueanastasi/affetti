@@ -22,6 +22,8 @@ import it.pittysoft.affetti.entity.Contratti;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
+import it.pittysoft.affetti.model.ContrattoSearchRequest;
+import it.pittysoft.affetti.model.ContrattoSearchResponse;
 import it.pittysoft.affetti.model.DomandaRequest;
 import it.pittysoft.affetti.model.DomandaRequestSearch;
 import it.pittysoft.affetti.model.DomandaResponse;
@@ -153,6 +155,18 @@ public class ControllerPrincipale {
     public ResponseEntity<?> searchPosti(@RequestBody PostiRequest posti) {
         log.info("ApiController:  search posti");
         PostiResponse resource = postiService.getPosti(posti);
+        if (resource.getReturnCode()==Response.OK) {
+        	return ResponseEntity.ok(resource);
+        } else  {
+        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Errore imprevisto, contattare l'assistenza");
+		}
+	}
+	
+	@PostMapping(path = ContrattoLinks.SEARCH_CONTRATTO)
+    public ResponseEntity<?> searchContratto(@RequestBody ContrattoSearchRequest resquestSearch) {
+        log.info("ApiController:  search contratti");
+        ContrattoSearchResponse resource = contrattiService.getContratti(resquestSearch);
         if (resource.getReturnCode()==Response.OK) {
         	return ResponseEntity.ok(resource);
         } else  {

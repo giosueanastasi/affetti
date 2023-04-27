@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
 
 import lombok.Data;
 
@@ -62,10 +63,8 @@ public class Domande {
     @JoinColumn(name = "fk_posto")
     private Posti posto;
     
-    @OneToOne(mappedBy = "domanda")
+    @OneToOne(mappedBy = "domande")
+    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
     private Contratti contratto;
-    
-    
-   
 }
 

@@ -1,5 +1,8 @@
 package it.pittysoft.affetti.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -38,9 +41,6 @@ public class Contratti {
     @NotNull(message="{NotNull.Contratto.stato}")
     private String stato;
     
-    //@Column
-   // private String fk_domanda;
-    
     @Column
     private String fk_user_modifier;
     
@@ -53,5 +53,6 @@ public class Contratti {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_domanda")
     private Domande domanda;
+    private List<Domande> domande  = new ArrayList<>();
     
 }

@@ -37,19 +37,6 @@ public class PostiService {
 		 PostiResponse response = new PostiResponse();
 		 
 		 for (Posti postiFiltrati : findtPostiByLoculoAndFornice) {
-			 
-			 
-			 
-//			 Iterator iter = postiFiltrati.getDomande().iterator();
-//			 while (iter.hasNext()) {
-//				 Domande dom = (Domande) iter.next();
-//			     PostiModel pm = new PostiModel();
-//				 pm.setCognome(dom.getAssegnatario().getCognome());
-//				 pm.setNome(dom.getAssegnatario().getNome());
-//				 pm.setLoculo(postiFiltrati.getLoculo());
-//				 pm.setFornice(postiFiltrati.getFornice());
-//				 response.getPosti().add(pm);
-//			 }
 
 			 postiFiltrati.getDomande().size();
 			
