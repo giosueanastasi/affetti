@@ -22,9 +22,10 @@ export class ContraentiModelComponent  {
 
 
   saveContraente() {
+    debugger;
     this.appService.saveContraente(this.contraente).pipe().subscribe(data => {
       this.save.emit(data);
-      $('#contranetiModal').modal('hide');
+      $('#contraentiModal').modal('hide');
     }, error => {
       this.errorMessage = "Errore imprevisto, contattare l'assistenza";
       console.log(error);
@@ -32,6 +33,6 @@ export class ContraentiModelComponent  {
   }
   
   showContraentiModal(){
-    $('#contranetiModal').modal('show');
+    $('#contraentiModal').modal('show');
   }
 }

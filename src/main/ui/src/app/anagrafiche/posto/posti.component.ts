@@ -1,8 +1,9 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from '../../app.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import {  Posto1 } from 'src/app/app-state/models';
 
 
 @Component({
@@ -11,20 +12,20 @@ import { Subject } from 'rxjs';
   styleUrls: ['./posti.component.css']
 })
 
-export class PostiComponent implements OnInit, OnDestroy {
+export class PostiComponent implements OnInit {
 
-constructor(private appService: AppService) {}
-
+  
 title = 'angular-nodejs-example';
 
 postoForm = new FormGroup({
-  id: new FormControl('', Validators.nullValidator && Validators.required),
-  loculo: new FormControl('', Validators.nullValidator && Validators.required),
-  fornice: new FormControl('', Validators.nullValidator && Validators.required),
-  data_insert: new FormControl('', Validators.nullValidator),
-  data_update: new FormControl('', Validators.nullValidator),
-  tipo: new FormControl('', Validators.nullValidator && Validators.required),
-  fk_user_modifier: new FormControl('', Validators.nullValidator),
+  loculo: new FormControl('', Validators.nullValidator),
+  fornice: new FormControl('', Validators.nullValidator),
+  stato: new FormControl('', Validators.nullValidator),
+  data_inizio: new FormControl('', Validators.nullValidator),
+  data_scadenza: new FormControl('', Validators.nullValidator),
+
+  nomeAss: new FormControl('', Validators.nullValidator),
+  cognomeAss: new FormControl('', Validators.nullValidator),
 
 });
 
@@ -33,15 +34,29 @@ postoCount = 0;
 
 destroy$: Subject<boolean> = new Subject<boolean>();
 
-onSubmit() {
-  this.appService.addPosto(this.postoForm.value, this.postoCount + 1).pipe(takeUntil(this.destroy$)).subscribe(data => {
-    console.log('message::::', data);
-    this.postoCount = this.postoCount + 1;
-    console.log(this.postoCount);
-    this.postoForm.reset();
-    this.getAllPosti();
-  });
-}
+posto1: Posto1 = new Posto1();
+ errorMessage: string = "";
+
+ @Output() save =  new EventEmitter<any>();
+ constructor(private appService: AppService) { }
+
+ filtraPosti() {
+  let postoFiltrato = new Posto1();
+  postoFiltrato.loculo = this.postoForm.controls['loculo'].value;
+  postoFiltrato.fornice = this.postoForm.controls['fornice'].value;
+  postoFiltrato.stato = this.postoForm.controls['stato'].value;
+  postoFiltrato.data_inizio = this.postoForm.controls['data_inizio'].value;
+  postoFiltrato.data_scadenza = this.postoForm.controls['data_scadenza'].value;
+  postoFiltrato.nome = this.postoForm.controls['nomeAss'].value;
+  postoFiltrato.cognome = this.postoForm.controls['cognomeAss'].value;
+
+
+   this.appService.cercaPosti(postoFiltrato).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+     this.postoCount =data.length;
+     this.posti = data.posti;
+     });
+ }
+
 
 getAllPosti() {
   this.appService.getPosti().pipe(takeUntil(this.destroy$)).subscribe((posti: any[]) => {
@@ -50,19 +65,9 @@ getAllPosti() {
   });
 }
 
-ngOnDestroy() {
-  this.destroy$.next(true);
-  this.destroy$.unsubscribe();
-}
 
-
-
-
-/*
-@Input() posti: any[];
-*/
 ngOnInit() {
-  console.log('esegui all posto on init');
+  console.log('esegui all posto1 on init');
   this.getAllPosti();
   }
 

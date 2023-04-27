@@ -113,6 +113,7 @@ CREATE TABLE domande (
 	protocollo varchar(10) NOT NULL,
 	data_protocollo date NOT NULL,
 	stato varchar(20) NOT NULL,
+	tipologia varchar(25) NOT NULL,
 	fk_posto int NOT NULL,
 	fk_assegnatario int NOT NULL,
 	fk_contraente int NOT NULL,
@@ -126,10 +127,10 @@ CREATE TABLE domande (
 	FOREIGN key(fk_contraente) references contraenti (id)
 	);
 	
-  INSERT INTO domande (protocollo,data_protocollo,stato,fk_posto,fk_assegnatario,fk_contraente,fk_user_modifier ,data_insert,data_update) VALUES
-  (506,'2023-09-25','in lavorazione',2,1,3,2, '2023-09-25','2023-09-25'),
-  (204, '2023-03-04','eseguito',1,2,1,3,'2023-03-04','2020-02-8'),
-  (890, '2023-04-8', 'sto elaborando',3,3,2,1, '2023-04-8','2023-04-8'); 
+  INSERT INTO domande (protocollo,data_protocollo,stato, tipologia,fk_posto,fk_assegnatario,fk_contraente,fk_user_modifier ,data_insert,data_update) VALUES
+  (506,'2023-09-25','in lavorazione','louculo',2,1,3,2, '2023-09-25','2023-09-25'),
+  (204, '2023-03-04','eseguito','tenuta a disposizione',1,2,1,3,'2023-03-04','2020-02-8'),
+  (890, '2023-04-8', 'sto elaborando','loculo',3,3,2,1, '2023-04-8','2023-04-8'); 
   
 	
 	

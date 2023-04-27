@@ -3,7 +3,7 @@
         <div class="modal-content">
             <form #f="ngForm" >
                  <div class="modal-header">
-                    <h5 class="modal-title"> Cerca Posto</h5>
+                    <h2 class="modal-title"> Cerca Posto</h2>
                     <button class="btn-close" data-bs-dismiss="modal"></button>
                  </div>
                  <div class="modal-body">
@@ -12,7 +12,7 @@
                         <strong>Error!</strong>{{errorMessage}}
                     </div>
 
-                    <h6>Dati posto </h6>
+                    <h3>Dati posto </h3>
                     <div class="form-group">
                         <label for="loculo">loculo</label>
                         <input 
@@ -42,7 +42,7 @@
                         </div>
                     </div>
 
-                    <h6>Assegnatario </h6>
+                    <h3>Assegnatario </h3>
                     <div class="form-group ">
                         <label for="nome">Nome</label>
                         <input 
@@ -77,9 +77,9 @@
 
                 <div class="modal-footer">
 
-                <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">svuota</button>
-                  <button class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-                  <button (click)="filtraPosti(posto1)">Cerca</button>
+                    <button input type="reset" value="cancella" class="btn btn-secondary" data-bs-dismiss="modal">svuota</button>
+                    <button class="btn btn-danger" data-bs-dismiss="modal">Chiudi</button>
+                  <button class="btn btn-primary"(click)="filtraPosti(posto1)">Cerca</button>
                 </div>
           </form>
           <h2>Posti Liberi</h2>
@@ -91,7 +91,7 @@
               <th>loculo</th>
               <th>fornice</th>
               <th>Nome</th>
-
+              <th>Cognome</th>
               <th>Scadenza</th>
             </tr>
           </thead>
@@ -102,13 +102,14 @@
               <td>{{postoTab.stato}}</td>
               <td>{{postoTab.loculo}}</td>
               <td>{{postoTab.fornice}}</td>
-              <td>{{postoTab.nome.cognome}}</td>
+              <td>{{postoTab.nome}}</td>
+              <td>{{postoTab.cognome}}</td>
               
               <td>{{postoTab.scadenza}}</td>
             </tr>
             </tbody>
           </table>
-          <button (click)="assegnaPosto(posti)">Seleziona</button>
+          <button class="btn btn-primary" (click)="assegnaPosto(posti)">Seleziona</button>
       </div>
   </div>
 </div>

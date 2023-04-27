@@ -42,14 +42,6 @@ public class Domande {
     private String stato;
         
     
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fk_contraente")
-    private Contraenti contraente;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fk_assegnatario")
-    private Assegnatari assegnatario;
-    
     @Column
     private Long fk_user_modifier;
     
@@ -62,6 +54,15 @@ public class Domande {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_posto")
     private Posti posto;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_assegnatario")
+    private Assegnatari assegnatario;
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_contraente")
+    private Contraenti contraente;
+    
     
     @OneToOne(mappedBy = "domande")
     @Cascade(value = org.hibernate.annotations.CascadeType.ALL)

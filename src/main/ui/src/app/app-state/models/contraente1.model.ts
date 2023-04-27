@@ -2,7 +2,7 @@ export class Contraente1 {
 	nome: String;
 	cognome: String;
 	codice_fiscale: String;
-	protocollo: String;
+	protocolloC: String;
 	comune_residenza: String;
 	provincia_residenza: String;
 	via_residenza: String;

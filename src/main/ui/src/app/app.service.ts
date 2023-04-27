@@ -25,6 +25,11 @@ export class AppService {
 	return this.http.post(this.rootURL + '/user', user);
   }
 
+
+  cercaUser(user: any) {
+    return this.http.post(this.rootURL + '/search_user', user);
+  }
+
   cercaPosti(posti1: any) {
     return this.http.post(this.rootURL + '/search_posti',posti1);
   }
@@ -39,6 +44,7 @@ export class AppService {
 
   addPosto(posto: any, id: number) {
 	posto.id = id;
+  debugger;
 	return this.http.post(this.rootURL + '/posto', posto);
   }
 
@@ -57,6 +63,7 @@ export class AppService {
 
   addContraente(contraente: any, id: number) {
     contraente.id = id;
+    debugger;
     return this.http.post(this.rootURL + '/contraente', contraente);
   }
 

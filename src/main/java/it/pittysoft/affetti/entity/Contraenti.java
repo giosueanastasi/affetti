@@ -94,4 +94,6 @@ public class Contraenti {
     @OneToMany(mappedBy = "contraente")
     private List<Domande> domande  = new ArrayList<>();
 
+    @OneToMany(mappedBy = "contraente")
+    private List<Domande> domande  = new ArrayList<>();
 }
