@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.stereotype.Component;
 
 import it.pittysoft.affetti.entity.Users;
+import it.pittysoft.affetti.model.UserRequest;
+import it.pittysoft.affetti.model.UserResponse;
 import it.pittysoft.affetti.repository.UsersRepository;
 
 
@@ -19,6 +21,12 @@ public class UsersService {
 
     public List<Users> getUsers() {
         return usersRepository.findAll();
+    }
+    
+    public UserResponse getUsers(UserRequest user) {
+    	UserResponse response = new UserResponse();
+    	response.setUtenti(usersRepository.findAll());
+        return response;
     }
     
     public Users saveUser(Users users) {

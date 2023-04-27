@@ -1,7 +1,7 @@
 <div class="modal fade" id="contraentiModal" tabIndex="-1">
     <div class="modal-dialog">
         <div class="modal-content">
-            <form #f="ngForm" (ngSubmit)="f.form.valid && saveContraente()">
+            <form #f="ngForm" >
                  <div class="modal-header">
                     <h4 class="modal-title">Contraente</h4>
                     <button class="btn-close" data-bs-dismiss="modal"></button>
@@ -253,7 +253,7 @@
 
                   <div class="modal-footer">
                     <button class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
-                    <button class="btn btn-primary" type="submit">Salva modifiche</button></div>
+                    <button class="btn btn-primary" (click)="saveContraente()">Salva modifiche</button></div>
             </form>
         </div>
     </div>

@@ -34,8 +34,13 @@ posto1: Posto1 = new Posto1();
  @Output() save =  new EventEmitter<any>();
  constructor(private appService: AppService) { }
 
- filtraPosti(postoForm: Posto1) {
-   this.appService.cercaPosti(postoForm).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+ filtraPosti() {
+  let postoFiltrato = new Posto1();
+  postoFiltrato.loculo = this.postoForm.controls['loculo'].value;
+  postoFiltrato.fornice = this.postoForm.controls['fornice'].value;
+  postoFiltrato.stato = this.postoForm.controls['stato'].value;
+
+   this.appService.cercaPosti(postoFiltrato).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
      this.postoCount =data.length;
      this.posti = data.posti;
      });

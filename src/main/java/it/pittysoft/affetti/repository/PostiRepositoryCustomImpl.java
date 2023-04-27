@@ -43,22 +43,25 @@ public class PostiRepositoryCustomImpl implements PostiRepositoryCustom {
 		 * loculo fornice data inizio e data fine  stato*/
 		
 		BooleanBuilder builder = new BooleanBuilder();
+		
+		
+		posti.setData_inizio("2058-04-07");
+		posti.setData_scadenza("2058-04-09");
+		
 
-		if(posti.getFornice()!=null) {
+		if(posti.getFornice()!=null && !posti.getFornice().isEmpty()) {
 			builder.and(qPosti.fornice.upper().like(posti.getFornice().toUpperCase()));
 		}
-		if(posti.getLoculo()!=null) {
+		if(posti.getLoculo()!=null && !posti.getLoculo().isEmpty()) {
 			builder.and(qPosti.loculo.upper().like(posti.getLoculo().toUpperCase()));
 		}
-		if(posti.getStato()!=null) {
+		if(posti.getStato()!=null&& !posti.getStato().isEmpty()) {
 			builder.and(qDomande.stato.upper().like(posti.getStato().toUpperCase()));
 		}
-		if(posti.getData_inizio()!=null) {
-			builder.and(qContratti.data_inizio.upper().like(posti.getData_inizio().toUpperCase()));
+		if(posti.getData_inizio()!=null && posti.getData_scadenza()!=null) {
+			builder.and(qContratti.data_scadenza.between(posti.getData_inizio(), posti.getData_scadenza()));
 		}
-		if(posti.getData_scadenza()!=null) {
-			builder.and(qContratti.data_scadenza.upper().like(posti.getData_scadenza().toUpperCase()));
-		}
+		
 		
 		
 		List<Posti> postiPlayer = query.select(qPosti)
@@ -71,5 +74,7 @@ public class PostiRepositoryCustomImpl implements PostiRepositoryCustom {
 		
 		return postiPlayer;
 	}
+	
+	
 
 }

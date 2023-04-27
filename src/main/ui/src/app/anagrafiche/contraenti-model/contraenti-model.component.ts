@@ -22,6 +22,7 @@ export class ContraentiModelComponent  {
 
 
   saveContraente() {
+    debugger;
     this.appService.saveContraente(this.contraente).pipe().subscribe(data => {
       this.save.emit(data);
       $('#contraentiModal').modal('hide');

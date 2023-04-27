@@ -30,6 +30,8 @@ import it.pittysoft.affetti.model.DomandaResponse;
 import it.pittysoft.affetti.model.PostiRequest;
 import it.pittysoft.affetti.model.PostiResponse;
 import it.pittysoft.affetti.model.Response;
+import it.pittysoft.affetti.model.UserRequest;
+import it.pittysoft.affetti.model.UserResponse;
 import it.pittysoft.affetti.service.ComuniService;
 import it.pittysoft.affetti.service.ContraentiService;
 import it.pittysoft.affetti.links.ContrattoLinks;
@@ -73,6 +75,19 @@ public class ControllerPrincipale {
         log.info("ApiController:  list users");
         List<Users> resource = usersService.getUsers();
         return ResponseEntity.ok(resource);
+    }
+	
+	@PostMapping(path = UserLinks.SEARCH_USERS)
+    public ResponseEntity<?> searchUsers(@RequestBody UserRequest user) {
+		UserResponse resource = usersService.getUsers(user);
+        if (resource.getReturnCode()==Response.OK) {
+        	return ResponseEntity.ok(resource);
+        } else  {
+        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Errore imprevisto, contattare l'assistenza");
+		}    
+	
+    
     }
 	
 	@PostMapping(path = UserLinks.ADD_USER)

@@ -1,5 +1,7 @@
 package it.pittysoft.affetti.model;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
