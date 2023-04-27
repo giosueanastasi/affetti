@@ -39,13 +39,11 @@ public class PostiRepositoryCustomImpl implements PostiRepositoryCustom {
 		QDomande qDomande = QDomande.domande;
 		QAssegnatari qAssegnatari = QAssegnatari.assegnatari;
 		QContratti qContratti = QContratti.contratti;
-		/*
-		 * loculo fornice data inizio e data fine  stato*/
+
 		
 		BooleanBuilder builder = new BooleanBuilder();
 		
-			//posti.setData_inizio("2058-04-07");
-		//	posti.setData_scadenza("2058-04-09");
+
 		
 		if(posti.getNome()!=null && !posti.getNome().isEmpty()) {
 			builder.and(qAssegnatari.nome.upper().like(posti.getNome().toUpperCase()));
