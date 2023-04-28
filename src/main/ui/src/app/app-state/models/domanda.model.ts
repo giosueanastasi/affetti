@@ -3,6 +3,7 @@ export class Domanda {
   protocollo: string;
   data_protocollo: string;
   stato: string;
+  tipologia: string;
   fk_posto: number;
   fk_assegnatario: number;
   fk_contraente: number;

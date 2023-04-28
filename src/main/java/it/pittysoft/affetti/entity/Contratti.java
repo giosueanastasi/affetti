@@ -53,6 +53,5 @@ public class Contratti {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_domanda")
     private Domande domanda;
-    private List<Domande> domande  = new ArrayList<>();
     
 }

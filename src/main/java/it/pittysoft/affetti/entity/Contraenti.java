@@ -89,11 +89,7 @@ public class Contraenti {
     
     @Column
     private String data_update;
-    
-    
-    @OneToMany(mappedBy = "contraente")
-    private List<Domande> domande  = new ArrayList<>();
-
+        
     @OneToMany(mappedBy = "contraente")
     private List<Domande> domande  = new ArrayList<>();
 }

@@ -1,14 +1,15 @@
 export class Contraente1 {
-	nome: String;
-	cognome: String;
-	codice_fiscale: String;
-	protocolloC: String;
-	comune_residenza: String;
-	provincia_residenza: String;
-	via_residenza: String;
-	nomeAss:String;
-	cognomeAss:String;
-	contratto:String;
+	id: string;
+	nome: string;
+	cognome: string;
+	codice_fiscale: string;
+	protocolloC: string;
+	comune_residenza: string;
+	provincia_residenza: string;
+	via_residenza: string;
+	nomeAss:string;
+	cognomeAss:string;
+	contratto:string;
 	checked: boolean;
 
 }

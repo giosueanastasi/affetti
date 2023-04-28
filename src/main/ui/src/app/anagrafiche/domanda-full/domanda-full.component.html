@@ -17,12 +17,14 @@
           <input ng-model="answers.dob" type="date" class="form-control" formControlName="data_protocollo" id="data_protocollo" aria-describedby="data_protocollolHelp" >
         </div>
 
-        <div class="form-group col-sm-3"  ><button  class="btn btn-info" (click)="cercaContraente()" >Cerca Contraente</button></div>
-        <h4>Tipologia </h4>
+        <div class="form-group col-sm-4"  ></div>
+        <br/>
+        <br/>
+        <br/>
 
 
-
-        <div class="form-check" class="form-group col-sm-3">
+        <label class="col-sm-1 "for="Data">Tipologia</label>
+        <div class="form-check" class="form-group col-sm-1">
           <input
             id="loculo"
             type="radio"
@@ -42,55 +44,58 @@
           />
           <label class="custom-control-label" for="tenuta_a_disposizione">Tenuta a disposizione</label>
         </div>
-
-
            <div class="form-group col-sm-2"  ></div>
-           <div class="form-group col-sm-3"><button class="btn btn-info" (click)="creaContraente()">Nuovo Contraente</button></div>
+           <div class="form-group col-sm-2"  ></div>
+           <div class="form-group col-sm-1"  ></div>
+           <div class="form-group col-sm-2"><button class="btn btn-info" (click)="creaContraente()">Nuovo Contraente</button></div>
             
            <h4>Dati Contraente</h4>
             <label class="col-sm-1 "for="nome">Nome</label>
             <div class="form-group col-sm-3">
-              <input  type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp"  readonly>
+              <input  type="text" class="form-control notEdit" formControlName="fk_contraente" id="fk_contraente" >
+              <input  type="text" class="form-control notEdit" formControlName="nome" id="nome" aria-describedby="nomelHelp"  readonly>
             </div>
             <label class="col-sm-1 "for="cognome">Cognome</label>
             <div class="form-group col-sm-4">
-              <input type="text" class="form-control" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp"  readonly>
+              <input type="text" class="form-control notEdit" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp"  readonly>
             </div>
+            <div class="form-group col-sm-1"  ></div>
+            <div class="form-group col-sm-2"  ><button  class="btn btn-info" (click)="cercaContraente()" >Cerca Contraente</button></div>
 
             <h4>Dati Nascita</h4>
             <label class="col-sm-1 "for="comune_nascita">Comune</label>
             <div class="form-group col-sm-3">
-              <input type="text" class="form-control" formControlName="comune_nascita" id="comune_nascita" aria-describedby="comune_nascitalHelp"  readonly>
+              <input type="text" class="form-control notEdit" formControlName="comune_nascita" id="comune_nascita" aria-describedby="comune_nascitalHelp"  readonly>
             </div>
             <label class="col-sm-1 "for="provincia_nascita">Provincia</label>
             <div class="form-group col-sm-1">
-              <input type="text" class="form-control" formControlName="provincia_nascita" id="provincia_nascita" aria-describedby="provincia_nascitalHelp"  readonly>
+              <input type="text" class="form-control notEdit" formControlName="provincia_nascita" id="provincia_nascita" aria-describedby="provincia_nascitalHelp"  readonly>
             </div>
             <label class="col-sm-1 "for="stato_nascita">Stato</label>
             <div class="form-group col-sm-2">
-              <input type="text" class="form-control" formControlName="stato_nascita" id="stato_nascita" aria-describedby="stato_nascitalHelp"  readonly>
+              <input type="text" class="form-control notEdit" formControlName="stato_nascita" id="stato_nascita" aria-describedby="stato_nascitalHelp"  readonly>
             </div>
             <label class="col-sm-1 "for="data_nascita">Data</label>
             <div class="form-group col-sm-2">
-              <input  type="text" class="form-control" formControlName="data_nascita" id="data_nascita" aria-describedby="data_nascitalHelp"  readonly>
+              <input  type="text" class="form-control notEdit" formControlName="data_nascita" id="data_nascita" aria-describedby="data_nascitalHelp"  readonly>
             </div>
 
             <h4>Dati Residenza</h4>
             <label class="col-sm-1 "for="comune_residenza">Comune</label>
             <div class="form-group col-sm-3">
-              <input type="text" class="form-control" formControlName="comune_residenza" id="comune_residenza" aria-describedby="comune_residenzalHelp"  readonly>
+              <input type="text" class="form-control notEdit" formControlName="comune_residenza" id="comune_residenza" aria-describedby="comune_residenzalHelp"  readonly>
             </div>
             <label class="col-sm-1 "for="provincia_residenza">Provincia</label>
             <div class="form-group col-sm-1">
-              <input type="text" class="form-control" formControlName="provincia_residenza" id="provincia_residenza" aria-describedby="provincia_residenzalHelp"  readonly>
+              <input type="text" class="form-control notEdit" formControlName="provincia_residenza" id="provincia_residenza" aria-describedby="provincia_residenzalHelp"  readonly>
             </div>
             <label class="col-sm-1 "for="via_residenza">Indirizzo</label>
             <div class="form-group col-sm-3">
-              <input type="text" class="form-control" formControlName="via_residenza" id="via_residenza" aria-describedby="via_residenzalHelp"  readonly>
+              <input type="text" class="form-control notEdit" formControlName="via_residenza" id="via_residenza" aria-describedby="via_residenzalHelp"  readonly>
             </div>
             <label class="col-sm-1 "for="civico_residenza">Civico</label>
             <div class="form-group col-sm-1">
-              <input type="text" class="form-control" formControlName="civico_residenza" id="civico_residenza" aria-describedby="civico_residenzalHelp"  readonly>
+              <input type="text" class="form-control notEdit" formControlName="civico_residenza" id="civico_residenza" aria-describedby="civico_residenzalHelp"  readonly>
             </div>
 
             <br>
@@ -98,17 +103,17 @@
             <br>
             <label class="col-sm-1 "for="cap_residenza">Cap</label>
             <div class="form-group col-sm-2">
-              <input type="text" class="form-control" formControlName="cap_residenza" id="cap_residenza" aria-describedby="cap_residenzalHelp"  readonly>
+              <input type="text" class="form-control notEdit" formControlName="cap_residenza" id="cap_residenza" aria-describedby="cap_residenzalHelp"  readonly>
             </div>
 
             <h4>Altri Dati </h4>
             <label class="col-sm-1 "for="codice_fiscale">Cod. Fiscale</label>
             <div class="form-group col-sm-4">
-              <input type="text" class="form-control" formControlName="codice_fiscale" id="codice_fiscale" aria-describedby="codice_fiscalelHelp"  readonly>
+              <input type="text" class="form-control notEdit" formControlName="codice_fiscale" id="codice_fiscale" aria-describedby="codice_fiscalelHelp"  readonly>
             </div>
             <label class="col-sm-1 "for="email">Email</label>
             <div class="form-group col-sm-4">
-              <input type="text" class="form-control" formControlName="email" id="email" aria-describedby="emaillHelp"  readonly>
+              <input type="text" class="form-control notEdit" formControlName="email" id="email" aria-describedby="emaillHelp"  readonly>
             </div>
             <div class="col-sm-2 mrgnbtm"></div>
 
@@ -117,7 +122,7 @@
             <br>
             <label class="col-sm-1 "for="note">Note</label>
               <div class="form-group col-lg">
-              <textarea class="form-control" formControlName="note" id="note" rows="3" aria-describedby="notelHelp" readonly ></textarea>
+              <textarea class="form-control" formControlName="note" id="note" rows="3" aria-describedby="notelHelp"  ></textarea>
             </div>
 
 

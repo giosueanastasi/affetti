@@ -24,6 +24,7 @@ export class DomandaFullComponent  {
   constructor(private appService: AppService) {}
 
   domandaFullForm = new FormGroup({
+    fk_contraente: new FormControl('', Validators.nullValidator && Validators.required),
     nome: new FormControl('', Validators.nullValidator && Validators.required),
     cognome: new FormControl('', Validators.nullValidator && Validators.required),
     comune_nascita: new FormControl('', Validators.nullValidator && Validators.required),
@@ -37,7 +38,7 @@ export class DomandaFullComponent  {
     civico_residenza: new FormControl('', Validators.nullValidator && Validators.required),
     cap_residenza: new FormControl('', Validators.nullValidator && Validators.required),
     codice_fiscale: new FormControl('', Validators.nullValidator && Validators.required),
-    email: new FormControl('', Validators.nullValidator ),
+    email: new FormControl('',  Validators.nullValidator),
     note: new FormControl('', Validators.nullValidator ),
 
     protocollo: new FormControl('', Validators.nullValidator && Validators.required),
@@ -79,6 +80,7 @@ export class DomandaFullComponent  {
   }
   
   saveContraenteWatcher(contraente: Contraente){
+    this.domandaFullForm.controls['fk_contraente'].setValue((contraente.id).toString());
     this.domandaFullForm.controls['nome'].setValue((contraente.nome).toString());
     this.domandaFullForm.controls['cognome'].setValue((contraente.cognome).toString());
     this.domandaFullForm.controls['comune_nascita'].setValue(contraente.comune_nascita.toString());
@@ -100,7 +102,6 @@ export class DomandaFullComponent  {
     this.domandaFullForm.controls['fornice'].setValue(posto.fornice);
     this.domandaFullForm.controls['nomeA'].setValue(posto.nome);
     this.domandaFullForm.controls['cognomeA'].setValue(posto.cognome);
-    
   }
 
   assegnaPostoWatcher(posti: any[]){
@@ -130,7 +131,7 @@ export class DomandaFullComponent  {
   }
 
   assegnaContraenteWatcher(contraenti: any[]){
-
+    
     let nome;
     let cognome;
     let codice_fiscale;
@@ -145,6 +146,7 @@ export class DomandaFullComponent  {
     let cap_residenza;
     let email;
     let note;
+    let fk_contraente;
 
  
 
@@ -167,6 +169,7 @@ export class DomandaFullComponent  {
         cap_residenza = value.cap_residenza;
         email = value.email;
         note = value.note;
+        fk_contraente = value.id;
 
       }
     });
@@ -184,6 +187,7 @@ export class DomandaFullComponent  {
     this.domandaFullForm.controls['codice_fiscale'].setValue(codice_fiscale);
     this.domandaFullForm.controls['email'].setValue(email);
     this.domandaFullForm.controls['note'].setValue(note);
+    this.domandaFullForm.controls['fk_contraente'].setValue(fk_contraente);
 
   
     

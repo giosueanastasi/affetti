@@ -107,7 +107,8 @@ export class AppService {
     domanda.id = domandaFullForm.id;
     domanda.protocollo = domandaFullForm.protocollo;
     domanda.data_protocollo = domandaFullForm.data_protocollo;
-    domanda.stato = 'bozza';
+    domanda.stato = 'BOZZA';
+    domanda.tipologia = domandaFullForm.tipologia;
     domanda.fk_posto = domandaFullForm.fk_posto;
     domanda.fk_contraente = domandaFullForm.fk_contraente;
 
@@ -118,6 +119,8 @@ export class AppService {
     df.comuneAss = domandaFullForm.comuneAss;
     df.provAss = domandaFullForm.provAss;
     df.dataDecesso = domandaFullForm.dataDecesso;
+    df.loculo = domandaFullForm.loculo;
+    df.fornice = domandaFullForm.fornice;
 
 	return this.http.post(this.rootURL + '/domandaFull', df);
   }

@@ -4,6 +4,7 @@ import lombok.Data;
 
 @Data
 public class ContraentiModel {
+	private String id;
 	private String nome;
 	private String cognome;
 	private String codice_fiscale;

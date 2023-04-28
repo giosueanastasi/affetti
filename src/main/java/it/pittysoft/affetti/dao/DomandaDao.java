@@ -28,11 +28,19 @@ import it.pittysoft.affetti.model.DomandaRequestSearch;
 import it.pittysoft.affetti.model.PostiRequest;
 import it.pittysoft.affetti.repository.AssegnatariRepository;
 import it.pittysoft.affetti.repository.DomandeRepository;
+import it.pittysoft.affetti.repository.PostiRepository;
 
 @Component
 public class DomandaDao {
 	@Autowired
 	private DomandeRepository domandeRepository;
+	
+	@Autowired
+	private PostiRepository postiRepository;
+	
+	@Autowired
+	private AssegnatariRepository assegnatariRepository;
+
 
 	@Autowired
 	EntityManager em;
@@ -82,7 +90,11 @@ public class DomandaDao {
 	
 	
 	@Transactional
-	public void addDomandaFull(Domande domanda, Assegnatari assegnatario) {
+	public void addDomandaFull(Domande domanda, Assegnatari assegnatario, Posti posto) {
+		List<Posti> posti = postiRepository.findByForniceAndLoculoOrderById(posto.getFornice(),posto.getLoculo());
+		
+		//WARN fare tutti i controlli per vetire errari
+		domanda.setPosto(posti.get(0));
 		domanda.setAssegnatario(assegnatario);
 		domandeRepository.save(domanda);
 	}

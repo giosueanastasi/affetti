@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from '../../app.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { User } from 'src/app/app-state/models';
+import { UserModelComponent } from '../user-model/user-model.component';
 
 
 
@@ -13,9 +15,13 @@ import { Subject } from 'rxjs';
 })
 export class UsersComponent implements OnInit, OnDestroy {
 
+  selectedUser: User = new User();
+
   constructor(private appService: AppService) {}
 
   title = 'angular-nodejs-example';
+
+  @ViewChild(UserModelComponent) child: UserModelComponent | undefined;
 
   userForm = new FormGroup({
     username: new FormControl('', Validators.nullValidator && Validators.required),
@@ -45,6 +51,16 @@ export class UsersComponent implements OnInit, OnDestroy {
     });
   }
 
+  createUserRequest(){
+    this.selectedUser = new User();
+    this.child?.showUserModal();
+  }
+
+  editUserRequest(item: User){
+    this.selectedUser = Object.assign({},item);
+    this.child?.showUserModal();
+  }
+
 
 
 
@@ -68,4 +84,12 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.getAllUsers();
     }
 
+    saveUserWatcher(user: User){
+      let userIndex = this.users.findIndex(item => item.username === user.username);
+      if(userIndex !==-1){
+        this.users[userIndex] = user;
+      }else{
+        this.users.push(user);
+      }
+    }
 }

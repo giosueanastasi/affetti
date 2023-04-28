@@ -34,6 +34,7 @@ import { DomandaFullComponent } from './anagrafiche/domanda-full/domanda-full.co
 import { ContraentiModelComponent } from './anagrafiche/contraenti-model/contraenti-model.component';
 import { PostiModelComponent } from './anagrafiche/posti-model/posti-model.component';
 import { CercacontraentiModelComponent } from './anagrafiche/cercacontraenti-model/cercacontraenti-model.component';
+import { UserModelComponent } from './anagrafiche/user-model/user-model.component';
 
 
 
@@ -66,6 +67,7 @@ import { CercacontraentiModelComponent } from './anagrafiche/cercacontraenti-mod
     DomandaFullComponent,
     PostiModelComponent,
     CercacontraentiModelComponent,
+    UserModelComponent,
     
 
     

@@ -37,28 +37,28 @@ public class ContrattiService {
 		 List<Contratti> findtContrattiByNomeAndCognome = contrattiRepository.findtContrattiByNomeAndCognome(resquestSearch);
 		 ContrattoSearchResponse response = new ContrattoSearchResponse();
 		 
-		 for (Contratti contrattiFiltrati : findtContrattiByNomeAndCognome) {
-
-			contrattiFiltrati.getDomande().size();
-			
-			 for (Domande domanda : contrattiFiltrati.getDomande()) {
-				 ContrattoModel cm = new ContrattoModel();
-				 
-				 cm.setCognomeA(domanda.getAssegnatario().getCognome());
-				 cm.setNomeA(domanda.getAssegnatario().getNome());
-				 cm.setCognomeC(domanda.getContraente().getCognome());
-				 cm.setNomeC(domanda.getContraente().getNome());
-				 cm.setCodice_fiscaleC(domanda.getContraente().getCodice_fiscale());
-				 cm.setProtocollo(domanda.getContratto().getProtocollo());
-				 cm.setStato(domanda.getContratto().getStato());
-				 cm.setData_inizio(domanda.getContratto().getData_inizio());
-				 cm.setData_scadenza(domanda.getContratto().getData_scadenza());
-				 response.getContratti().add(cm);
-				
-			 }
-
-			 
-		 }
+//		 for (Contratti contrattiFiltrati : findtContrattiByNomeAndCognome) {
+//
+//			contrattiFiltrati.getDomande().size();
+//			
+//			 for (Domande domanda : contrattiFiltrati.getDomande()) {
+//				 ContrattoModel cm = new ContrattoModel();
+//				 
+//				 cm.setCognomeA(domanda.getAssegnatario().getCognome());
+//				 cm.setNomeA(domanda.getAssegnatario().getNome());
+//				 cm.setCognomeC(domanda.getContraente().getCognome());
+//				 cm.setNomeC(domanda.getContraente().getNome());
+//				 cm.setCodice_fiscaleC(domanda.getContraente().getCodice_fiscale());
+//				 cm.setProtocollo(domanda.getContratto().getProtocollo());
+//				 cm.setStato(domanda.getContratto().getStato());
+//				 cm.setData_inizio(domanda.getContratto().getData_inizio());
+//				 cm.setData_scadenza(domanda.getContratto().getData_scadenza());
+//				 response.getContratti().add(cm);
+//				
+//			 }
+//
+//			 
+//		 }
 		return response;
 	}
 

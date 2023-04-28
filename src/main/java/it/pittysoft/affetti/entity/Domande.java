@@ -51,6 +51,9 @@ public class Domande {
     @Column
     private String data_update;
     
+    @Column
+    private String tipologia;
+    
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_posto")
     private Posti posto;
@@ -64,8 +67,7 @@ public class Domande {
     private Contraenti contraente;
     
     
-    @OneToOne(mappedBy = "domande")
-    @Cascade(value = org.hibernate.annotations.CascadeType.ALL)
+    @OneToOne(mappedBy = "domanda")
     private Contratti contratto;
 }
 

@@ -73,7 +73,7 @@ public class ContrattiRepositoryCustomImpl implements ContrattiRepositoryCustom 
 		
 		List<Contratti> contrattiPlayer = query.select(qContratti)
 		                               .from(qContratti)
-		                               .innerJoin(qContratti.domande,qDomande)
+//		                               .innerJoin(qContratti.domande,qDomande)
 		                               .innerJoin(qDomande.contraente,qContraenti)
 		                               .innerJoin(qDomande.assegnatario,qAssegnatari)
 		                               .where(builder

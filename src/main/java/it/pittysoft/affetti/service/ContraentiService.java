@@ -43,6 +43,7 @@ public class ContraentiService {
 			
 			 for (Domande domanda : contraentiFiltrati.getDomande()) {
 				 ContraentiModel pm = new ContraentiModel();
+				 pm.setId(contraentiFiltrati.getId().toString());
 				 pm.setNome(contraentiFiltrati.getNome());
 				 pm.setCognome(contraentiFiltrati.getCognome());
 				 pm.setCodice_fiscale(contraentiFiltrati.getCodice_fiscale());

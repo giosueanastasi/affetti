@@ -81,7 +81,13 @@ public class DomandeService {
     		assegnatario.setFk_user_modifier("1");
     		assegnatario.setData_insert(null);//now
     		assegnatario.setData_update(null);
-    		domandaDao.addDomandaFull(request.getDomanda(), assegnatario);
+    		
+    		Posti posto = new Posti();
+    		posto.setLoculo(request.getLoculo());
+    		posto.setFornice(request.getFornice());
+    		
+    		
+    		domandaDao.addDomandaFull(request.getDomanda(), assegnatario, posto);
     		
     	}else {
     		//errore, mancano i dati dell'assegnatario

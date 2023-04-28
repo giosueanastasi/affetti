@@ -6,5 +6,6 @@ export class Posto1 {
   cognome: string;
   data_scadenza: string;
   data_inizio: string;
+  id: string;
   checked: boolean;
 }
