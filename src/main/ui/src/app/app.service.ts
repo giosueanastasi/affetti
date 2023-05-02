@@ -68,6 +68,10 @@ export class AppService {
     return this.http.post(this.rootURL + '/contraente', contraente);
   }
 
+  saveUser(user: any) {
+    return this.http.post(this.rootURL + '/user', user);
+  }
+
   saveContraente(contraente: any) {
     return this.http.post(this.rootURL + '/contraente', contraente);
   }

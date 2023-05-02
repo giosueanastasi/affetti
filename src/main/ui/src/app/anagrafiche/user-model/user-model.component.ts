@@ -24,7 +24,7 @@ export class UserModelComponent {
 
   saveUser() {
     debugger;
-    this.appService.saveContraente(this.user).pipe().subscribe(data => {
+    this.appService.saveUser(this.user).pipe().subscribe(data => {
       this.save.emit(data);
       $('#userModal').modal('hide');
     });
