@@ -57,6 +57,7 @@ export class UsersComponent implements OnInit, OnDestroy {
   }
 
   editUserRequest(item: User){
+    debugger;
     this.selectedUser = Object.assign({},item);
     this.child?.showUserModal();
   }

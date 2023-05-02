@@ -1,5 +1,7 @@
 package it.pittysoft.affetti.model;
 
+
+
 import java.util.Date;
 
 import lombok.Data;
@@ -12,8 +14,8 @@ public class PostiRequest extends Request{
 	private String fornice;
 	private String scadenza;
 	private String stato;
-	private String data_inizio;
-	private String data_scadenza;
+	private Date data_inizio;
+	private Date data_scadenza;
 	
 	
 }

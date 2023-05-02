@@ -1,6 +1,6 @@
 import { Domanda } from "./domanda.model";
 
-export class DomandaSearch {
+export class ContrattiSearch {
     nome: string;
 	cognome: string;
 	codiceFiscale: string;

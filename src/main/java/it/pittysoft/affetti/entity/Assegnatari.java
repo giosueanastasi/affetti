@@ -39,7 +39,7 @@ public class Assegnatari {
     private String cognome;
     
     @Column
-    private String data_decesso;
+    private Date data_decesso;
     
     @Column
     private String comune_decesso;

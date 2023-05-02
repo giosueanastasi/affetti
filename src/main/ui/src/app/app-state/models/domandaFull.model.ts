@@ -9,6 +9,7 @@ export class DomandaFull {
 	fornice: string;
 	provAss: string;
 	dataDecesso: string;
+	fkContraente: string;
 	
   }
   

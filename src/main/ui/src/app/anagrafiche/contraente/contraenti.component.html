@@ -1,44 +1,47 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-7 mrgnbtm">
+    
 
       <h2>Cerca Contraente</h2>
 
       <form [formGroup]="contraenteForm">
         <div class="row">
+          <h4>Dati</h4>
 
-          <label class="col-sm-2"for="nome">Nome</label>
-              <div class="form-group col-sm-4">
+          <label class="col-md-1"for="nome">Nome</label>
+              <div class="form-group col-md-5">
               <input type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp" >
             </div>
 
-            <label class="col-sm-2"for="cognome">Cognome</label>
-            <div class="form-group col-sm-4">
+            <label class="col-md-1"for="cognome">Cognome</label>
+            <div class="form-group col-md-5">
             <input type="text" class="form-control" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp" >
           </div>
-
-
-          <br>
-          <br>
-          <br>
-          <label class="col-sm-2" for="codice_fiscale">Cod. Fiscale</label>
-          <div class="form-group col-sm-4">
-          <input type="text" class="form-control" formControlName="codice_fiscale" id="codice_fiscale" aria-describedby="codice_fiscalelHelp" >
+        </div>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+          <label class="col-md-1" for="codice_fiscale">Cod. Fiscale</label>
+          <div class="form-group col-md-5">
+          <input type="text" class="form-control col-md-2" formControlName="codice_fiscale" id="codice_fiscale" aria-describedby="codice_fiscalelHelp" >
         </div>
   
-            <label class="col-sm-2" for="protocollo">N. Protocollo</label>
-            <div class="form-group col-sm-4">
+            <label class="col-md-1" for="protocollo">N. Protocollo</label>
+            <div class="form-group col-md-5">
             <input type="text" class="form-control" formControlName="protocollo" id="protocollo" aria-describedby="protocollolHelp" >
             </div>
             </div>
             <br>
-            <button input type="reset" value="cancella" class="btn btn-secondary me-1" data-bs-dismiss="modal">svuota</button>
-        <button class="btn btn-primary" (click)="filtraContraenti()">Cerca</button>
+            <div class="row">
+              <button class="btn btn-info col-md-2" (click)="filtraContraenti()">Cerca</button>
+              <div class="col-md-8"></div>
+              <button input type="reset" value="cancella" class="btn btn-danger col-md-2" data-bs-dismiss="modal">svuota</button>
+            </div>
       </form>
       </div>
-      <div class="col-md-4 mrgnbtm"></div>
-   </div>
+   
 
    <h2>Contraenti</h2>
    <table class="table table-bordered">
@@ -48,13 +51,10 @@
        <th>Nome</th>
        <th>Cognome</th>
        <th>Codice Fiscale</th>
-       <th>Comune Residenza</th>
-       <th>Via Residenza</th>
-       <th>Provincia Residenza</th>
-       <th>Nome Assegnatario</th>
-       <th>Cognome Assegnatario</th>
+       <th>Residenza</th>
+       <th>Assegnatario</th>
        <th>Contratto</th>
-       <th> </th>
+       <th>Dettaglio Contratto</th>
      </tr>
    </thead>
    <tbody>
@@ -63,12 +63,10 @@
        <td>{{contraentiTab.nome}}</td>
        <td>{{contraentiTab.cognome}}</td>
        <td>{{contraentiTab.codice_fiscale}}</td>
-       <td>{{contraentiTab.comune_residenza}}</td>
-       <td>{{contraentiTab.via_residenza}}</td>
-       <td>{{contraentiTab.provincia_residenza}}</td>
-       <td>{{contraentiTab.nomeAss}}</td>
-       <td>{{contraentiTab.cognomeAss}}</td>
+       <td>{{contraentiTab.comune_residenza}} - {{contraentiTab.via_residenza}} ({{contraentiTab.provincia_residenza}})</td>
+       <td>{{contraentiTab.cognomeAss}} {{contraentiTab.nomeAss}} </td>
        <td>{{contraentiTab.protocolloC}}</td>
+       <td></td>
      </tr>
      </tbody>
    </table>

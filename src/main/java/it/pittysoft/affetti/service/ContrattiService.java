@@ -1,5 +1,8 @@
 package it.pittysoft.affetti.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
@@ -37,28 +40,20 @@ public class ContrattiService {
 		 List<Contratti> findtContrattiByNomeAndCognome = contrattiRepository.findtContrattiByNomeAndCognome(resquestSearch);
 		 ContrattoSearchResponse response = new ContrattoSearchResponse();
 		 
-//		 for (Contratti contrattiFiltrati : findtContrattiByNomeAndCognome) {
-//
-//			contrattiFiltrati.getDomande().size();
-//			
-//			 for (Domande domanda : contrattiFiltrati.getDomande()) {
-//				 ContrattoModel cm = new ContrattoModel();
-//				 
-//				 cm.setCognomeA(domanda.getAssegnatario().getCognome());
-//				 cm.setNomeA(domanda.getAssegnatario().getNome());
-//				 cm.setCognomeC(domanda.getContraente().getCognome());
-//				 cm.setNomeC(domanda.getContraente().getNome());
-//				 cm.setCodice_fiscaleC(domanda.getContraente().getCodice_fiscale());
-//				 cm.setProtocollo(domanda.getContratto().getProtocollo());
-//				 cm.setStato(domanda.getContratto().getStato());
-//				 cm.setData_inizio(domanda.getContratto().getData_inizio());
-//				 cm.setData_scadenza(domanda.getContratto().getData_scadenza());
-//				 response.getContratti().add(cm);
-//				
-//			 }
-//
-//			 
-//		 }
+		 for (Contratti contratti : findtContrattiByNomeAndCognome) {
+			ContrattoModel cm = new ContrattoModel();
+			 cm.setNumeroProtocolloContratto(contratti.getProtocollo());
+			 cm.setStato(contratti.getStato());	
+			 cm.setDataProtocolloContratto(contratti.getData_inizio());
+			 cm.setDataScadenzaContratto(contratti.getData_scadenza());
+			 cm.setContraente(contratti.getDomanda().getContraente().getCognome()+ " "
+					 +contratti.getDomanda().getContraente().getNome());
+			 cm.setAssegnatario(contratti.getDomanda().getAssegnatario().getCognome()+ " "
+					 +contratti.getDomanda().getAssegnatario().getNome());
+			response.getContratti().add(cm);
+
+			 
+		 }
 		return response;
 	}
 

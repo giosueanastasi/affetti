@@ -20,6 +20,8 @@ title = 'angular-nodejs-example';
 postoForm = new FormGroup({
   loculo: new FormControl('', Validators.nullValidator),
   fornice: new FormControl('', Validators.nullValidator),
+  nome: new FormControl('', Validators.nullValidator),
+  cognome: new FormControl('', Validators.nullValidator),
   stato: new FormControl('', Validators.nullValidator),
   data_inizio: new FormControl('', Validators.nullValidator),
   data_scadenza: new FormControl('', Validators.nullValidator),

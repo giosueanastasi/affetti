@@ -4,7 +4,7 @@
             <form #f="ngForm" >
                  <div class="modal-header">
                     <h2 class="modal-title"> Cerca Posto</h2>
-                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                  </div>
                  <div class="modal-body">
 
@@ -42,6 +42,29 @@
                         </div>
                     </div>
 
+
+                    <div class="form-group">
+                        <label for="stato">stato</label>
+                        <!-- <select name="stato" id ="stato"> -->
+                        <select class="form-select" 
+                                aria-label="Default select example"
+                                type="search" 
+                                id="stato" 
+                                name="stato"
+                                class="form-control" 
+                                [(ngModel)]="posto1.stato"
+                                #stato="ngModel"
+                                
+                                >
+                        <option >-----</option>
+                        <option  value="LIBERO">Libero</option>
+                        <option  value="PRENOTATO">Prenotato</option>
+                        <option  value="OCCUPATO">Occupato</option>
+                        <option  value="DA_LIBERARE">Da Liberare</option>
+                        </select>
+                    </div>
+
+
                     <h3>Assegnatario </h3>
                     <div class="form-group ">
                         <label for="nome">Nome</label>
@@ -78,8 +101,8 @@
                 <div class="modal-footer">
 
                     <button input type="reset" value="cancella" class="btn btn-secondary" data-bs-dismiss="modal">svuota</button>
-                    <button class="btn btn-danger" data-bs-dismiss="modal">Chiudi</button>
-                  <button class="btn btn-primary"(click)="filtraPosti(posto1)">Cerca</button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Chiudi</button>
+                  <button type="button" class="btn btn-primary"(click)="filtraPosti(posto1)">Cerca</button>
                 </div>
           </form>
           <h2>Posti Liberi</h2>
@@ -109,7 +132,7 @@
             </tr>
             </tbody>
           </table>
-          <button class="btn btn-primary" (click)="assegnaPosto(posti)">Seleziona</button>
+          <button type="button" class="btn btn-primary" (click)="assegnaPosto(posti)">Seleziona</button>
       </div>
   </div>
 </div>

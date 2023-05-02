@@ -67,7 +67,7 @@ public class PostiRepositoryCustomImpl implements PostiRepositoryCustom {
 		
 		
 		
-		List<Posti> postiPlayer = query.select(qPosti)
+		List<Posti> postiPlayer = query.select(qPosti).distinct()
 		                               .from(qPosti)
 		                               .innerJoin(qPosti.domande,qDomande)
 		                               .innerJoin(qDomande.assegnatario,qAssegnatari)

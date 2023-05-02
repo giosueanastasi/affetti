@@ -1,6 +1,9 @@
 package it.pittysoft.affetti.service;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,12 +19,7 @@ import it.pittysoft.affetti.model.DomandaRequest;
 import it.pittysoft.affetti.model.DomandaRequestSearch;
 import it.pittysoft.affetti.model.DomandaResponse;
 import it.pittysoft.affetti.model.DomandaResponseSearch;
-import it.pittysoft.affetti.model.PostiModel;
-import it.pittysoft.affetti.model.PostiRequest;
-import it.pittysoft.affetti.model.PostiResponse;
-import it.pittysoft.affetti.repository.AssegnatariRepository;
 import it.pittysoft.affetti.repository.DomandeRepository;
-import it.pittysoft.affetti.repository.DomandeRepositoryCustom;
 
 
 
@@ -53,13 +51,20 @@ public class DomandeService {
 		  
 		 for (Domande domanda : findDomandeByCognomeAndNome) {
 			 DomandaModel dm = new DomandaModel();
-			 dm.setCognomeA(domanda.getAssegnatario().getCognome());
-			 dm.setNomeA(domanda.getAssegnatario().getNome());
-			 dm.setCognomeC(domanda.getContraente().getCognome());
-			 dm.setNomeC(domanda.getContraente().getNome());
-			 dm.setCodice_fiscaleC(domanda.getContraente().getCodice_fiscale());
-			 dm.setNumero_protocolloC(domanda.getProtocollo());
-			 dm.setStatoC(domanda.getStato());	
+			 dm.setNumeroProtocolloDomanda(domanda.getProtocollo());
+			 dm.setStato(domanda.getStato());	
+			 dm.setCognomeContraente(domanda.getContraente().getCognome());
+			 dm.setNomeContraente(domanda.getContraente().getNome());
+			 Date date1 = null;
+				try {
+					date1 = new SimpleDateFormat("yyyy-MM-dd").parse(domanda.getData_protocollo());
+				} catch (ParseException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			 dm.setDataProtocollo(date1);
+			 dm.setAssegnatario(domanda.getContraente().getCognome()+" "+domanda.getAssegnatario().getNome());
+			 dm.setNumeroProtocolloContratto(domanda.getContratto().getProtocollo());
 			 response.getDomande().add(dm);
 		 } 
  	return response;
@@ -86,8 +91,11 @@ public class DomandeService {
     		posto.setLoculo(request.getLoculo());
     		posto.setFornice(request.getFornice());
     		
+    		Contraenti contraente = new Contraenti();
+    		contraente.setId(Long.parseLong(request.getFkContraente()));
     		
-    		domandaDao.addDomandaFull(request.getDomanda(), assegnatario, posto);
+    		
+    		domandaDao.addDomandaFull(request.getDomanda(), assegnatario, posto,contraente);
     		
     	}else {
     		//errore, mancano i dati dell'assegnatario

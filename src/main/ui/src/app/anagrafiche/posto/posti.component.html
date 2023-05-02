@@ -1,51 +1,66 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-7 mrgnbtm">
       <h2>Cerca Posto</h2>
 
       <form [formGroup]="postoForm">
-        <div class="row">
 
+        <div class="row">
           <h4>Dati Posto</h4>
-          <label class="col-sm-2"for="loculo">Loculo</label>
-              <div class="form-group col-sm-3">
+          <label class="col-sm-1"for="loculo">Loculo</label>
+              <div class="form-group col-sm-5">
               <input type="text" class="form-control" formControlName="loculo" id="loculo" aria-describedby="loculolHelp" >
             </div>
 
-            <label class="col-sm-2 "for="fornice">Fornice</label>
-            <div class="form-group col-sm-3">
+            <label class="col-sm-1 "for="fornice">Fornice</label>
+            <div class="form-group col-sm-5">
              <input type="text" class="form-control" formControlName="fornice" id="fornice" aria-describedby="fornicelHelp" >
             </div>
+        </div>
+        <div class="row">
+          <h4>Dati Assegnatario</h4>
+          <label class="col-sm-1"for="nome">Nome</label>
+              <div class="form-group col-sm-5">
+              <input type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp" >
+            </div>
 
+            <label class="col-sm-1 "for="cognome">Cognome</label>
+            <div class="form-group col-sm-5">
+             <input type="text" class="form-control" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp" >
+            </div>
+        </div>
+        <div class="row">
             <h4>Intervallo scadenza</h4>
             <label class="col-sm-1"for="data_inizio">Da</label>
-            <div class="form-group col-sm-3">
-            <input type="text" class="form-control" formControlName="data_inizio" id="data_inizio" aria-describedby="data_iniziolHelp" >
+            <div class="form-group col-sm-2">
+            <input ng-model="answers.dob" type="date" class="form-control" formControlName="data_inizio" id="data_inizio" aria-describedby="data_iniziolHelp" >
           </div>
           <label class="col-sm-1"for="data_scadenza">a</label>
-              <div class="form-group col-sm-3">
-              <input type="text" class="form-control" formControlName="data_scadenza" id="data_scadenza" aria-describedby="data_scadenzalHelp" >
+              <div class="form-group col-sm-2">
+              <input ng-model="answers.dob" type="date" class="form-control" formControlName="data_scadenza" id="data_scadenza" aria-describedby="data_scadenzalHelp" >
             </div>
+          
         
-          <div class="form-group col-sm-1">
-            <label for="stato">Stato</label>
-          <select name="stato" id ="stato">
-            <option ></option>
-            <option  value="LIBERO">Libero</option>
-            <option  value="PRENOTATO">Prenotato</option>
-            <option  value="OCCUPATO">Occupato</option>
-            <option  value="DA_LIBERARE">Da Liberare</option>
-          </select>
+          <label class="col-sm-1 " for="stato">Stato</label>
+          <div class="form-group col-sm-5">
+            <!-- <select name="stato" id ="stato"> -->
+              <select class="form-select" aria-label="Default select example">
+              <option >-----</option>
+              <option  value="LIBERO">Libero</option>
+              <option  value="PRENOTATO">Prenotato</option>
+              <option  value="OCCUPATO">Occupato</option>
+              <option  value="DA_LIBERARE">Da Liberare</option>
+            </select>
         </div>
         </div>
         <br>
         <br>
-        <button input type="reset" value="cancella" class="btn btn-secondary me-1" data-bs-dismiss="modal">svuota</button>
-        <button class="btn btn-primary" (click)="filtraPosti()">Cerca</button>
+        <div class="row">
+          <button class="btn btn-info col-md-2" (click)="filtraPosti()">Cerca</button>
+          <div class="col-md-8"></div>
+          <button input type="reset" value="cancella" class="btn btn-danger col-md-2" data-bs-dismiss="modal">Svuota filtri</button>
+        </div>
       </form>
-    </div>
-    <div class="col-md-4 mrgnbtm">
-    </div>
+
   </div>
 
     <h2>Posti</h2>
@@ -55,8 +70,7 @@
         <th>Stato</th>
         <th>Loculo</th>
         <th>Fornice</th>
-        <th>Nome</th>
-        <th>Cognome</th>
+        <th>Assegnatario</th>
         <th>Scadenza</th>
         <th>Contratto</th>
       </tr>
@@ -66,10 +80,9 @@
         <td>{{postoTab.stato}}</td>
         <td>{{postoTab.loculo}}</td>
         <td>{{postoTab.fornice}}</td>
-        <td>{{postoTab.nome}}</td>
-        <td>{{postoTab.cognome}}</td>
-        <td>{{postoTab.scadenza}}</td>
-        <td>{{postoTab}}</td>
+        <td>{{postoTab.cognome}} {{postoTab.nome}}</td>
+        <td>{{postoTab.scadenza.substring(0, 10)}}</td>
+        <td></td>
       </tr>
     </tbody>
     </table>

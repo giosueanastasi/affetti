@@ -9,7 +9,9 @@ import { Posto } from 'src/app/app-state/models';
 import { PostiModelComponent } from '../posti-model/posti-model.component';
 import { each } from 'jquery';
 import { CercacontraentiModelComponent } from '../cercacontraenti-model/cercacontraenti-model.component';
+import { PopupComponent } from 'src/app/popup/popup.component';
 
+declare var $ : any;
 @Component({
   selector: 'app-domanda-full',
   templateUrl: './domanda-full.component.html',
@@ -17,6 +19,7 @@ import { CercacontraentiModelComponent } from '../cercacontraenti-model/cercacon
 })
 export class DomandaFullComponent  {
 
+  @ViewChild(PopupComponent) childPopUp: PopupComponent|undefined;
   @ViewChild(ContraentiModelComponent) child: ContraentiModelComponent|undefined;
   @ViewChild(PostiModelComponent) child1: PostiModelComponent|undefined;
   @ViewChild(CercacontraentiModelComponent) child2: CercacontraentiModelComponent|undefined;
@@ -64,7 +67,7 @@ export class DomandaFullComponent  {
   addDomanda() {
     this.appService.addDomandaFull(this.domandaFullForm.value).pipe(takeUntil(this.destroy$)).subscribe(data => {
       console.log('message::::', data);
-      
+      this.childPopUp?.showPopupModal();
     });
   }
   creaContraente(){
@@ -192,5 +195,7 @@ export class DomandaFullComponent  {
   
     
   }
-
+  showPopuoModal(){
+    $('#popUpModal').modal('show');
+  }
 }

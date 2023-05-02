@@ -1,86 +1,116 @@
 <div class="container">
   <div class="row">
-    <div class="col-md-7 mrgnbtm">
-      <h2>Create Contratto</h2>
-      <form [formGroup]="contrattoForm" (ngSubmit)="onSubmit()">
+    <div class=" mrgnbtm">
+      <h2>Cerca Contratti</h2>
+     
+      <form [formGroup]="contrattoForm">
+       
         <div class="row">
-          <div class="form-group col-md-6">
-            <label for="id">ID</label>
-            <input type="text" class="form-control" formControlName="id" id="id" aria-describedby="idlHelp" placeholder="id">
+          <h4>Dati Contraente</h4>
+          <label class="col-sm-1 "for="nome">Nome</label>
+          <div class="form-group col-sm-5">
+            <input type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp">
           </div>
-          <div class="form-group col-md-6">
-            <label for="protocollo">protocollo</label>
-            <input type="text" class="form-control" formControlName="protocollo" id="protocollo" aria-describedby="protocollolHelp" placeholder="protocollo">
+          
+          <label class="col-sm-1 "for="cognome">Cognome</label>
+          <div class="form-group col-sm-5">
+            <input type="text" class="form-control" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp">
           </div>
-          <div class="form-group col-md-6">
-            <label for="data_inizio">data_inizio</label>
-            <input type="text" class="form-control" formControlName="data_inizio" id="data_inizio" aria-describedby="data_iniziolHelp" placeholder="data_inizio">
+        </div>
+          <br>
+          <div class="row">
+
+          
+            <label class="col-sm-1 "for="Data">Tipologia</label>
+            <div class="form-check" class="form-group col-sm-1" style="font-size: medium;">
+              <input
+                id="loculo"
+                type="radio"
+                value="LOCULO"
+                name="tipologia"
+                formControlName="tipologia"
+              />
+              <label class="custom-control-label" for="loculo"> Loculo</label>
+            </div>
+            <div class="form-check" class="form-group col-sm-3" >
+              <input
+                id="tenuta_a_disposizione"
+                type="radio"
+                value="TENUTA_DISPOSIZIONE"
+                name="tipologia"
+                formControlName="tipologia"
+              />
+              <label class="custom-control-label" for="tenuta_a_disposizione" style="font-size: medium;"> Tenuta a disposizione</label>
+            </div>
+            <div class="form-group col-sm-1"></div>
+            <label class="col-sm-1 "for="codice_fiscale">Cod. Fis.</label>
+            <div class="form-group col-sm-5">
+              <input type="text" class="form-control" formControlName="codice_fiscale" id="codice_fiscale" aria-describedby="codice_fiscalelHelp">
+            </div>
           </div>
-          <div class="form-group col-md-6">
-          <label for="data_scadenza">data_scadenza</label>
-          <input type="text" class="form-control" formControlName="data_scadenza" id="data_scadenza" aria-describedby="data_scadenzalHelp" placeholder="data_scadenza">
+          <br>
+          <div class="row">
+            <label class="col-sm-1 "for="numero_protocollo">N.Protocollo</label>
+            <div class="form-group col-md-5">
+              <input type="text" class="form-control" formControlName="numero_protocollo" id="numero_protocollo" aria-describedby="numero_protocollolHelp">
+            </div>
+
+            <label class="col-sm-1 "for="stato">Stato</label>
+            <div class="form-group col-md-5">
+                <select class="form-select" aria-label="Default select example">
+                  <option value="">-----</option>
+                  <option value="APERTA">APERTA</option>
+                  <option value="CHIUSA">CHIUSA</option>
+                </select>
+            </div>
           </div>
-          <div class="form-group col-md-6">
-          <label for="stato">stato</label>
-          <input type="text" class="form-control" formControlName="stato" id="stato" aria-describedby="statoHelp" placeholder="stato">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="data_update">data_update</label>
-          <input type="text" class="form-control" formControlName="data_update" id="data_update" aria-describedby="data_updatelHelp" placeholder="data_update">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="data_insert">data_insert</label>
-          <input type="text" class="form-control" formControlName="data_insert" id="data_insert" aria-describedby="data_insertlHelp" placeholder="data_insert">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="fk_domanda_loculo">fk_domanda_loculo</label>
-          <input type="text" class="form-control" formControlName="fk_domanda_loculo" id="fk_domanda_loculo" aria-describedby="fk_domanda_loculolHelp" placeholder="fk_domanda_loculo">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="fk_domanda_disposizione">fk_domanda_disposizione</label>
-          <input type="text" class="form-control" formControlName="fk_domanda_disposizione" id="fk_domanda_disposizione" aria-describedby="fk_domanda_disposizionelHelp" placeholder="fk_domanda_disposizione">
-        </div>
-        <div class="form-group col-md-6">
-          <label for="fk_user_modifier">fk_user_modifier</label>
-          <input type="text" class="form-control" formControlName="fk_user_modifier" id="fk_user_modifier" aria-describedby="fk_user_modifierlHelp" placeholder="fk_user_modifier">
-        </div>
-        </div>
-        <button type="submit" [disabled]="!contrattoForm.valid" class="btn btn-danger">Create</button>
+          <br>
+          <div class="row">
+
+            <h4>Cerca Intervallo</h4>
+            <label class="col-sm-1 "for="stato">da</label>
+            <div class="form-group col-md-2">
+              <input ng-model="answers.dob" type="date" class="form-control" formControlName="data_protocollo_iniziale" id="data_protocollo_iniziale" aria-describedby="data_protocollo_inizialelHelp" placeholder="data_protocollo_iniziale">
+            </div>
+            <label class="col-sm-1 "for="stato">a</label>
+            <div class="form-group col-md-2">
+              <input ng-model="answers.dob" type="date" class="form-control" formControlName="data_protocollo_finale" id="data_protocollo_finale" aria-describedby="data_protocollo_finalelHelp" placeholder="data_protocollo_finale">
+            </div>
+
+          </div>
+          <br>
+          <div class="row">
+            <button class="btn btn-info col-md-2"  (click)="cercaContratti(contrattoForm)">Cerca</button>
+            <div class="col-md-8"></div>
+            <button input type="reset" class="btn btn-danger col-md-2" type="reset">Svuota Filtri</button>
+          </div>
       </form>
-    </div>
-    <div class="col-md-4 mrgnbtm">
-    </div>
-   </div>
+      </div>
+  <br>
 
   <h2>Contratti</h2>
   <table class="table table-bordered">
     <thead>
       <tr>
-        <th>id</th>
-        <th>protocollo</th>
-        <th>data_inizio</th>
-        <th>data_scadenza</th>
-        <th>stato</th>
-        <th>data_update</th>
-        <th>data_insert</th>
-        <th>fk_domanda_loculo</th>
-        <th>fk_domanda_disposizione</th>
-        <th>fk_user_modifier</th>
+        <th>N.Protocollo</th>
+        <th>Stato</th>
+        <th>Data Protocollo</th>
+        <th>Data Scadenza</th>
+        <th>Contraente</th>
+        <th>Assegnatario</th>
+        <th>Dettaglio</th>
 
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let contratto of contratti; let i = index">
-        <td>{{i + 1}}</td>
-        <td>{{contratto.protocollo}}</td>
-        <td>{{contratto.data_inizio}}</td>
-        <td>{{contratto.data_scadenza}}</td>
+        <td>{{contratto.numeroProtocolloContratto}}</td>
         <td>{{contratto.stato}}</td>
-        <td>{{contratto.data_update}}</td>
-        <td>{{contratto.data_insert}}</td>
-        <td>{{contratto.fk_domanda_loculo}}</td>
-        <td>{{contratto.fk_domanda_disposizione}}</td>
-        <td>{{contratto.fk_user_modifier}}</td>
+        <td>{{contratto.dataProtocolloContratto.substring(0, 10)}}</td>
+        <td>{{contratto.dataScadenzaContratto.substring(0, 10)}}</td>
+        <td>{{contratto.contraente}}</td>
+        <td>{{contratto.assegnatario}}</td>
+        <td></td>
       </tr>
     </tbody>
   </table>

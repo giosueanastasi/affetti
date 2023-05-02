@@ -50,9 +50,10 @@ CREATE TABLE posti (
 
 
  INSERT INTO posti ( loculo,fornice,tipo,stato,data_update,data_insert,fk_user_modifier) VALUES
-  ( 15, 150, 'intermedia','libero' ,'2023-09-25','2023-09-25',1),
-  ( 1, 8, 'monumentale','occupato' ,'2023-03-04','2020-02-8',2),
-  ( 8,120, 'nuova', 'prenotato','2023-04-8','2023-04-8',3); 
+  ( 15, 150, 'intermedia','LIBERO' ,'2023-09-25','2023-09-25',1),
+  ( 1, 8, 'monumentale','PRENOTATO' ,'2023-03-04','2020-02-8',2),
+  ( 14, 150, 'intermedia','DA_LIBERARE' ,'2023-09-25','2023-09-25',1),
+  ( 8,120, 'nuova', 'OCCUPATO','2023-04-8','2023-04-8',3); 
   
 	DROP TABLE IF EXISTS assegnatari;
 
@@ -70,7 +71,7 @@ CREATE TABLE posti (
 );
 
 INSERT INTO assegnatari ( nome,cognome,data_decesso,comune_decesso,data_update,data_insert,fk_user_modifier ) VALUES
-  ( 'Stefano', 'Bandello','2023-09-20','Sant Egidio alla Vibrata', '2023-09-20','2023-09-25',1),
+  ( 'Stefano', 'Rossi','2023-09-20','Sant Egidio alla Vibrata', '2023-09-20','2023-09-25',1),
   ( 'Vincenzo','D Auri', '2020-02-4','Ascoli Piceno','2023-03-5','2020-02-8',3),
   ( 'Samuel','Feliciani', '2023-04-5','Giulianova', '2023-04-8','2023-04-8',2); 
 	
@@ -102,7 +103,7 @@ CREATE TABLE contraenti (
 );
 
 INSERT INTO contraenti ( nome,cognome,comune_nascita,provincia_nascita,stato_nascita,data_nascita,comune_residenza,provincia_residenza,via_residenza,civico_residenza,cap_residenza,telefono,codice_fiscale,email,note,fk_user_modifier ,data_insert,data_update) VALUES
-  ('Antonio','Bandello', 'Sant Omero','TE','Italia','1998-09-20','Sant Egidio alla Vibrata','TE','Via Vibrata',27,64016,0861840071,'BNDNTN98P20I348D','bandelloantonio@libero.it','',2,'2023-09-25','2023-09-25'),
+  ('Antonio','Rossi', 'Sant Omero','TE','Italia','1998-09-20','Sant Egidio alla Vibrata','TE','Via Vibrata',27,64016,0861840071,'BNDNTN98P20I348D','rossiantonio@libero.it','',2,'2023-09-25','2023-09-25'),
   ( 'Antonietta', 'Di Giuseppe','Ascoli Piceno','AP','Italia','1990-08-15','Monticelli','AP','Via dei Sanniti',3,63100,3277665754,'DGPANT90P15L387J','','',1,'2023-03-4','2020-02-8'),
   ( 'Giovanna','Di Saverio','Giulianova','TE','Italia','1970-01-31','Giulianova','TE','Via Liguria',2,64021,3475700123,'DSRGVN70P31I351S','','',3,'2023-04-8','2023-04-8'); 
 
@@ -128,9 +129,9 @@ CREATE TABLE domande (
 	);
 	
   INSERT INTO domande (protocollo,data_protocollo,stato, tipologia,fk_posto,fk_assegnatario,fk_contraente,fk_user_modifier ,data_insert,data_update) VALUES
-  (506,'2023-09-25','in lavorazione','louculo',2,1,3,2, '2023-09-25','2023-09-25'),
-  (204, '2023-03-04','eseguito','tenuta a disposizione',1,2,1,3,'2023-03-04','2020-02-8'),
-  (890, '2023-04-8', 'sto elaborando','loculo',3,3,2,1, '2023-04-8','2023-04-8'); 
+  (506,'2023-09-25','APERTA','LOCULO',2,1,3,2, '2023-09-25','2023-09-25'),
+  (204, '2023-03-04','CHIUSA','TENUTA_DISPOSIZIONE',1,2,1,3,'2023-03-04','2020-02-8'),
+  (890, '2023-04-8', 'APERTA','LOCULO',3,3,2,1, '2023-04-8','2023-04-8'); 
   
 	
 	
@@ -149,6 +150,6 @@ CREATE TABLE domande (
 );
 
 INSERT INTO contratti ( protocollo,data_inizio,data_scadenza,stato,fk_domanda,fk_user_modifier,data_insert,data_update) VALUES
-  (106,'2023-09-25','2058-09-25','in lavorazione',3,1, '2023-09-25','2023-09-25'),
-  (405, '2023-03-4','2058-03-4','eseguito',2,2,'2023-03-04','2020-02-8'),
-  ( 450, '2023-04-8', '2058-04-8','sto elaborando',1,3, '2023-04-08','2023-04-8'); 
+  (106,'2023-09-25','2058-09-25','IN_ATTESA_PAGAMENTO',3,1, '2023-09-25','2023-09-25'),
+  (405, '2023-03-4','2058-03-4','PAGATO',2,2,'2023-03-04','2020-02-8'),
+  ( 450, '2023-04-8', '2058-04-8','IN_ATTESA_PAGAMENTO',1,3, '2023-04-08','2023-04-8'); 

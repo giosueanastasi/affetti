@@ -1,6 +1,8 @@
 package it.pittysoft.affetti.entity;
 
+
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -32,10 +34,10 @@ public class Contratti {
     
     @Column
     @NotNull(message="{NotNull.Contratto.data_inizio}")
-    private String data_inizio;
+    private Date data_inizio;
     
     @Column
-    private String data_scadenza;
+    private Date data_scadenza;
     
     @Column
     @NotNull(message="{NotNull.Contratto.stato}")

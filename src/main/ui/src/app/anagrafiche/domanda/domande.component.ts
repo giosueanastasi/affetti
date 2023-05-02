@@ -22,15 +22,12 @@ title = 'angular-nodejs-example';
 domandaForm = new FormGroup({
   nome: new FormControl('', Validators.nullValidator),
   cognome: new FormControl('', Validators.nullValidator),
-  nomeA: new FormControl('', Validators.nullValidator),
-  cognomeA: new FormControl('', Validators.nullValidator),
+  tipologia: new FormControl('', Validators.nullValidator),
   codice_fiscale: new FormControl('', Validators.nullValidator),
+  numero_protocollo: new FormControl('', Validators.nullValidator),
   data_protocollo_iniziale: new FormControl('', Validators.nullValidator),
   data_protocollo_finale: new FormControl('', Validators.nullValidator),
-  numero_protocollo: new FormControl('', Validators.nullValidator),
-  fk_user_modifier: new FormControl('', Validators.nullValidator),
-  data_insert: new FormControl('', Validators.nullValidator),
-  data_update: new FormControl('', Validators.nullValidator)
+  stato: new FormControl('', Validators.nullValidator)
 });
 
 domande: any[] = [];
@@ -38,15 +35,15 @@ domandaCount = 0;
 
 destroy$: Subject<boolean> = new Subject<boolean>();
 
-onSubmit() {
-  this.appService.addDomanda(this.domandaForm.value, this.domandaCount + 1).pipe(takeUntil(this.destroy$)).subscribe(data => {
-    console.log('message::::', data);
-    this.domandaCount = this.domandaCount + 1;
-    console.log(this.domandaCount);
-    this.domandaForm.reset();
-    this.getAllDomande();
-  });
-}
+// onSubmit() {
+//   this.appService.addDomanda(this.domandaForm.value, this.domandaCount + 1).pipe(takeUntil(this.destroy$)).subscribe(data => {
+//     console.log('message::::', data);
+//     this.domandaCount = this.domandaCount + 1;
+//     console.log(this.domandaCount);
+//     this.domandaForm.reset();
+//     this.getAllDomande();
+//   });
+// }
 
 getAllDomande() {
   this.appService.getDomande().pipe(takeUntil(this.destroy$)).subscribe((domande: any[]) => {
@@ -65,9 +62,8 @@ svuotaDomanda(svuotadomandeForm: FormGroup) {
 }
 
 cercaDomande(cercaDomandaForm: FormGroup) {
-    this.appService.cercaDomandeService(cercaDomandaForm.value).pipe(takeUntil(this.destroy$)).subscribe((data: any[]) => {
-      this.domande = data;
-      console.log('ciao');
+    this.appService.cercaDomandeService(cercaDomandaForm.value).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+      this.domande = data.domande;
     }); 
 }
 

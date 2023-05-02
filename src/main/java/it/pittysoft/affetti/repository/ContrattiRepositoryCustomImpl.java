@@ -45,35 +45,27 @@ public class ContrattiRepositoryCustomImpl implements ContrattiRepositoryCustom 
 		
 		BooleanBuilder builder = new BooleanBuilder();
 		
-		if(resquestSearch.getNomeA()!=null) {
-			builder.and(qAssegnatari.nome.upper().like("%"+resquestSearch.getNomeA().toUpperCase()+"%"));
+		if(resquestSearch.getNumeroProtocollo() !=null && !resquestSearch.getNumeroProtocollo().isEmpty()) {
+			builder.and(qDomande.protocollo.upper().like(resquestSearch.getNumeroProtocollo().toUpperCase()));
 		}
-		if(resquestSearch.getCognomeA()!=null) {
-			builder.and(qAssegnatari.cognome.upper().like("%"+resquestSearch.getCognomeA().toUpperCase()+"%"));
+		if(resquestSearch.getStato() !=null  && !resquestSearch.getStato().isEmpty() ) {
+			builder.and(qDomande.stato.upper().like(resquestSearch.getStato().toUpperCase()));
 		}
-		if(resquestSearch.getNomeC()!=null) {
-			builder.and(qContraenti.nome.upper().like("%"+resquestSearch.getNomeC().toUpperCase()+"%"));
+		if(resquestSearch.getNome()!=null && !resquestSearch.getNome().isEmpty()) {
+			builder.and(qContraenti.nome.upper().like("%"+resquestSearch.getNome().toUpperCase()+"%"));
 		}
-		if(resquestSearch.getCognomeC()!=null) {
-			builder.and(qContraenti.cognome.upper().like("%"+resquestSearch.getCognomeC().toUpperCase()+"%"));
+		if(resquestSearch.getCognome()!=null && !resquestSearch.getCognome().isEmpty()) {
+			builder.and(qContraenti.cognome.upper().like("%"+resquestSearch.getCognome().toUpperCase()+"%"));
 		}
-		if(resquestSearch.getData_inizio()!=null) {
-			builder.and(qContratti.data_inizio.upper().like(resquestSearch.getData_inizio().toUpperCase()));
-		}
-		if(resquestSearch.getData_scadenza()!=null) {
-			builder.and(qContratti.data_scadenza.upper().like(resquestSearch.getData_scadenza().toUpperCase()));
-		}
-		if(resquestSearch.getContratto() !=null) {
-			builder.and(qContratti.protocollo.upper().like(resquestSearch.getContratto().getProtocollo().toUpperCase()));
-		}
-		if(resquestSearch.getStato()!=null) {
-			builder.and(qContratti.stato.upper().like(resquestSearch.getStato().toUpperCase()));
+			
+		if(resquestSearch.getCodiceFiscale()!=null && !resquestSearch.getCodiceFiscale().isEmpty()) {
+			builder.and(qContraenti.codice_fiscale.upper().like(resquestSearch.getCodiceFiscale().toUpperCase()));
 		}
 		
 		
 		List<Contratti> contrattiPlayer = query.select(qContratti)
 		                               .from(qContratti)
-//		                               .innerJoin(qContratti.domande,qDomande)
+		                               .innerJoin(qContratti.domanda,qDomande)
 		                               .innerJoin(qDomande.contraente,qContraenti)
 		                               .innerJoin(qDomande.assegnatario,qAssegnatari)
 		                               .where(builder

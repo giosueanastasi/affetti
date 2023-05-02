@@ -32,7 +32,7 @@
             name="tipologia"
             formControlName="tipologia"
           />
-          <label class="custom-control-label" for="loculo">Loculo</label>
+          <label class="custom-control-label" for="loculo" style="font-size: medium;">Loculo</label>
         </div>
         <div class="form-check" class="form-group col-sm-3">
           <input
@@ -42,7 +42,7 @@
             name="tipologia"
             formControlName="tipologia"
           />
-          <label class="custom-control-label" for="tenuta_a_disposizione">Tenuta a disposizione</label>
+          <label class="custom-control-label" for="tenuta_a_disposizione" style="font-size: medium;">Tenuta a disposizione</label>
         </div>
            <div class="form-group col-sm-2"  ></div>
            <div class="form-group col-sm-2"  ></div>
@@ -52,7 +52,7 @@
            <h4>Dati Contraente</h4>
             <label class="col-sm-1 "for="nome">Nome</label>
             <div class="form-group col-sm-3">
-              <input  type="text" class="form-control notEdit" formControlName="fk_contraente" id="fk_contraente" >
+              <!-- <input  type="text" class="form-control notEdit" formControlName="fk_contraente" id="fk_contraente" > -->
               <input  type="text" class="form-control notEdit" formControlName="nome" id="nome" aria-describedby="nomelHelp"  readonly>
             </div>
             <label class="col-sm-1 "for="cognome">Cognome</label>
@@ -179,6 +179,7 @@
      </div>
       
 </div>
+<app-popup></app-popup>
 <app-cercacontraenti-model (save)="assegnaContraenteWatcher($event)"></app-cercacontraenti-model>
 <app-contraenti-model (save)="saveContraenteWatcher($event)"></app-contraenti-model>
 <app-posti-model (save)="assegnaPostoWatcher($event)"></app-posti-model>

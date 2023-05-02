@@ -40,17 +40,17 @@ public class ContraentiRepositoryCustomImpl implements ContraentiRepositoryCusto
 		
 		BooleanBuilder builder = new BooleanBuilder();
 		
-		if(contraenti.getNome()!=null) {
+		if(contraenti.getNome()!=null && !contraenti.getNome().isEmpty()) {
 			builder.and(qContraenti.nome.upper().like("%" + contraenti.getNome().toUpperCase()+"%" ));
 		}
-		if(contraenti.getCognome()!=null) {
+		if(contraenti.getCognome()!=null && !contraenti.getCognome().isEmpty()) {
 			builder.and(qContraenti.cognome.upper().like("%" + contraenti.getCognome().toUpperCase()+ "%" ));
 			
 		}
-		if(contraenti.getCodice_fiscale()!=null) {
+		if(contraenti.getCodice_fiscale()!=null && !contraenti.getCodice_fiscale().isEmpty()) {
 			builder.and(qContraenti.codice_fiscale.upper().like(contraenti.getCodice_fiscale().toUpperCase()));
 		}
-		if(contraenti.getProtocolloC()!=null) {
+		if(contraenti.getProtocolloC()!=null && !contraenti.getProtocolloC().isEmpty()) {
 			builder.and(qContratti.protocollo.upper().like(contraenti.getProtocolloC().toUpperCase()));
 			
 		}
