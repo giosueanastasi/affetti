@@ -62,9 +62,6 @@ export class UsersComponent implements OnInit, OnDestroy {
     this.child?.showUserModal();
   }
 
-
-
-
   getAllUsers() {
     this.appService.getUsers().pipe(takeUntil(this.destroy$)).subscribe((users: any[]) => {
 		    this.userCount = users.length;
