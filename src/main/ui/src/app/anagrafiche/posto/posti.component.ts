@@ -4,8 +4,8 @@ import { AppService } from '../../app.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import {  Posto1 } from 'src/app/app-state/models';
-import {  Contratto } from 'src/app/app-state/models';
-import { PostoModel2Component } from '../posto-model2/posto-model2.component';
+//import {  Posto } from 'src/app/app-state/models';
+import { PostoEditComponent } from '../posto-edit/posto-edit.component';
 
 
 @Component({
@@ -16,9 +16,9 @@ import { PostoModel2Component } from '../posto-model2/posto-model2.component';
 
 export class PostiComponent implements OnInit {
 
-  selectedContratto: Contratto = new Contratto();
+selectedPosto: Posto1 = new Posto1();
 
-  @ViewChild(PostoModel2Component) child: PostoModel2Component | undefined;
+  @ViewChild(PostoEditComponent) child: PostoEditComponent | undefined;
   
 title = 'angular-nodejs-example';
 
@@ -37,7 +37,6 @@ postoForm = new FormGroup({
 });
 
 posti: any[] = [];
-contratti: any[] = [];
 postoCount = 0;
 
 destroy$: Subject<boolean> = new Subject<boolean>();
@@ -66,6 +65,15 @@ posto1: Posto1 = new Posto1();
      });
  }
 
+ /*createPostoRequest(){
+  this.selectedPosto = new Posto1();
+  this.child?.showPostoModal();
+}*/
+
+editPostoRequest(item: Posto1){
+  this.selectedPosto = Object.assign({},item);
+  this.child?.showPostoModal();
+}
 
 getAllPosti() {
   this.appService.getPosti().pipe(takeUntil(this.destroy$)).subscribe((posti: any[]) => {
@@ -74,30 +82,22 @@ getAllPosti() {
   });
 }
 
-createContrattoRequest(){
-  this.selectedContratto = new Contratto();
-  this.child?.showContrattoModal();
+ngOnDestroy() {
+  this.destroy$.next(true);
+  this.destroy$.unsubscribe();
 }
-
-editContrattoRequest(item: Contratto){
- // debugger;
-  this.selectedContratto = Object.assign({},item);
-  this.child?.showContrattoModal();
-}
-
-
-
-  saveContrattoWatcher(contratto: Contratto){
-    let contrattoIndex = this.contratti.findIndex(item => item.id === contratto.id);
-    if(contrattoIndex !==-1){
-      this.contratti[contrattoIndex] = contratto;
-    }else{
-      this.contratti.push(contratto);
-    }
-  }
 
   ngOnInit() {
     console.log('esegui all posto1 on init');
     this.getAllPosti();
+    }
+
+    savePostoWatcher(posto1: Posto1){
+      let postoIndex = this.posti.findIndex(item => item.loculo === posto1.loculo);
+      if(postoIndex !==-1){
+        this.posti[postoIndex] = posto1;
+      }else{
+        this.posti.push(posto1);
+      }
     }
 }

@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PostoModel2Component } from './posto-model2.component';
+import { PostoEditComponent } from './posto-edit.component';
 
-describe('PostoModel2Component', () => {
-  let component: PostoModel2Component;
-  let fixture: ComponentFixture<PostoModel2Component>;
+describe('PostoEdit2Component', () => {
+  let component: PostoEditComponent;
+  let fixture: ComponentFixture<PostoEditComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PostoModel2Component ]
+      declarations: [ PostoEditComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(PostoModel2Component);
+    fixture = TestBed.createComponent(PostoEditComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

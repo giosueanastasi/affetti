@@ -1,0 +1,110 @@
+<div class="modal fade" id="postoEdit" tabIndex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form #f="ngForm" >
+                 <div class="modal-header">
+                    <h2 class="modal-title"> Modifica Posto</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                   
+                 
+                 <div class="modal-body">
+
+                    <div class="alert alert-danger" *ngIf="errorMessage">
+                        <strong>Error!</strong>{{errorMessage}}
+                    </div>
+
+                    <h3>Dati posto </h3>
+                    <div class="form-group">
+                        <label for="loculo">loculo</label>
+                        <input 
+                            type="search" 
+                            id="loculo" 
+                            name="loculo"
+                            class="form-control notEdit" 
+                            [(ngModel)]="posto1.loculo"
+                            #loculo="ngModel"
+                          
+                            >
+                        
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fornice">fornice</label>
+                        <input 
+                            type="search" 
+                            id="fornice" 
+                            name="fornice"
+                            class="form-control notEdit" 
+                            [(ngModel)]="posto1.fornice"
+                            #fornice="ngModel"
+                            readonly
+                            >
+                        
+                    </div>
+
+
+                    <div class="form-group">
+                        <label for="stato">stato</label>
+                        <!-- <select name="stato" id ="stato"> -->
+                        <select class="form-select" 
+                                aria-label="Default select example"
+                                type="search" 
+                                id="stato" 
+                                name="stato"
+                                class="form-control" 
+                                [(ngModel)]="posto1.stato"
+                                #stato="ngModel"
+                                
+                                >
+                        <option >-----</option>
+                        <option  value="LIBERO">Libero</option>
+                        <option  value="PRENOTATO">Prenotato</option>
+                        <option  value="OCCUPATO">Occupato</option>
+                        <option  value="DA_LIBERARE">Da Liberare</option>
+                        </select>
+                    </div>
+
+
+                    <h3>Assegnatario </h3>
+                    <div class="form-group ">
+                        <label for="nome">Nome</label>
+                        <input 
+                            type="search" 
+                            id="nome" 
+                            name="nome"
+                            class="form-control notEdit" 
+                            [(ngModel)]="posto1.nome"
+                            #nome="ngModel"
+                            readonly
+                            >
+                        
+                    </div>
+
+                    <div class="form-group ">
+                        <label for="cognome">Cognome</label>
+                        <input 
+                            type="search" 
+                            id="cognome" 
+                            name="cognome"
+                            class="form-control notEdit" 
+                            [(ngModel)]="posto1.cognome"
+                            #cognome="ngModel"
+                            readonly
+                            >
+                        
+
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Chiudi</button>
+                  <button type="button" class="btn btn-primary" (click)="savePosto()">Modifica</button>
+                </div>
+          </form>
+        </div>
+    </div>
+</div>
+

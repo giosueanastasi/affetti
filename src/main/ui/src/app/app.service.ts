@@ -75,15 +75,12 @@ export class AppService {
   saveContraente(contraente: any) {
     return this.http.post(this.rootURL + '/contraente', contraente);
   }
-  
+
 
   savePosto(posto1: any) {
-    return this.http.post(this.rootURL + '/posto1', posto1);
+    return this.http.post(this.rootURL + '/posto', posto1);
   }
 
-  saveContratto(contratto: any) {
-    return this.http.post(this.rootURL + '/contratto', contratto);
-  }
 
   getAssegnatari() {
     return this.http.get(this.rootURL + '/assegnatari');

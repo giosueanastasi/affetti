@@ -40,7 +40,6 @@ public class Posti {
     private String loculo;
     
     @Column
-    @NotNull(message="{NotNull.Posto.tipo}")
     private String tipo;
     
     @Column

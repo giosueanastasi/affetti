@@ -39,7 +39,7 @@ CREATE TABLE posti (
 	id INT NOT NULL IDENTITY,
 	loculo VARCHAR(10) NOT NULL,
 	fornice VARCHAR(10) NOT NULL,
-	tipo VARCHAR (15) NOT NULL,
+	tipo VARCHAR (15) ,
 	stato VARCHAR(15) NOT NULL,
 	data_update date NULL,
 	data_insert date NULL,
