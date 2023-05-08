@@ -42,6 +42,7 @@ public class PostiService {
 			
 			 for (Domande domanda : postiFiltrati.getDomande()) {
 				 PostiModel pm = new PostiModel();
+				 pm.setId(postiFiltrati.getId());
 				 pm.setCognome(domanda.getAssegnatario().getCognome());
 				 pm.setNome(domanda.getAssegnatario().getNome());
 				 pm.setLoculo(postiFiltrati.getLoculo());

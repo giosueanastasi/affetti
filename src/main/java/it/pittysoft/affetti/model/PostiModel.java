@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class PostiModel {
+	private Long id;
 	private String nome;
 	private String cognome;
 	private String loculo;

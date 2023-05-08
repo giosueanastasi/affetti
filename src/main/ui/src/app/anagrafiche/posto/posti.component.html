@@ -67,6 +67,7 @@
     <table class="table table-bordered">
     <thead>
       <tr>
+        <th>Id</th>
         <th>Stato</th>
         <th>Loculo</th>
         <th>Fornice</th>
@@ -74,10 +75,12 @@
         <th>Scadenza</th>
         <th>Contratto</th>
         <th>Modifica</th>
+
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let postoTab of posti">
+        <td>{{postoTab.id}}</td>
         <td>{{postoTab.stato}}</td>
         <td>{{postoTab.loculo}}</td>
         <td>{{postoTab.fornice}}</td>

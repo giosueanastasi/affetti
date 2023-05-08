@@ -88,9 +88,7 @@ public class ControllerPrincipale {
         } else  {
         	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Errore imprevisto, contattare l'assistenza");
-		}    
-	
-    
+		}     
     }
 	
 	@PostMapping(path = UserLinks.ADD_USER)
