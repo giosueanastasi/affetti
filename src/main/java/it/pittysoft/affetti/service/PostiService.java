@@ -3,14 +3,19 @@ package it.pittysoft.affetti.service;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Contratti;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.entity.Posti;
 import it.pittysoft.affetti.model.PostiModel;
 import it.pittysoft.affetti.model.PostiRequest;
 import it.pittysoft.affetti.model.PostiResponse;
+import it.pittysoft.affetti.repository.ContraentiRepository;
+import it.pittysoft.affetti.repository.ContrattiRepository;
+import it.pittysoft.affetti.repository.DomandeRepository;
 import it.pittysoft.affetti.repository.PostiRepository;
 
 
@@ -19,7 +24,13 @@ import it.pittysoft.affetti.repository.PostiRepository;
 public class PostiService {
 	
 	private PostiRepository postiRepository;
-
+	
+	@Autowired
+	private DomandeRepository domandaRepository;
+	
+	@Autowired
+	private ContrattiRepository contrattiRepository;
+	
     public PostiService(PostiRepository postiRepository) {
         this.postiRepository = postiRepository;
     }
@@ -29,13 +40,31 @@ public class PostiService {
     }
     
     public PostiResponse savePosto(PostiRequest postiRequest) {
-    	Posti posti = new Posti();
+    	PostiResponse response = new PostiResponse();
     	
+    	Posti posti = new Posti();
     	posti.setId(postiRequest.getId());
     	posti.setLoculo(postiRequest.getLoculo());
     	posti.setFornice(postiRequest.getFornice());
+    	posti.setStato(postiRequest.getStato());
+    	   	
     	Posti postiSaved = postiRepository.save(posti);
-    	return postiRepository.save(posti);
+    	
+    	PostiModel postiModel = new PostiModel();
+    	postiModel.setId(postiSaved.getId());
+    	postiModel.setLoculo(postiSaved.getLoculo());
+    	
+    	Domande domanda = domandaRepository.findById(postiRequest.getIdD());
+    	postiModel.setCognome(domanda.getAssegnatario().getCognome());
+   	
+    	Contratti contratti = contrattiRepository.findByDomanda(domanda);
+    	postiModel.setScadenza(contratti.getData_scadenza());
+    	
+    	   	
+    	response.getPosti().add(postiModel);
+    	
+    	
+    	return response;
     }
     
     public PostiResponse getPosti(PostiRequest posti) {
