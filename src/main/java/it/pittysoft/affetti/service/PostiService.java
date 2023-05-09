@@ -28,7 +28,13 @@ public class PostiService {
         return postiRepository.findAll();
     }
     
-    public Posti savePosto(Posti posti) {
+    public PostiResponse savePosto(PostiRequest postiRequest) {
+    	Posti posti = new Posti();
+    	
+    	posti.setId(postiRequest.getId());
+    	posti.setLoculo(postiRequest.getLoculo());
+    	posti.setFornice(postiRequest.getFornice());
+    	Posti postiSaved = postiRepository.save(posti);
     	return postiRepository.save(posti);
     }
     
@@ -43,6 +49,7 @@ public class PostiService {
 			 for (Domande domanda : postiFiltrati.getDomande()) {
 				 PostiModel pm = new PostiModel();
 				 pm.setId(postiFiltrati.getId());
+				 pm.setIdD(domanda.getId());
 				 pm.setCognome(domanda.getAssegnatario().getCognome());
 				 pm.setNome(domanda.getAssegnatario().getNome());
 				 pm.setLoculo(postiFiltrati.getLoculo());
@@ -52,7 +59,6 @@ public class PostiService {
 				 response.getPosti().add(pm);
 				
 			 }
-
 			 
 		 }
 		return response;

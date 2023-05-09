@@ -90,7 +90,7 @@ ngOnDestroy() {
 
   ngOnInit() {
     console.log('esegui all posto1 on init');
-    this.getAllPosti();
+    //this.getAllPosti();
     }
 
     savePostoWatcher(posto1: Posto1){

@@ -106,11 +106,12 @@ public class ControllerPrincipale {
     }
 	
 	@PostMapping(path = PostoLinks.ADD_POSTO)
-	public ResponseEntity<?> savePosto(@RequestBody Posti posto) {
+	public ResponseEntity<?> savePosto(@RequestBody PostiRequest posto) {
         log.info("ApiController:  list posti");
-        Posti resource = postiService.savePosto(posto);
+        PostiResponse resource = postiService.savePosto(posto);
         return ResponseEntity.ok(resource);
     }
+	
 	@GetMapping(path = AssegnatarioLinks.LIST_ASSEGNATARI)
     public ResponseEntity<?> listAssegnatari() {
         log.info("ApiController:  list assegnatari");
@@ -156,7 +157,8 @@ public class ControllerPrincipale {
         } else  {
         	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Errore imprevisto, contattare l'assistenza");
-		}    }
+		}   
+        }
 	
 	@PostMapping(path = DomandaLinks.SEARCH_DOMANDE)
     public ResponseEntity<?> searchDomande(@RequestBody DomandaRequestSearch resquestSearch) {

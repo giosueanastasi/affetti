@@ -8,6 +8,8 @@ import lombok.Data;
 
 @Data
 public class PostiRequest extends Request{
+	private Long idD;
+	private Long id;
 	private String nome;
 	private String cognome;
 	private String loculo;
