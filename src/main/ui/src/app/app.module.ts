@@ -36,6 +36,7 @@ import { PostiModelComponent } from './anagrafiche/posti-model/posti-model.compo
 import { CercacontraentiModelComponent } from './anagrafiche/cercacontraenti-model/cercacontraenti-model.component';
 import { UserModelComponent } from './anagrafiche/user-model/user-model.component';
 import { PopupComponent } from './popup/popup.component';
+import { ContrattoModelComponent } from './anagrafiche/contratto-model/contratto-model.component';
 
 
 
@@ -69,6 +70,7 @@ import { PopupComponent } from './popup/popup.component';
     PostiModelComponent,
     CercacontraentiModelComponent,
     UserModelComponent,
+    ContrattoModelComponent,
     PopupComponent,
     
 

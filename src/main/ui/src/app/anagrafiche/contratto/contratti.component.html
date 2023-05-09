@@ -99,6 +99,11 @@
         <th>Contraente</th>
         <th>Assegnatario</th>
         <th>Dettaglio</th>
+        <th>C.F</th>
+        <th>protocolloDomanda</th>
+        <th>loculo</th>
+        <th>data decesso</th>
+        
 
       </tr>
     </thead>
@@ -113,6 +118,10 @@
         <td>
           <button class="btn btn-primary me-1" (click)="editContrattoRequest(contratto)">Dettaglio</button>
         </td>
+        <td>{{contratto.codice_fiscale}}</td>
+        <td>{{contratto.protocolloDomanda}}</td>
+        <td>{{contratto.loculo}}</td>
+        <td>{{contratto.data_decesso}}</td>
       </tr>
     </tbody>
   </table>

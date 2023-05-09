@@ -13,7 +13,7 @@ import { Contratto } from 'src/app/app-state/models';
   templateUrl: './contratti.component.html',
   styleUrls: ['./contratti.component.css']
 })
-export class ContrattiComponent implements OnInit, OnDestroy {
+export class ContrattiComponent implements OnInit {
 
   selectedContratto: Contratto = new Contratto();
 
@@ -39,22 +39,11 @@ export class ContrattiComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
- // onSubmit() {
- //   this.appService.addContratto(this.contrattoForm.value, this.contrattoCount + 1).pipe(takeUntil(this.destroy$)).subscribe(data => {
-  //    console.log('message::::', data);
-   //   this.contrattoCount = this.contrattoCount + 1;
-   //   console.log(this.contrattoCount);
-   //   this.contrattoForm.reset();
-   //   this.getAllContratti();
-  //  });
- // }
-
-  createContrattoRequest(){
-    this.selectedContratto = new Contratto();
-    this.child?.showContrattoModal();
-  }
+ // createContrattoRequest(){
+   // this.selectedContratto = new Contratto();
+    //this.child?.showContrattoModal();
+  //}
   editContrattoRequest(item: Contratto){
-    debugger;
     this.selectedContratto = Object.assign({},item);
     this.child?.showContrattoModal();
   }
@@ -82,11 +71,11 @@ export class ContrattiComponent implements OnInit, OnDestroy {
 */
   ngOnInit() {
     console.log('esegui all contratto on init');
-    this.getAllContratti();
+  //  this.getAllContratti();
     }
 
     saveContrattoWatcher(contratto: Contratto){
-      let contrattoIndex = this.contratti.findIndex(item => item.protocollo === contratto.protocollo);
+      let contrattoIndex = this.contratti.findIndex(item => item.id === contratto.id);
       if(contrattoIndex !==-1){
         this.contratti[contrattoIndex] = contratto;
       }else{

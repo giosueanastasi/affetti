@@ -14,5 +14,27 @@ public class ContrattoModel {
 	private Date dataScadenzaContratto;
 	private String contraente;
 	private String assegnatario;
-
+	
+	private String codice_fiscale;
+	private String comune_nascita;
+	private String provincia_nascita;
+	private String stato_nascita;
+	private String data_nascita;
+	private String comune_residenza;
+	private String provincia_residenza;
+	private String via_residenza;
+	private String civico_residenza;
+	private String cap_residenza;
+	private String email;
+	private String note;
+	private String telefono;
+	
+	private String loculo;
+	private String fornice;
+	
+	private String comune_decesso;
+	private String data_decesso;
+	
+	private String protocolloDomanda;
+	private String dataProtocolloDomanda;
 }
