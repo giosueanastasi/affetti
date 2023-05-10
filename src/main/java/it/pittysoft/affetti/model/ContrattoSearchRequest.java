@@ -17,5 +17,5 @@ public class ContrattoSearchRequest extends Request {
 	private String numeroProtocollo;
 	private String tipologia;
 	private String stato;
-
+	
 }

@@ -15,6 +15,11 @@ public class ContrattoModel {
 	private String contraente;
 	private String assegnatario;
 	
+	
+	private String nomeA;
+	private String nomeC;
+	private String cognomeA;
+	private String cognomeC;
 	private String codice_fiscale;
 	private String comune_nascita;
 	private String provincia_nascita;
@@ -33,7 +38,7 @@ public class ContrattoModel {
 	private String fornice;
 	
 	private String comune_decesso;
-	private String data_decesso;
+	private Date data_decesso;
 	
 	private String protocolloDomanda;
 	private String dataProtocolloDomanda;
