@@ -53,9 +53,13 @@ public class PostiService {
     	PostiModel postiModel = new PostiModel();
     	postiModel.setId(postiSaved.getId());
     	postiModel.setLoculo(postiSaved.getLoculo());
+    	postiModel.setFornice(postiSaved.getFornice());
+    	postiModel.setStato(postiSaved.getStato());
     	
-    	Domande domanda = domandaRepository.findById(postiRequest.getIdD());
+    	Domande domanda = domandaRepository.findById(postiRequest.getIdDomanda());
+    	postiModel.setIdDomanda(domanda.getId());
     	postiModel.setCognome(domanda.getAssegnatario().getCognome());
+    	postiModel.setNome(domanda.getAssegnatario().getNome());
    	
     	Contratti contratti = contrattiRepository.findByDomanda(domanda);
     	postiModel.setScadenza(contratti.getData_scadenza());
@@ -78,7 +82,7 @@ public class PostiService {
 			 for (Domande domanda : postiFiltrati.getDomande()) {
 				 PostiModel pm = new PostiModel();
 				 pm.setId(postiFiltrati.getId());
-				 pm.setIdD(domanda.getId());
+				 pm.setIdDomanda(domanda.getId());
 				 pm.setCognome(domanda.getAssegnatario().getCognome());
 				 pm.setNome(domanda.getAssegnatario().getNome());
 				 pm.setLoculo(postiFiltrati.getLoculo());

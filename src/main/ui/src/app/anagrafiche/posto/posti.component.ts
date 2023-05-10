@@ -23,6 +23,7 @@ selectedPosto: Posto1 = new Posto1();
 title = 'angular-nodejs-example';
 
 postoForm = new FormGroup({
+  idDomanda: new FormControl('', Validators.nullValidator),
   id: new FormControl('', Validators.nullValidator),
   loculo: new FormControl('', Validators.nullValidator),
   fornice: new FormControl('', Validators.nullValidator),
@@ -94,6 +95,7 @@ ngOnDestroy() {
     }
 
     savePostoWatcher(posto1: Posto1){
+    
       let postoIndex = this.posti.findIndex(item => item.id === posto1.id);
       if(postoIndex !==-1){
         this.posti[postoIndex] = posto1;

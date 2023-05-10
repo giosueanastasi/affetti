@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 public class PostiModel {
-	private Long idD;
+	private Long idDomanda;
 	private Long id;
 	private String nome;
 	private String cognome;
