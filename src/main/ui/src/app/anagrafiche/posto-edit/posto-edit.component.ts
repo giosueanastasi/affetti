@@ -22,9 +22,12 @@ export class PostoEditComponent {
     $('#postoEdit').modal('show');
   }
 
-  savePosto() {
+  savePostoEdit() {
     this.appService.savePosto(this.posto1).pipe().subscribe(data => {
-      this.save.emit(data);
+      debugger
+      //assegnare a emit il primo elemento della array data.posti
+     // var emit = data[0];
+      this.save.emit(data.posti[0]);
       $('#postoEdit').modal('hide');
     });
   }

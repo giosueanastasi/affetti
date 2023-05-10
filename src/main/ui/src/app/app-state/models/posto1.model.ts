@@ -1,4 +1,5 @@
 export class Posto1 {
+  id: string;
   stato: string;
   loculo: string;
   fornice: string;
@@ -6,6 +7,5 @@ export class Posto1 {
   cognome: string;
   data_scadenza: string;
   data_inizio: string;
-  id: string;
   checked: boolean;
 }
