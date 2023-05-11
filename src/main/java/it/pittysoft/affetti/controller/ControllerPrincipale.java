@@ -134,13 +134,13 @@ public class ControllerPrincipale {
     }
 	
 	@PostMapping(path = ContrattoLinks.ADD_CONTRATTO)
-	public ResponseEntity<?> saveContratto(@RequestBody Contratti contratto) {
+	public ResponseEntity<?> saveContratto(@RequestBody ContrattoSearchRequest contratto) {
         log.info("ApiController:  list contratti");
-        Contratti resource = contrattiService.saveContratto(contratto);
+        ContrattoSearchResponse resource = contrattiService.saveContratto(contratto);
         return ResponseEntity.ok(resource);
     }
     
-	
+
 	@GetMapping(path = ContraenteLinks.LIST_CONTRAENTI)
     public ResponseEntity<?> listContraenti() {
         log.info("ApiController:  list contraenti");

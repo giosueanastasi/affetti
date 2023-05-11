@@ -19,7 +19,7 @@
                                     class="form-control" 
                                     [(ngModel)]="contratto.numeroProtocolloContratto"
                                     #numeroProtocolloContratto="ngModel"
-                                    required
+                                    
                                     >
                             </div>
 
@@ -29,10 +29,10 @@
                                     type="text" 
                                     id="dataProtocolloContratto" 
                                     name="dataProtocolloContratto"
-                                    class="form-control" 
+                                    class="form-control notEdit" 
                                     [(ngModel)]="contratto.dataProtocolloContratto"
                                     #dataProtocolloContratto="ngModel"
-                                    required
+                                    readonly
                                     >
                             </div>
 
@@ -42,10 +42,10 @@
                                     type="text" 
                                     id="dataScadenzaContratto" 
                                     name="dataScadenzaContratto"
-                                    class="form-control" 
+                                    class="form-control notEdit" 
                                     [(ngModel)]="contratto.dataScadenzaContratto"
                                     #dataScadenzaContratto="ngModel"
-                                    required
+                                    readonly
                                     >
                             </div>
 
@@ -57,10 +57,10 @@
                                         type="text" 
                                         id="nomeC" 
                                         name="nomeC"
-                                        class="form-control" 
+                                        class="form-control notEdit" 
                                         [(ngModel)]="contratto.nomeC"
                                         #nomeC="ngModel"
-                                        required
+                                        readonly
                                         >
                                 </div>
 
@@ -70,10 +70,10 @@
                                             type="text" 
                                             id="cognomeC" 
                                             name="cognomeC"
-                                            class="form-control" 
+                                            class="form-control notEdit" 
                                             [(ngModel)]="contratto.cognomeC"
                                             #cognomeC="ngModel"
-                                            required
+                                            readonly
                                             >
                                     </div>
 
@@ -85,10 +85,10 @@
                                     type="text" 
                                     id="comune_nascita" 
                                     name="comune_nascita"
-                                    class="form-control" 
+                                    class="form-control notEdit" 
                                     [(ngModel)]="contratto.comune_nascita"
                                     #comune_nascita="ngModel"
-                                    required
+                                    readonly
                                     >
                             </div>
 
@@ -98,10 +98,10 @@
                                     type="text" 
                                     id="provincia_nascita" 
                                     name="provincia_nascita"
-                                    class="form-control" 
+                                    class="form-control notEdit" 
                                     [(ngModel)]="contratto.provincia_nascita"
                                     #provincia_nascita="ngModel"
-                                    required
+                                    readonly
                                     >
                             </div>
 
@@ -111,10 +111,10 @@
                                     type="text" 
                                     id="stato_nascita" 
                                     name="stato_nascita"
-                                    class="form-control" 
+                                    class="form-control notEdit" 
                                     [(ngModel)]="contratto.stato_nascita"
                                     #stato_nascita="ngModel"
-                                    required
+                                    readonly
                                     >
                             </div>
 
@@ -124,10 +124,10 @@
                                     type="text" 
                                     id="data_nascita" 
                                     name="data_nascita"
-                                    class="form-control" 
+                                    class="form-control notEdit" 
                                     [(ngModel)]="contratto.data_nascita"
                                     #data_nascita="ngModel"
-                                    required
+                                    readonly
                                     >
                             </div>
 
@@ -139,10 +139,10 @@
                                 type="text" 
                                 id="comune_residenza" 
                                 name="comune_residenza"
-                                class="form-control" 
+                                class="form-control notEdit" 
                                 [(ngModel)]="contratto.comune_residenza"
                                 #comune_residenza="ngModel"
-                                required
+                                readonly
                                 >
                             </div>
 
@@ -152,10 +152,10 @@
                                     type="text" 
                                     id="provincia_residenza" 
                                     name="provincia_residenza"
-                                    class="form-control" 
+                                    class="form-control notEdit" 
                                     [(ngModel)]="contratto.provincia_residenza"
                                     #provincia_residenza="ngModel"
-                                    required
+                                    readonly
                                     >
                                 </div>
 
@@ -165,10 +165,10 @@
                                         type="text" 
                                         id="via_residenza" 
                                         name="via_residenza"
-                                        class="form-control" 
+                                        class="form-control notEdit" 
                                         [(ngModel)]="contratto.via_residenza"
                                         #via_residenza="ngModel"
-                                        required
+                                        readonly
                                         >
                                 </div>
 
@@ -178,10 +178,10 @@
                                         type="text" 
                                         id="cap_residenza" 
                                         name="cap_residenza"
-                                        class="form-control" 
+                                        class="form-control notEdit" 
                                         [(ngModel)]="contratto.cap_residenza"
                                         #cap_residenza="ngModel"
-                                        required
+                                        readonly
                                         >
                                 </div>
 
@@ -193,10 +193,10 @@
                                         type="text" 
                                         id="codice_fiscale" 
                                         name="codice_fiscale"
-                                        class="form-control" 
+                                        class="form-control notEdit" 
                                         [(ngModel)]="contratto.codice_fiscale"
                                         #codice_fiscale="ngModel"
-                                        required
+                                        readonly
                                         >
                                 </div>
 
@@ -206,10 +206,10 @@
                                         type="text" 
                                         id="email" 
                                         name="email"
-                                        class="form-control" 
+                                        class="form-control notEdit" 
                                         [(ngModel)]="contratto.email"
                                         #email="ngModel"
-                                        required
+                                        readonly
                                         >
                                 </div>
 
@@ -219,10 +219,23 @@
                                         type="text" 
                                         id="telefono" 
                                         name="telefono"
-                                        class="form-control" 
+                                        class="form-control notEdit" 
                                         [(ngModel)]="contratto.telefono"
                                         #telefono="ngModel"
-                                        required
+                                        readonly
+                                        >
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="note">Note</label>
+                                    <input 
+                                        type="text" 
+                                        id="note" 
+                                        name="note"
+                                        class="form-control notEdit" 
+                                        [(ngModel)]="contratto.note"
+                                        #note="ngModel"
+                                        readonly
                                         >
                                 </div>
                                 
@@ -234,10 +247,10 @@
                                         type="text" 
                                         id="loculo" 
                                         name="loculo"
-                                        class="form-control" 
+                                        class="form-control notEdit" 
                                         [(ngModel)]="contratto.loculo"
                                         #loculo="ngModel"
-                                        required
+                                        readonly
                                         >
                                 </div>
                                 
@@ -248,10 +261,10 @@
                                         type="text" 
                                         id="fornice" 
                                         name="fornice"
-                                        class="form-control" 
+                                        class="form-control notEdit" 
                                         [(ngModel)]="contratto.fornice"
                                         #fornice="ngModel"
-                                        required
+                                        readonly
                                         >
                                 </div>
                                 
@@ -263,10 +276,10 @@
                                         type="text" 
                                         id="nomeA" 
                                         name="nomeA"
-                                        class="form-control" 
+                                        class="form-control notEdit" 
                                         [(ngModel)]="contratto.nomeA"
                                         #nomeA="ngModel"
-                                        required
+                                        readonly
                                         >
                                 </div>
                                 
@@ -277,10 +290,10 @@
                                         type="text" 
                                         id="cognomeA" 
                                         name="cognomeA"
-                                        class="form-control" 
+                                        class="form-control notEdit" 
                                         [(ngModel)]="contratto.cognomeA"
                                         #cognomeA="ngModel"
-                                        required
+                                        readonly
                                         >
                                 </div>
 
@@ -292,10 +305,10 @@
                                         type="text" 
                                         id="comune_decesso" 
                                         name="comune_decesso"
-                                        class="form-control" 
+                                        class="form-control notEdit" 
                                         [(ngModel)]="contratto.comune_decesso"
                                         #comune_decesso="ngModel"
-                                        required
+                                        readonly
                                         >
                                 </div>
 
@@ -305,10 +318,10 @@
                                         type="text" 
                                         id="data_decesso" 
                                         name="data_decesso"
-                                        class="form-control" 
+                                        class="form-control notEdit" 
                                         [(ngModel)]="contratto.data_decesso"
                                         #data_decesso="ngModel"
-                                        required
+                                        readonly
                                         >
                                 </div>
 
@@ -320,10 +333,10 @@
                                         type="text" 
                                         id="protocolloDomanda" 
                                         name="protocolloDomanda"
-                                        class="form-control" 
+                                        class="form-control notEdit" 
                                         [(ngModel)]="contratto.protocolloDomanda"
                                         #protocolloDomanda="ngModel"
-                                        required
+                                        readonly
                                         >
                                 </div>
 
@@ -333,10 +346,10 @@
                                         type="text" 
                                         id="dataProtocolloDomanda" 
                                         name="dataProtocolloDomanda"
-                                        class="form-control" 
+                                        class="form-control notEdit" 
                                         [(ngModel)]="contratto.dataProtocolloDomanda"
                                         #dataProtocolloDomanda="ngModel"
-                                        required
+                                        readonly
                                         >
                                 </div>
                         </div>

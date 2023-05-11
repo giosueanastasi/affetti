@@ -34,10 +34,10 @@ public class Contratti {
     
     @Column
     @NotNull(message="{NotNull.Contratto.data_inizio}")
-    private Date data_inizio;
+    private Data data_inizio;
     
     @Column
-    private Date data_scadenza;
+    private Data data_scadenza;
     
     @Column
     @NotNull(message="{NotNull.Contratto.stato}")

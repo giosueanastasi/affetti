@@ -10,4 +10,8 @@ import it.pittysoft.affetti.entity.Contratti;
 
 
 @RepositoryRestResource()
-public interface ContrattiRepository extends JpaRepository<Contratti, Integer>, JpaSpecificationExecutor<Contratti>, QuerydslPredicateExecutor<Contratti>,ContrattiRepositoryCustom {}
+public interface ContrattiRepository extends JpaRepository<Contratti, Integer>, JpaSpecificationExecutor<Contratti>, QuerydslPredicateExecutor<Contratti>,ContrattiRepositoryCustom {
+	
+	
+	
+}
