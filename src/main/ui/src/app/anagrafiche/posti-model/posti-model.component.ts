@@ -44,7 +44,7 @@ posto1: Posto1 = new Posto1();
 
   ngOnInit() {
     console.log('esegui all posto1 on init');
-    this.getAllPosti();
+    //this.getAllPosti();
     }
 
     showPostiModal(){

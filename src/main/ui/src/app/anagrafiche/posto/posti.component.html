@@ -18,14 +18,14 @@
         </div>
         <div class="row">
           <h4>Dati Assegnatario</h4>
-          <label class="col-sm-1"for="nome">Nome</label>
+          <label class="col-sm-1"for="nomeAss">Nome</label>
               <div class="form-group col-sm-5">
-              <input type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp" >
+              <input type="text" class="form-control" formControlName="nomeAss" id="nomeAss" aria-describedby="nomeAsslHelp" >
             </div>
 
-            <label class="col-sm-1 "for="cognome">Cognome</label>
+            <label class="col-sm-1 "for="cognomeAss">Cognome</label>
             <div class="form-group col-sm-5">
-             <input type="text" class="form-control" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp" >
+             <input type="text" class="form-control" formControlName="cognomeAss" id="cognomeAss" aria-describedby="cognomeAsslHelp" >
             </div>
         </div>
         <div class="row">
@@ -43,7 +43,7 @@
           <label class="col-sm-1 " for="stato">Stato</label>
           <div class="form-group col-sm-5">
             <!-- <select name="stato" id ="stato"> -->
-              <select class="form-select" aria-label="Default select example">
+              <select class="form-select"  aria-label="Default select example">
               <option >-----</option>
               <option  value="LIBERO">Libero</option>
               <option  value="PRENOTATO">Prenotato</option>
@@ -85,7 +85,7 @@
         <td>{{postoTab.loculo}}</td>
         <td>{{postoTab.fornice}}</td>
         <td>{{postoTab.cognome}} {{postoTab.nome}}</td>
-        <td>{{postoTab.scadenza}}</td>
+        <td>{{postoTab.scadenza| date:'MM-LL-YYYY'}}</td>
         <td>
           <button class="btn btn-primary me-1" >Dettaglio</button>
         </td>
