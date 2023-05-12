@@ -23,6 +23,7 @@ import it.pittysoft.affetti.repository.ContraentiRepository;
 import it.pittysoft.affetti.repository.ContrattiRepository;
 import it.pittysoft.affetti.repository.DomandeRepository;
 import it.pittysoft.affetti.repository.PostiRepository;
+import lombok.Data;
 
 
 
@@ -30,12 +31,29 @@ import it.pittysoft.affetti.repository.PostiRepository;
 public class ContrattiService {
 	
 	private ContrattiRepository contrattiRepository;
+	
+	private DomandeRepository domandaRepository;
+	
+	private ContraentiRepository contraentiRepository;
+	
+	private AssegnatariRepository assegnatariRepository;
+	
+	private PostiRepository postiRepository;
 
-    public ContrattiService(ContrattiRepository contrattiRepository) {
-        this.contrattiRepository = contrattiRepository;
-    }
+    
 
-    public List<Contratti> getContratti() {
+    public ContrattiService(ContrattiRepository contrattiRepository, DomandeRepository domandaRepository,
+			ContraentiRepository contraentiRepository, AssegnatariRepository assegnatariRepository,
+			PostiRepository postiRepository) {
+		super();
+		this.contrattiRepository = contrattiRepository;
+		this.domandaRepository = domandaRepository;
+		this.contraentiRepository = contraentiRepository;
+		this.assegnatariRepository = assegnatariRepository;
+		this.postiRepository = postiRepository;
+	}
+
+	public List<Contratti> getContratti() {
         return contrattiRepository.findAll();
     }
     
@@ -60,15 +78,16 @@ public class ContrattiService {
     	contrattiModel.setDataScadenzaContratto(contrattiSaved.getData_scadenza());
     	
     	
-    	Posti posti = PostiRepository.findByDomanda(domanda);
+    	Domande domande= domandaRepository.findById(contrattiRequest.getIdDomanda());
+    	contrattiModel.setIdDomanda(domande.getId());
+    	contrattiModel.setProtocolloDomanda(domande.getProtocollo());
+    	contrattiModel.setDataProtocolloDomanda(domande.getData_protocollo());
+    	
+    	Posti posti = postiRepository.findByDomanda(domande);
     	contrattiModel.setLoculo(posti.getLoculo());
     	contrattiModel.setFornice(posti.getFornice()); 
-    	
-    	Domande domanda = DomandeRepository.findByDomanda(domanda);
-    	contrattiModel.setProtocolloDomanda(domanda.getProtocollo());
-    	contrattiModel.setDataProtocolloDomanda(domanda.getData_protocollo());
    	
-    	Contraenti contraente = ContraentiRepository.findByDomanda(domanda);
+    	Contraenti contraente = contraentiRepository.findByDomanda(domande);
     	contrattiModel.setNomeC(contraente.getNome());
     	contrattiModel.setCognomeC(contraente.getCognome());
     	contrattiModel.setCap_residenza(contraente.getCap_residenza());
@@ -86,9 +105,11 @@ public class ContrattiService {
     	contrattiModel.setData_nascita(contraente.getData_nascita());
     	
     	
-    	Assegnatari assegnatari = AssegnatariRepository.findByDomanda(domanda);
-    	contrattiModel.setLoculo(posti.getLoculo());
-    	contrattiModel.setFornice(posti.getFornice()); 
+    	Assegnatari assegnatari = assegnatariRepository.findByDomanda(domande);
+    	contrattiModel.setData_decesso(assegnatari.getData_decesso());
+    	contrattiModel.setComune_decesso(assegnatari.getComune_decesso()); 
+    	contrattiModel.setNomeA(assegnatari.getNome());
+    	contrattiModel.setCognomeA(assegnatari.getCognome());
     	
     	response.getContratti().add(contrattiModel);
     	

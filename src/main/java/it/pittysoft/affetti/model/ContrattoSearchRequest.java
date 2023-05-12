@@ -9,11 +9,12 @@ import lombok.Data;
 @Data
 public class ContrattoSearchRequest extends Request {
 	
+	private Long idDomanda;
 	private String nome;
 	private String cognome;
 	private String codiceFiscale;
-	private String dataProtocolloIniziale;
-	private String dataProtocolloFinale;
+	private Date dataProtocolloIniziale;
+	private Date dataProtocolloFinale;
 	private String numeroProtocollo;
 	private String tipologia;
 	private String stato;

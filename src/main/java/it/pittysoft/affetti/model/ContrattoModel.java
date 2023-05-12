@@ -10,8 +10,8 @@ public class ContrattoModel {
 
 	private String numeroProtocolloContratto;
 	private String stato;
-	private Data dataProtocolloContratto;
-	private Data dataScadenzaContratto;
+	private Date dataProtocolloContratto;
+	private Date dataScadenzaContratto;
 	private String contraente;
 	private String assegnatario;
 	
@@ -40,6 +40,7 @@ public class ContrattoModel {
 	private String comune_decesso;
 	private Date data_decesso;
 	
+	private Long idDomanda;
 	private String protocolloDomanda;
 	private String dataProtocolloDomanda;
 }

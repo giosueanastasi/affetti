@@ -17,7 +17,9 @@ import it.pittysoft.affetti.entity.Posti;
 
 @RepositoryRestResource()
 public interface ContraentiRepository extends JpaRepository<Contraenti, Integer>, JpaSpecificationExecutor<Contraenti>, QuerydslPredicateExecutor<Contraenti>, ContraentiRepositoryCustom {
+	
 	Contraenti findById(Long id);
-	Contraenti findByDomanda(Domande domanda);
+	
+	Contraenti findByDomanda(Domande domande);
 	
 }

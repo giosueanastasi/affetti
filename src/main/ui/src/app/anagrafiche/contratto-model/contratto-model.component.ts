@@ -24,8 +24,8 @@ export class ContrattoModelComponent {
 
   saveContratto() {
     debugger;
-    this.appService.saveContratto(this.contratto).pipe().subscribe(data => {
-      this.save.emit(data);
+    this.appService.saveContratto(this.contratto).pipe().subscribe((data:any) => {
+      this.save.emit(data.contratti[0]);
       $('#contrattoModal').modal('hide');
     });
   }
