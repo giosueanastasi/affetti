@@ -61,7 +61,7 @@
 
               <label class="col-sm-1 "for="stato">Stato</label>
               <div class="form-group col-md-5">
-                  <select class="form-select" aria-label="Default select example">
+                  <select class="form-select" formControlName="stato" id="stato" name="stato" aria-label="Default select example">
                     <option value="">-----</option>
                     <option value="APERTA">APERTA</option>
                     <option value="CHIUSA">CHIUSA</option>
@@ -72,13 +72,13 @@
             <div class="row">
   
               <h4>Cerca Intervallo</h4>
-              <label class="col-sm-1 "for="stato">da</label>
+              <label class="col-sm-1 "for="data_protocollo_iniziale">da</label>
               <div class="form-group col-md-2">
-                <input ng-model="answers.dob" type="date" class="form-control" formControlName="data_protocollo_iniziale" id="data_protocollo_iniziale" aria-describedby="data_protocollo_inizialelHelp" placeholder="data_protocollo_iniziale">
+                <input ng-model="answers.dob" type="date" class="form-control" formControlName="data_protocollo_iniziale" id="data_protocollo_iniziale" aria-describedby="data_protocollo_inizialelHelp" >
               </div>
-              <label class="col-sm-1 "for="stato">a</label>
+              <label class="col-sm-1 "for="data_protocollo_finale">a</label>
               <div class="form-group col-md-2">
-                <input ng-model="answers.dob" type="date" class="form-control" formControlName="data_protocollo_finale" id="data_protocollo_finale" aria-describedby="data_protocollo_finalelHelp" placeholder="data_protocollo_finale">
+                <input ng-model="answers.dob" type="date" class="form-control" formControlName="data_protocollo_finale" id="data_protocollo_finale" aria-describedby="data_protocollo_finalelHelp" >
               </div>
   
             </div>
@@ -110,12 +110,12 @@
         <tr *ngFor="let domanda of domande; let i = index">
           <td>{{domanda.numeroProtocolloDomanda}}</td>
           <td>{{domanda.stato}}</td>
-          <td>{{domanda.dataProtocollo.substring(0, 10)}}</td>
+          <td>{{domanda.dataProtocollo |date:'dd-MM-YYYY'}}</td>
           <td>{{domanda.nomeContraente}}</td>
           <td>{{domanda.cognomeContraente}}</td>
           <td>{{domanda.assegnatario }}</td>
-          <td>{{domanda.numeroProtocolloContratto }}</td>
-          <td></td>
+          <td><button class="btn btn-primary me-1" >Dettaglio</button></td>
+          <td><button class="btn btn-primary me-1" >Dettaglio</button></td>
         </tr>
       </tbody>
       </table>

@@ -35,15 +35,6 @@ domandaCount = 0;
 
 destroy$: Subject<boolean> = new Subject<boolean>();
 
-// onSubmit() {
-//   this.appService.addDomanda(this.domandaForm.value, this.domandaCount + 1).pipe(takeUntil(this.destroy$)).subscribe(data => {
-//     console.log('message::::', data);
-//     this.domandaCount = this.domandaCount + 1;
-//     console.log(this.domandaCount);
-//     this.domandaForm.reset();
-//     this.getAllDomande();
-//   });
-// }
 
 getAllDomande() {
   this.appService.getDomande().pipe(takeUntil(this.destroy$)).subscribe((domande: any[]) => {
@@ -68,12 +59,10 @@ cercaDomande(cercaDomandaForm: FormGroup) {
 }
 
 
-/*
-@Input() domande: any[];
-*/
+
 ngOnInit() {
   console.log('esegui all domande on init');
-  this.getAllDomande();
+ // this.getAllDomande();
   }
 
 

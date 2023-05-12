@@ -50,6 +50,7 @@ filtraContraenti() {
   contraenteFiltrato.nome = this.contraenteForm.controls['nome'].value;
   contraenteFiltrato.cognome = this.contraenteForm.controls['cognome'].value;
   contraenteFiltrato.codice_fiscale = this.contraenteForm.controls['codice_fiscale'].value;
+  contraenteFiltrato.protocolloC = this.contraenteForm.controls['protocollo'].value;
  
 
   this.appService.cercaCercacontraenti(contraenteFiltrato).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
@@ -67,7 +68,7 @@ ngOnDestroy() {
 
 ngOnInit() {
   console.log('esegui all contraenti on init');
-  this.getAllContraenti();
+ // this.getAllContraenti();
   }
 
 

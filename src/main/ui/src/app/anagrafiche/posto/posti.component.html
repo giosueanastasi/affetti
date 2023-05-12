@@ -43,7 +43,7 @@
           <label class="col-sm-1 " for="stato">Stato</label>
           <div class="form-group col-sm-5">
             <!-- <select name="stato" id ="stato"> -->
-              <select class="form-select"  aria-label="Default select example">
+              <select class="form-select" formControlName="stato" id="stato" name="stato" aria-label="Default select example">
               <option >-----</option>
               <option  value="LIBERO">Libero</option>
               <option  value="PRENOTATO">Prenotato</option>
@@ -85,7 +85,7 @@
         <td>{{postoTab.loculo}}</td>
         <td>{{postoTab.fornice}}</td>
         <td>{{postoTab.cognome}} {{postoTab.nome}}</td>
-        <td>{{postoTab.scadenza| date:'MM-LL-YYYY'}}</td>
+        <td>{{postoTab.scadenza| date:'dd-MM-YYYY'}}</td>
         <td>
           <button class="btn btn-primary me-1" >Dettaglio</button>
         </td>

@@ -24,7 +24,6 @@ export class PostoEditComponent {
 
   savePostoEdit() {
     this.appService.savePosto(this.posto1).pipe().subscribe((data: any) => {
-      debugger;
       this.save.emit(data.posti[0]);
       $('#postoEdit').modal('hide');
     });

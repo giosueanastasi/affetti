@@ -78,6 +78,11 @@ public class DomandaDao {
 		if(resquestSearch.getCognome()!=null && !resquestSearch.getCognome().isEmpty()) {
 			builder.and(qContraenti.cognome.upper().like("%"+resquestSearch.getCognome().toUpperCase()+"%"));
 		}
+		if(resquestSearch.getDataProtocolloIniziale()!=null && resquestSearch.getDataProtocolloFinale() != null) {
+			builder.and(qDomande.data_protocollo.between(resquestSearch.getDataProtocolloIniziale(), resquestSearch.getDataProtocolloFinale()));
+		}
+			
+
 			
 		if(resquestSearch.getCodiceFiscale()!=null && !resquestSearch.getCodiceFiscale().isEmpty()) {
 			builder.and(qContraenti.codice_fiscale.upper().like(resquestSearch.getCodiceFiscale().toUpperCase()));
