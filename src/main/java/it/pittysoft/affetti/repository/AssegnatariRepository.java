@@ -6,8 +6,15 @@ import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 import it.pittysoft.affetti.entity.Assegnatari;
+import it.pittysoft.affetti.entity.Domande;
+import it.pittysoft.affetti.entity.Posti;
 
 
 
 @RepositoryRestResource()
-public interface AssegnatariRepository extends JpaRepository<Assegnatari, Integer>, JpaSpecificationExecutor<Assegnatari>, QuerydslPredicateExecutor<Assegnatari> {}
+public interface AssegnatariRepository extends JpaRepository<Assegnatari, Integer>, JpaSpecificationExecutor<Assegnatari>, QuerydslPredicateExecutor<Assegnatari> {
+	
+	 Assegnatari findById (Long id);
+	// Assegnatari findByDomanda(Domande domande);
+		
+}

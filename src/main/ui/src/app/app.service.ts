@@ -99,6 +99,10 @@ export class AppService {
     return this.http.get(this.rootURL + '/contratti');
   }
 
+  saveContratto(contratto: any) {
+    return this.http.post(this.rootURL + '/contratto', contratto);
+  }
+
   addContratto(contratto: any, id: number) {
     contratto.id = id;
 	return this.http.post(this.rootURL + '/contratto', contratto);

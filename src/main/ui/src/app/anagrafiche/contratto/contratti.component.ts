@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from '../../app.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { ContrattoModelComponent } from '../contratto-model/contratto-model.component';
+import { Contratto } from 'src/app/app-state/models';
 
 
 
@@ -11,11 +13,15 @@ import { Subject } from 'rxjs';
   templateUrl: './contratti.component.html',
   styleUrls: ['./contratti.component.css']
 })
-export class ContrattiComponent implements OnInit, OnDestroy {
+export class ContrattiComponent implements OnInit {
+
+  selectedContratto: Contratto = new Contratto();
 
   constructor(private appService: AppService) {}
 
   title = 'angular-nodejs-example';
+
+  @ViewChild(ContrattoModelComponent) child: ContrattoModelComponent | undefined;
 
   contrattoForm = new FormGroup({
     nome: new FormControl('', Validators.nullValidator),
@@ -33,14 +39,13 @@ export class ContrattiComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  onSubmit() {
-    this.appService.addContratto(this.contrattoForm.value, this.contrattoCount + 1).pipe(takeUntil(this.destroy$)).subscribe(data => {
-      console.log('message::::', data);
-      this.contrattoCount = this.contrattoCount + 1;
-      console.log(this.contrattoCount);
-      this.contrattoForm.reset();
-      this.getAllContratti();
-    });
+  createContrattoRequest(){
+    this.selectedContratto = new Contratto();
+    this.child?.showContrattoModal();
+  }
+  editContrattoRequest(item: Contratto){
+    this.selectedContratto = Object.assign({},item);
+    this.child?.showContrattoModal();
   }
 
   getAllContratti() {
@@ -66,7 +71,16 @@ export class ContrattiComponent implements OnInit, OnDestroy {
 */
   ngOnInit() {
     console.log('esegui all contratto on init');
-    this.getAllContratti();
+    //this.getAllContratti();
+    }
+
+    saveContrattoWatcher(contratto: Contratto){
+      let contrattoIndex = this.contratti.findIndex(item => item.id === contratto.id);
+      if(contrattoIndex !==-1){
+        this.contratti[contrattoIndex] = contratto;
+      }else{
+        this.contratti.push(contratto);
+      }
     }
 
 }

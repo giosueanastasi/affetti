@@ -9,10 +9,16 @@ import org.springframework.transaction.annotation.Transactional;
 import it.pittysoft.affetti.entity.Assegnatari;
 import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Domande;
+import it.pittysoft.affetti.entity.Posti;
 
 
 @RepositoryRestResource()
 public interface DomandeRepository extends JpaRepository<Domande, Integer>, JpaSpecificationExecutor<Domande>, QuerydslPredicateExecutor<Domande>{
+<<<<<<< HEAD
 	Domande findById(Long id);
+=======
+	
+	Domande findById (Long id);
+>>>>>>> refs/remotes/origin/develop
 	
 }

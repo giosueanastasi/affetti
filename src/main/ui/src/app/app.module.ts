@@ -38,7 +38,7 @@ import { UserModelComponent } from './anagrafiche/user-model/user-model.componen
 import { PopupComponent } from './popup/popup.component';
 import { PostoEditComponent } from './anagrafiche/posto-edit/posto-edit.component';
 import { DomandaModelComponent } from './anagrafiche/domanda-model/domanda-model.component';
-
+import { ContrattoModelComponent } from './anagrafiche/contratto-model/contratto-model.component';
 
 
 // state related imports
@@ -71,6 +71,7 @@ import { DomandaModelComponent } from './anagrafiche/domanda-model/domanda-model
     PostiModelComponent,
     CercacontraentiModelComponent,
     UserModelComponent,
+    ContrattoModelComponent,
     PopupComponent,
     PostoEditComponent,
 

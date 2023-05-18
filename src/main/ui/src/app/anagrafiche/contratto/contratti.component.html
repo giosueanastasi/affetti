@@ -99,6 +99,7 @@
         <th>Contraente</th>
         <th>Assegnatario</th>
         <th>Dettaglio</th>
+        
 
       </tr>
     </thead>
@@ -110,8 +111,11 @@
         <td>{{contratto.dataScadenzaContratto.substring(0, 10)}}</td>
         <td>{{contratto.contraente}}</td>
         <td>{{contratto.assegnatario}}</td>
-        <td></td>
+        <td>
+          <button class="btn btn-primary me-1"(click)="editContrattoRequest(contratto)">Dettaglio</button>
+        </td>
       </tr>
     </tbody>
   </table>
 </div>
+<app-contratto-model [contratto]="selectedContratto" (save)="saveContrattoWatcher($event)"></app-contratto-model>

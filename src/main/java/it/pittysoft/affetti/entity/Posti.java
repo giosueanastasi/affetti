@@ -59,7 +59,7 @@ public class Posti {
 
     @OneToMany(mappedBy = "posto")
     private List<Domande> domande  = new ArrayList<>();
-    
+   
 
     
 
