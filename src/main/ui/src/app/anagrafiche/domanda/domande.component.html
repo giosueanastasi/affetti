@@ -26,7 +26,7 @@
 
             
               <label class="col-sm-1 "for="Data">Tipologia</label>
-              <div class="form-check" class="form-group col-sm-1" style="font-size: medium;">
+              <div class="form-check"   class="form-group col-sm-1" style="font-size: medium;">
                 <input
                   id="loculo"
                   type="radio"
@@ -36,7 +36,7 @@
                 />
                 <label class="custom-control-label" for="loculo"> Loculo</label>
               </div>
-              <div class="form-check" class="form-group col-sm-3" >
+              <div class="form-check"   class="form-group col-sm-3" >
                 <input
                   id="tenuta_a_disposizione"
                   type="radio"
@@ -107,7 +107,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let domanda of domande; let i = index">
+        <tr *ngFor="let domanda of domande">
           <td>{{domanda.numeroProtocolloDomanda}}</td>
           <td>{{domanda.stato}}</td>
           <td>{{domanda.dataProtocollo |date:'dd-MM-YYYY'}}</td>
@@ -115,8 +115,10 @@
           <td>{{domanda.cognomeContraente}}</td>
           <td>{{domanda.assegnatario }}</td>
           <td><button class="btn btn-primary me-1" >Dettaglio</button></td>
-          <td><button class="btn btn-primary me-1" >Dettaglio</button></td>
+          <td><button class="btn btn-primary me-1" (click)="editDomandaRequest(domanda)" >Dettaglio</button></td>
         </tr>
       </tbody>
       </table>
      </div>
+
+     <app-domanda-model [domanda]="selectedDomanda" (save)="saveDomandaWatcher($event)"></app-domanda-model>

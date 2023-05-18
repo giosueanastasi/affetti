@@ -1,0 +1,349 @@
+<div class="modal fade" id="domandaModal" tabIndex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form #f="ngForm" >
+                 <div class="modal-header">
+                    <h2 class="modal-title"> Dettaglio Domanda</h2>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                 </div>
+
+                 <div class="modal-body">
+                    <div class="alert alert-danger" *ngIf="errorMessage">
+                        <strong>Error!</strong>{{errorMessage}}
+                    </div>
+
+                    <h3>Protocollo </h3>
+
+                    <div class="form-group">
+                        <label for="protocollo">Numero</label>
+                        <input 
+                            type="search" 
+                            id="protocollo" 
+                            name="protocollo"
+                            class="form-control" 
+                            [(ngModel)]="domanda.protocollo"
+                            #protocollo="ngModel"
+                            
+                            >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="data_protocollo">Data</label>
+                        <input 
+                            type="text" 
+                            id="data_protocollo" 
+                            name="data_protocollo"
+                            class="form-control" 
+                            [(ngModel)]="domanda.data_protocollo"
+                            #data_protocollo="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stato">stato</label>
+                        <select class="form-select" 
+                                aria-label="Default select example"
+                                type="search" 
+                                id="stato" 
+                                name="stato"
+                                class="form-control" 
+                                [(ngModel)]="domanda.stato"
+                                #stato="ngModel"
+                                
+                                >
+                        <option >-----</option>
+                        <option  value="APERTA">Aperta</option>
+                        <option  value="CHIUSA">Chiusa</option>
+                        </select>
+                    </div>
+
+                    <h3>Dati Contraente </h3>
+
+                    <div class="form-group">
+                        <label for="nome">Nome</label>
+                        <input 
+                            type="search" 
+                            id="nome" 
+                            name="nome"
+                            class="form-control" 
+                            [(ngModel)]="domanda.nome"
+                            #nome="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cognome">Cognome</label>
+                        <input 
+                            type="search" 
+                            id="cognome" 
+                            name="cognome"
+                            class="form-control" 
+                            [(ngModel)]="domanda.cognome"
+                            #cognome="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <h3>Dati Nascita </h3>
+
+                    <div class="form-group">
+                        <label for="comune_nascita">Comune</label>
+                        <input 
+                            type="search" 
+                            id="comune_nascita" 
+                            name="comune_nascita"
+                            class="form-control" 
+                            [(ngModel)]="domanda.comune_nascita"
+                            #comune_nascita="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="provincia_nascita">Provincia</label>
+                        <input 
+                            type="search" 
+                            id="provincia_nascita" 
+                            name="provincia_nascita"
+                            class="form-control" 
+                            [(ngModel)]="domanda.provincia_nascita"
+                            #provincia_nascita="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="stato_nascita">Stato</label>
+                        <input 
+                            type="search" 
+                            id="stato_nascita" 
+                            name="stato_nascita"
+                            class="form-control" 
+                            [(ngModel)]="domanda.stato_nascita"
+                            #stato_nascita="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <h3>Dati Residenza </h3>
+
+                    <div class="form-group">
+                        <label for="comune_residenza">Comune</label>
+                        <input 
+                            type="search" 
+                            id="comune_residenza" 
+                            name="comune_residenza"
+                            class="form-control" 
+                            [(ngModel)]="domanda.comune_residenza"
+                            #comune_residenza="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="provincia_residenza">Provincia</label>
+                        <input 
+                            type="search" 
+                            id="provincia_residenza" 
+                            name="provincia_residenza"
+                            class="form-control" 
+                            [(ngModel)]="domanda.provincia_residenza"
+                            #provincia_residenza="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="via_residenza">Indirizzo</label>
+                        <input 
+                            type="search" 
+                            id="via_residenza" 
+                            name="via_residenza"
+                            class="form-control" 
+                            [(ngModel)]="domanda.via_residenza"
+                            #via_residenza="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="civico_residenza">Civico</label>
+                        <input 
+                            type="search" 
+                            id="civico_residenza" 
+                            name="civico_residenza"
+                            class="form-control" 
+                            [(ngModel)]="domanda.civico_residenza"
+                            #civico_residenza="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cap_residenza">Cap</label>
+                        <input 
+                            type="search" 
+                            id="cap_residenza" 
+                            name="cap_residenza"
+                            class="form-control" 
+                            [(ngModel)]="domanda.cap_residenza"
+                            #cap_residenza="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <h3>Altri Dati</h3>
+
+                    <div class="form-group">
+                        <label for="codice_fiscale">Codice Fiscale</label>
+                        <input 
+                            type="search" 
+                            id="codice_fiscale" 
+                            name="codice_fiscale"
+                            class="form-control" 
+                            [(ngModel)]="domanda.codice_fiscale"
+                            #codice_fiscale="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input 
+                            type="search" 
+                            id="email" 
+                            name="email"
+                            class="form-control" 
+                            [(ngModel)]="domanda.email"
+                            #email="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Telefono</label>
+                        <input 
+                            type="search" 
+                            id="telefono" 
+                            name="telefono"
+                            class="form-control" 
+                            [(ngModel)]="domanda.telefono"
+                            #telefono="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="note">Note</label>
+                        <input 
+                            type="textarea" 
+                            id="note" 
+                            name="note"
+                            class="form-control" 
+                            [(ngModel)]="domanda.note"
+                            #note="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <h3>Dati posto</h3>
+
+                    <div class="form-group">
+                        <label for="loculo">Loculo</label>
+                        <input 
+                            type="search" 
+                            id="loculo" 
+                            name="loculo"
+                            class="form-control" 
+                            [(ngModel)]="domanda.loculo"
+                            #loculo="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fornice">Fornice</label>
+                        <input 
+                            type="search" 
+                            id="fornice" 
+                            name="fornice"
+                            class="form-control" 
+                            [(ngModel)]="domanda.fornice"
+                            #fornice="ngModel"
+                            readonly
+                            >
+                    </div>
+
+
+
+                    <h3>Assegnatario</h3>
+
+                    <div class="form-group">
+                        <label for="nomeAss">Nome</label>
+                        <input 
+                            type="search" 
+                            id="nomeAss" 
+                            name="nomeAss"
+                            class="form-control" 
+                            [(ngModel)]="domanda.nomeAss"
+                            #nomeAss="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cognomeAss">Cognome</label>
+                        <input 
+                            type="search" 
+                            id="cognomeAss" 
+                            name="cognomeAss"
+                            class="form-control" 
+                            [(ngModel)]="domanda.cognomeAss"
+                            #cognomeAss="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <h3>Dati Decesso</h3>
+
+                    <div class="form-group">
+                        <label for="comune_decesso">Comune</label>
+                        <input 
+                            type="search" 
+                            id="comune_decesso" 
+                            name="comune_decesso"
+                            class="form-control" 
+                            [(ngModel)]="domanda.comune_decesso"
+                            #comune_decesso="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="data_decesso">Date</label>
+                        <input 
+                            type="text" 
+                            id="data_decesso" 
+                            name="data_decesso"
+                            class="form-control" 
+                            [(ngModel)]="domanda.data_decesso"
+                            #data_decesso="ngModel"
+                            readonly
+                            >
+                    </div>
+
+                    </div>
+               
+
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Chiudi</button>
+                  <button type="button" class="btn btn-primary" (click)="saveDomandaModal()">Modifica</button>
+                </div>
+          </form>
+        </div>
+    </div>
+</div>
+  

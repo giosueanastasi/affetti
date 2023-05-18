@@ -37,6 +37,7 @@ import { CercacontraentiModelComponent } from './anagrafiche/cercacontraenti-mod
 import { UserModelComponent } from './anagrafiche/user-model/user-model.component';
 import { PopupComponent } from './popup/popup.component';
 import { PostoEditComponent } from './anagrafiche/posto-edit/posto-edit.component';
+import { DomandaModelComponent } from './anagrafiche/domanda-model/domanda-model.component';
 
 
 
@@ -72,6 +73,8 @@ import { PostoEditComponent } from './anagrafiche/posto-edit/posto-edit.componen
     UserModelComponent,
     PopupComponent,
     PostoEditComponent,
+
+    DomandaModelComponent,
     
 
     

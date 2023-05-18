@@ -64,7 +64,7 @@ export class AppService {
 
   addContraente(contraente: any, id: number) {
     contraente.id = id;
-    debugger;
+
     return this.http.post(this.rootURL + '/contraente', contraente);
   }
 
@@ -79,6 +79,10 @@ export class AppService {
 
   savePosto(posto1: any) {
     return this.http.post(this.rootURL + '/posto', posto1);
+  }
+
+  saveDomanda(domanda: any) {
+    return this.http.post(this.rootURL + '/domanda', domanda);
   }
 
 

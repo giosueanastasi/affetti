@@ -1,5 +1,6 @@
 package it.pittysoft.affetti.entity;
 
+import java.util.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -35,7 +36,7 @@ public class Domande {
     
     @Column
     @NotNull(message="{NotNull.Domanda.data_protocollo}")
-    private String data_protocollo;
+    private Date data_protocollo;
     
     @Column
     @NotNull(message="{NotNull.Domanda.stato}")
