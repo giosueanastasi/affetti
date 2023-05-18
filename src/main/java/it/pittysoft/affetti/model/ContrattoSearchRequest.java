@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 public class ContrattoSearchRequest extends Request {
 	
+	private Long idContratto;
 	private Long idDomanda;
 	private String nome;
 	private String cognome;

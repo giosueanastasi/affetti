@@ -16,17 +16,20 @@ export class Contratto {
   cognomeA : string;
   cognomeC : string;
 
+
+    idContratto:number;
 	numeroProtocolloContratto: string;
 	dataProtocolloContratto: Date;
 	dataScadenzaContratto: Date;
 
+    idContraente:number;
 	codice_fiscale: string;
 	comune_nascita: string;
 	provincia_nascita: string;
 	stato_nascita: string;
 	data_nascita: string;
 	comune_residenza: string;
-  provincia_residenza: string;
+    provincia_residenza: string;
 	via_residenza: string;
 	civico_residenza: string;
 	cap_residenza: string;
@@ -34,12 +37,15 @@ export class Contratto {
 	note: string;
 	telefono: string;
 	
+	idPosto:number;
 	loculo: string;
 	fornice: string;
 	
+	idAssegnatario: number;
 	comune_decesso: string;
 	data_decesso: string;
 	
+	idDomanda:number;
 	protocolloDomanda: string;
 	dataProtocolloDomanda: string;
 

@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class ContrattoModel {
 
+	private Long idContratto;
 	private String numeroProtocolloContratto;
 	private String stato;
 	private Date dataProtocolloContratto;
@@ -15,7 +16,7 @@ public class ContrattoModel {
 	private String contraente;
 	private String assegnatario;
 	
-	
+	private Long idContraente;
 	private String nomeA;
 	private String nomeC;
 	private String cognomeA;
@@ -34,9 +35,11 @@ public class ContrattoModel {
 	private String note;
 	private String telefono;
 	
+	private Long idPosto;
 	private String loculo;
 	private String fornice;
 	
+	private Long idAssegnatario;
 	private String comune_decesso;
 	private Date data_decesso;
 	

@@ -20,6 +20,6 @@ public interface ContraentiRepository extends JpaRepository<Contraenti, Integer>
 	
 	Contraenti findById(Long id);
 	
-	Contraenti findByDomanda(Domande domande);
+	//Contraenti findByDomanda(Domande domande);
 	
 }

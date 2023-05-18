@@ -39,10 +39,10 @@ export class ContrattiComponent implements OnInit {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
- // createContrattoRequest(){
-   // this.selectedContratto = new Contratto();
-    //this.child?.showContrattoModal();
-  //}
+  createContrattoRequest(){
+    this.selectedContratto = new Contratto();
+    this.child?.showContrattoModal();
+  }
   editContrattoRequest(item: Contratto){
     this.selectedContratto = Object.assign({},item);
     this.child?.showContrattoModal();
@@ -71,7 +71,7 @@ export class ContrattiComponent implements OnInit {
 */
   ngOnInit() {
     console.log('esegui all contratto on init');
-  //  this.getAllContratti();
+    //this.getAllContratti();
     }
 
     saveContrattoWatcher(contratto: Contratto){

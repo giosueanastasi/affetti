@@ -16,7 +16,7 @@ import it.pittysoft.affetti.entity.Posti;
 public interface PostiRepository extends JpaRepository<Posti, Integer>, JpaSpecificationExecutor<Posti>, QuerydslPredicateExecutor<Posti>, PostiRepositoryCustom {
 	
 	List<Posti> findByForniceAndLoculoOrderById(String fornice,String loculo);
-	//Posti findById (Long id);
-	Posti findByDomanda(Domande domande);
+	Posti findById (Long id);
+	//Posti findByDomanda(Domande domande);
 	
 }

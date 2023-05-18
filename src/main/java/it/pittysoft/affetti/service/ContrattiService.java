@@ -66,28 +66,34 @@ public class ContrattiService {
     	ContrattoSearchResponse response = new ContrattoSearchResponse();
     	
     	Contratti contratti = new Contratti();
+    	contratti.setId(contrattiRequest.getIdContratto());
     	contratti.setProtocollo(contrattiRequest.getNumeroProtocollo());
+    	contratti.setStato(contrattiRequest.getStato());
     	contratti.setData_inizio(contrattiRequest.getDataProtocolloIniziale());
     	contratti.setData_scadenza(contrattiRequest.getDataProtocolloFinale());
     	   	
     	Contratti contrattiSaved = contrattiRepository.save(contratti);
     	
     	ContrattoModel contrattiModel = new ContrattoModel();
+    	contrattiModel.setIdContratto(contrattiSaved.getId());
+    	contrattiModel.setStato(contrattiSaved.getStato());
     	contrattiModel.setNumeroProtocolloContratto(contrattiSaved.getProtocollo());
     	contrattiModel.setDataProtocolloContratto(contrattiSaved.getData_inizio());
     	contrattiModel.setDataScadenzaContratto(contrattiSaved.getData_scadenza());
     	
     	
-    	Domande domande= domandaRepository.findById(contrattiRequest.getIdDomanda());
-    	contrattiModel.setIdDomanda(domande.getId());
-    	contrattiModel.setProtocolloDomanda(domande.getProtocollo());
-    	contrattiModel.setDataProtocolloDomanda(domande.getData_protocollo());
+    	Domande domanda = domandaRepository.findById(contrattiRequest.getIdDomanda());
+    	contrattiModel.setIdDomanda(domanda.getId());
+    	contrattiModel.setProtocolloDomanda(domanda.getProtocollo());
+    	contrattiModel.setDataProtocolloDomanda(domanda.getData_protocollo());
     	
-    	Posti posti = postiRepository.findByDomanda(domande);
-    	contrattiModel.setLoculo(posti.getLoculo());
-    	contrattiModel.setFornice(posti.getFornice()); 
+    	Posti posto = postiRepository.findById(domanda.getPosto().getId());
+    	contrattiModel.setIdPosto(domanda.getId());
+    	contrattiModel.setLoculo(posto.getLoculo());
+    	contrattiModel.setFornice(posto.getFornice()); 
    	
-    	Contraenti contraente = contraentiRepository.findByDomanda(domande);
+    	Contraenti contraente = contraentiRepository.findById(domanda.getContraente().getId());
+    	contrattiModel.setIdContraente(domanda.getId());
     	contrattiModel.setNomeC(contraente.getNome());
     	contrattiModel.setCognomeC(contraente.getCognome());
     	contrattiModel.setCap_residenza(contraente.getCap_residenza());
@@ -105,7 +111,8 @@ public class ContrattiService {
     	contrattiModel.setData_nascita(contraente.getData_nascita());
     	
     	
-    	Assegnatari assegnatari = assegnatariRepository.findByDomanda(domande);
+    	Assegnatari assegnatari = assegnatariRepository.findById(domanda.getAssegnatario().getId());
+    	contrattiModel.setIdAssegnatario(domanda.getId());
     	contrattiModel.setData_decesso(assegnatari.getData_decesso());
     	contrattiModel.setComune_decesso(assegnatari.getComune_decesso()); 
     	contrattiModel.setNomeA(assegnatari.getNome());
@@ -155,6 +162,10 @@ public class ContrattiService {
 			 cm.setNomeC(contratti.getDomanda().getContraente().getNome());
 			 cm.setNomeA(contratti.getDomanda().getAssegnatario().getNome());
 			 cm.setCognomeA(contratti.getDomanda().getAssegnatario().getCognome());
+			 cm.setIdPosto(contratti.getDomanda().getPosto().getId());
+			 cm.setIdAssegnatario(contratti.getDomanda().getAssegnatario().getId());
+			 cm.setIdContraente(contratti.getDomanda().getContraente().getId());
+			 
 			response.getContratti().add(cm);
 
 			 

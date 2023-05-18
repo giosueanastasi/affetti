@@ -15,6 +15,6 @@ import it.pittysoft.affetti.entity.Posti;
 public interface AssegnatariRepository extends JpaRepository<Assegnatari, Integer>, JpaSpecificationExecutor<Assegnatari>, QuerydslPredicateExecutor<Assegnatari> {
 	
 	 Assegnatari findById (Long id);
-	 Assegnatari findByDomanda(Domande domande);
+	// Assegnatari findByDomanda(Domande domande);
 		
 }
