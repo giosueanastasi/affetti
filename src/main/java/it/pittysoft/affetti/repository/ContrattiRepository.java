@@ -13,12 +13,9 @@ import it.pittysoft.affetti.entity.Domande;
 @RepositoryRestResource()
 public interface ContrattiRepository extends JpaRepository<Contratti, Integer>, JpaSpecificationExecutor<Contratti>, QuerydslPredicateExecutor<Contratti>,ContrattiRepositoryCustom {
 	
-<<<<<<< HEAD
+
 	Contratti findById(Long id);
 
 	Contratti findByDomanda(Domande domanda);
-=======
-	
-	
->>>>>>> refs/remotes/origin/develop
+
 }
