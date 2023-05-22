@@ -39,11 +39,14 @@ export class ContrattiComponent implements OnInit {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  createContrattoRequest(){
+  /*createContrattoRequest(){
     this.selectedContratto = new Contratto();
     this.child?.showContrattoModal();
-  }
-  editContrattoRequest(item: Contratto){
+  }*/
+  
+  editContrattoRequest(item: any){
+
+    let contratto = new Contratto;
     this.selectedContratto = Object.assign({},item);
     this.child?.showContrattoModal();
   }

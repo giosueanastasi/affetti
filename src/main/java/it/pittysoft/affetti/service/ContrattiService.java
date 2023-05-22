@@ -12,6 +12,7 @@ import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Contratti;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.entity.Posti;
+import it.pittysoft.affetti.model.ContrattoEditRequest;
 import it.pittysoft.affetti.model.ContrattoModel;
 import it.pittysoft.affetti.model.ContrattoSearchRequest;
 import it.pittysoft.affetti.model.ContrattoSearchResponse;
@@ -62,15 +63,15 @@ public class ContrattiService {
     }
     
     
-    public ContrattoSearchResponse saveContratto(ContrattoSearchRequest contrattiRequest) {
+    public ContrattoSearchResponse saveContratto(ContrattoEditRequest contrattiRequest) {
     	ContrattoSearchResponse response = new ContrattoSearchResponse();
     	
     	Contratti contratti = new Contratti();
     	contratti.setId(contrattiRequest.getIdContratto());
-    	contratti.setProtocollo(contrattiRequest.getNumeroProtocollo());
+    	contratti.setProtocollo(contrattiRequest.getNumeroProtocolloContratto());
     	contratti.setStato(contrattiRequest.getStato());
-    	contratti.setData_inizio(contrattiRequest.getDataProtocolloIniziale());
-    	contratti.setData_scadenza(contrattiRequest.getDataProtocolloFinale());
+    	contratti.setData_inizio(contrattiRequest.getDataProtocolloContratto());
+    	contratti.setData_scadenza(contrattiRequest.getDataScadenzaContratto());
     	   	
     	Contratti contrattiSaved = contrattiRepository.save(contratti);
     	
@@ -165,7 +166,8 @@ public class ContrattiService {
 			 cm.setIdPosto(contratti.getDomanda().getPosto().getId());
 			 cm.setIdAssegnatario(contratti.getDomanda().getAssegnatario().getId());
 			 cm.setIdContraente(contratti.getDomanda().getContraente().getId());
-			 
+			 cm.setIdDomanda(contratti.getDomanda().getId());
+			 cm.setIdContratto(contratti.getId());
 			response.getContratti().add(cm);
 
 			 

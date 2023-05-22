@@ -18,12 +18,14 @@ export class ContrattoModelComponent {
 
   constructor(private appService: AppService) { }
 
+  errorMessage: string = "";
+  
   showContrattoModal(){
     $('#contrattoModal').modal('show');
   }
 
   saveContratto() {
-    debugger;
+    //debugger;
     this.appService.saveContratto(this.contratto).pipe().subscribe((data:any) => {
       this.save.emit(data.contratti[0]);
       $('#contrattoModal').modal('hide');

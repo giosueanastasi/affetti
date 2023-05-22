@@ -32,7 +32,6 @@ postoForm = new FormGroup({
   stato: new FormControl('', Validators.nullValidator),
   data_inizio: new FormControl('', Validators.nullValidator),
   data_scadenza: new FormControl('', Validators.nullValidator),
-
   nomeAss: new FormControl('', Validators.nullValidator),
   cognomeAss: new FormControl('', Validators.nullValidator),
 
