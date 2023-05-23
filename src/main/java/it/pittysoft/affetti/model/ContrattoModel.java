@@ -45,5 +45,5 @@ public class ContrattoModel {
 	
 	private Long idDomanda;
 	private String protocolloDomanda;
-	private String dataProtocolloDomanda;
+	private Date dataProtocolloDomanda;
 }

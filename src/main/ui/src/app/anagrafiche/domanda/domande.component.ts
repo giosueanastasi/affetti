@@ -25,11 +25,13 @@ selectedDomanda: Domanda = new Domanda();
 title = 'angular-nodejs-example';
 
 domandaForm = new FormGroup({
+  idPosto: new FormControl('', Validators.nullValidator),
   nome: new FormControl('', Validators.nullValidator),
   cognome: new FormControl('', Validators.nullValidator),
   tipologia: new FormControl('', Validators.nullValidator),
   codice_fiscale: new FormControl('', Validators.nullValidator),
   numero_protocollo: new FormControl('', Validators.nullValidator),
+  
   data_protocollo_iniziale: new FormControl('', Validators.nullValidator),
   data_protocollo_finale: new FormControl('', Validators.nullValidator),
   stato: new FormControl('', Validators.nullValidator)
@@ -70,41 +72,15 @@ ngOnInit() {
  // this.getAllDomande();
   }
 
-  editDomandaRequest(item: any){
-    let domanda = new Domanda;
- 
-    domanda.data_protocollo = item.dataProtocollo;
-    domanda.protocollo = item.numeroProtocolloDomanda;
-    domanda.tipologia = item.tipologia;
-    domanda.stato = item.stato;
-    domanda.nome = item.nomeContraente;
-    domanda.cognome= item.cognomeContraente;
-    domanda.comune_nascita = item.comuneDiNascita;
-    domanda.provincia_nascita = item.provinciaDiNascita;
-    domanda.stato_nascita = item.statoDiNascita;
-    domanda.comune_residenza = item.comuneDiResidenza;
-    domanda.provincia_residenza = item.provinciaDiResidenza;
-    domanda.via_residenza = item.viaDiResidenza;
-    domanda.civico_residenza = item.civicoDiResidenza;
-    domanda.cap_residenza = item.capDiResidenza;
-    domanda.codice_fiscale =item.codiceFiscale;
-    domanda.telefono = item.telefono;
-    domanda.email = item.email;
-    domanda.note = item.note;
-    domanda.loculo = item.loculo;
-    domanda.fornice = item.fornice;
-    domanda.nomeAss = item.nomeAss;
-    domanda.cognomeAss = item.cognomeAss;
-    domanda.comune_decesso = item.comuneDecesso;
-    domanda.data_decesso = item.dataDecesso;
+  editDomandaRequest(item: Domanda){
 
-    this.selectedDomanda = Object.assign({},domanda);
+    this.selectedDomanda = Object.assign({},item);
     this.child?.showDomandaModal();
   }
 
   saveDomandaWatcher(domanda: Domanda){
     
-    let domandaIndex = this.domande.findIndex(item => item.id === domanda.id);
+    let domandaIndex = this.domande.findIndex(item => item.id === domanda.idDomanda);
     if(domandaIndex !==-1){
       this.domande[domandaIndex] = domanda;
     }else{

@@ -226,18 +226,12 @@ public class ControllerPrincipale {
     }
 	
 	@PostMapping(path = DomandaLinks.ADD_DOMANDA)
-	public ResponseEntity<?> saveDomanda(@RequestBody Domande domanda) {
+	public ResponseEntity<?> saveDomanda(@RequestBody DomandaRequest domanda) {
         log.info("ApiController:  list domande");
-        Domande resource = domandeService.saveDomanda(domanda);
+        DomandaResponse resource = domandeService.saveDomanda(domanda);
         return ResponseEntity.ok(resource);
         
-        /*
-         * 	@PostMapping(path = PostoLinks.ADD_POSTO)
-	public ResponseEntity<?> savePosto(@RequestBody PostiRequest posto) {
-        log.info("ApiController:  list posti");
-        PostiResponse resource = postiService.savePosto(posto);
-        return ResponseEntity.ok(resource);
-         */
+
     }
 	
 	@PostMapping(path = DomandaLinks.ADD_DOMANDA_FULL)

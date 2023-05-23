@@ -9,6 +9,11 @@ import lombok.Data;
 @Data
 public class DomandaModel {
 
+	private Long idAssegnatario;
+	private Long idContraente;
+	private Long idDomanda;
+	private Long idPosto;
+
 	private Date dataProtocollo;
 	private String numeroProtocolloDomanda;
 	private String tipologia;
@@ -29,7 +34,7 @@ public class DomandaModel {
 	private String capDiResidenza;
 	private String codiceFiscale;
 	private String telefono;
-	private String Email;
+	private String email;
 	private String note;
 	private String loculo;
 	private String fornice;

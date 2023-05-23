@@ -14,11 +14,7 @@ import it.pittysoft.affetti.entity.Posti;
 
 @RepositoryRestResource()
 public interface DomandeRepository extends JpaRepository<Domande, Integer>, JpaSpecificationExecutor<Domande>, QuerydslPredicateExecutor<Domande>{
-<<<<<<< HEAD
+
 	Domande findById(Long id);
-=======
-	
-	Domande findById (Long id);
->>>>>>> refs/remotes/origin/develop
 	
 }

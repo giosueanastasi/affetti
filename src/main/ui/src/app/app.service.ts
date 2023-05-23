@@ -119,9 +119,9 @@ export class AppService {
 
   addDomandaFull(domandaFullForm: any) {
     let domanda = new Domanda;
-    domanda.id = domandaFullForm.id;
-    domanda.protocollo = domandaFullForm.protocollo;
-    domanda.data_protocollo = domandaFullForm.data_protocollo;
+    domanda.idDomanda = domandaFullForm.id;
+    domanda.numeroProtocolloDomanda = domandaFullForm.protocollo;
+    domanda.dataProtocollo = domandaFullForm.data_protocollo;
     domanda.stato = 'APERTA';
     domanda.tipologia = domandaFullForm.tipologia;
     domanda.fk_posto = domandaFullForm.fk_posto;

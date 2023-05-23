@@ -1,30 +1,35 @@
 export class Domanda {
-  id: number;
-  protocollo: string;
-  data_protocollo: string;
+
+  idDomanda: number;
+  idPosto: number;
+  idAssegnatario : number;
+  idContraente: number;
+  numeroProtocolloDomanda: string;
+  dataProtocollo: string;
   stato: string;
   tipologia: string;
-  nome: string;
-  cognome: string;
+  nomeContraente: string;
+  cognomeContraente: string;
   nomeAss: string;
   cognomeAss: string;
-  comune_nascita: String;
-	provincia_nascita: String;
-	stato_nascita: String;
-	comune_residenza: String;
-	provincia_residenza: String;
-	via_residenza: String;
-	civico_residenza: String;
-	cap_residenza: Number;
-  codice_fiscale: string;
+  comuneDiNascita: String;
+	provinciaDiNascita: String;
+	statoDiNascita: String;
+	comuneDiResidenza: String;
+	provinciaDiResidenza: String;
+	viaDiResidenza: String;
+	civicoDiResidenza: String;
+	capDiResidenza: Number;
+  codiceFiscale: string;
   email: string;
   note: string;
   telefono: Number;
   loculo: string;
   fornice: string;
   data: Date;
-  data_decesso: Date;
-  comune_decesso: string;
+  dataDecesso: Date;
+  comuneDecesso: string;
   fk_posto: number;
+  fk_assegnatario : number;
 }
 

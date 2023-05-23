@@ -15,27 +15,27 @@
                     <h3>Protocollo </h3>
 
                     <div class="form-group">
-                        <label for="protocollo">Numero</label>
+                        <label for="numeroProtocolloDomanda">Numero</label>
                         <input 
                             type="search" 
-                            id="protocollo" 
-                            name="protocollo"
+                            id="numeroProtocolloDomanda" 
+                            name="numeroProtocolloDomanda"
                             class="form-control" 
-                            [(ngModel)]="domanda.protocollo"
-                            #protocollo="ngModel"
+                            [(ngModel)]="domanda.numeroProtocolloDomanda"
+                            #numeroProtocolloDomanda="ngModel"
                             
                             >
                     </div>
 
                     <div class="form-group">
-                        <label for="data_protocollo">Data</label>
+                        <label for="dataProtocollo">Data</label>
                         <input 
                             type="text" 
                             id="data_protocollo" 
                             name="data_protocollo"
                             class="form-control" 
-                            [(ngModel)]="domanda.data_protocollo"
-                            #data_protocollo="ngModel"
+                            [(ngModel)]="domanda.dataProtocollo"
+                            #dataProtocollo="ngModel"
                             readonly
                             >
                     </div>
@@ -61,27 +61,27 @@
                     <h3>Dati Contraente </h3>
 
                     <div class="form-group">
-                        <label for="nome">Nome</label>
+                        <label for="nomeContraente">Nome</label>
                         <input 
                             type="search" 
-                            id="nome" 
-                            name="nome"
+                            id="nomeContraente" 
+                            name="nomeContraente"
                             class="form-control" 
-                            [(ngModel)]="domanda.nome"
-                            #nome="ngModel"
+                            [(ngModel)]="domanda.nomeContraente"
+                            #nomeContraente="ngModel"
                             readonly
                             >
                     </div>
 
                     <div class="form-group">
-                        <label for="cognome">Cognome</label>
+                        <label for="cognomeContraente">Cognome</label>
                         <input 
                             type="search" 
-                            id="cognome" 
-                            name="cognome"
+                            id="cognomeContraente" 
+                            name="cognomeContraente"
                             class="form-control" 
-                            [(ngModel)]="domanda.cognome"
-                            #cognome="ngModel"
+                            [(ngModel)]="domanda.cognomeContraente"
+                            #cognomeContraente="ngModel"
                             readonly
                             >
                     </div>
@@ -89,40 +89,40 @@
                     <h3>Dati Nascita </h3>
 
                     <div class="form-group">
-                        <label for="comune_nascita">Comune</label>
+                        <label for="comuneDiNascita">Comune</label>
                         <input 
                             type="search" 
-                            id="comune_nascita" 
-                            name="comune_nascita"
+                            id="comuneDiNascita" 
+                            name="comuneDiNascita"
                             class="form-control" 
-                            [(ngModel)]="domanda.comune_nascita"
-                            #comune_nascita="ngModel"
+                            [(ngModel)]="domanda.comuneDiNascita"
+                            #comuneDiNascita="ngModel"
                             readonly
                             >
                     </div>
 
                     <div class="form-group">
-                        <label for="provincia_nascita">Provincia</label>
+                        <label for="provinciaDiNascita">Provincia</label>
                         <input 
                             type="search" 
-                            id="provincia_nascita" 
-                            name="provincia_nascita"
+                            id="provinciaDiNascita" 
+                            name="provinciaDiNascita"
                             class="form-control" 
-                            [(ngModel)]="domanda.provincia_nascita"
-                            #provincia_nascita="ngModel"
+                            [(ngModel)]="domanda.provinciaDiNascita"
+                            #provinciaDiNascita="ngModel"
                             readonly
                             >
                     </div>
 
                     <div class="form-group">
-                        <label for="stato_nascita">Stato</label>
+                        <label for="statoDiNascita">Stato</label>
                         <input 
                             type="search" 
-                            id="stato_nascita" 
-                            name="stato_nascita"
+                            id="statoDiNascita" 
+                            name="statoDiNascita"
                             class="form-control" 
-                            [(ngModel)]="domanda.stato_nascita"
-                            #stato_nascita="ngModel"
+                            [(ngModel)]="domanda.statoDiNascita"
+                            #statoDiNascita="ngModel"
                             readonly
                             >
                     </div>
@@ -130,66 +130,66 @@
                     <h3>Dati Residenza </h3>
 
                     <div class="form-group">
-                        <label for="comune_residenza">Comune</label>
+                        <label for="comuneDiResidenza">Comune</label>
                         <input 
                             type="search" 
-                            id="comune_residenza" 
-                            name="comune_residenza"
+                            id="comuneDiResidenza" 
+                            name="comuneDiResidenza"
                             class="form-control" 
-                            [(ngModel)]="domanda.comune_residenza"
-                            #comune_residenza="ngModel"
+                            [(ngModel)]="domanda.comuneDiResidenza"
+                            #comuneDiResidenza="ngModel"
                             readonly
                             >
                     </div>
 
                     <div class="form-group">
-                        <label for="provincia_residenza">Provincia</label>
+                        <label for="provinciaDiResidenza">Provincia</label>
                         <input 
                             type="search" 
-                            id="provincia_residenza" 
-                            name="provincia_residenza"
+                            id="provinciaDiResidenza" 
+                            name="provinciaDiResidenza"
                             class="form-control" 
-                            [(ngModel)]="domanda.provincia_residenza"
-                            #provincia_residenza="ngModel"
+                            [(ngModel)]="domanda.provinciaDiResidenza"
+                            #provinciaDiResidenza="ngModel"
                             readonly
                             >
                     </div>
 
                     <div class="form-group">
-                        <label for="via_residenza">Indirizzo</label>
+                        <label for="viaDiResidenza">Indirizzo</label>
                         <input 
                             type="search" 
-                            id="via_residenza" 
-                            name="via_residenza"
+                            id="viaDiResidenza" 
+                            name="viaDiResidenza"
                             class="form-control" 
-                            [(ngModel)]="domanda.via_residenza"
-                            #via_residenza="ngModel"
+                            [(ngModel)]="domanda.viaDiResidenza"
+                            #viaDiResidenza="ngModel"
                             readonly
                             >
                     </div>
 
                     <div class="form-group">
-                        <label for="civico_residenza">Civico</label>
+                        <label for="civicoDiResidenza">Civico</label>
                         <input 
                             type="search" 
-                            id="civico_residenza" 
-                            name="civico_residenza"
+                            id="civicoDiResidenza" 
+                            name="civicoDiResidenza"
                             class="form-control" 
-                            [(ngModel)]="domanda.civico_residenza"
-                            #civico_residenza="ngModel"
+                            [(ngModel)]="domanda.civicoDiResidenza"
+                            #civicoDiResidenza="ngModel"
                             readonly
                             >
                     </div>
 
                     <div class="form-group">
-                        <label for="cap_residenza">Cap</label>
+                        <label for="capDiResidenza">Cap</label>
                         <input 
                             type="search" 
-                            id="cap_residenza" 
-                            name="cap_residenza"
+                            id="capDiResidenza" 
+                            name="capDiResidenza"
                             class="form-control" 
-                            [(ngModel)]="domanda.cap_residenza"
-                            #cap_residenza="ngModel"
+                            [(ngModel)]="domanda.capDiResidenza"
+                            #capDiResidenza="ngModel"
                             readonly
                             >
                     </div>
@@ -197,14 +197,14 @@
                     <h3>Altri Dati</h3>
 
                     <div class="form-group">
-                        <label for="codice_fiscale">Codice Fiscale</label>
+                        <label for="codiceFiscale">Codice Fiscale</label>
                         <input 
                             type="search" 
-                            id="codice_fiscale" 
-                            name="codice_fiscale"
+                            id="codiceFiscale" 
+                            name="codiceFiscale"
                             class="form-control" 
-                            [(ngModel)]="domanda.codice_fiscale"
-                            #codice_fiscale="ngModel"
+                            [(ngModel)]="domanda.codiceFiscale"
+                            #codiceFiscale="ngModel"
                             readonly
                             >
                     </div>
@@ -309,27 +309,27 @@
                     <h3>Dati Decesso</h3>
 
                     <div class="form-group">
-                        <label for="comune_decesso">Comune</label>
+                        <label for="comuneDecesso">Comune</label>
                         <input 
                             type="search" 
-                            id="comune_decesso" 
-                            name="comune_decesso"
+                            id="comuneDecesso" 
+                            name="comuneDecesso"
                             class="form-control" 
-                            [(ngModel)]="domanda.comune_decesso"
-                            #comune_decesso="ngModel"
+                            [(ngModel)]="domanda.comuneDecesso"
+                            #comuneDecesso="ngModel"
                             readonly
                             >
                     </div>
 
                     <div class="form-group">
-                        <label for="data_decesso">Date</label>
+                        <label for="dataDecesso">Date</label>
                         <input 
                             type="text" 
-                            id="data_decesso" 
-                            name="data_decesso"
+                            id="dataDecesso" 
+                            name="dataDecesso"
                             class="form-control" 
-                            [(ngModel)]="domanda.data_decesso"
-                            #data_decesso="ngModel"
+                            [(ngModel)]="domanda.dataDecesso"
+                            #dataDecesso="ngModel"
                             readonly
                             >
                     </div>

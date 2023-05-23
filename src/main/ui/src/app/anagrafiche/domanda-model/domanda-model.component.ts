@@ -24,7 +24,7 @@ export class DomandaModelComponent {
 
   saveDomandaModal() {
     this.appService.saveDomanda(this.domanda).pipe().subscribe((data: any) => {
-      this.save.emit(data.domanda[0]);
+      this.save.emit(data.domanda);
       $('#domandaModal').modal('hide');
     });
   }
