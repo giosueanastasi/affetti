@@ -7,20 +7,20 @@
           <div class="row ">
             <h4>Protocollo </h4>
             <!--Campi relativi al Protocollo-->
-            <div class="col-12 mb-3 d-flex gap-3">
-              <label class="col-sm-1 " for="Numero">Numero</label>
-              <div class="form-group col-sm-3 ">
+            <div class="col-12 mb-3 d-flex gap-3 flex-wrap">
+              <label class="col-2 col-md-1 " for="Numero">Numero</label>
+              <div class="form-group col-9 col-sm-8 col-md-3 ">
                 <input type="text" class="form-control" formControlName="protocollo" id="protocollo" aria-describedby="protocollolHelp" >
               </div>
-              <label class="col-sm-1 "for="Data">Data</label>
-              <div class="form-group col-sm-3">
+              <label class="col-md-1 col-2 "for="Data">Data</label>
+              <div class="form-group col-md-3 col-sm-8 col-9">
                 <input ng-model="answers.dob" type="date" class="form-control" formControlName="data_protocollo" id="data_protocollo" aria-describedby="data_protocollolHelp" >
               </div>
             </div>
             <!--Campi relativi alla tipologia di loculo-->
-            <div class="col-12 mb-3 d-flex gap-3">
-              <label class="col-sm-1 "for="Data">Tipologia</label>
-              <div class="form-check" class="form-group col-sm-1">
+            <div class="col-12 mb-3 d-flex gap-3 flex-wrap">
+              <label class="col-md-1 col-9 "for="Data">Tipologia</label>
+              <div class="form-check" class="form-group col-md-2 col-9">
                 <input
                   id="loculo"
                   type="radio"
@@ -30,7 +30,7 @@
                 />
                 <label class="custom-control-label" for="loculo" style="font-size: medium;">Loculo</label>
               </div>
-              <div class="form-check" class="form-group col-sm-3">
+              <div class="form-check" class="form-group col-md-3 col-9 flex-fill">
                 <input
                   id="tenuta_a_disposizione"
                   type="radio"
@@ -47,51 +47,51 @@
           </div>
           <h4>Dati Contraente</h4>
           <!--Campi relativi ai dati anagrafici del contraente-->
-          <div class="col-12 d-flex gap-3">
-            <label class="col-sm-1 "for="nome">Nome</label>
-            <div class="form-group col-sm-3">
+          <div class="col-12 d-flex gap-3 flex-wrap">
+            <label class="col-md-1 col-2 order-md-0 order-1"for="nome">Nome</label>
+            <div class="form-group col-md-3 col-sm-8 col-9 order-md-0 order-1">
               <!-- <input  type="text" class="form-control notEdit" formControlName="fk_contraente" id="fk_contraente" > -->
               <input  type="text" class="form-control notEdit" formControlName="nome" id="nome" aria-describedby="nomelHelp"  readonly>
             </div>
-            <label class="col-sm-1 "for="cognome">Cognome</label>
-            <div class="form-group col-sm-4">
+            <label class="col-md-1 col-2 order-md-0 order-1"for="cognome">Cognome</label>
+            <div class="form-group col-md-3 col-sm-8 col-9 order-md-0 order-1">
               <input type="text" class="form-control notEdit" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp"  readonly>
             </div>
-            <div class="form-group ms-auto"  ><button  class="btn btn-info" (click)="cercaContraente()" >Cerca Contraente</button></div>
+            <div class="form-group ms-auto col-12 col-md-2 text-end order-md-1 order-0"  ><button  class="btn btn-info" (click)="cercaContraente()" >Cerca Contraente</button></div>
           </div>
           <h4>Dati Nascita</h4>
           <!--Campi relativi alla data di nascita-->
-          <div class="col-12 d-flex gap-3">
-            <label class="col-sm-1 "for="comune_nascita">Comune</label>
-            <div class="form-group col-sm-3">
+          <div class="col-12 d-flex gap-3 flex-wrap flex-lg-nowrap">
+            <label class="col-md-1 col-2"for="comune_nascita">Comune</label>
+            <div class="form-group col-lg-3 col-md-3 col-sm-8 col-9">
               <input type="text" class="form-control notEdit" formControlName="comune_nascita" id="comune_nascita" aria-describedby="comune_nascitalHelp"  readonly>
             </div>
-            <label class="col-sm-1 "for="provincia_nascita">Provincia</label>
-            <div class="form-group col-sm-1">
+            <label class="col-md-1 col-2"for="provincia_nascita">Provincia</label>
+            <div class="form-group col-lg-1 col-md-2 col-sm-8 col-9">
               <input type="text" class="form-control notEdit" formControlName="provincia_nascita" id="provincia_nascita" aria-describedby="provincia_nascitalHelp"  readonly>
             </div>
-            <label class="col-sm-1 flex-shrink-1" for="stato_nascita">Stato</label>
-            <div class="form-group col-sm-2">
+            <label class="col-md-1 col-2 flex-shrink-1" for="stato_nascita">Stato</label>
+            <div class="form-group col-lg-2 col-md-2 col-sm-8 col-9">
               <input type="text" class="form-control notEdit" formControlName="stato_nascita" id="stato_nascita" aria-describedby="stato_nascitalHelp"  readonly>
             </div>
-            <label class="col-sm-1 flex-shrink-1"for="data_nascita">Data</label>
-            <div class="form-group col-sm-2">
+            <label class="col-md-1 col-2 flex-shrink-1"for="data_nascita">Data</label>
+            <div class="form-group col-lg-2 col-md-3 col-sm-8 col-9">
               <input  type="text" class="form-control notEdit" formControlName="data_nascita" id="data_nascita" aria-describedby="data_nascitalHelp"  readonly>
             </div>
           </div>
           <h4>Dati Residenza</h4>
           <!--Campi relativi alla residenza-->
-          <div class="col-12 d-flex gap-3 mb-3">
-            <label class="col-sm-1 "for="comune_residenza">Comune</label>
-            <div class="form-group col-sm-3">
+          <div class="col-12 d-flex gap-3 mb-3 flex-md-nowrap flex-wrap ">
+            <label class="col-md-1 col-2"for="comune_residenza">Comune</label>
+            <div class="form-group col-md-3 col-sm-8 col-9">
               <input type="text" class="form-control notEdit" formControlName="comune_residenza" id="comune_residenza" aria-describedby="comune_residenzalHelp"  readonly>
             </div>
-            <label class="col-sm-1 "for="provincia_residenza">Provincia</label>
-            <div class="form-group col-sm-1">
+            <label class="col-md-1 col-2"for="provincia_residenza">Provincia</label>
+            <div class="form-group col-md-1 col-sm-8 col-9">
               <input type="text" class="form-control notEdit" formControlName="provincia_residenza" id="provincia_residenza" aria-describedby="provincia_residenzalHelp"  readonly>
             </div>
-            <label class="col-sm-1 "for="via_residenza">Indirizzo</label>
-            <div class="form-group col-sm-3">
+            <label class="col-md-1 col-2"for="via_residenza">Indirizzo</label>
+            <div class="form-group col-md-3 col-sm-8 col-9">
               <input type="text" class="form-control notEdit" formControlName="via_residenza" id="via_residenza" aria-describedby="via_residenzalHelp"  readonly>
             </div>
           </div>
@@ -107,13 +107,13 @@
           </div>
           <!--Campi relativi agli altri dati-->
           <h4>Altri Dati </h4>
-          <div class="col-12 d-flex gap-3 mb-3">
-            <label class="col-sm-1 "for="codice_fiscale">Cod. Fiscale</label>
-            <div class="form-group col-sm-4">
+          <div class="col-12 d-flex gap-3 mb-3 flex-wrap">
+            <label class="col-md-1 col-2"for="codice_fiscale">Cod. Fiscale</label>
+            <div class="form-group col-md-3 col-sm-8 col-9 ">
               <input type="text" class="form-control notEdit" formControlName="codice_fiscale" id="codice_fiscale" aria-describedby="codice_fiscalelHelp"  readonly>
             </div>
-            <label class="col-sm-1 "for="email">Email</label>
-            <div class="form-group col-sm-4">
+            <label class="col-md-1 col-2 "for="email">Email</label>
+            <div class="form-group col-md-3 col-sm-8 col-9 ">
               <input type="text" class="form-control notEdit" formControlName="email" id="email" aria-describedby="emaillHelp"  readonly>
             </div>
           </div>
@@ -126,38 +126,38 @@
           </div>
           <h4>Dati Posto </h4>
           <!--Campi relativi ai dati del post-->
-          <div class="col-12 d-flex gap-3">
-            <label class="col-sm-1 "for="loculo">Loculo</label>
-              <div class="form-group col-sm-3">
+          <div class="col-12 d-flex gap-3 flex-wrap">
+            <label class="col-md-1 col-2 order-md-0 order-1" for="loculo">Loculo</label>
+              <div class="form-group col-md-3 col-sm-8 col-9 order-md-0 order-1">
               <input type="text" class="form-control" formControlName="loculo" id="loculo" aria-describedby="loculolHelp" >
             </div>
-            <label class="col-sm-1 "for="fornice">Fornice</label>
-            <div class="form-group col-sm-3">
+            <label class="col-md-1 col-2 order-md-0 order-1 "for="fornice">Fornice</label>
+            <div class="form-group col-md-3 col-sm-8 col-9 order-md-0 order-1 ">
              <input type="text" class="form-control" formControlName="fornice" id="fornice" aria-describedby="fornicelHelp" >
             </div>
-            <button  class="btn btn-info ms-auto" (click)="cercaPosto()">Cerca Posto</button>
+            <div class="form-group ms-auto col-12 col-md-2 text-end order-md-1 order-0" ><button class="btn btn-info" (click)="cercaPosto()">Cerca Posto</button></div>
           </div>
           <h4>Assegnatario </h4>
           <!--Campi relativi all'assegnatario-->
-          <div class="col-12 d-flex gap-3">
-            <label class="col-sm-1 "for="nomeAss">Nome</label>
-            <div class="form-group col-sm-3">
+          <div class="col-12 d-flex gap-3 flex-wrap">
+            <label class="col-md-1 col-2"for="nomeAss">Nome</label>
+            <div class="form-group col-md-3 col-sm-8 col-9 ">
                  <input type="text" class="form-control" formControlName="nomeAss" id="nomeAss" aria-describedby="nomeAssHelp" >
             </div>
-            <label class="col-sm-1 "for="cognomeAss">Cognome</label>
-            <div class="form-group col-sm-3">
+            <label class="col-md-1 col-2"for="cognomeAss">Cognome</label>
+            <div class="form-group col-md-3 col-sm-8 col-9 ">
                  <input type="text" class="form-control" formControlName="cognomeAss" id="cognomeAss" aria-describedby="cognomeAssHelp" >
             </div>
           </div>
           <h4>Dati Decesso </h4>
           <!--Campi relativi ai dati del decesso-->
-          <div class="col-12 d-flex gap-3">
-            <label class="col-sm-1 "for="comune_decesso">Comune</label>
-            <div class="form-group col-sm-3">
+          <div class="col-12 d-flex mb-3 gap-3 flex-wrap">
+            <label class="col-md-1 col-2"for="comune_decesso">Comune</label>
+            <div class="form-group col-md-3 col-sm-8 col-9 ">
                  <input type="text" class="form-control" formControlName="comune_decesso" id="comune_decesso" aria-describedby="comune_decessoHelp" >
             </div>
-            <label class="col-sm-1" for="data_decesso">Data</label>
-            <div class="form-group col-sm-2">
+            <label class="col-md-1 col-2" for="data_decesso">Data</label>
+            <div class="form-group col-md-3 col-sm-8 col-9 ">
               <input  ng-model="answers.dob" type="date" class="form-control" formControlName="data_decesso" id="data_decesso" aria-describedby="data_decessoHelp" >
             </div>
           </div>
