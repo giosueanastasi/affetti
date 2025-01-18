@@ -19,5 +19,7 @@
   margin-left:initial;
 }  */
 
-
+.mat-drawer.mat-drawer-side{
+  z-index: 1;
+}
 
