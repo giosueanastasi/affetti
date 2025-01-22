@@ -26,6 +26,7 @@ import it.pittysoft.affetti.model.ContrattoSearchRequest;
 import it.pittysoft.affetti.model.ContrattoSearchResponse;
 import it.pittysoft.affetti.model.ContraentiRequest;
 import it.pittysoft.affetti.model.ContraentiResponse;
+import it.pittysoft.affetti.model.ContrattoModel;
 import it.pittysoft.affetti.model.DomandaRequest;
 import it.pittysoft.affetti.model.DomandaRequestSearch;
 import it.pittysoft.affetti.model.DomandaResponse;
@@ -133,7 +134,7 @@ public class ControllerPrincipale {
     }
 	
 	@PostMapping(path = ContrattoLinks.ADD_CONTRATTO)
-	public ResponseEntity<?> saveContratto(@RequestBody ContrattoSearchRequest contratto) {
+	public ResponseEntity<?> saveContratto(@RequestBody ContrattoModel contratto) {
         log.info("ApiController:  list contratti");
         ContrattoSearchResponse resource = contrattiService.saveContratto(contratto);
         return ResponseEntity.ok(resource);
