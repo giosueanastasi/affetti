@@ -41,8 +41,8 @@ export class CercacontraentiModelComponent {
   
   
     ngOnInit() {
-      console.log('esegui all contraente1 on init');
-      this.getAllCercacontraenti();
+      //console.log('esegui all contraente1 on init');
+      //this.getAllCercacontraenti();
       }
   
       showCercacontraentiModal(){
