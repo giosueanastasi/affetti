@@ -1,23 +1,23 @@
 <div class="modal fade" id="contraentiModal" tabIndex="-1">
-    <div class="modal-dialog">
+    <div class="modal-dialog col-8">
         <div class="modal-content">
             <form #f="ngForm" >
                  <div class="modal-header">
                     <h4 class="modal-title">Contraente</h4>
                     <button button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                  </div>
-                 <div class="modal-body">
+                 <div class="modal-body d-flex flex-wrap justify-content-between">
 
                     <div class="alert alert-danger" *ngIf="errorMessage">
                         <strong>Error!</strong>{{errorMessage}}
                     </div>
-                    <div class="form-group">
-                        <label for="cognome">Cognome</label>
+                    <div class="form-group col-md-6 col-12  d-flex mb-3">
+                        <label class="col-lg-2 col-3"  for="cognome">Cognome</label>
                         <input 
                             type="text" 
                             id="cognome" 
                             name="cognome"
-                            class="form-control" 
+                            class="form-control mx-3" 
                             [(ngModel)]="contraente.cognome"
                             #cognome="ngModel"
                             required
@@ -28,13 +28,13 @@
                     </div>
 
 
-                    <div class="form-group">
-                        <label for="nome">Nome</label>
+                    <div class="form-group col-md-6 col-12  d-flex mb-3">
+                        <label class="col-lg-2 col-3" for="nome">Nome</label>
                         <input 
                             type="text" 
                             id="nome" 
                             name="nome"
-                            class="form-control" 
+                            class="form-control mx-3" 
                             [(ngModel)]="contraente.nome"
                             #nome="ngModel"
                             required
@@ -44,13 +44,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="comune_nascita">Comune di Nascita</label>
+                    <div class="form-group col-md-6 col-12  d-flex mb-3">
+                        <label class="col-lg-2 col-3" for="comune_nascita">Comune di Nascita</label>
                         <input 
                             type="text" 
                             id="comune_nascita" 
                             name="comune_nascita"
-                            class="form-control" 
+                            class="form-control mx-3" 
                             [(ngModel)]="contraente.comune_nascita"
                             #comune_nascita="ngModel"
                             required
@@ -60,13 +60,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="provincia_nascita">Provincia di Nascita</label>
+                    <div class="form-group col-md-6 col-12  d-flex mb-3">
+                        <label class="col-lg-2 col-3" for="provincia_nascita">Provincia di Nascita</label>
                         <input 
                             type="text" 
                             id="provincia_nascita" 
                             name="provincia_nascita"
-                            class="form-control" 
+                            class="form-control mx-3" 
                             [(ngModel)]="contraente.provincia_nascita"
                             #provincia_nascita="ngModel"
                             required
@@ -76,13 +76,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="stato_nascita">Stato di Nascita</label>
+                    <div class="form-group col-md-6 col-12  d-flex mb-3">
+                        <label class="col-lg-2 col-3" for="stato_nascita">Stato di Nascita</label>
                         <input 
                             type="text" 
                             id="stato_nascita" 
                             name="stato_nascita"
-                            class="form-control" 
+                            class="form-control mx-3" 
                             [(ngModel)]="contraente.stato_nascita"
                             #stato_nascita="ngModel"
                             required
@@ -92,13 +92,13 @@
                         </div>
                     </div>
 
-                     <div class="form-group">
-                        <label for="data_nascita">Data di Nascita</label>
+                     <div class="form-group col-md-6 col-12  d-flex mb-3">
+                        <label class="col-lg-2 col-3" for="data_nascita">Data di Nascita</label>
                         <input 
                             type="date" 
                             id="data_nascita" 
                             name="data_nascita"
-                            class="form-control"
+                            class="form-control mx-3"
                             ng-model="answers.dob"
                             [(ngModel)]="contraente.data_nascita"
                             #data_nascita="ngModel"
@@ -109,13 +109,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="comune_residenza">Comune di Residenza</label>
+                    <div class="form-group col-md-6 col-12  d-flex mb-3">
+                        <label class="col-lg-2 col-3" for="comune_residenza">Comune di Residenza</label>
                         <input 
                             type="text" 
                             id="comune_residenza" 
                             name="comune_residenza"
-                            class="form-control" 
+                            class="form-control mx-3" 
                             [(ngModel)]="contraente.comune_residenza"
                             #comune_residenza="ngModel"
                             required
@@ -125,13 +125,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="provincia_residenza">Provincia di Residenza</label>
+                    <div class="form-group col-md-6 col-12  d-flex mb-3">
+                        <label class="col-lg-2 col-3" for="provincia_residenza">Provincia di Residenza</label>
                         <input 
                             type="text" 
                             id="provincia_residenza" 
                             name="provincia_residenza"
-                            class="form-control" 
+                            class="form-control mx-3" 
                             [(ngModel)]="contraente.provincia_residenza"
                             #provincia_residenza="ngModel"
                             required
@@ -141,13 +141,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="via_residenza">Via di Residenza</label>
+                    <div class="form-group col-md-6 col-12  d-flex mb-3">
+                        <label class="col-lg-2 col-3" for="via_residenza">Via di Residenza</label>
                         <input 
                             type="text" 
                             id="via_residenza" 
                             name="via_residenza"
-                            class="form-control" 
+                            class="form-control mx-3" 
                             [(ngModel)]="contraente.via_residenza"
                             #via_residenza="ngModel"
                             required
@@ -157,29 +157,29 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="civico_residenza">Civico di Residenza</label>
+                    <div class="form-group col-md-6 col-12  d-flex mb-3">
+                        <label class="col-lg-2 col-3" for="civico_residenza">Civico di Residenza</label>
                         <input 
                             type="text" 
                             id="civico_residenza" 
                             name="civico_residenza"
-                            class="form-control" 
+                            class="form-control mx-3" 
                             [(ngModel)]="contraente.civico_residenza"
                             #civico_residenza="ngModel"
                             required
                             >
-                        <div class="alert-danger" *ngIf="f.submitted && !civico_residenza.valid">
+                        <div class="alert-danger " *ngIf="f.submitted && !civico_residenza.valid">
                             Campo Obbligatorio
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="cap_residenza">Cap di Residenza</label>
+                    <div class="form-group col-md-6 col-12  d-flex mb-3">
+                        <label class="col-lg-2 col-3" for="cap_residenza">Cap di Residenza</label>
                         <input 
                             type="text" 
                             id="cap_residenza" 
                             name="cap_residenza"
-                            class="form-control" 
+                            class="form-control mx-3" 
                             [(ngModel)]="contraente.cap_residenza"
                             #cap_residenza="ngModel"
                             required
@@ -189,13 +189,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="telefono">Telefono</label>
+                    <div class="form-group col-md-6 col-12  d-flex mb-3">
+                        <label class="col-lg-2 col-3" for="telefono">Telefono</label>
                         <input 
                             type="text" 
                             id="telefono" 
                             name="telefono"
-                            class="form-control" 
+                            class="form-control mx-3" 
                             [(ngModel)]="contraente.telefono"
                             #telefono="ngModel"
                             required
@@ -205,13 +205,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="codice_fiscale">Codice Fiscale</label>
+                    <div class="form-group col-md-6 col-12  d-flex mb-3">
+                        <label class="col-lg-2 col-3" for="codice_fiscale">Codice Fiscale</label>
                         <input 
                             type="text" 
                             id="codice_fiscale" 
                             name="codice_fiscale"
-                            class="form-control" 
+                            class="form-control mx-3" 
                             [(ngModel)]="contraente.codice_fiscale"
                             #codice_fiscale="ngModel"
                             required
@@ -221,13 +221,13 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label for="email">Email</label>
+                    <div class="form-group col-md-6 col-12  d-flex mb-3">
+                        <label class="col-lg-2 col-3" for="email">Email</label>
                         <input 
                             type="text" 
                             id="email" 
                             name="email"
-                            class="form-control" 
+                            class="form-control mx-3" 
                             [(ngModel)]="contraente.email"
                             #email="ngModel"
                             >
@@ -235,16 +235,16 @@
                         </div>
                     </div>
 
-                    <div class="form-group">
+                    <div class="form-group col-12 d-flex">
                         <label for="note">Note</label>
-                        <input 
-                            type="text" 
+                        <textarea
+                            type="textarea" 
                             id="note" 
                             name="note"
-                            class="form-control" 
+                            class="form-control mx-3" 
                             [(ngModel)]="contraente.note"
                             #note="ngModel"
-                            >
+                            ></textarea>
                         <div class="alert-danger" *ngIf="f.submitted && !note.valid">
                         </div>
                     </div>
