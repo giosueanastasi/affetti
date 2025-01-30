@@ -54,7 +54,14 @@
                             [(ngModel)]="contraente.comune_nascita"
                             #comune_nascita="ngModel"
                             required
+                            list="optlist"
+                            placeholder="Cerca il comune"
                             >
+                            <datalist id="optlist">
+                                <select class="form-select" >
+                                    <option *ngFor="let comune of comuni" value={{comune.id}} >{{comune.nome}}</option>
+                                </select>
+                            </datalist>
                         <div class="alert-danger" *ngIf="f.submitted && !comune_nascita.valid">
                             Campo Obbligatorio
                         </div>

@@ -1,8 +1,8 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Contraente } from 'src/app/app-state/models';
 import { AppService } from 'src/app/app.service';
-
-
+import { takeUntil } from 'rxjs/operators';
+import { Subject } from 'rxjs';
 
 declare var $ : any;
 
@@ -18,9 +18,9 @@ export class ContraentiModelComponent  {
 
   @Output() save =  new EventEmitter<any>();
   constructor(private appService: AppService) { }
-
-
-
+  comuniCount = 0;
+  comuni: any[] = [];
+  destroy$: Subject<boolean> = new Subject<boolean>();
   saveContraente() {
     debugger;
     this.appService.saveContraente(this.contraente).pipe().subscribe(data => {
@@ -34,5 +34,16 @@ export class ContraentiModelComponent  {
   
   showContraentiModal(){
     $('#contraentiModal').modal('show');
+    this.getAllComuni();
   }
+  getAllComuni(){
+    this.appService.getComuni().pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+              this.comuniCount = data.length;
+              this.comuni = data.comuni;
+          });
+  }
+
+  ngOnInit() {
+    //this.getAllComuni();
+    }
 }
