@@ -37,11 +37,11 @@ public class Comuni {
     
     @Column
     @NotNull(message="{NotNull.Contraente.nome}")
-    private String codProvincia;
+    private String codProv;
     
     @Column
     @NotNull(message="{NotNull.Contraente.nome}")
-    private String descProvincia;
+    private String descProv;
     
     @Column
     @NotNull(message="{NotNull.Contraente.nome}")
