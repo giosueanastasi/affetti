@@ -24,7 +24,7 @@ import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
 import it.pittysoft.affetti.model.ContrattoSearchRequest;
 import it.pittysoft.affetti.model.ContrattoSearchResponse;
-import it.pittysoft.affetti.model.ComuniResponse;
+import it.pittysoft.affetti.model.ComuniSelectResponse;
 import it.pittysoft.affetti.model.ContraentiRequest;
 import it.pittysoft.affetti.model.ContraentiResponse;
 import it.pittysoft.affetti.model.ContrattoModel;
@@ -208,7 +208,7 @@ public class ControllerPrincipale {
 	@GetMapping(path = ComuneLinks.LIST_COMUNI)
     public ResponseEntity<?> listComuni() {
         log.info("ApiController:  list Comuni");
-        ComuniResponse resource = comuniService.getComuni();
+        ComuniSelectResponse resource = comuniService.getComuni();
         return ResponseEntity.ok(resource);
     }
 	

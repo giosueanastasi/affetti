@@ -6,7 +6,7 @@ import java.util.List;
 import lombok.Data;
 
 @Data
-public class ComuniResponse extends Response {
-	List<ComuniModel> comuni = new ArrayList<>();
+public class ComuniSelectResponse extends Response {
+	List<ComuniSelectModel> comuni = new ArrayList<>();
 
 }
