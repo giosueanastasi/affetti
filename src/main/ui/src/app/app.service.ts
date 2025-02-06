@@ -166,5 +166,7 @@ export class AppService {
     ds.stato = contrattoForm.stato;
 	  return this.http.post(this.rootURL + '/search_contratti', ds);
   }
-  
+  getComuneByNome(nome: string) {
+    return this.http.post(this.rootURL + '/get_comune',nome);
+  }
 }

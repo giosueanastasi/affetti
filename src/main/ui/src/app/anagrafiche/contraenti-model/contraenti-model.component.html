@@ -56,10 +56,12 @@
                             required
                             list="optlist"
                             placeholder="Cerca il comune"
+                            (change)="onComuneNascSelect($event.target.value)"
+                            
                             >
                             <datalist id="optlist">
                                 <select class="form-select" >
-                                    <option *ngFor="let comune of comuni" value={{comune.id}} >{{comune.nome}}</option>
+                                    <option *ngFor="let comune of comuni" [value]=comune.nome >{{comune.nome}}</option>
                                 </select>
                             </datalist>
                         <div class="alert-danger" *ngIf="f.submitted && !comune_nascita.valid">
@@ -76,6 +78,7 @@
                             class="form-control mx-3" 
                             [(ngModel)]="contraente.provincia_nascita"
                             #provincia_nascita="ngModel"
+                            [value]=comuneNasc.provincia 
                             required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !provincia_nascita.valid">
@@ -125,8 +128,17 @@
                             class="form-control mx-3" 
                             [(ngModel)]="contraente.comune_residenza"
                             #comune_residenza="ngModel"
+                            list="optlist"
+                            placeholder="Cerca il comune"
+                            (change)="onComuneResSelect($event.target.value)"
+                            
                             required
                             >
+                            <datalist id="optlist">
+                                <select class="form-select" >
+                                    <option *ngFor="let comune of comuni" [value]=comune.nome >{{comune.nome}}</option>
+                                </select>
+                            </datalist>
                         <div class="alert-danger" *ngIf="f.submitted && !comune_residenza.valid">
                             Campo Obbligatorio
                         </div>
@@ -141,6 +153,7 @@
                             class="form-control mx-3" 
                             [(ngModel)]="contraente.provincia_residenza"
                             #provincia_residenza="ngModel"
+                            [value]=comuneRes.provincia
                             required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !provincia_residenza.valid">

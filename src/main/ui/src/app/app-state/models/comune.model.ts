@@ -4,8 +4,8 @@ export class Comune {
   codComuneIstat: string;
   codCatastComune: string;
   provincia: string;
-  codProvincia: string;
-  descProvincia: string;
+  codProv: string;
+  descProv: string;
   codReg: string;
   descReg: string;
 }
