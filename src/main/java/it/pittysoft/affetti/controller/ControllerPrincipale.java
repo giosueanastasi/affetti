@@ -24,6 +24,8 @@ import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
 import it.pittysoft.affetti.model.ContrattoSearchRequest;
 import it.pittysoft.affetti.model.ContrattoSearchResponse;
+import it.pittysoft.affetti.model.ComuniModel;
+import it.pittysoft.affetti.model.ComuniResponse;
 import it.pittysoft.affetti.model.ComuniSelectResponse;
 import it.pittysoft.affetti.model.ContraentiRequest;
 import it.pittysoft.affetti.model.ContraentiResponse;
@@ -253,4 +255,13 @@ public class ControllerPrincipale {
                     .body("Errore imprevisto, contattare l'assistenza");
 		}
     }
+	
+	@PostMapping(path = ComuneLinks.GET_COMUNE)
+	public ResponseEntity<?> getComune(@RequestBody String nome) {
+		log.info("ApiController:  get comune");
+	    ComuniResponse resource = comuniService.getComune(nome) ;
+		
+        	return ResponseEntity.ok(resource);
+       
+	}
 }
