@@ -24,30 +24,32 @@ public class Comuni {
     private String nome;
     
     @Column
-    @NotNull(message="{NotNull.Contraente.nome}")
+    @NotNull(message="{NotNull.Comune.codComuneIstat}")
     private String codComuneIstat;
     
     @Column
-    @NotNull(message="{NotNull.Contraente.nome}")
+    @NotNull(message="{NotNull.Comune.codCatastComune}")
     private String codCatastComune;
     
     @Column
-    @NotNull(message="{NotNull.Contraente.provincia}")
+    @NotNull(message="{NotNull.Comune.provincia}")
     private String provincia;
     
     @Column
-    @NotNull(message="{NotNull.Contraente.nome}")
+    @NotNull(message="{NotNull.Comune.codProv}")
     private String codProv;
     
     @Column
-    @NotNull(message="{NotNull.Contraente.nome}")
+    @NotNull(message="{NotNull.Comune.descProv}")
     private String descProv;
     
     @Column
-    @NotNull(message="{NotNull.Contraente.nome}")
+    @NotNull(message="{NotNull.Comune.codReg}")
     private String codReg;
     
     @Column
     private String descReg;
+    
+   
    
 }
