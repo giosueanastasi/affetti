@@ -50,6 +50,8 @@ public class Comuni {
     @Column
     private String descReg;
     
-   
+    @Column
+    @NotNull(message="{NotNull.Comune.nome}")
+    private String stato;
    
 }
