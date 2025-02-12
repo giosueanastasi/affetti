@@ -52,6 +52,34 @@
                             name="comune_nascita"
                             class="form-control mx-3" 
                             [(ngModel)]="contraente.comune_nascita"
+                            required
+                            placeholder="Cerca il comune"
+                            matInput
+                            [matAutocomplete]="autoNasc"
+                            [formControl]="comuneNascitaControl"
+                            >
+                            <mat-autocomplete #autoNasc="matAutocomplete">
+                                <mat-option 
+                                *ngFor="let comune of comuniNascitaFiltrati | async" 
+                                [value]="comune.nome"
+                                (onSelectionChange)="onComuneNascSelect(comune)"
+                                >
+                                    {{comune.nome}} 
+                                </mat-option>
+                            </mat-autocomplete>
+
+                        <div class="alert-danger" *ngIf="f.submitted && !comuneNascitaControl.valid">
+                            Campo Obbligatorio
+                        </div>
+
+
+                        <!-- <label class="col-lg-2 col-3" for="comune_nascita">Comune di Nascita</label>
+                        <input 
+                            type="text" 
+                            id="comune_nascita" 
+                            name="comune_nascita"
+                            class="form-control mx-3" 
+                            [(ngModel)]="contraente.comune_nascita"
                             #comune_nascita="ngModel"
                             required
                             list="optlist"
@@ -63,10 +91,7 @@
                                 <select class="form-select" >
                                     <option *ngFor="let comune of comuni" [value]=comune.nome >{{comune.nome}}</option>
                                 </select>
-                            </datalist>
-                        <div class="alert-danger" *ngIf="f.submitted && !comune_nascita.valid">
-                            Campo Obbligatorio
-                        </div>
+                            </datalist> -->
                     </div>
 
                     <div class="form-group col-md-6 col-12  d-flex mb-3">
@@ -78,7 +103,6 @@
                             class="form-control mx-3" 
                             [(ngModel)]="contraente.provincia_nascita"
                             #provincia_nascita="ngModel"
-                            [value]=comuneNasc.provincia 
                             required
                             >
                         <div class="alert-danger" *ngIf="f.submitted && !provincia_nascita.valid">
@@ -127,21 +151,44 @@
                             name="comune_residenza"
                             class="form-control mx-3" 
                             [(ngModel)]="contraente.comune_residenza"
-                            #comune_residenza="ngModel"
-                            list="optlist"
-                            placeholder="Cerca il comune"
-                            (change)="onComuneResSelect($event.target.value)"
-                            
                             required
+                            placeholder="Cerca il comune"
+                            matInput
+                            [matAutocomplete]="autoRes"
+                            [formControl]="comuneResidenzaControl"
                             >
-                            <datalist id="optlist">
-                                <select class="form-select" >
-                                    <option *ngFor="let comune of comuni" [value]=comune.nome >{{comune.nome}}</option>
-                                </select>
-                            </datalist>
-                        <div class="alert-danger" *ngIf="f.submitted && !comune_residenza.valid">
+                            <mat-autocomplete #autoRes="matAutocomplete">
+                                <mat-option 
+                                *ngFor="let comune of comuniResidenzaFiltrati | async" 
+                                [value]="comune.nome"
+                                (onSelectionChange)="onComuneResSelect(comune)"
+                                >
+                                    {{comune.nome}} 
+                                </mat-option>
+                            </mat-autocomplete>
+                 
+                        <div class="alert-danger" *ngIf="f.submitted && !comuneResidenzaControl.valid">
                             Campo Obbligatorio
                         </div>
+
+                        <!-- <input 
+                        type="text" 
+                        id="comune_residenza" 
+                        name="comune_residenza"
+                        class="form-control mx-3" 
+                        [(ngModel)]="contraente.comune_residenza"
+                        #comune_residenza="ngModel"
+                        list="optlist"
+                        placeholder="Cerca il comune"
+                        (change)="onComuneResSelect($event.target.value)"
+                        
+                        required
+                        >
+                        <datalist id="optlist">
+                            <select class="form-select" >
+                                <option *ngFor="let comune of comuni" [value]=comune.nome >{{comune.nome}}</option>
+                            </select>
+                        </datalist> -->
                     </div>
 
                     <div class="form-group col-md-6 col-12  d-flex mb-3">

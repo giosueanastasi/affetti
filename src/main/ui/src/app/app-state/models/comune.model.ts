@@ -8,5 +8,6 @@ export class Comune {
   descProv: string;
   codReg: string;
   descReg: string;
+  stato: string;
 }
 

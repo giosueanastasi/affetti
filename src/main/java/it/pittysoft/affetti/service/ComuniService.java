@@ -32,6 +32,8 @@ public class ComuniService {
     		ComuniSelectModel cm = new ComuniSelectModel();
     		cm.setId(comune.getId());
     		cm.setNome(comune.getNome());
+    		cm.setProvincia(comune.getProvincia());
+    		cm.setStato(comune.getStato());
     		
     		response.getComuni().add(cm);
     	}

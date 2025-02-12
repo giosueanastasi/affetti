@@ -7,5 +7,7 @@ public class ComuniSelectModel {
 	
 	private Long id;
 	private String nome;
+	private String provincia;
+	private String stato;
 
 }
