@@ -1,6 +1,7 @@
 package it.pittysoft.affetti.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -45,24 +46,24 @@ public class ComuniService {
     	return comuniRepository.save(comuni);
     }
     
-    public ComuniResponse getComune(String nome) {
+    public ComuniResponse getComune(int id) {
     	
     	ComuniResponse response =  new ComuniResponse();
     	
     	//Recuperiamo il comune ricercato tramite il nome
-    	Comuni comune = comuniRepository.findByNomeContainingIgnoreCase(nome).getFirst();
+    	Optional<Comuni> comune = comuniRepository.findById(id);
     	
     	//Usiamo l'entity appena recuperata per compilare i campi del model
     	ComuniModel cm = new ComuniModel();
-    	cm.setId(comune.getId());
-    	cm.setNome(comune.getNome());
-    	cm.setCodComuneIstat(comune.getCodComuneIstat());
-    	cm.setCodCatastComune(comune.getCodCatastComune());
-    	cm.setProvincia(comune.getProvincia());
-    	cm.setCodProv(comune.getCodProv());
-    	cm.setDescProv(comune.getDescProv());
-    	cm.setCodReg(comune.getCodReg());
-    	cm.setDescReg(comune.getDescReg());
+    	cm.setId(comune.get().getId());
+    	cm.setNome(comune.get().getNome());
+    	cm.setCodComuneIstat(comune.get().getCodComuneIstat());
+    	cm.setCodCatastComune(comune.get().getCodCatastComune());
+    	cm.setProvincia(comune.get().getProvincia());
+    	cm.setCodProv(comune.get().getCodProv());
+    	cm.setDescProv(comune.get().getDescProv());
+    	cm.setCodReg(comune.get().getCodReg());
+    	cm.setDescReg(comune.get().getDescReg());
     	
     	response.setComune(cm);
     	

@@ -257,9 +257,9 @@ public class ControllerPrincipale {
     }
 	
 	@PostMapping(path = ComuneLinks.GET_COMUNE)
-	public ResponseEntity<?> getComune(@RequestBody String nome) {
+	public ResponseEntity<?> getComune(@RequestBody int id) {
 		log.info("ApiController:  get comune");
-	    ComuniResponse resource = comuniService.getComune(nome) ;
+	    ComuniResponse resource = comuniService.getComune(id) ;
 		
         	return ResponseEntity.ok(resource);
        
