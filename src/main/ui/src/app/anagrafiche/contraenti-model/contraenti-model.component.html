@@ -242,15 +242,18 @@
 
                     <div class="form-group col-md-6 col-12  d-flex mb-3">
                         <label class="col-lg-2 col-3" for="cap_residenza">Cap di Residenza</label>
-                        <input 
-                            type="text" 
+                        <mat-select
                             id="cap_residenza" 
                             name="cap_residenza"
                             class="form-control mx-3" 
                             [(ngModel)]="contraente.cap_residenza"
                             #cap_residenza="ngModel"
                             required
-                            >
+                        >
+                            <mat-option *ngFor="let cap of listaCap" [value]="cap">
+                                {{cap}} 
+                            </mat-option>
+                        </mat-select>
                         <div class="alert-danger" *ngIf="f.submitted && !cap_residenza.valid">
                             Campo Obbligatorio
                         </div>

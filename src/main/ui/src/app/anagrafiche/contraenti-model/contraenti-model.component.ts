@@ -27,7 +27,7 @@ export class ContraentiModelComponent  {
   comuniResidenzaFiltrati: Observable<string[]>;
   destroy$: Subject<boolean> = new Subject<boolean>();
   comuneRes: Comune = new Comune();//Comune di residenza
-
+  listaCap: any[] = [];
 
   saveContraente() {
     debugger;
@@ -79,6 +79,12 @@ export class ContraentiModelComponent  {
   onComuneResSelect(comuneResidenzaSelezionato: Comune){
     this.contraente.comune_residenza = comuneResidenzaSelezionato.nome;
     this.contraente.provincia_residenza = comuneResidenzaSelezionato.provincia;
+    this.appService.getCapListByComune(comuneResidenzaSelezionato.id).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+      this.listaCap = data.listaCap;
+    });
+
+
+
   }
 
   //Funzione che filtra la lista dei comuni in base ad una stringa in data in input
@@ -90,6 +96,11 @@ export class ContraentiModelComponent  {
   //Funzione per normalizzare i valori di tipo string
   private normalizeValue(value: string): string {
     return value.toLowerCase().replace(/\s/g, '');
+  }
+
+  //
+  private assegnaCap(){
+    
   }
 
 }

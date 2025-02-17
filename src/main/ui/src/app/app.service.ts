@@ -166,7 +166,13 @@ export class AppService {
     ds.stato = contrattoForm.stato;
 	  return this.http.post(this.rootURL + '/search_contratti', ds);
   }
-  getComuneByNome(nome: string) {
-    return this.http.post(this.rootURL + '/get_comune',nome);
+  //Metodo per recuperare un singolo oggetto comune tramite id
+  // getComuneById(id: number) {
+  //   return this.http.post(this.rootURL + '/get_comune',id);
+  // }
+
+  //Metodo per recuperare la lista di codici cap di un determinato comune
+  getCapListByComune(idComune: number){
+    return this.http.post(this.rootURL + '/get_lista_cap',idComune);
   }
 }
