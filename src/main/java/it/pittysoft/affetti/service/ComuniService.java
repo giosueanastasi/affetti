@@ -46,28 +46,12 @@ public class ComuniService {
     	return comuniRepository.save(comuni);
     }
     
-    public ComuniResponse getComune(int id) {
-    	
-    	ComuniResponse response =  new ComuniResponse();
-    	
+    public Optional<Comuni> getComune(Integer id) {
+    		
     	//Recuperiamo il comune ricercato tramite il nome
     	Optional<Comuni> comune = comuniRepository.findById(id);
     	
-    	//Usiamo l'entity appena recuperata per compilare i campi del model
-    	ComuniModel cm = new ComuniModel();
-    	cm.setId(comune.get().getId());
-    	cm.setNome(comune.get().getNome());
-    	cm.setCodComuneIstat(comune.get().getCodComuneIstat());
-    	cm.setCodCatastComune(comune.get().getCodCatastComune());
-    	cm.setProvincia(comune.get().getProvincia());
-    	cm.setCodProv(comune.get().getCodProv());
-    	cm.setDescProv(comune.get().getDescProv());
-    	cm.setCodReg(comune.get().getCodReg());
-    	cm.setDescReg(comune.get().getDescReg());
-    	
-    	response.setComune(cm);
-    	
-    	return response;  	
+    	return comune;
     }
 
 }
