@@ -1,6 +1,8 @@
 package it.pittysoft.affetti.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,14 +20,14 @@ import it.pittysoft.affetti.entity.Users;
 import it.pittysoft.affetti.links.ComuneLinks;
 import it.pittysoft.affetti.links.ContraenteLinks;
 import it.pittysoft.affetti.entity.Assegnatari;
+import it.pittysoft.affetti.entity.Cap;
 import it.pittysoft.affetti.entity.Contratti;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
 import it.pittysoft.affetti.model.ContrattoSearchRequest;
 import it.pittysoft.affetti.model.ContrattoSearchResponse;
-import it.pittysoft.affetti.model.ComuniModel;
-import it.pittysoft.affetti.model.ComuniResponse;
+import it.pittysoft.affetti.model.CapResponse;
 import it.pittysoft.affetti.model.ComuniSelectResponse;
 import it.pittysoft.affetti.model.ContraentiRequest;
 import it.pittysoft.affetti.model.ContraentiResponse;
@@ -44,6 +46,7 @@ import it.pittysoft.affetti.service.ContraentiService;
 import it.pittysoft.affetti.links.ContrattoLinks;
 import it.pittysoft.affetti.links.DomandaLinks;
 import it.pittysoft.affetti.links.AssegnatarioLinks;
+import it.pittysoft.affetti.links.CapLinks;
 import it.pittysoft.affetti.service.PostiService;
 import it.pittysoft.affetti.service.UsersService;
 import it.pittysoft.affetti.service.ContrattiService;
@@ -76,6 +79,7 @@ public class ControllerPrincipale {
 	
 	@Autowired
 	DomandeService domandeService;
+	
 	
 	@GetMapping(path = UserLinks.LIST_USERS)
     public ResponseEntity<?> listUsers() {
@@ -256,12 +260,21 @@ public class ControllerPrincipale {
 		}
     }
 	
-	@PostMapping(path = ComuneLinks.GET_COMUNE)
-	public ResponseEntity<?> getComune(@RequestBody int id) {
-		log.info("ApiController:  get comune");
-	    ComuniResponse resource = comuniService.getComune(id) ;
+	@PostMapping(path = CapLinks.SEARCH_CAP)
+	public ResponseEntity<?> getCapList(@RequestBody Integer id){
+		//Lista di cap da restituire
+		List<String> listaCap = new ArrayList<String>();
+		//Per recuperare la lista cap abbiamo bisogno del comune di cui ci è dato l'id
+		Optional<Comuni> comune = comuniService.getComune(id);
 		
-        	return ResponseEntity.ok(resource);
-       
+		for(Cap cap : comune.get().getListaCap() ) {
+			listaCap.add(cap.getCap());
+		}
+		
+		CapResponse resource = new CapResponse();
+		resource.setListaCap(listaCap);
+		
+		return ResponseEntity.ok(resource);
 	}
+	
 }
