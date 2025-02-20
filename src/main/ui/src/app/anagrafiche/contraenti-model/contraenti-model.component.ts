@@ -5,6 +5,7 @@ import { takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import {startWith, map} from 'rxjs/operators';
+import { UtilsService } from 'src/app/utils.service';
 
 declare var $ : any;
 
@@ -19,15 +20,20 @@ export class ContraentiModelComponent  {
   errorMessage: string = "";
 
   @Output() save =  new EventEmitter<any>();
+
   comuneNascitaControl= new FormControl('');
   comuneResidenzaControl= new FormControl('');
-  constructor(private appService: AppService) { }
+
+  constructor(private appService: AppService, private utilsService: UtilsService) { };
+
   comuni: any[] = [];
   comuniNascitaFiltrati: Observable<string[]>;
   comuniResidenzaFiltrati: Observable<string[]>;
-  destroy$: Subject<boolean> = new Subject<boolean>();
-  comuneRes: Comune = new Comune();//Comune di residenza
   listaCap: any[] = [];
+  comuneRes: Comune = new Comune();//Comune di residenza
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
+
 
   saveContraente() {
     debugger;
@@ -89,18 +95,10 @@ export class ContraentiModelComponent  {
 
   //Funzione che filtra la lista dei comuni in base ad una stringa in data in input
   private comuniFilter(value: string): string[] {
-    const valoreFiltro =  this.normalizeValue(value);
-    return this.comuni.filter(comune => this.normalizeValue(comune.nome).includes(valoreFiltro));
+    const valoreFiltro =  this.utilsService.normalizeValue(value);
+    return this.comuni.filter(comune => this.utilsService.normalizeValue(comune.nome).includes(valoreFiltro));
    }
 
-  //Funzione per normalizzare i valori di tipo string
-  private normalizeValue(value: string): string {
-    return value.toLowerCase().replace(/\s/g, '');
-  }
-
-  //
-  private assegnaCap(){
-    
-  }
+  
 
 }
