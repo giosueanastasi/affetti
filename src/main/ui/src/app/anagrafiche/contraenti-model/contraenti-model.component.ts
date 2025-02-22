@@ -1,12 +1,11 @@
 import { Component, Output, EventEmitter } from '@angular/core';
-import { Comune, Contraente } from 'src/app/app-state/models';
+import { type Comune, Contraente } from 'src/app/app-state/models';
 import { AppService } from 'src/app/app.service';
 import { takeUntil } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import {startWith, map} from 'rxjs/operators';
-import { UtilsService } from 'src/app/utils.service';
-
+import { Utils } from 'src/app/app-state/shared/utils';
 declare var $ : any;
 
 @Component({
@@ -24,26 +23,31 @@ export class ContraentiModelComponent  {
   comuneNascitaControl= new FormControl('');
   comuneResidenzaControl= new FormControl('');
 
-  constructor(private appService: AppService, private utilsService: UtilsService) { };
+  constructor(private appService: AppService, private utils: Utils) { };
 
-  comuni: any[] = [];
-  comuniNascitaFiltrati: Observable<string[]>;
-  comuniResidenzaFiltrati: Observable<string[]>;
+  comuni: Comune[] = [];
+  comuniNascitaFiltrati: Observable<Comune[]>;
+  comuniResidenzaFiltrati: Observable<Comune[]>;
   listaCap: any[] = [];
-  comuneRes: Comune = new Comune();//Comune di residenza
+  comuneRes: Comune;//Comune di residenza
+
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
 
   saveContraente() {
     debugger;
-    this.appService.saveContraente(this.contraente).pipe().subscribe(data => {
-      this.save.emit(data);
-      $('#contraentiModal').modal('hide');
-    }, error => {
-      this.errorMessage = "Errore imprevisto, contattare l'assistenza";
-      console.log(error);
-    });
+    //Il blocco di istruzioni per salvare i dati del contraente viene eseguito solo se 
+    //i valori anagrafici inseriti sono validi
+    if(this.controllaSelezioniComuni()) {
+      this.appService.saveContraente(this.contraente).pipe().subscribe(data => {
+        this.save.emit(data);
+        $('#contraentiModal').modal('hide');
+      }, error => {
+        this.errorMessage = "Errore imprevisto, contattare l'assistenza";
+        console.log(error);
+      });
+    }
   }
   
   showContraentiModal(){
@@ -93,12 +97,34 @@ export class ContraentiModelComponent  {
 
   }
 
-  //Funzione che filtra la lista dei comuni in base ad una stringa in data in input
-  private comuniFilter(value: string): string[] {
-    const valoreFiltro =  this.utilsService.normalizeValue(value);
-    return this.comuni.filter(comune => this.utilsService.normalizeValue(comune.nome).includes(valoreFiltro));
+  //Funzione che filtra la lista dei comuni in base ad una stringa data in input
+  private comuniFilter(value: string): Comune[] {
+    const valoreFiltro =  this.utils.normalizeValue(value);
+    return this.comuni.filter(comune => this.utils.normalizeValue(comune.nome).includes(valoreFiltro));
    }
 
+   //Funzione che controlla se i valori nei campi relativi ai comuni sono stati 
+   private controllaSelezioniComuni(): boolean{
+    let valoriComuniValidi = true;
+     let nomiComuni = this.comuni.map(nomeComune => nomeComune.nome);
+     if(!nomiComuni.includes(this.contraente.comune_nascita.toString())){
+       this.contraente.comune_nascita = null;
+       this.contraente.provincia_nascita = null;
+       this.contraente.stato_nascita = null;
+       this.errorMessage = "Scegliere il comune dalla lista";
+       valoriComuniValidi = false;
+     }
+     if(!nomiComuni.includes(this.contraente.comune_residenza.toString())){
+       this.contraente.comune_residenza = null;
+       this.contraente.provincia_residenza;
+       this.listaCap = null;
+       this.errorMessage = "Scegliere il comune dalla lista";
+       valoriComuniValidi = false;
+     }
+
+     return valoriComuniValidi;
+   }
   
+
 
 }
