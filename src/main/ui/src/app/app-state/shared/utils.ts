@@ -1,5 +1,6 @@
 import { RouterStateSerializer } from '@ngrx/router-store';
 import { RouterStateSnapshot, Params } from '@angular/router';
+import { Injectable } from '@angular/core';
 
 /**
  * The RouterStateSerializer takes the current RouterStateSnapshot
@@ -22,5 +23,15 @@ export class CustomRouterStateSerializer
     const queryParams = routerState.root.queryParams;
 
     return { url, queryParams };
+  }
+  
+}
+
+@Injectable({providedIn: 'root'})
+export class Utils{
+
+    //Funzione per normalizzare i valori di tipo string
+     normalizeValue(value: string): string {
+    return value.toLowerCase().replace(/\s/g, '');
   }
 }
