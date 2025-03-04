@@ -33,7 +33,7 @@
     "ngrx": "0.0.1-security",
     "ngrx-store-freeze": "^0.2.4",
     "ngrx-store-localstorage": "^16.0.0",
-    "ngx-bootstrap": "^10.2.0",
+    "ngx-bootstrap": "^11.0.2",
     "rxjs": "~7.8.0",
     "tslib": "^2.5.0",
     "zone.js": "~0.13.0"
