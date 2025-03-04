@@ -12676,11 +12676,22 @@ CREATE TABLE contraenti (
 	FOREIGN key(fk_user_modifier ) references users (id)
 );
 
-INSERT INTO contraenti ( nome,cognome,comune_nascita,provincia_nascita,stato_nascita,data_nascita,comune_residenza,provincia_residenza,via_residenza,civico_residenza,cap_residenza,telefono,codice_fiscale,email,note,fk_user_modifier ,data_insert,data_update) VALUES
-  ('Antonio','Rossi', 'Sant Omero','TE','Italia','1998-09-20','Sant Egidio alla Vibrata','TE','Via Vibrata',27,64016,0861840071,'BNDNTN98P20I348D','rossiantonio@libero.it','',2,'2023-09-25','2023-09-25'),
-  ( 'Antonietta', 'Di Giuseppe','Ascoli Piceno','AP','Italia','1990-08-15','Monticelli','AP','Via dei Sanniti',3,63100,3277665754,'DGPANT90P15L387J','','',1,'2023-03-4','2020-02-8'),
-  ( 'Giovanna','Di Saverio','Giulianova','TE','Italia','1970-01-31','Giulianova','TE','Via Liguria',2,64021,3475700123,'DSRGVN70P31I351S','','',3,'2023-04-8','2023-04-8'); 
-
+INSERT INTO contraenti (nome, cognome, comune_nascita, provincia_nascita, stato_nascita, data_nascita, comune_residenza, provincia_residenza, via_residenza, civico_residenza, cap_residenza, telefono, codice_fiscale, email, note, fk_user_modifier, data_insert, data_update) VALUES
+  ('Antonio', 'Rossi', 'Sant Omero', 'TE', 'Italia', '1998-09-20', 'Sant Egidio alla Vibrata', 'TE', 'Via Vibrata', 27, 64016, 0861840071, 'BNDNTN98P20I348D', 'rossiantonio@libero.it', '', 2, '2023-09-25', '2023-09-25'),
+  ('Antonietta', 'Di Giuseppe', 'Ascoli Piceno', 'AP', 'Italia', '1990-08-15', 'Monticelli', 'AP', 'Via dei Sanniti', 3, 63100, 3277665754, 'DGPANT90P15L387J', '', '', 1, '2023-03-4', '2020-02-8'),
+  ('Giovanna', 'Di Saverio', 'Giulianova', 'TE', 'Italia', '1970-01-31', 'Giulianova', 'TE', 'Via Liguria', 2, 64021, 3475700123, 'DSRGVN70P31I351S', '', '', 3, '2023-04-8', '2023-04-8'),
+  ('Marco', 'Bianchi', 'Teramo', 'TE', 'Italia', '1985-12-05', 'Teramo', 'TE', 'Corso San Giorgio', 10, 64100, 0861258963, 'BNCMRC85T05L219M', 'marcobianchi@mail.it', '', 2, '2023-02-10', '2023-02-10'),
+  ('Luisa', 'Verdi', 'Giulianova', 'TE', 'Italia', '1995-03-22', 'Giulianova', 'TE', 'Via Abruzzo', 15, 64021, 3477896543, 'VRDLUS95C62G177X', 'luisa.verdi@outlook.it', '', 1, '2023-03-01', '2023-03-01'),
+  ('Francesco', 'Marini', 'Atri', 'TE', 'Italia', '1987-11-11', 'Montorio al Vomano', 'TE', 'Via delle Rose', 5, 64046, 0861448652, 'MRNFRN87L11B048P', 'francescomarini@gmail.com', '', 3, '2023-04-12', '2023-04-12'),
+  ('Giulia', 'Ciani', 'Teramo', 'TE', 'Italia', '1992-06-03', 'Teramo', 'TE', 'Via Della Stazione', 28, 64100, 3274512637, 'CNIGLL92H43C158T', 'giuliaciani@tiscali.it', '', 2, '2023-03-22', '2023-03-22'),
+  ('Luca', 'Mancini', 'Martinsicuro', 'TE', 'Italia', '1980-02-15', 'Villa Rosa', 'TE', 'Via dei Fiori', 12, 64010, 0861792345, 'MNCNLC80B15L219X', 'lucamancini@libero.it', '', 1, '2023-02-25', '2023-02-25'),
+  ('Roberta', 'Ferretti', 'Giulianova', 'TE', 'Italia', '1996-10-10', 'Giulianova', 'TE', 'Via Trieste', 22, 64021, 3278603298, 'FRRRTT96J50G177K', 'robertaferretti@pec.it', '', 3, '2023-01-15', '2023-01-15'),
+  ('Alessandro', 'Santomauro', 'Roseto degli Abruzzi', 'TE', 'Italia', '1991-07-27', 'Roseto degli Abruzzi', 'TE', 'Via Roma', 40, 64026, 0861497384, 'STMSLD91L27H501K', 'alessandrosantomauro@libero.it', '', 2, '2023-03-14', '2023-03-14'),
+  ('Michela', 'Bellini', 'Pescara', 'PE', 'Italia', '1993-04-05', 'Pescara', 'PE', 'Viale della Libertà', 3, 65121, 3274528721, 'BLLMCL93D45F157F', 'michelabellini@tiscali.it', '', 1, '2023-02-18', '2023-02-18'),
+  ('Roberto', 'Galli', 'Ascoli Piceno', 'AP', 'Italia', '1988-09-18', 'Ascoli Piceno', 'AP', 'Via delle Marche', 9, 63100, 3471225689, 'GLLRRT88P18A470D', 'robertogalli@fastweb.it', '', 3, '2023-03-05', '2023-03-05'),
+  ('Francesca', 'Pastore', 'Montorio al Vomano', 'TE', 'Italia', '1994-01-02', 'Montorio al Vomano', 'TE', 'Viale del Lavoro', 7, 64046, 3277569083, 'PSTFNC94A42D156D', 'francescapastore@libero.it', '', 2, '2023-01-20', '2023-01-20'),
+  ('Giuseppe', 'Fiorini', 'Alba Adriatica', 'TE', 'Italia', '1986-04-10', 'Alba Adriatica', 'TE', 'Via delle Palme', 21, 64011, 0861882345, 'FRNGPP86D10A536Q', 'giuseppefiorini@gmail.com', '', 1, '2023-02-12', '2023-02-12'),
+  ('Simona', 'Moro', 'Teramo', 'TE', 'Italia', '1999-12-30', 'Teramo', 'TE', 'Via Manzoni', 3, 64100, 3271234567, 'MRSSMN99T30L219R', 'simonamoro@libero.it', '', 3, '2023-04-01', '2023-04-01');
 
 
 CREATE TABLE domande (
