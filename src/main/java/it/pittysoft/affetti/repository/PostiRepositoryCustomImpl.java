@@ -21,6 +21,7 @@ import org.springframework.stereotype.Repository;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.entity.Posti;
 import it.pittysoft.affetti.entity.QAssegnatari;
+import it.pittysoft.affetti.entity.QContratti;
 import it.pittysoft.affetti.entity.QDomande;
 import it.pittysoft.affetti.entity.QPosti;
 import it.pittysoft.affetti.model.PostiRequest;
@@ -37,59 +38,46 @@ public class PostiRepositoryCustomImpl implements PostiRepositoryCustom {
 		QPosti qPosti = QPosti.posti;
 		QDomande qDomande = QDomande.domande;
 		QAssegnatari qAssegnatari = QAssegnatari.assegnatari;
+		QContratti qContratti = QContratti.contratti;
+
 		
 		BooleanBuilder builder = new BooleanBuilder();
-		if(posti.getNome()!=null) {
-			builder.and(qAssegnatari.nome.upper().like("%"+posti.getNome().toUpperCase()+"%"));
+		
+
+		
+		if(posti.getNome()!=null && !posti.getNome().isEmpty()) {
+			builder.and(qAssegnatari.nome.upper().like(posti.getNome().toUpperCase()));
 		}
-		if(posti.getCognome()!=null) {
-			builder.and(qAssegnatari.cognome.upper().like("%"+posti.getCognome().toUpperCase()+"%"));
-			
+		if(posti.getCognome()!=null && !posti.getCognome().isEmpty()) {
+			builder.and(qAssegnatari.cognome.upper().like(posti.getCognome().toUpperCase()));
 		}
-		if(posti.getFornice()!=null) {
-			builder.and(qPosti.fornice.upper().like("%"+posti.getFornice().toUpperCase()+"%"));
+		if(posti.getFornice()!=null && !posti.getFornice().isEmpty()) {
+			builder.and(qPosti.fornice.upper().like(posti.getFornice().toUpperCase()));
 		}
-		if(posti.getLoculo()!=null) {
-			builder.and(qPosti.loculo.upper().like("%"+posti.getLoculo().toUpperCase()+"%"));
+		if(posti.getLoculo()!=null && !posti.getLoculo().isEmpty()) {
+			builder.and(qPosti.loculo.upper().like(posti.getLoculo().toUpperCase()));
+		}
+		if(posti.getStato()!=null&& !posti.getStato().isEmpty()) {
+			builder.and(qPosti.stato.upper().like(posti.getStato().toUpperCase()));
+		}
+		
+		if(posti.getData_inizio()!=null && posti.getData_scadenza()!=null) {
+			builder.and(qContratti.data_scadenza.between(posti.getData_inizio(), posti.getData_scadenza()));
 		}
 		
 		
-		List<Posti> postiPlayer = query.select(qPosti)
+		
+		List<Posti> postiPlayer = query.select(qPosti).distinct()
 		                               .from(qPosti)
 		                               .innerJoin(qPosti.domande,qDomande)
 		                               .innerJoin(qDomande.assegnatario,qAssegnatari)
+		                               .innerJoin(qDomande.contratto,qContratti)
 		                               .where(builder
 		                            		    ).fetch();
 		
 		return postiPlayer;
-		/*	CriteriaBuilder cb = em.getCriteriaBuilder();
-	    CriteriaQuery<Posti> cq = cb.createQuery(Posti.class);
-//	    Metamodel m = em.getMetamodel();
-	//   EntityType<Posti> PostiMetaModel = m.entity(Posti.class);
-
-	    Root<Posti> postofrom = cq.from(Posti.class);
-	//    Join<Posti, Domande> domandeJoin = postofrom.join("fk_posto",JoinType.INNER);
-	    List<Predicate> predicates = new ArrayList<>();
-	    
-
-	    
-	    if (posti.getLoculo() != null) {
-	    	predicates.add(cb.like(
-	    			cb.upper(
-	    					postofrom.get("loculo")
-	    			)
-	    			, "%" + posti.getLoculo().toUpperCase() + "%"));
-	    }
-	    if (posti.getFornice() != null) {
-	    	predicates.add(cb.like(
-	    			cb.upper(
-	    					postofrom.get("fornice")
-	    			)
-	    			, "%" + posti.getFornice().toUpperCase() + "%"));
-	    }
-	    cq.where(predicates.toArray(new Predicate[0]));
-
-	    return em.createQuery(cq).getResultList();*/
 	}
+	
+	
 
 }

@@ -1,6 +1,8 @@
 package it.pittysoft.affetti.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,21 +20,33 @@ import it.pittysoft.affetti.entity.Users;
 import it.pittysoft.affetti.links.ComuneLinks;
 import it.pittysoft.affetti.links.ContraenteLinks;
 import it.pittysoft.affetti.entity.Assegnatari;
+import it.pittysoft.affetti.entity.Cap;
 import it.pittysoft.affetti.entity.Contratti;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
+import it.pittysoft.affetti.model.ContrattoSearchRequest;
+import it.pittysoft.affetti.model.ContrattoSearchResponse;
+import it.pittysoft.affetti.model.CapResponse;
+import it.pittysoft.affetti.model.ComuniSelectResponse;
+import it.pittysoft.affetti.model.ContraentiRequest;
+import it.pittysoft.affetti.model.ContraentiResponse;
+import it.pittysoft.affetti.model.ContrattoModel;
 import it.pittysoft.affetti.model.DomandaRequest;
 import it.pittysoft.affetti.model.DomandaRequestSearch;
 import it.pittysoft.affetti.model.DomandaResponse;
+import it.pittysoft.affetti.model.DomandaResponseSearch;
 import it.pittysoft.affetti.model.PostiRequest;
 import it.pittysoft.affetti.model.PostiResponse;
 import it.pittysoft.affetti.model.Response;
+import it.pittysoft.affetti.model.UserRequest;
+import it.pittysoft.affetti.model.UserResponse;
 import it.pittysoft.affetti.service.ComuniService;
 import it.pittysoft.affetti.service.ContraentiService;
 import it.pittysoft.affetti.links.ContrattoLinks;
 import it.pittysoft.affetti.links.DomandaLinks;
 import it.pittysoft.affetti.links.AssegnatarioLinks;
+import it.pittysoft.affetti.links.CapLinks;
 import it.pittysoft.affetti.service.PostiService;
 import it.pittysoft.affetti.service.UsersService;
 import it.pittysoft.affetti.service.ContrattiService;
@@ -66,11 +80,23 @@ public class ControllerPrincipale {
 	@Autowired
 	DomandeService domandeService;
 	
+	
 	@GetMapping(path = UserLinks.LIST_USERS)
     public ResponseEntity<?> listUsers() {
         log.info("ApiController:  list users");
         List<Users> resource = usersService.getUsers();
         return ResponseEntity.ok(resource);
+    }
+	
+	@PostMapping(path = UserLinks.SEARCH_USERS)
+    public ResponseEntity<?> searchUsers(@RequestBody UserRequest user) {
+		UserResponse resource = usersService.getUsers(user);
+        if (resource.getReturnCode()==Response.OK) {
+        	return ResponseEntity.ok(resource);
+        } else  {
+        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Errore imprevisto, contattare l'assistenza");
+		}     
     }
 	
 	@PostMapping(path = UserLinks.ADD_USER)
@@ -88,11 +114,12 @@ public class ControllerPrincipale {
     }
 	
 	@PostMapping(path = PostoLinks.ADD_POSTO)
-	public ResponseEntity<?> savePosto(@RequestBody Posti posto) {
+	public ResponseEntity<?> savePosto(@RequestBody PostiRequest posto) {
         log.info("ApiController:  list posti");
-        Posti resource = postiService.savePosto(posto);
+        PostiResponse resource = postiService.savePosto(posto);
         return ResponseEntity.ok(resource);
     }
+	
 	@GetMapping(path = AssegnatarioLinks.LIST_ASSEGNATARI)
     public ResponseEntity<?> listAssegnatari() {
         log.info("ApiController:  list assegnatari");
@@ -114,13 +141,13 @@ public class ControllerPrincipale {
     }
 	
 	@PostMapping(path = ContrattoLinks.ADD_CONTRATTO)
-	public ResponseEntity<?> saveContratto(@RequestBody Contratti contratto) {
+	public ResponseEntity<?> saveContratto(@RequestBody ContrattoModel contratto) {
         log.info("ApiController:  list contratti");
-        Contratti resource = contrattiService.saveContratto(contratto);
+        ContrattoSearchResponse resource = contrattiService.saveContratto(contratto);
         return ResponseEntity.ok(resource);
     }
     
-	
+
 	@GetMapping(path = ContraenteLinks.LIST_CONTRAENTI)
     public ResponseEntity<?> listContraenti() {
         log.info("ApiController:  list contraenti");
@@ -130,16 +157,45 @@ public class ControllerPrincipale {
 	
 	
 	@PostMapping(path = ContraenteLinks.SEARCH_CONTRAENTI)
-    public ResponseEntity<?> searchContraenti(@RequestBody Contraenti contraenti) {
+    public ResponseEntity<?> searchContraenti(@RequestBody ContraentiRequest contraenti) {
         log.info("ApiController:  search contraenti");
-        List<Contraenti> resource = contraentiService.getContraenti(contraenti);
-        return ResponseEntity.ok(resource);
-    }
+        ContraentiResponse resource = contraentiService.getContraenti(contraenti);
+        if (resource.getReturnCode()==Response.OK) {
+        	return ResponseEntity.ok(resource);
+        } else  {
+        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Errore imprevisto, contattare l'assistenza");
+		}   
+        }
+	
+	@PostMapping(path = DomandaLinks.SEARCH_DOMANDE)
+    public ResponseEntity<?> searchDomande(@RequestBody DomandaRequestSearch resquestSearch) {
+        log.info("ApiController:  search domande");
+        DomandaResponseSearch resource = domandeService.getDomande(resquestSearch);
+        if (resource.getReturnCode()==Response.OK) {
+        	return ResponseEntity.ok(resource);
+        } else  {
+        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Errore imprevisto, contattare l'assistenza");
+        }
+	}
 	
 	@PostMapping(path = PostoLinks.SEARCH_POSTI)
     public ResponseEntity<?> searchPosti(@RequestBody PostiRequest posti) {
         log.info("ApiController:  search posti");
         PostiResponse resource = postiService.getPosti(posti);
+        if (resource.getReturnCode()==Response.OK) {
+        	return ResponseEntity.ok(resource);
+        } else  {
+        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Errore imprevisto, contattare l'assistenza");
+		}
+	}
+	
+	@PostMapping(path = ContrattoLinks.SEARCH_CONTRATTO)
+    public ResponseEntity<?> searchContratto(@RequestBody ContrattoSearchRequest resquestSearch) {
+        log.info("ApiController:  search contratti");
+        ContrattoSearchResponse resource = contrattiService.getContratti(resquestSearch);
         if (resource.getReturnCode()==Response.OK) {
         	return ResponseEntity.ok(resource);
         } else  {
@@ -158,7 +214,7 @@ public class ControllerPrincipale {
 	@GetMapping(path = ComuneLinks.LIST_COMUNI)
     public ResponseEntity<?> listComuni() {
         log.info("ApiController:  list Comuni");
-        List<Comuni> resource = comuniService.getComuni();
+        ComuniSelectResponse resource = comuniService.getComuni();
         return ResponseEntity.ok(resource);
     }
 	
@@ -182,6 +238,14 @@ public class ControllerPrincipale {
         log.info("ApiController:  list domande");
         Domande resource = domandeService.saveDomanda(domanda);
         return ResponseEntity.ok(resource);
+        
+        /*
+         * 	@PostMapping(path = PostoLinks.ADD_POSTO)
+	public ResponseEntity<?> savePosto(@RequestBody PostiRequest posto) {
+        log.info("ApiController:  list posti");
+        PostiResponse resource = postiService.savePosto(posto);
+        return ResponseEntity.ok(resource);
+         */
     }
 	
 	@PostMapping(path = DomandaLinks.ADD_DOMANDA_FULL)
@@ -196,10 +260,21 @@ public class ControllerPrincipale {
 		}
     }
 	
-	@PostMapping(path = DomandaLinks.SEARCH_DOMANDE)
-    public ResponseEntity<?> searchDomande(@RequestBody DomandaRequestSearch resquestSearch) {
-        log.info("ApiController:  search domande");
-        List<Domande> resource = domandeService.getDomande(resquestSearch);
-        return ResponseEntity.ok(resource);
-    }
+	@PostMapping(path = CapLinks.SEARCH_CAP)
+	public ResponseEntity<?> getCapList(@RequestBody Integer id){
+		//Lista di cap da restituire
+		List<String> listaCap = new ArrayList<String>();
+		//Per recuperare la lista cap abbiamo bisogno del comune di cui ci è dato l'id
+		Optional<Comuni> comune = comuniService.getComune(id);
+		
+		for(Cap cap : comune.get().getListaCap() ) {
+			listaCap.add(cap.getCap());
+		}
+		
+		CapResponse resource = new CapResponse();
+		resource.setListaCap(listaCap);
+		
+		return ResponseEntity.ok(resource);
+	}
+	
 }

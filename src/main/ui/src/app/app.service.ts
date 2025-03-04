@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { DomandaFull } from './app-state/models/domandaFull.model';
 import { Domanda, Posto1 } from './app-state/models';
 import { DomandaSearch } from './app-state/models/domandaSearch.model';
+import { ContrattiSearch } from './app-state/models/contrattiSearch.model';
 
 
 
@@ -25,8 +26,17 @@ export class AppService {
 	return this.http.post(this.rootURL + '/user', user);
   }
 
+
+  cercaUser(user: any) {
+    return this.http.post(this.rootURL + '/search_user', user);
+  }
+
   cercaPosti(posti1: any) {
     return this.http.post(this.rootURL + '/search_posti',posti1);
+  }
+
+  cercaCercacontraenti(contraenti1: any) {
+    return this.http.post(this.rootURL + '/search_contraenti',contraenti1);
   }
 
   getPosti() {
@@ -35,6 +45,7 @@ export class AppService {
 
   addPosto(posto: any, id: number) {
 	posto.id = id;
+  debugger;
 	return this.http.post(this.rootURL + '/posto', posto);
   }
 
@@ -53,16 +64,27 @@ export class AppService {
 
   addContraente(contraente: any, id: number) {
     contraente.id = id;
+
     return this.http.post(this.rootURL + '/contraente', contraente);
+  }
+
+  saveUser(user: any) {
+    return this.http.post(this.rootURL + '/user', user);
   }
 
   saveContraente(contraente: any) {
     return this.http.post(this.rootURL + '/contraente', contraente);
   }
 
+
   savePosto(posto1: any) {
-    return this.http.post(this.rootURL + '/posto1', posto1);
+    return this.http.post(this.rootURL + '/posto', posto1);
   }
+
+  saveDomanda(domanda: any) {
+    return this.http.post(this.rootURL + '/domanda', domanda);
+  }
+
 
   getAssegnatari() {
     return this.http.get(this.rootURL + '/assegnatari');
@@ -75,6 +97,10 @@ export class AppService {
 
   getContratti() {
     return this.http.get(this.rootURL + '/contratti');
+  }
+
+  saveContratto(contratto: any) {
+    return this.http.post(this.rootURL + '/contratto', contratto);
   }
 
   addContratto(contratto: any, id: number) {
@@ -96,9 +122,10 @@ export class AppService {
     domanda.id = domandaFullForm.id;
     domanda.protocollo = domandaFullForm.protocollo;
     domanda.data_protocollo = domandaFullForm.data_protocollo;
-    domanda.stato = 'bozza';
+    domanda.stato = 'APERTA';
+    domanda.tipologia = domandaFullForm.tipologia;
     domanda.fk_posto = domandaFullForm.fk_posto;
-    domanda.fk_contraente = domandaFullForm.fk_contraente;
+   
 
     let  df = new DomandaFull();
     df.domanda = domanda;
@@ -106,26 +133,46 @@ export class AppService {
     df.cognomeAss = domandaFullForm.cognomeAss;
     df.comuneAss = domandaFullForm.comuneAss;
     df.provAss = domandaFullForm.provAss;
-    df.dataDecesso = domandaFullForm.dataDecesso;
+    df.dataDecesso = domandaFullForm.data_decesso;
+    df.loculo = domandaFullForm.loculo;
+    df.fornice = domandaFullForm.fornice;
+    df.fkContraente = domandaFullForm.fk_contraente;
 
 	return this.http.post(this.rootURL + '/domandaFull', df);
   }
 
 
   cercaDomandeService(domandaForm: any) {
-    let domanda = new Domanda;
-    domanda.protocollo = domandaForm.numero_protocollo;
-    domanda.data_protocollo = domandaForm.data_protocollo;
-    domanda.stato = domandaForm.stato;
-
     let  ds = new DomandaSearch();
-    ds.domanda = domanda;
-    ds.nomeC = domandaForm.nome;
-    ds.cognomeC = domandaForm.cognome;
-    ds.codice_fiscaleC = domandaForm.codice_fiscale;
-    ds.emailC = domandaForm.email;
-    
-	return this.http.post(this.rootURL + '/search_domande', ds);
+    ds.nome = domandaForm.nome;
+    ds.cognome = domandaForm.cognome;
+    ds.codiceFiscale = domandaForm.codice_fiscale;
+    ds.dataProtocolloFinale = domandaForm.data_protocollo_finale;
+    ds.dataProtocolloIniziale = domandaForm.data_protocollo_iniziale;
+    ds.tipologia = domandaForm.tipologia;
+    ds.numeroProtocollo = domandaForm.numero_protocollo;
+    ds.stato = domandaForm.stato;
+	  return this.http.post(this.rootURL + '/search_domande', ds);
   }
-  
+  cercaContrattiService(contrattoForm: any) {
+    let  ds = new ContrattiSearch();
+    ds.nome = contrattoForm.nome;
+    ds.cognome = contrattoForm.cognome;
+    ds.codiceFiscale = contrattoForm.codice_fiscale;
+    ds.dataProtocolloFinale = contrattoForm.data_protocollo_finale;
+    ds.dataProtocolloIniziale = contrattoForm.data_protocollo_iniziale;
+    ds.tipologia = contrattoForm.tipologia;
+    ds.numeroProtocollo = contrattoForm.numero_protocollo;
+    ds.stato = contrattoForm.stato;
+	  return this.http.post(this.rootURL + '/search_contratti', ds);
+  }
+  //Metodo per recuperare un singolo oggetto comune tramite id
+  // getComuneById(id: number) {
+  //   return this.http.post(this.rootURL + '/get_comune',id);
+  // }
+
+  //Metodo per recuperare la lista di codici cap di un determinato comune
+  getCapListByComune(idComune: number){
+    return this.http.post(this.rootURL + '/get_lista_cap',idComune);
+  }
 }

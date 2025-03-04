@@ -6,3 +6,4 @@ export { Assegnatario } from './assegnatario.model';
 export { Contratto } from './contratto.model';
 export { Domanda } from './domanda.model';
 export { Posto1 } from './posto1.model';
+export { Contraente1 } from './contraente1.model';

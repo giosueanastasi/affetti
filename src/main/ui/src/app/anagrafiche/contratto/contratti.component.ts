@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from '../../app.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
+import { ContrattoModelComponent } from '../contratto-model/contratto-model.component';
+import { Contratto } from 'src/app/app-state/models';
 
 
 
@@ -11,22 +13,25 @@ import { Subject } from 'rxjs';
   templateUrl: './contratti.component.html',
   styleUrls: ['./contratti.component.css']
 })
-export class ContrattiComponent implements OnInit, OnDestroy {
+export class ContrattiComponent implements OnInit {
+
+  selectedContratto: Contratto = new Contratto();
 
   constructor(private appService: AppService) {}
 
   title = 'angular-nodejs-example';
 
+  @ViewChild(ContrattoModelComponent) child: ContrattoModelComponent | undefined;
+
   contrattoForm = new FormGroup({
-    protocollo: new FormControl('', Validators.nullValidator ),
-    data_inizio: new FormControl('', Validators.nullValidator && Validators.required),
-    data_scadenza: new FormControl('', Validators.nullValidator),
-    stato: new FormControl('', Validators.nullValidator && Validators.required),
-    fk_domanda_loculo: new FormControl('', Validators.nullValidator && Validators.required),
-    fk_domanda_disposizione: new FormControl('', Validators.nullValidator ),
-    fk_user_modifier: new FormControl('', Validators.nullValidator ),
-    data_update: new FormControl('', Validators.nullValidator ),
-    data_insert: new FormControl('', Validators.nullValidator)
+    nome: new FormControl('', Validators.nullValidator),
+    cognome: new FormControl('', Validators.nullValidator),
+    tipologia: new FormControl('', Validators.nullValidator),
+    codice_fiscale: new FormControl('', Validators.nullValidator),
+    numero_protocollo: new FormControl('', Validators.nullValidator),
+    data_protocollo_iniziale: new FormControl('', Validators.nullValidator),
+    data_protocollo_finale: new FormControl('', Validators.nullValidator),
+    stato: new FormControl('', Validators.nullValidator)
   });
 
   contratti: any[] = [];
@@ -34,14 +39,13 @@ export class ContrattiComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
-  onSubmit() {
-    this.appService.addContratto(this.contrattoForm.value, this.contrattoCount + 1).pipe(takeUntil(this.destroy$)).subscribe(data => {
-      console.log('message::::', data);
-      this.contrattoCount = this.contrattoCount + 1;
-      console.log(this.contrattoCount);
-      this.contrattoForm.reset();
-      this.getAllContratti();
-    });
+  createContrattoRequest(){
+    this.selectedContratto = new Contratto();
+    this.child?.showContrattoModal();
+  }
+  editContrattoRequest(item: Contratto){
+    this.selectedContratto = Object.assign({},item);
+    this.child?.showContrattoModal();
   }
 
   getAllContratti() {
@@ -55,13 +59,28 @@ export class ContrattiComponent implements OnInit, OnDestroy {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }
+
+  cercaContratti(cercaContrattiForm: FormGroup) {
+    this.appService.cercaContrattiService(cercaContrattiForm.value).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+      this.contratti = data.contratti;
+    }); 
+}
   
 /*
   @Input() contratti: any[];
 */
   ngOnInit() {
     console.log('esegui all contratto on init');
-    this.getAllContratti();
+    //this.getAllContratti();
+    }
+
+    saveContrattoWatcher(contratto: Contratto){
+      let contrattoIndex = this.contratti.findIndex(item => item.id === contratto.id);
+      if(contrattoIndex !==-1){
+        this.contratti[contrattoIndex] = contratto;
+      }else{
+        this.contratti.push(contratto);
+      }
     }
 
 }

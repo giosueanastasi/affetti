@@ -15,7 +15,10 @@ public class DomandaRequest extends Request {
 	private String cognomeAss;
 	private String comuneAss;
 	private String provAss;
-	private String dataDecesso;
+	private Date dataDecesso;
+	private String loculo;
+	private String fornice;
+	private String fkContraente;
 	
 
 }

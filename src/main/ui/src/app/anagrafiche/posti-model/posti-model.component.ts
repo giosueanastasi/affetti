@@ -25,7 +25,7 @@ posto1: Posto1 = new Posto1();
   constructor(private appService: AppService) { }
 
   posti: any[] = [];
-  searchValue : string;
+
 
   filtraPosti(postoForm: Posto1) {
     this.appService.cercaPosti(postoForm).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
@@ -43,8 +43,8 @@ posto1: Posto1 = new Posto1();
 
 
   ngOnInit() {
-    console.log('esegui all posto on init');
-    this.getAllPosti();
+    console.log('esegui all posto1 on init');
+    //this.getAllPosti();
     }
 
     showPostiModal(){

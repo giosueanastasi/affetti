@@ -1,0 +1,365 @@
+<div class="modal fade" id="contrattoModal" tabIndex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form #f="ngForm" >
+                <div class="modal-header">
+                    <h4 class="modal-title">Dettaglio Contratto </h4>
+                    <button class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                        <div class="modal-body">
+
+                            <h4>Protocollo</h4>
+
+                            <div class="form-group">
+                                <label for="numeroProtocolloContratto">Numero</label>
+                                <input 
+                                    type="text" 
+                                    id="numeroProtocolloContratto" 
+                                    name="numeroProtocolloContratto"
+                                    class="form-control" 
+                                    [(ngModel)]="contratto.numeroProtocolloContratto"
+                                    #numeroProtocolloContratto="ngModel"
+                                    
+                                    >
+                            </div>
+
+                            <div class="form-group">
+                            <label for="dataProtocolloContratto">Data Inizio</label>
+                                <input 
+                                    type="text" 
+                                    id="dataProtocolloContratto" 
+                                    name="dataProtocolloContratto"
+                                    class="form-control notEdit" 
+                                    [(ngModel)]="contratto.dataProtocolloContratto"
+                                    #dataProtocolloContratto="ngModel"
+                                    readonly
+                                    >
+                            </div>
+
+                            <div class="form-group">
+                            <label for="dataScadenzaContratto">Data Fine</label>
+                                <input 
+                                    type="text" 
+                                    id="dataScadenzaContratto" 
+                                    name="dataScadenzaContratto"
+                                    class="form-control notEdit" 
+                                    [(ngModel)]="contratto.dataScadenzaContratto"
+                                    #dataScadenzaContratto="ngModel"
+                                    readonly
+                                    >
+                            </div>
+
+                            <h4>Dati Contraente</h4>
+
+                            <div class="form-group">
+                                <label for="nomeC">Nome</label>
+                                    <input 
+                                        type="text" 
+                                        id="nomeC" 
+                                        name="nomeC"
+                                        class="form-control notEdit" 
+                                        [(ngModel)]="contratto.nomeC"
+                                        #nomeC="ngModel"
+                                        readonly
+                                        >
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cognomeC">Cognome</label>
+                                        <input 
+                                            type="text" 
+                                            id="cognomeC" 
+                                            name="cognomeC"
+                                            class="form-control notEdit" 
+                                            [(ngModel)]="contratto.cognomeC"
+                                            #cognomeC="ngModel"
+                                            readonly
+                                            >
+                                    </div>
+
+                            <h4>Dati Nascita</h4>
+
+                            <div class="form-group">
+                            <label for="comune_nascita">Comune</label>
+                                <input 
+                                    type="text" 
+                                    id="comune_nascita" 
+                                    name="comune_nascita"
+                                    class="form-control notEdit" 
+                                    [(ngModel)]="contratto.comune_nascita"
+                                    #comune_nascita="ngModel"
+                                    readonly
+                                    >
+                            </div>
+
+                            <div class="form-group">
+                            <label for="provincia_nascita">Provincia</label>
+                                <input 
+                                    type="text" 
+                                    id="provincia_nascita" 
+                                    name="provincia_nascita"
+                                    class="form-control notEdit" 
+                                    [(ngModel)]="contratto.provincia_nascita"
+                                    #provincia_nascita="ngModel"
+                                    readonly
+                                    >
+                            </div>
+
+                            <div class="form-group">
+                            <label for="stato_nascita">Stato</label>
+                                <input 
+                                    type="text" 
+                                    id="stato_nascita" 
+                                    name="stato_nascita"
+                                    class="form-control notEdit" 
+                                    [(ngModel)]="contratto.stato_nascita"
+                                    #stato_nascita="ngModel"
+                                    readonly
+                                    >
+                            </div>
+
+                            <div class="form-group">
+                            <label for="data_nascita">Data di Nascita</label>
+                                <input 
+                                    type="text" 
+                                    id="data_nascita" 
+                                    name="data_nascita"
+                                    class="form-control notEdit" 
+                                    [(ngModel)]="contratto.data_nascita"
+                                    #data_nascita="ngModel"
+                                    readonly
+                                    >
+                            </div>
+
+                            <h4>Dati Residenza</h4>
+
+                            <div class="form-group">
+                            <label for="comune_residenza">Comune</label>
+                            <input 
+                                type="text" 
+                                id="comune_residenza" 
+                                name="comune_residenza"
+                                class="form-control notEdit" 
+                                [(ngModel)]="contratto.comune_residenza"
+                                #comune_residenza="ngModel"
+                                readonly
+                                >
+                            </div>
+
+                            <div class="form-group">
+                                <label for="provincia_residenza">Provincia</label>
+                                <input 
+                                    type="text" 
+                                    id="provincia_residenza" 
+                                    name="provincia_residenza"
+                                    class="form-control notEdit" 
+                                    [(ngModel)]="contratto.provincia_residenza"
+                                    #provincia_residenza="ngModel"
+                                    readonly
+                                    >
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="via_residenza">Indirizzo</label>
+                                    <input 
+                                        type="text" 
+                                        id="via_residenza" 
+                                        name="via_residenza"
+                                        class="form-control notEdit" 
+                                        [(ngModel)]="contratto.via_residenza"
+                                        #via_residenza="ngModel"
+                                        readonly
+                                        >
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="cap_residenza">Cap</label>
+                                    <input 
+                                        type="text" 
+                                        id="cap_residenza" 
+                                        name="cap_residenza"
+                                        class="form-control notEdit" 
+                                        [(ngModel)]="contratto.cap_residenza"
+                                        #cap_residenza="ngModel"
+                                        readonly
+                                        >
+                                </div>
+
+                                <h4>Altri Dati</h4>
+
+                                <div class="form-group">
+                                    <label for="codice_fiscale">Codice Fiscale</label>
+                                    <input 
+                                        type="text" 
+                                        id="codice_fiscale" 
+                                        name="codice_fiscale"
+                                        class="form-control notEdit" 
+                                        [(ngModel)]="contratto.codice_fiscale"
+                                        #codice_fiscale="ngModel"
+                                        readonly
+                                        >
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input 
+                                        type="text" 
+                                        id="email" 
+                                        name="email"
+                                        class="form-control notEdit" 
+                                        [(ngModel)]="contratto.email"
+                                        #email="ngModel"
+                                        readonly
+                                        >
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="telefono">Telefono</label>
+                                    <input 
+                                        type="text" 
+                                        id="telefono" 
+                                        name="telefono"
+                                        class="form-control notEdit" 
+                                        [(ngModel)]="contratto.telefono"
+                                        #telefono="ngModel"
+                                        readonly
+                                        >
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="note">Note</label>
+                                    <input 
+                                        type="text" 
+                                        id="note" 
+                                        name="note"
+                                        class="form-control notEdit" 
+                                        [(ngModel)]="contratto.note"
+                                        #note="ngModel"
+                                        readonly
+                                        >
+                                </div>
+                                
+                                <h4>Dati Posto</h4>
+
+                                <div class="form-group">
+                                    <label for="loculo">Loculo</label>
+                                    <input 
+                                        type="text" 
+                                        id="loculo" 
+                                        name="loculo"
+                                        class="form-control notEdit" 
+                                        [(ngModel)]="contratto.loculo"
+                                        #loculo="ngModel"
+                                        readonly
+                                        >
+                                </div>
+                                
+
+                                <div class="form-group">
+                                    <label for="fornice">Fornice</label>
+                                    <input 
+                                        type="text" 
+                                        id="fornice" 
+                                        name="fornice"
+                                        class="form-control notEdit" 
+                                        [(ngModel)]="contratto.fornice"
+                                        #fornice="ngModel"
+                                        readonly
+                                        >
+                                </div>
+                                
+                                <h4>Dati Assegnatario</h4>
+
+                                <div class="form-group">
+                                    <label for="nomeA">Nome</label>
+                                    <input 
+                                        type="text" 
+                                        id="nomeA" 
+                                        name="nomeA"
+                                        class="form-control notEdit" 
+                                        [(ngModel)]="contratto.nomeA"
+                                        #nomeA="ngModel"
+                                        readonly
+                                        >
+                                </div>
+                                
+
+                                <div class="form-group">
+                                    <label for="cognomeA">Cognome</label>
+                                    <input 
+                                        type="text" 
+                                        id="cognomeA" 
+                                        name="cognomeA"
+                                        class="form-control notEdit" 
+                                        [(ngModel)]="contratto.cognomeA"
+                                        #cognomeA="ngModel"
+                                        readonly
+                                        >
+                                </div>
+
+                                <h4>Dati Decesso</h4>
+
+                                <div class="form-group">
+                                    <label for="comune_decesso">Comune</label>
+                                    <input 
+                                        type="text" 
+                                        id="comune_decesso" 
+                                        name="comune_decesso"
+                                        class="form-control notEdit" 
+                                        [(ngModel)]="contratto.comune_decesso"
+                                        #comune_decesso="ngModel"
+                                        readonly
+                                        >
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="data_decesso">Data</label>
+                                    <input 
+                                        type="text" 
+                                        id="data_decesso" 
+                                        name="data_decesso"
+                                        class="form-control notEdit" 
+                                        [(ngModel)]="contratto.data_decesso"
+                                        #data_decesso="ngModel"
+                                        readonly
+                                        >
+                                </div>
+
+                                <h4>Dati Domanda</h4>
+
+                                <div class="form-group">
+                                    <label for="protocolloDomanda">Protocollo</label>
+                                    <input 
+                                        type="text" 
+                                        id="protocolloDomanda" 
+                                        name="protocolloDomanda"
+                                        class="form-control notEdit" 
+                                        [(ngModel)]="contratto.protocolloDomanda"
+                                        #protocolloDomanda="ngModel"
+                                        readonly
+                                        >
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="dataProtocolloDomanda">Data</label>
+                                    <input 
+                                        type="text" 
+                                        id="dataProtocolloDomanda" 
+                                        name="dataProtocolloDomanda"
+                                        class="form-control notEdit" 
+                                        [(ngModel)]="contratto.dataProtocolloDomanda"
+                                        #dataProtocolloDomanda="ngModel"
+                                        readonly
+                                        >
+                                </div>
+                        </div>
+
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-bs-dismiss="modal" >Chiudi</button>
+                                <button class="btn btn-primary" (click)="saveContratto()">Salva modifiche</button>
+                            </div>  
+            </form>
+        </div>
+    </div>
+</div>
+

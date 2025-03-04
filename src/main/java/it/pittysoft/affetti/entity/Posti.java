@@ -40,8 +40,12 @@ public class Posti {
     private String loculo;
     
     @Column
-    @NotNull(message="{NotNull.Posto.tipo}")
     private String tipo;
+    
+    @Column
+    @NotNull(message="{NotNull.Posto.stato}")
+    private String stato;
+
     
     @Column
     private String data_insert;
@@ -55,7 +59,7 @@ public class Posti {
 
     @OneToMany(mappedBy = "posto")
     private List<Domande> domande  = new ArrayList<>();
-    
+   
 
     
 

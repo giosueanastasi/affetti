@@ -1,77 +1,124 @@
 <div class="container">
     <div class="row">
       <div class=" mrgnbtm">
-        <h2>Domande</h2>
-        <div class="text-end"><button [routerLink]="['/domandaFull']">Nuova Domanda</button> </div>
-        <h4>Cerca</h4>
+        <h2>Cerca Domande</h2>
+       
+       
         <form [formGroup]="domandaForm">
           <div class="row">
-            <div class="form-group col-md-4">
-              <input type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp" placeholder="nome">
+            <div class="form-group col-sm-10"></div>
+            <div class="form-group col-sm-2"><button class="btn btn-info" [routerLink]="['/domandaFull']">Nuova Domanda</button> </div>
+          </div>
+          <div class="row">
+            <h4>Dati Contraente</h4>
+            <label class="col-sm-1 "for="nome">Nome</label>
+            <div class="form-group col-sm-5">
+              <input type="text" class="form-control" formControlName="nome" id="nome" aria-describedby="nomelHelp">
             </div>
-            <div class="form-group col-md-4">
-              <input type="text" class="form-control" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp" placeholder="cognome">
-            </div>
-            <div class="form-group col-md-4">
-              <input type="text" class="form-control" formControlName="codice_fiscale" id="codice_fiscale" aria-describedby="codice_fiscalelHelp" placeholder="codice_fiscale">
-            </div>
-              <div class="form-group col-md-4">
-              <input type="text" class="form-control" formControlName="email" id="email" aria-describedby="emaillHelp" placeholder="email">
-            </div>
-
-            <fieldset>
-              <legend><h5>Tipologia</h5></legend>
-              Loculo <input type="radio" name="linguaggio" value="Loculo"/>
-              Tenuta a Disposizione <input type="radio" name="linguaggio" value="Tenuta a Disposizione"/>
-            </fieldset>
-
-            <h6>Intervallo Ricerca</h6>
-            <div class="form-group col-md-2">
-             da <input type="text" class="form-control" formControlName="data_protocollo_iniziale" id="data_protocollo_iniziale" aria-describedby="data_protocollo_inizialelHelp" placeholder="data_protocollo_iniziale">
-            </div>
-            <div class="form-group col-md-2">
-             a <input type="text" class="form-control" formControlName="data_protocollo_finale" id="data_protocollo_finale" aria-describedby="data_protocollo_finalelHelp" placeholder="data_protocollo_finale">
-            </div>
-            <div class="form-group col-md-2">
-              <input type="text" class="form-control" formControlName="numero_protocollo" id="numero_protocollo" aria-describedby="numero_protocollolHelp" placeholder="numero_protocollo">
+            
+            <label class="col-sm-1 "for="cognome">Cognome</label>
+            <div class="form-group col-sm-5">
+              <input type="text" class="form-control" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp">
             </div>
           </div>
-          <button (click)="cercaDomande(domandaForm)">Cerca</button>
-          <button (click)="svuotaDomanda(domandaForm)">Svuota Filtri</button>
+            <br>
+            <div class="row">
+
+            
+              <label class="col-sm-1 "for="Data">Tipologia</label>
+              <div class="form-check"   class="form-group col-sm-1" style="font-size: medium;">
+                <input
+                  id="loculo"
+                  type="radio"
+                  value="LOCULO"
+                  name="tipologia"
+                  formControlName="tipologia"
+                />
+                <label class="custom-control-label" for="loculo"> Loculo</label>
+              </div>
+              <div class="form-check"   class="form-group col-sm-3" >
+                <input
+                  id="tenuta_a_disposizione"
+                  type="radio"
+                  value="TENUTA_DISPOSIZIONE"
+                  name="tipologia"
+                  formControlName="tipologia"
+                />
+                <label class="custom-control-label" for="tenuta_a_disposizione" style="font-size: medium;"> Tenuta a disposizione</label>
+              </div>
+              <div class="form-group col-sm-1"></div>
+              <label class="col-sm-1 "for="codice_fiscale">Cod. Fis.</label>
+              <div class="form-group col-sm-5">
+                <input type="text" class="form-control" formControlName="codice_fiscale" id="codice_fiscale" aria-describedby="codice_fiscalelHelp">
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <label class="col-sm-1 "for="numero_protocollo">N.Protocollo</label>
+              <div class="form-group col-md-5">
+                <input type="text" class="form-control" formControlName="numero_protocollo" id="numero_protocollo" aria-describedby="numero_protocollolHelp">
+              </div>
+
+              <label class="col-sm-1 "for="stato">Stato</label>
+              <div class="form-group col-md-5">
+                  <select class="form-select" formControlName="stato" id="stato" name="stato" aria-label="Default select example">
+                    <option value="">-----</option>
+                    <option value="APERTA">APERTA</option>
+                    <option value="CHIUSA">CHIUSA</option>
+                  </select>
+              </div>
+            </div>
+            <br>
+            <div class="row">
+  
+              <h4>Cerca Intervallo</h4>
+              <label class="col-sm-1 "for="data_protocollo_iniziale">da</label>
+              <div class="form-group col-md-2">
+                <input ng-model="answers.dob" type="date" class="form-control" formControlName="data_protocollo_iniziale" id="data_protocollo_iniziale" aria-describedby="data_protocollo_inizialelHelp" >
+              </div>
+              <label class="col-sm-1 "for="data_protocollo_finale">a</label>
+              <div class="form-group col-md-2">
+                <input ng-model="answers.dob" type="date" class="form-control" formControlName="data_protocollo_finale" id="data_protocollo_finale" aria-describedby="data_protocollo_finalelHelp" >
+              </div>
+  
+            </div>
+            <br>
+            <div class="row">
+              <button class="btn btn-info col-md-2"  (click)="cercaDomande(domandaForm)">Cerca</button>
+              <div class="col-md-8"></div>
+              <button input type="reset" class="btn btn-danger col-md-2" type="reset">Svuota Filtri</button>
+            </div>
         </form>
         </div>
-        <div class="col-md-4 mrgnbtm">
-        </div>
+    <br>
      </div>
       <h2>Domande</h2>
       <table class="table table-bordered">
       <thead>
         <tr>
-          <th>Id</th>
-          <th>protocollo</th>
-          <th>data_protocollo</th>
-          <th>stato</th>
-          <th>fk_posto</th>
-          <th>fk_assegnatario</th>
-          <th>fk_contraente</th>
-          <th>fk_user_modifier</th>
-          <th>data_insert</th>
-          <th>data_update</th>
+          <th>N.Protocollo</th>
+          <th>Stato</th>
+          <th>Data Protocollo</th>
+          <th>Nome Contraente</th>
+          <th>Cognome Contraente</th>
+          <th>Assegnatario</th>
+          <th>Contratto</th>
+          <th>Dettaglio</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let domanda of domande; let i = index">
-          <td>{{i + 1}}</td>
-          <td>{{domanda.protocollo}}</td>
-          <td>{{domanda.data_protocollo}}</td>
+        <tr *ngFor="let domanda of domande">
+          <td>{{domanda.numeroProtocolloDomanda}}</td>
           <td>{{domanda.stato}}</td>
-          <td>{{domanda.fk_posto}}</td>
-          <td>{{domanda.fk_assegnatario}}</td>
-          <td>{{domanda.fk_contraente}}</td>
-          <td>{{domanda.fk_user_modifier}}</td>
-          <td>{{domanda.data_insert}}</td>
-          <td>{{domanda.data_update}}</td>
+          <td>{{domanda.dataProtocollo |date:'dd-MM-YYYY'}}</td>
+          <td>{{domanda.nomeContraente}}</td>
+          <td>{{domanda.cognomeContraente}}</td>
+          <td>{{domanda.assegnatario }}</td>
+          <td><button class="btn btn-primary me-1" >Dettaglio</button></td>
+          <td><button class="btn btn-primary me-1" (click)="editDomandaRequest(domanda)" >Dettaglio</button></td>
         </tr>
       </tbody>
       </table>
      </div>
+
+     <app-domanda-model [domanda]="selectedDomanda" (save)="saveDomandaWatcher($event)"></app-domanda-model>

@@ -4,6 +4,7 @@ import { AppService } from '../../app.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ContraentiModelComponent } from '../contraenti-model/contraenti-model.component';
+import { Contraente1 } from 'src/app/app-state/models';
 
 
 @Component({
@@ -13,30 +14,15 @@ import { ContraentiModelComponent } from '../contraenti-model/contraenti-model.c
 })
 
 export class ContraentiComponent implements OnInit, OnDestroy {
-constructor(private appService: AppService) {}
+
 
 title = 'angular-nodejs-example';
 
 contraenteForm = new FormGroup({
-  id: new FormControl('', Validators.nullValidator && Validators.required),
-  nome: new FormControl('', Validators.nullValidator && Validators.required),
-  cognome: new FormControl('', Validators.nullValidator && Validators.required),
-  comune_nascita: new FormControl('', Validators.nullValidator && Validators.required),
-  provincia_nascita: new FormControl('', Validators.nullValidator && Validators.required),
-  stato_nascita: new FormControl('', Validators.nullValidator && Validators.required),
-  data_nascita: new FormControl('', Validators.nullValidator && Validators.required),
-  comune_residenza: new FormControl('', Validators.nullValidator && Validators.required),
-  provincia_residenza: new FormControl('', Validators.nullValidator && Validators.required),
-  via_residenza: new FormControl('', Validators.nullValidator && Validators.required),
-  civico_residenza: new FormControl('', Validators.nullValidator && Validators.required),
-  cap_residenza: new FormControl('', Validators.nullValidator && Validators.required),
-  telefono: new FormControl('', Validators.nullValidator && Validators.required),
-  codice_fiscale: new FormControl('', Validators.nullValidator && Validators.required),
-  email: new FormControl('', Validators.nullValidator ),
-  note: new FormControl('', Validators.nullValidator ),
-  fk_user_modifier: new FormControl('', Validators.nullValidator ),
-  data_insert: new FormControl('', Validators.nullValidator ),
-  data_update: new FormControl('', Validators.nullValidator ),
+  nome: new FormControl('', Validators.nullValidator ),
+  cognome: new FormControl('', Validators.nullValidator ),
+  codice_fiscale: new FormControl('', Validators.nullValidator ),
+  protocollo: new FormControl('', Validators.nullValidator ),
 
 });
 
@@ -45,15 +31,12 @@ contraenteCount = 0;
 
 destroy$: Subject<boolean> = new Subject<boolean>();
 
-onSubmit() {
-  this.appService.addContraente(this.contraenteForm.value, this.contraenteCount + 1).pipe(takeUntil(this.destroy$)).subscribe(data => {
-    console.log('message::::', data);
-    this.contraenteCount = this.contraenteCount + 1;
-    console.log(this.contraenteCount);
-    this.contraenteForm.reset();
-    this.getAllContraenti();
-  });
-}
+contraente1: Contraente1 = new Contraente1();
+ errorMessage: string = "";
+
+ @Output() save =  new EventEmitter<any>();
+ constructor(private appService: AppService) { }
+
 
 getAllContraenti() {
   this.appService.getContraenti().pipe(takeUntil(this.destroy$)).subscribe((contraenti: any[]) => {
@@ -62,8 +45,19 @@ getAllContraenti() {
   });
 }
 
-filtraContraneti(contraenteFormPar: FormGroup) {
-  console.log(contraenteFormPar);
+filtraContraenti() {
+  let contraenteFiltrato = new Contraente1();
+  contraenteFiltrato.nome = this.contraenteForm.controls['nome'].value;
+  contraenteFiltrato.cognome = this.contraenteForm.controls['cognome'].value;
+  contraenteFiltrato.codice_fiscale = this.contraenteForm.controls['codice_fiscale'].value;
+  contraenteFiltrato.protocolloC = this.contraenteForm.controls['protocollo'].value;
+ 
+
+  this.appService.cercaCercacontraenti(contraenteFiltrato).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+    this.contraenteCount =data.length;
+    this.contraenti = data.contraenti;
+    });
+  
 }
 
 ngOnDestroy() {
@@ -72,14 +66,9 @@ ngOnDestroy() {
 }
 
 
-
-
-/*
-@Input() contraenti: any[];
-*/
 ngOnInit() {
   console.log('esegui all contraenti on init');
-  this.getAllContraenti();
+ // this.getAllContraenti();
   }
 
 

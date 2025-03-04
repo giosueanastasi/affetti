@@ -1,9 +1,9 @@
-.mrgnbtm {
+/* .mrgnbtm {
   margin-top: 20px;
 }
 
 /* navigate menu*/
-.sidebar-content {
+/* .sidebar-content {
   display: flex;
   left: 0;
   float: left;
@@ -17,7 +17,9 @@
   padding: 16px;
   height: 100%;
   margin-left:initial;
+}  */
+
+.mat-drawer.mat-drawer-side{
+  z-index: 1;
 }
-
-
 

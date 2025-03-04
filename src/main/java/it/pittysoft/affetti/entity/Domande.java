@@ -1,5 +1,8 @@
 package it.pittysoft.affetti.entity;
 
+import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.Column;
@@ -14,6 +17,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
 
 import lombok.Data;
 
@@ -27,28 +31,17 @@ public class Domande {
     private Long id;
 
     @Column
-    @NotNull(message="{NotNull.Contraente.protocollo}")
+    @NotNull(message="{NotNull.Domanda.protocollo}")
     private String protocollo;
     
     @Column
-    @NotNull(message="{NotNull.Contraente.data_protocollo}")
-    private String data_protocollo;
+    @NotNull(message="{NotNull.Domanda.data_protocollo}")
+    private Date data_protocollo;
     
     @Column
-    @NotNull(message="{NotNull.Contraente.stato}")
+    @NotNull(message="{NotNull.Domanda.stato}")
     private String stato;
-    
-//    @Column
-//    @NotNull(message="{NotNull.Contraente.fk_assegnatario}")
-//    private Long fk_assegnatario;
-    
-    @Column
-    @NotNull(message="{NotNull.Contraente.fk_contraente}")
-    private Long fk_contraente;
-    
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "fk_assegnatario")
-    private Assegnatari assegnatario;
+        
     
     @Column
     private Long fk_user_modifier;
@@ -59,11 +52,23 @@ public class Domande {
     @Column
     private String data_update;
     
+    @Column
+    private String tipologia;
+    
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_posto")
     private Posti posto;
     
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_assegnatario")
+    private Assegnatari assegnatario;
     
-   
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "fk_contraente")
+    private Contraenti contraente;
+    
+    
+    @OneToOne(mappedBy = "domanda")
+    private Contratti contratto;
 }
 

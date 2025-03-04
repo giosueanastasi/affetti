@@ -2,6 +2,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
+import { MatListModule } from '@angular/material/list';
+import { MatButtonModule} from '@angular/material/button';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatIconModule } from '@angular/material/icon';
+import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatSelectModule} from '@angular/material/select';
 
 
 
@@ -28,7 +36,13 @@ import { ContrattiComponent } from './anagrafiche/contratto/contratti.component'
 import { DomandaFullComponent } from './anagrafiche/domanda-full/domanda-full.component';
 import { ContraentiModelComponent } from './anagrafiche/contraenti-model/contraenti-model.component';
 import { PostiModelComponent } from './anagrafiche/posti-model/posti-model.component';
-import { PostoPipe } from './anagrafiche/posti-model/posto.pipe';
+import { CercacontraentiModelComponent } from './anagrafiche/cercacontraenti-model/cercacontraenti-model.component';
+import { UserModelComponent } from './anagrafiche/user-model/user-model.component';
+import { PopupComponent } from './popup/popup.component';
+import { PostoEditComponent } from './anagrafiche/posto-edit/posto-edit.component';
+import { DomandaModelComponent } from './anagrafiche/domanda-model/domanda-model.component';
+import { ContrattoModelComponent } from './anagrafiche/contratto-model/contratto-model.component';
+
 
 // state related imports
 // import { StoreModule } from '@ngrx/store';
@@ -58,7 +72,16 @@ import { PostoPipe } from './anagrafiche/posti-model/posto.pipe';
     ContraentiModelComponent,
     DomandaFullComponent,
     PostiModelComponent,
-    PostoPipe,
+    CercacontraentiModelComponent,
+    UserModelComponent,
+    ContrattoModelComponent,
+    PopupComponent,
+    PostoEditComponent,
+
+    DomandaModelComponent,
+    
+    
+
     
   ],
   
@@ -69,6 +92,15 @@ import { PostoPipe } from './anagrafiche/posti-model/posto.pipe';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatListModule,
+    MatButtonModule,
+    MatIconModule,
+    MatInputModule,
+    MatAutocompleteModule,
+    MatSelectModule
+
 
     
 

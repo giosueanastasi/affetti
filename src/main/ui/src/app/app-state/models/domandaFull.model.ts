@@ -5,8 +5,11 @@ export class DomandaFull {
     nomeAss: string;
 	cognomeAss: string;
 	comuneAss: string;
+	loculo: string;
+	fornice: string;
 	provAss: string;
 	dataDecesso: string;
+	fkContraente: string;
 	
   }
   
