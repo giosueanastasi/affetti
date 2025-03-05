@@ -34,7 +34,8 @@
                             id="data_protocollo" 
                             name="data_protocollo"
                             class="form-control" 
-                            [(ngModel)]="domanda.data_protocollo"
+                            [(ngModel)]="domanda.data_protocollo" 
+                            [ngModel]="domanda.data_protocollo | date:'dd/MM/yyyy' " 
                             #data_protocollo="ngModel"
                             readonly
                             >
@@ -322,18 +323,18 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="data_decesso">Date</label>
+                        <label for="data_decesso">Data</label>
                         <input 
                             type="text" 
                             id="data_decesso" 
                             name="data_decesso"
                             class="form-control" 
-                            [(ngModel)]="domanda.data_decesso"
+                            [(ngModel)]="domanda.data_decesso" 
+                            [ngModel]="domanda.data_decesso | date:'dd/MM/yyyy' " 
                             #data_decesso="ngModel"
                             readonly
                             >
                     </div>
-
                     </div>
                
 
