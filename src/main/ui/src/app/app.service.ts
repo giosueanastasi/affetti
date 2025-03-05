@@ -175,4 +175,10 @@ export class AppService {
   getCapListByComune(idComune: number){
     return this.http.post(this.rootURL + '/get_lista_cap',idComune);
   }
+
+  //Metodo per recuperare il contratto di una specifica domanda tramite numero di protocollo
+  getContrattoByProtocollo(numProtocollo: String){
+    return this.http.post(this.rootURL + '/get_contratto_by_protocollo',numProtocollo);
+
+  }
 }

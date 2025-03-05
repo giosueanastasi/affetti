@@ -4,8 +4,10 @@ import { AppService } from '../../app.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ContraentiModelComponent } from '../contraenti-model/contraenti-model.component';
-import { Domanda } from 'src/app/app-state/models';
+import { Contratto, Domanda } from 'src/app/app-state/models';
 import { DomandaModelComponent } from '../domanda-model/domanda-model.component';
+import { ContrattoModelComponent } from '../contratto-model/contratto-model.component';
+
 
 
 @Component({
@@ -19,6 +21,8 @@ export class DomandeComponent implements OnInit, OnDestroy {
 constructor(private appService: AppService) {}
 
 @ViewChild(DomandaModelComponent) child: DomandaModelComponent | undefined;
+@ViewChild(ContrattoModelComponent) childContratto: ContrattoModelComponent | undefined;
+
 
 selectedDomanda: Domanda = new Domanda();
 
@@ -37,6 +41,8 @@ domandaForm = new FormGroup({
 
 domande: any[] = [];
 domandaCount = 0;
+
+contratto: Contratto;
 
 destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -110,6 +116,15 @@ ngOnInit() {
     }else{
       this.domande.push(domanda);
     }
+  }
+
+  //Metodo per recuperare il dettaglio del contratto selezionato tramite il numero di protocollo
+  showContratto( numProtocollo: String ){
+    this.appService.getContrattoByProtocollo(numProtocollo).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+      this.contratto = data.contratti[0];
+    }); 
+
+    this.childContratto?.showContrattoModal();
   }
 
 

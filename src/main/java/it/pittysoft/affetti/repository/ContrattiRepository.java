@@ -17,5 +17,7 @@ public interface ContrattiRepository extends JpaRepository<Contratti, Integer>, 
 	Contratti findById(Long id);
 
 	Contratti findByDomanda(Domande domanda);
+	
+	Contratti findByProtocollo(String protocollo);
 
 }

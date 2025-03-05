@@ -114,7 +114,7 @@
           <td>{{domanda.nomeContraente}}</td>
           <td>{{domanda.cognomeContraente}}</td>
           <td>{{domanda.assegnatario }}</td>
-          <td><button class="btn btn-primary me-1" >Dettaglio</button></td>
+          <td><button class="btn btn-primary me-1" (click)="showContratto(domanda.numeroProtocolloContratto)" >Dettaglio</button></td> 
           <td><button class="btn btn-primary me-1" (click)="editDomandaRequest(domanda)" >Dettaglio</button></td>
         </tr>
       </tbody>
@@ -122,3 +122,5 @@
      </div>
 
      <app-domanda-model [domanda]="selectedDomanda" (save)="saveDomandaWatcher($event)"></app-domanda-model>
+     <app-contratto-model *ngIf="contratto" [contratto]="contratto" ></app-contratto-model>
+     
