@@ -58,8 +58,8 @@ public class DomandeService {
 			 dm.setStato(domanda.getStato());	
 			 dm.setCognomeContraente(domanda.getContraente().getCognome());
 			 dm.setNomeContraente(domanda.getContraente().getNome());
-			 dm.setAssegnatario(domanda.getContraente().getCognome()+" "+domanda.getAssegnatario().getNome());
-			 dm.setNumeroProtocolloContratto(domanda.getContratto().getProtocollo());
+			 //dm.setAssegnatario(domanda.getContraente().getCognome()+" "+domanda.getAssegnatario().getNome());
+			 //dm.setNumeroProtocolloContratto(domanda.getContratto().getProtocollo());
 			 dm.setComuneDiNascita(domanda.getContraente().getComune_nascita());
 			 dm.setProvinciaDiNascita(domanda.getContraente().getProvincia_nascita());
 			 dm.setStatoDiNascita(domanda.getContraente().getStato_nascita());
@@ -78,6 +78,8 @@ public class DomandeService {
 			 dm.setDataDecesso(domanda.getAssegnatario().getData_decesso());
 			 dm.setNomeAss(domanda.getAssegnatario().getNome());
 			 dm.setCognomeAss(domanda.getAssegnatario().getCognome());
+			 dm.setContratto(domanda.getContratto());
+			 dm.setDataNascita(domanda.getContraente().getData_nascita());
 			 
 			 response.getDomande().add(dm);
 		 } 

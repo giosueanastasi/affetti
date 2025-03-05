@@ -277,16 +277,6 @@ public class ControllerPrincipale {
 		return ResponseEntity.ok(resource);
 	}
 	
-	@PostMapping(path = ContrattoLinks.GET_CONTRATTO_BY_PROTOCOLLO)
-	public ResponseEntity<?> getContrattoByProtocollo(@RequestBody String numProtocollo){
-		
-		ContrattoSearchResponse resource = contrattiService.getContrattoByProtocollo(numProtocollo);
-        if (resource.getReturnCode()==Response.OK) {
-        	return ResponseEntity.ok(resource);
-        } else  {
-        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Errore imprevisto, contattare l'assistenza");
-		}
-	}
+	
 	
 }

@@ -3,7 +3,7 @@ package it.pittysoft.affetti.model;
 
 import java.util.Date;
 
-import it.pittysoft.affetti.entity.Domande;
+import it.pittysoft.affetti.entity.Contratti;
 import lombok.Data;
 
 @Data
@@ -15,10 +15,10 @@ public class DomandaModel {
 	private String stato;
 	private String nomeContraente;
 	private String cognomeContraente;
-	private String Assegnatario;
+	//private String Assegnatario;
 	private String nomeAss;
 	private String cognomeAss;
-	private String numeroProtocolloContratto;
+	//private String numeroProtocolloContratto;
 	private String comuneDiNascita;
 	private String provinciaDiNascita;
 	private String statoDiNascita;
@@ -35,5 +35,7 @@ public class DomandaModel {
 	private String fornice;
 	private String comuneDecesso;
 	private Date dataDecesso;
+	private Contratti contratto;
+	private String dataNascita;
 	
 }

@@ -172,51 +172,6 @@ public class ContrattiService {
 		return response;
 	}
 	
-	public ContrattoSearchResponse getContrattoByProtocollo(String numProtocollo) {
-		
-		ContrattoSearchResponse response = new ContrattoSearchResponse();
-		Contratti contratti = contrattiRepository.findByProtocollo(numProtocollo);
-		ContrattoModel cm = new ContrattoModel();
-		cm.setNumeroProtocolloContratto(contratti.getProtocollo());
-		cm.setStato(contratti.getStato());
-		cm.setDataProtocolloContratto(contratti.getData_inizio());
-		cm.setDataScadenzaContratto(contratti.getData_scadenza());
-		cm.setContraente(contratti.getDomanda().getContraente().getCognome() + " "
-				+ contratti.getDomanda().getContraente().getNome());
-		cm.setAssegnatario(contratti.getDomanda().getAssegnatario().getCognome() + " "
-				+ contratti.getDomanda().getAssegnatario().getNome());
-		cm.setCodice_fiscale(contratti.getDomanda().getContraente().getCodice_fiscale());
-		cm.setComune_nascita(contratti.getDomanda().getContraente().getComune_nascita());
-		cm.setProvincia_nascita(contratti.getDomanda().getContraente().getProvincia_nascita());
-		cm.setComune_nascita(contratti.getDomanda().getContraente().getComune_nascita());
-		cm.setStato_nascita(contratti.getDomanda().getContraente().getStato_nascita());
-		cm.setData_nascita(contratti.getDomanda().getContraente().getData_nascita());
-		cm.setComune_residenza(contratti.getDomanda().getContraente().getComune_residenza());
-		cm.setProvincia_residenza(contratti.getDomanda().getContraente().getProvincia_residenza());
-		cm.setVia_residenza(contratti.getDomanda().getContraente().getVia_residenza());
-		cm.setCivico_residenza(contratti.getDomanda().getContraente().getCivico_residenza());
-		cm.setCap_residenza(contratti.getDomanda().getContraente().getCap_residenza());
-		cm.setEmail(contratti.getDomanda().getContraente().getEmail());
-		cm.setNote(contratti.getDomanda().getContraente().getNote());
-		cm.setTelefono(contratti.getDomanda().getContraente().getTelefono());
-		cm.setLoculo(contratti.getDomanda().getPosto().getLoculo());
-		cm.setFornice(contratti.getDomanda().getPosto().getFornice());
-		cm.setComune_decesso(contratti.getDomanda().getAssegnatario().getComune_decesso());
-		cm.setData_decesso(contratti.getDomanda().getAssegnatario().getData_decesso());
-		cm.setProtocolloDomanda(contratti.getDomanda().getProtocollo());
-		cm.setDataProtocolloDomanda(contratti.getDomanda().getData_protocollo());
-		cm.setCognomeC(contratti.getDomanda().getContraente().getCognome());
-		cm.setNomeC(contratti.getDomanda().getContraente().getNome());
-		cm.setNomeA(contratti.getDomanda().getAssegnatario().getNome());
-		cm.setCognomeA(contratti.getDomanda().getAssegnatario().getCognome());
-		cm.setIdPosto(contratti.getDomanda().getPosto().getId());
-		cm.setIdAssegnatario(contratti.getDomanda().getAssegnatario().getId());
-		cm.setIdContraente(contratti.getDomanda().getContraente().getId());
-		cm.setIdContratto(contratti.getId());
-		
-		response.getContratti().add(cm);
-		
-		return response;
-	}
+	
 
 }
