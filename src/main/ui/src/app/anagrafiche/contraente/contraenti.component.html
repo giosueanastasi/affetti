@@ -65,7 +65,14 @@
        <td>{{contraentiTab.codice_fiscale}}</td>
        <td>{{contraentiTab.comune_residenza}} - {{contraentiTab.via_residenza}} ({{contraentiTab.provincia_residenza}})</td>
        <td>{{contraentiTab.cognomeAss}} {{contraentiTab.nomeAss}} </td>
-       <td>{{contraentiTab.protocolloC}}</td>
+       <td>
+         <select matNativeControl *ngIf="contraentiTab.protocolliC.length > 0" name="">
+          <option value="" selected></option>
+          <option *ngFor="let protocolloContratto of contraentiTab.protocolliC" [value]="protocolloContratto.value">
+            {{protocolloContratto}}
+          </option>
+        </select> 
+       </td>
        <td><button class="btn btn-primary me-1" >Dettaglio</button></td>
      </tr>
      </tbody>
