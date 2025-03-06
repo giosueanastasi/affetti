@@ -37,34 +37,34 @@ public class ContraentiService {
 		 List<Contraenti> findContraentiByCognomeAndNome = contraentiRepository.findContraentiByCognomeAndNome(contraenti);
 		 ContraentiResponse response = new ContraentiResponse();
 		 
-		 for (Contraenti contraentiFiltrati : findContraentiByCognomeAndNome) {
+		 for (Contraenti contraente : findContraentiByCognomeAndNome) {
 
-			 contraentiFiltrati.getDomande().size();
+			 //contraentiFiltrati.getDomande().size();
 			
-			 for (Domande domanda : contraentiFiltrati.getDomande()) {
+			 //for (Domande domanda : contraente.getDomande()) {
 				 ContraentiModel pm = new ContraentiModel();
-				 pm.setId(contraentiFiltrati.getId().toString());
-				 pm.setNome(contraentiFiltrati.getNome());
-				 pm.setCognome(contraentiFiltrati.getCognome());
-				 pm.setCodice_fiscale(contraentiFiltrati.getCodice_fiscale());
-				 pm.setComune_nascita(contraentiFiltrati.getComune_nascita());
-				 pm.setProvincia_nascita(contraentiFiltrati.getProvincia_nascita());
-				 pm.setStato_nascita(contraentiFiltrati.getStato_nascita());
-				 pm.setData_nascita(contraentiFiltrati.getData_nascita());
-				 pm.setComune_residenza(contraentiFiltrati.getComune_residenza());
-				 pm.setProvincia_residenza(contraentiFiltrati.getProvincia_residenza());
-				 pm.setVia_residenza(contraentiFiltrati.getVia_residenza());
-				 pm.setCivico_residenza(contraentiFiltrati.getCivico_residenza());
-				 pm.setCap_residenza(contraentiFiltrati.getCap_residenza());
-				 pm.setEmail(contraentiFiltrati.getEmail());
-				 pm.setNote(contraentiFiltrati.getNote());
-     			 pm.setProtocolloC(domanda.getContratto().getProtocollo());
-				 pm.setNomeAss(domanda.getAssegnatario().getNome());
-				 pm.setCognomeAss(domanda.getAssegnatario().getCognome());
+				 pm.setId(contraente.getId().toString());
+				 pm.setNome(contraente.getNome());
+				 pm.setCognome(contraente.getCognome());
+				 pm.setCodice_fiscale(contraente.getCodice_fiscale());
+				 pm.setComune_nascita(contraente.getComune_nascita());
+				 pm.setProvincia_nascita(contraente.getProvincia_nascita());
+				 pm.setStato_nascita(contraente.getStato_nascita());
+				 pm.setData_nascita(contraente.getData_nascita());
+				 pm.setComune_residenza(contraente.getComune_residenza());
+				 pm.setProvincia_residenza(contraente.getProvincia_residenza());
+				 pm.setVia_residenza(contraente.getVia_residenza());
+				 pm.setCivico_residenza(contraente.getCivico_residenza());
+				 pm.setCap_residenza(contraente.getCap_residenza());
+				 pm.setEmail(contraente.getEmail());
+				 pm.setNote(contraente.getNote());
+     			 //pm.setProtocolloC(domanda.getContratto().getProtocollo());
+				 //pm.setNomeAss(domanda.getAssegnatario().getNome());
+				 //pm.setCognomeAss(domanda.getAssegnatario().getCognome());
 				 
 				 response.getContraenti().add(pm);
 				
-			 }
+			// }
 
 			 
 		 }

@@ -60,8 +60,8 @@ public class ContraentiRepositoryCustomImpl implements ContraentiRepositoryCusto
 		
 		List<Contraenti> contraentiPlayer = query.select(qContraenti)
 		                               .from(qContraenti)
-		                               .innerJoin(qContraenti.domande,qDomande)
-		                               .innerJoin(qDomande.contratto,qContratti)
+		                               .leftJoin(qContraenti.domande,qDomande)
+		                               .leftJoin(qDomande.contratto,qContratti)
 		                               .where(builder
 		                            		    ).fetch();
 		
