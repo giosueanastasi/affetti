@@ -3,6 +3,7 @@ package it.pittysoft.affetti.service;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -19,6 +20,8 @@ import it.pittysoft.affetti.model.DomandaRequest;
 import it.pittysoft.affetti.model.DomandaRequestSearch;
 import it.pittysoft.affetti.model.DomandaResponse;
 import it.pittysoft.affetti.model.DomandaResponseSearch;
+import it.pittysoft.affetti.model.ProtocolloDomandaModel;
+import it.pittysoft.affetti.model.ProtocolloDomandaResponse;
 import it.pittysoft.affetti.repository.DomandeRepository;
 
 
@@ -122,6 +125,33 @@ public class DomandeService {
     	
     	return response;
 
+    }
+    
+    public ProtocolloDomandaResponse generaProtocollo() {
+    	
+    	ProtocolloDomandaModel protocolloDomanda = new ProtocolloDomandaModel();
+    	
+    	List<Domande> domande = domandeRepository.findAll();
+    	int protocolli[] =  new int[domande.size()];
+    	
+    	for(int i = 0; i < domande.size(); i++){
+    		protocolli[i] = Integer.parseInt(domande.get(i).getProtocollo());
+    	}
+    	
+    	Arrays.sort(protocolli);
+    	
+    	for(int i = 0; i < protocolli.length; i++){
+    		Integer numeroDaVerificare = i + 1;
+    		if(protocolli[i] != numeroDaVerificare) {
+    			protocolloDomanda.setProtocollo(numeroDaVerificare.toString());	
+    			break;
+    		}
+    	}
+    	
+    	ProtocolloDomandaResponse response = new ProtocolloDomandaResponse();
+    	response.setProtocolloDomanda(protocolloDomanda);
+    	
+    	return response;
     }
 
 }

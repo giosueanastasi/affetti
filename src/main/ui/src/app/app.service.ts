@@ -181,4 +181,9 @@ export class AppService {
     return this.http.post(this.rootURL + '/get_contratto_by_protocollo',numProtocollo);
 
   }
+
+  //Metodo per recuperare un nuovo numero di protocollo per le domande
+  getNuovoProtocolloDomanda(){
+    return this.http.get(this.rootURL + '/genera_protocollo_domanda');
+  }
 }

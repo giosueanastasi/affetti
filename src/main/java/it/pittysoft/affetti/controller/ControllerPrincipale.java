@@ -27,6 +27,7 @@ import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
 import it.pittysoft.affetti.model.ContrattoSearchRequest;
 import it.pittysoft.affetti.model.ContrattoSearchResponse;
+import it.pittysoft.affetti.model.ProtocolloDomandaResponse;
 import it.pittysoft.affetti.model.CapResponse;
 import it.pittysoft.affetti.model.ComuniSelectResponse;
 import it.pittysoft.affetti.model.ContraentiRequest;
@@ -278,5 +279,15 @@ public class ControllerPrincipale {
 	}
 	
 	
+	@GetMapping(path = DomandaLinks.GENERA_PROTOCOLLO)
+	public ResponseEntity<?> getNewProtocolloDomanda(){
+		ProtocolloDomandaResponse resource = domandeService.generaProtocollo();
+		 if (resource.getReturnCode()==Response.OK) {
+	        	return ResponseEntity.ok(resource);
+	        } else  {
+	        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                    .body("Errore imprevisto, contattare l'assistenza");
+			}
+	}
 	
 }
