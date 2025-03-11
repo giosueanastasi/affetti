@@ -48,13 +48,12 @@
    <thead>
      <tr>
 
-       <th>Nome</th>
-       <th>Cognome</th>
-       <th>Codice Fiscale</th>
-       <th>Residenza</th>
-       <th>Assegnatario</th>
-       <th>Contratto</th>
-       <th>Dettaglio Contratto</th>
+       <th class="col-1">Nome</th>
+       <th class="col-1">Cognome</th>
+       <th class="col-1">Codice Fiscale</th>
+       <th class="col-3">Residenza</th>
+       <th class="col-2">Contratto</th>
+       <th class="col-1">Dettaglio</th>
      </tr>
    </thead>
    <tbody>
@@ -64,20 +63,38 @@
        <td>{{contraentiTab.cognome}}</td>
        <td>{{contraentiTab.codice_fiscale}}</td>
        <td>{{contraentiTab.comune_residenza}} - {{contraentiTab.via_residenza}} ({{contraentiTab.provincia_residenza}})</td>
-       <td>{{contraentiTab.cognomeAss}} {{contraentiTab.nomeAss}} </td>
        <td>
-         <select matNativeControl *ngIf="contraentiTab.protocolliC.length > 0" name="">
-          <option value="" selected></option>
-          <option *ngFor="let protocolloContratto of contraentiTab.protocolliC" [value]="protocolloContratto.value">
-            {{protocolloContratto}}
-          </option>
-        </select> 
+          <!-- <p
+            [ngClass] = "{'visually-hidden' : contraentiTab.contratti.length > 1 }"
+          >
+          {{contraentiTab.contratti[0].protocolloContratto}} -  {{contraentiTab.contratti[0].nomeAssegnatario}} - {{contraentiTab.contratti[0].cognomeAssegnatario}}
+        </p> -->
+          <mat-select
+            matNativeControl 
+            #contrattoSelect
+            *ngIf="contraentiTab.contratti.length > 0" 
+            [(value)]="contraentiTab.protocolloSelezionato" 
+            placeholder="Seleziona il contratto"
+            
+            >
+            <mat-option *ngFor="let contratto of contraentiTab.contratti" [value]="contratto.protocolloContratto" >
+              {{contratto.protocolloContratto}} - {{contratto.nomeAssegnatario}} {{contratto.cognomeAssegnatario}}
+            </mat-option>
+          </mat-select> 
        </td>
-       <td><button class="btn btn-primary me-1" >Dettaglio</button></td>
+       <td>
+        <button 
+          class="btn btn-primary me-1" 
+          [ngClass] = "{'disabled' : contraentiTab.contratti.length === 0 }"
+          (click)="showContrattoByProtocollo(contraentiTab.protocolloSelezionato)"
+          >Dettaglio</button>
+      </td>
      </tr>
      </tbody>
    </table>
    </div>
+
+   <app-contratto-model  [contratto]="contratto" ></app-contratto-model>
 
 
 

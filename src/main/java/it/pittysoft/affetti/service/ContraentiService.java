@@ -9,6 +9,7 @@ import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.entity.Posti;
 import it.pittysoft.affetti.model.ContraentiRequest;
 import it.pittysoft.affetti.model.ContraentiResponse;
+import it.pittysoft.affetti.model.ProtocolloContrattoConAssegnatario;
 import it.pittysoft.affetti.model.ContraentiModel;
 import it.pittysoft.affetti.model.ContraentiRequest;
 import it.pittysoft.affetti.model.ContraentiResponse;
@@ -60,10 +61,15 @@ public class ContraentiService {
  			 
 			 if(!contraente.getDomande().isEmpty()) {
 				  for (Domande domanda : contraente.getDomande()) {
-					  pm.getProtocolliC().add(domanda.getContratto().getProtocollo());;
-					  pm.setNomeAss(domanda.getAssegnatario().getNome());
-					  pm.setCognomeAss(domanda.getAssegnatario().getCognome());
+					  ProtocolloContrattoConAssegnatario contratto = new ProtocolloContrattoConAssegnatario();
+					  
+					  contratto.setProtocolloContratto(domanda.getContratto().getProtocollo());
+					  contratto.setNomeAssegnatario(domanda.getAssegnatario().getNome());
+					  contratto.setCognomeAssegnatario(domanda.getAssegnatario().getCognome());
+					  
+					  pm.getContratti().add(contratto);
 				  }
+				  pm.setProtocolloSelezionato(pm.getContratti().get(0).getProtocolloContratto());;
 			 }
 			
 			 
