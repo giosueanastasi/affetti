@@ -74,7 +74,6 @@
             #contrattoSelect
             *ngIf="contraentiTab.contratti.length > 0" 
             [(value)]="contraentiTab.protocolloSelezionato" 
-            placeholder="Seleziona il contratto"
             
             >
             <mat-option *ngFor="let contratto of contraentiTab.contratti" [value]="contratto.protocolloContratto" >
