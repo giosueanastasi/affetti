@@ -63,7 +63,9 @@ public class ContraentiRepositoryCustomImpl implements ContraentiRepositoryCusto
 		                               .leftJoin(qContraenti.domande,qDomande)
 		                               .leftJoin(qDomande.contratto,qContratti)
 		                               .where(builder
-		                            		    ).fetch();
+		                            		    )
+		                               .distinct()
+		                               .fetch();
 		
 		return contraentiPlayer;
 }
