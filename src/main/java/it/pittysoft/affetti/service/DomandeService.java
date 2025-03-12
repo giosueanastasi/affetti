@@ -23,6 +23,7 @@ import it.pittysoft.affetti.model.DomandaResponseSearch;
 import it.pittysoft.affetti.model.ProtocolloDomandaModel;
 import it.pittysoft.affetti.model.ProtocolloDomandaResponse;
 import it.pittysoft.affetti.repository.DomandeRepository;
+import it.pittysoft.affetti.utils.Protocollo;
 
 
 
@@ -132,21 +133,8 @@ public class DomandeService {
     	ProtocolloDomandaModel protocolloDomanda = new ProtocolloDomandaModel();
     	
     	List<Domande> domande = domandeRepository.findAll();
-    	int protocolli[] =  new int[domande.size()];
     	
-    	for(int i = 0; i < domande.size(); i++){
-    		protocolli[i] = Integer.parseInt(domande.get(i).getProtocollo());
-    	}
-    	
-    	Arrays.sort(protocolli);
-    	
-    	for(int i = 0; i < protocolli.length; i++){
-    		Integer numeroDaVerificare = i + 1;
-    		if(protocolli[i] != numeroDaVerificare) {
-    			protocolloDomanda.setProtocollo(numeroDaVerificare.toString());	
-    			break;
-    		}
-    	}
+    	protocolloDomanda.setProtocollo(Protocollo.generaProtocolloDomanda(domande));
     	
     	ProtocolloDomandaResponse response = new ProtocolloDomandaResponse();
     	response.setProtocolloDomanda(protocolloDomanda);
