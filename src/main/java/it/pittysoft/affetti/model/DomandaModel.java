@@ -9,6 +9,7 @@ import lombok.Data;
 @Data
 public class DomandaModel {
 
+	private Long id;
 	private Date dataProtocollo;
 	private String numeroProtocolloDomanda;
 	private String tipologia;

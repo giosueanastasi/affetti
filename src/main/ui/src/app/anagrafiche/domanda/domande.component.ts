@@ -78,7 +78,8 @@ export class DomandeComponent implements OnInit, OnDestroy {
 
   editDomandaRequest(item: any) {
     let domanda = new Domanda;
-
+	
+	domanda.id = item.id;
     domanda.data_protocollo = item.dataProtocollo;
     domanda.protocollo = item.numeroProtocolloDomanda;
     domanda.tipologia = item.tipologia;
