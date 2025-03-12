@@ -55,6 +55,7 @@ public class DomandeService {
 		 for (Domande domanda : findDomandeByCognomeAndNome) {
 			 DomandaModel dm = new DomandaModel();
 			 
+			 dm.setId(domanda.getId());
 			 dm.setDataProtocollo(domanda.getData_protocollo());
 			 dm.setNumeroProtocolloDomanda(domanda.getProtocollo());
 			 dm.setTipologia(domanda.getTipologia());
