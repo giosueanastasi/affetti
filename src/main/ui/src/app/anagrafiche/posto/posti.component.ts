@@ -3,9 +3,10 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AppService } from '../../app.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import {  Posto1 } from 'src/app/app-state/models';
+import {  Contratto, Posto1 } from 'src/app/app-state/models';
 //import {  Posto } from 'src/app/app-state/models';
 import { PostoEditComponent } from '../posto-edit/posto-edit.component';
+import { ContrattoModelComponent } from '../contratto-model/contratto-model.component';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class PostiComponent implements OnInit {
 selectedPosto: Posto1 = new Posto1();
 
   @ViewChild(PostoEditComponent) child: PostoEditComponent | undefined;
+  @ViewChild(ContrattoModelComponent) childContratto: ContrattoModelComponent | undefined;
   
 title = 'angular-nodejs-example';
 
@@ -45,6 +47,8 @@ destroy$: Subject<boolean> = new Subject<boolean>();
 
 posto1: Posto1 = new Posto1();
  errorMessage: string = "";
+
+ contratto: Contratto = new Contratto();
 
  @Output() save =  new EventEmitter<any>();
 
@@ -103,4 +107,13 @@ ngOnDestroy() {
         this.posti.push(posto1);
       }
     }
+
+
+    //Metodo per recuperare il dettaglio del contratto selezionato tramite il numero di protocollo
+  showContrattoByProtocollo( numProtocollo: String ){
+    this.appService.getContrattoByProtocollo(numProtocollo).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+    this.contratto = data.contratti[0];
+    this.childContratto?.showContrattoModal();
+  });
+}
 }

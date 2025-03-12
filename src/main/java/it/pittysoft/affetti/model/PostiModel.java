@@ -14,5 +14,6 @@ public class PostiModel {
 	private String fornice;
 	private Date scadenza;
 	private String stato;
+	private String protocolloContratto;
 	private Boolean checked = false; 
 }
