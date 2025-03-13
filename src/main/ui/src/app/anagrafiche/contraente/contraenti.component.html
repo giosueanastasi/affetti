@@ -64,17 +64,19 @@
        <td>{{contraentiTab.codice_fiscale}}</td>
        <td>{{contraentiTab.comune_residenza}} - {{contraentiTab.via_residenza}} ({{contraentiTab.provincia_residenza}})</td>
        <td>
-          <!-- <p
+          <p
+            class="fs-6"
             [ngClass] = "{'visually-hidden' : contraentiTab.contratti.length > 1 }"
+            *ngIf = "contraentiTab.contratti.length === 1"
           >
           {{contraentiTab.contratti[0].protocolloContratto}} -  {{contraentiTab.contratti[0].nomeAssegnatario}} - {{contraentiTab.contratti[0].cognomeAssegnatario}}
-        </p> -->
+        </p>
           <mat-select
             matNativeControl 
             #contrattoSelect
-            *ngIf="contraentiTab.contratti.length > 0" 
+           
             [(value)]="contraentiTab.protocolloSelezionato" 
-            
+            [ngClass] = "{'visually-hidden' : contraentiTab.contratti.length < 2 }"
             >
             <mat-option *ngFor="let contratto of contraentiTab.contratti" [value]="contratto.protocolloContratto" >
               {{contratto.protocolloContratto}} - {{contratto.nomeAssegnatario}} {{contratto.cognomeAssegnatario}}
