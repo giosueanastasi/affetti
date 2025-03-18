@@ -1,18 +1,27 @@
 package it.pittysoft.affetti.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+
+import org.springframework.core.io.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lowagie.text.DocumentException;
+
+import freemarker.template.TemplateException;
 import it.pittysoft.affetti.entity.Comuni;
 import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Posti;
@@ -27,6 +36,7 @@ import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
 import it.pittysoft.affetti.model.ContrattoSearchRequest;
 import it.pittysoft.affetti.model.ContrattoSearchResponse;
+import it.pittysoft.affetti.model.DomandaModel;
 import it.pittysoft.affetti.model.ProtocolloDomandaResponse;
 import it.pittysoft.affetti.model.CapResponse;
 import it.pittysoft.affetti.model.ComuniSelectResponse;
@@ -80,6 +90,8 @@ public class ControllerPrincipale {
 	
 	@Autowired
 	DomandeService domandeService;
+	
+
 	
 	
 	@GetMapping(path = UserLinks.LIST_USERS)
@@ -301,5 +313,19 @@ public class ControllerPrincipale {
                     .body("Errore imprevisto, contattare l'assistenza");
 		}
 	}
+	
+	@PostMapping(path = DomandaLinks.STAMPA_DOMANDA)
+    public ResponseEntity<Resource> generaPdfDomanda(@RequestBody Long idDomanda) {
+        try {
+            Resource pdfDomanda = domandeService.generaPdfDomanda(idDomanda);
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=report.pdf")
+                    .contentType(MediaType.APPLICATION_PDF)
+                    .body(pdfDomanda);
+        } catch (IOException | TemplateException | DocumentException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 	
 }

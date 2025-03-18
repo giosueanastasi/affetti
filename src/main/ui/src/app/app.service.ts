@@ -186,4 +186,9 @@ export class AppService {
   getNuovoProtocolloDomanda(){
     return this.http.get(this.rootURL + '/genera_protocollo_domanda');
   }
+
+  //Metodo per stampare la domanda selezionata
+  printDomanda(idDomanda: number){
+    return this.http.post(this.rootURL + '/stampa_domanda',idDomanda);
+  }
 }

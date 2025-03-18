@@ -13,6 +13,8 @@ declare var $ : any;
 export class DomandaModelComponent {
   @Input() domanda: Domanda = new Domanda();
   @Output() save = new EventEmitter<any>();
+  @Output() print = new EventEmitter<any>();
+
 
   constructor(private appService: AppService) { }
 
@@ -25,6 +27,12 @@ export class DomandaModelComponent {
   saveDomandaModal() {
     this.appService.saveDomanda(this.domanda).pipe().subscribe((data: any) => {
       this.save.emit(data.domanda[0]);
+      $('#domandaModal').modal('hide');
+    });
+  }
+
+  printDomandaModal() {
+    this.appService.printDomanda(this.domanda.id).pipe().subscribe((data: any) => {
       $('#domandaModal').modal('hide');
     });
   }
