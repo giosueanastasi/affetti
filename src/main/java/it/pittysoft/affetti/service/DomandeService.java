@@ -1,5 +1,6 @@
 package it.pittysoft.affetti.service;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -163,7 +164,7 @@ public class DomandeService {
     	return response;
     }
     
-    public Resource generaPdfDomanda(Long idDomanda) throws IOException, TemplateException, DocumentException {
+    public  byte[] generaPdfDomanda(Long idDomanda) throws IOException, TemplateException, DocumentException {
     	
     	Domande domanda = domandeRepository.findById(idDomanda);
     	Map<String, Object> dati = new HashMap<>();
@@ -204,18 +205,13 @@ public class DomandeService {
         template.process(dati, writer);
         String htmlContent = writer.toString();
 
-        // Percorso del file PDF
-        Path pdfPath = Paths.get("domandeReport.pdf");
-
-        // Genera il PDF con Flying Saucer
-        try (OutputStream outputStream = new FileOutputStream(pdfPath.toFile())) {
-            ITextRenderer renderer = new ITextRenderer();
-            renderer.setDocumentFromString(htmlContent);
-            renderer.layout();
-            renderer.createPDF(outputStream);
-        }
-
-        return new UrlResource(pdfPath.toUri());
+    	 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+         ITextRenderer renderer = new ITextRenderer();
+         renderer.setDocumentFromString(htmlContent);
+         renderer.layout();
+         renderer.createPDF(outputStream);
+        
+         return outputStream.toByteArray();	
     }
 
 }

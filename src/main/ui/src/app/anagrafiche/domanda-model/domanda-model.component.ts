@@ -32,9 +32,7 @@ export class DomandaModelComponent {
   }
 
   printDomandaModal() {
-    this.appService.printDomanda(this.domanda.id).pipe().subscribe((data: any) => {
-      $('#domandaModal').modal('hide');
-    });
+    window.open("/api/stampa_domanda/" + this.domanda.id, "_blank");
   }
 
 }
