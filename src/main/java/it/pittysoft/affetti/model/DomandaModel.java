@@ -10,6 +10,7 @@ import lombok.Data;
 public class DomandaModel {
 
 	private Long id;
+	private Long fk_posto;
 	private Date dataProtocollo;
 	private String numeroProtocolloDomanda;
 	private String tipologia;

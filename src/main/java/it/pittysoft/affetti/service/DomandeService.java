@@ -78,6 +78,7 @@ public class DomandeService {
 			 DomandaModel dm = new DomandaModel();
 			 
 			 dm.setId(domanda.getId());
+			 dm.setFk_posto(domanda.getPosto().getId());
 			 dm.setDataProtocollo(domanda.getData_protocollo());
 			 dm.setNumeroProtocolloDomanda(domanda.getProtocollo());
 			 dm.setTipologia(domanda.getTipologia());

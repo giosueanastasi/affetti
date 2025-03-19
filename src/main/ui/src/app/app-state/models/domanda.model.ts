@@ -1,3 +1,5 @@
+import { Posto } from "./posto.model";
+
 export class Domanda {
   id: number;
   protocollo: string;
@@ -26,5 +28,6 @@ export class Domanda {
   data_decesso: Date;
   comune_decesso: string;
   fk_posto: number;
+  posto: Posto;
 }
 

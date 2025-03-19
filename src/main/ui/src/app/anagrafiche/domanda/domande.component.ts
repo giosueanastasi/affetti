@@ -4,7 +4,7 @@ import { AppService } from '../../app.service';
 import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ContraentiModelComponent } from '../contraenti-model/contraenti-model.component';
-import { Contratto, Domanda } from 'src/app/app-state/models';
+import { Contratto, Domanda, Posto } from 'src/app/app-state/models';
 import { DomandaModelComponent } from '../domanda-model/domanda-model.component';
 import { ContrattoModelComponent } from '../contratto-model/contratto-model.component';
 
@@ -79,7 +79,13 @@ export class DomandeComponent implements OnInit, OnDestroy {
   editDomandaRequest(item: any) {
     let domanda = new Domanda;
 	
+	const posto = new Posto();
+	posto.id = item.fk_posto;
+	posto.fornice = item.fornice;
+	posto.loculo = item.loculo;
+	
 	domanda.id = item.id;
+	domanda.posto = posto;
     domanda.data_protocollo = item.dataProtocollo;
     domanda.protocollo = item.numeroProtocolloDomanda;
     domanda.tipologia = item.tipologia;
