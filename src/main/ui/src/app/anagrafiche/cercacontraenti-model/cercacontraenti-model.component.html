@@ -101,7 +101,7 @@
           <tbody>
           
             <tr *ngFor="let contraentiTab of contraenti;">
-              <td><input type="checkbox"  [(ngModel)]="contraentiTab.checked"></td>
+              <td><input type="checkbox"  [(ngModel)]="contraentiTab.checked" [id]="'checkbox-' + contraentiTab.id" (change)="setCheckboxes($event.target.checked, contraentiTab.id)"></td>
               <td>{{contraentiTab.nome}}</td>
               <td>{{contraentiTab.cognome}}</td>
               <td>{{contraentiTab.codice_fiscale}}</td>
