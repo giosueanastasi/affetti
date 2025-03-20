@@ -78,14 +78,11 @@ export class DomandeComponent implements OnInit, OnDestroy {
 
   editDomandaRequest(item: any) {
     let domanda = new Domanda;
-	
-	const contraente = new Contraente();
-	contraente.id = item.fk_contraente;
-	contraente.contratti = [];
 
 	domanda.id = item.id;
 	domanda.assegnatario = item.assegnatario;
 	domanda.posto = item.posto;
+	domanda.contraente = item.contraente;
     domanda.data_protocollo = item.dataProtocollo;
     domanda.protocollo = item.numeroProtocolloDomanda;
     domanda.tipologia = item.tipologia;
@@ -110,13 +107,15 @@ export class DomandeComponent implements OnInit, OnDestroy {
     domanda.cognomeAss = item.cognomeAss;
     domanda.comune_decesso = item.comuneDecesso;
     domanda.data_decesso = item.dataDecesso;
+	
+	console.info({domanda})
 
     this.selectedDomanda = Object.assign({}, domanda);
     this.child?.showDomandaModal();
   }
 
   saveDomandaWatcher(domanda: Domanda) {
-
+	console.log("save domanda watcher triggered")
     let domandaIndex = this.domande.findIndex(item => item.id === domanda.id);
     if (domandaIndex !== -1) {
       this.domande[domandaIndex] = domanda;

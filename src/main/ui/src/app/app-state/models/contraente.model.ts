@@ -18,5 +18,4 @@ export class Contraente {
 	fk_user_modifier: Number;
 	data_insert: Date;
 	data_update: Date;
-    contratti: any[];
 }

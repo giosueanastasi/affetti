@@ -4,7 +4,10 @@ import java.util.List;
 
 import org.springframework.stereotype.Component;
 
+import it.pittysoft.affetti.entity.Assegnatari;
+import it.pittysoft.affetti.entity.AssegnatariDTO;
 import it.pittysoft.affetti.entity.Contraenti;
+import it.pittysoft.affetti.entity.ContraentiDTO;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.entity.Posti;
 import it.pittysoft.affetti.model.ContraentiRequest;
@@ -29,6 +32,27 @@ public class ContraentiService {
         return contraentiRepository.findAll();
     }
  
+    public static ContraentiDTO toDTO(Contraenti contraente) {
+        if (contraente == null) return null;
+        ContraentiDTO dto = new ContraentiDTO();
+        dto.setId(contraente.getId());
+        dto.setNome(contraente.getNome());
+        dto.setComune_nascita(contraente.getComune_nascita());
+        dto.setCognome(contraente.getCognome());
+        dto.setProvincia_nascita(contraente.getProvincia_nascita());
+        dto.setStato_nascita(contraente.getStato_nascita());
+        dto.setData_nascita(contraente.getData_nascita());
+        dto.setComune_residenza(contraente.getComune_residenza());
+        dto.setProvincia_residenza(contraente.getProvincia_residenza());
+        dto.setVia_residenza(contraente.getVia_residenza());
+        dto.setCivico_residenza(contraente.getCivico_residenza());
+        dto.setCap_residenza(contraente.getCap_residenza());
+        dto.setTelefono(contraente.getTelefono());
+        dto.setEmail(contraente.getEmail());
+        dto.setCodice_fiscale(contraente.getCodice_fiscale());
+        dto.setNote(contraente.getNote());
+        return dto;
+    }
     
     public Contraenti saveContraente(Contraenti contraenti) {
     	return contraentiRepository.save(contraenti);

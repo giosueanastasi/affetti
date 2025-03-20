@@ -78,29 +78,28 @@ public class DomandeService {
 			 DomandaModel dm = new DomandaModel();
 			 
 			 dm.setId(domanda.getId());
-			 dm.setFk_contraente(domanda.getContraente().getId());
 			 dm.setDataProtocollo(domanda.getData_protocollo());
 			 dm.setNumeroProtocolloDomanda(domanda.getProtocollo());
 			 dm.setTipologia(domanda.getTipologia());
 			 dm.setStato(domanda.getStato());	
-			 dm.setCognomeContraente(domanda.getContraente().getCognome());
-			 dm.setNomeContraente(domanda.getContraente().getNome());
+			 dm.setCognomeContraente(ContraentiService.toDTO(domanda.getContraente()).getCognome());
+			 dm.setNomeContraente(ContraentiService.toDTO(domanda.getContraente()).getNome());
 			 //dm.setAssegnatario(domanda.getContraente().getCognome()+" "+domanda.getAssegnatario().getNome());
 			 //dm.setNumeroProtocolloContratto(domanda.getContratto().getProtocollo());
-			 dm.setComuneDiNascita(domanda.getContraente().getComune_nascita());
-			 dm.setProvinciaDiNascita(domanda.getContraente().getProvincia_nascita());
-			 dm.setStatoDiNascita(domanda.getContraente().getStato_nascita());
-			 dm.setComuneDiResidenza(domanda.getContraente().getComune_residenza());
-			 dm.setProvinciaDiResidenza(domanda.getContraente().getProvincia_residenza());
-			 dm.setViaDiResidenza(domanda.getContraente().getVia_residenza());
-			 dm.setCivicoDiResidenza(domanda.getContraente().getCivico_residenza());
-			 dm.setCapDiResidenza(domanda.getContraente().getCap_residenza());
-			 dm.setCodiceFiscale(domanda.getContraente().getCodice_fiscale());
-			 dm.setTelefono(domanda.getContraente().getTelefono());
-			 dm.setEmail(domanda.getContraente().getEmail());
-			 dm.setNote(domanda.getContraente().getNote());
-			 //dm.setLoculo(domanda.getPosto().getLoculo());
-			 //dm.setFornice(domanda.getPosto().getFornice());
+			 dm.setComuneDiNascita(ContraentiService.toDTO(domanda.getContraente()).getComune_nascita());
+			 dm.setProvinciaDiNascita(ContraentiService.toDTO(domanda.getContraente()).getProvincia_nascita());
+			 dm.setStatoDiNascita(ContraentiService.toDTO(domanda.getContraente()).getStato_nascita());
+			 dm.setComuneDiResidenza(ContraentiService.toDTO(domanda.getContraente()).getComune_residenza());
+			 dm.setProvinciaDiResidenza(ContraentiService.toDTO(domanda.getContraente()).getProvincia_residenza());
+			 dm.setViaDiResidenza(ContraentiService.toDTO(domanda.getContraente()).getVia_residenza());
+			 dm.setCivicoDiResidenza(ContraentiService.toDTO(domanda.getContraente()).getCivico_residenza());
+			 dm.setCapDiResidenza(ContraentiService.toDTO(domanda.getContraente()).getCap_residenza());
+			 dm.setCodiceFiscale(ContraentiService.toDTO(domanda.getContraente()).getCodice_fiscale());
+			 dm.setTelefono(ContraentiService.toDTO(domanda.getContraente()).getTelefono());
+			 dm.setEmail(ContraentiService.toDTO(domanda.getContraente()).getEmail());
+			 dm.setNote(ContraentiService.toDTO(domanda.getContraente()).getNote());
+			 dm.setLoculo(domanda.getPosto().getLoculo());
+			 dm.setFornice(domanda.getPosto().getFornice());
 			 dm.setComuneDecesso(domanda.getAssegnatario().getComune_decesso());
 			 dm.setDataDecesso(domanda.getAssegnatario().getData_decesso());
 			 dm.setNomeAss(domanda.getAssegnatario().getNome());
@@ -108,7 +107,8 @@ public class DomandeService {
 			 dm.setContratto(domanda.getContratto());
 			 dm.setPosto(PostiService.toDTO(domanda.getPosto()));
 			 dm.setAssegnatario(AssegnatariService.toDTO(domanda.getAssegnatario()));
-			 dm.setDataNascita(domanda.getContraente().getData_nascita());
+			 dm.setContraente(ContraentiService.toDTO(domanda.getContraente()));
+			 dm.setDataNascita(ContraentiService.toDTO(domanda.getContraente()).getData_nascita());
 			 
 			 response.getDomande().add(dm);
 		 } 

@@ -4,8 +4,8 @@ package it.pittysoft.affetti.model;
 import java.util.Date;
 
 import it.pittysoft.affetti.entity.AssegnatariDTO;
+import it.pittysoft.affetti.entity.ContraentiDTO;
 import it.pittysoft.affetti.entity.Contratti;
-import it.pittysoft.affetti.entity.Posti;
 import it.pittysoft.affetti.entity.PostiDTO;
 import lombok.Data;
 
@@ -13,7 +13,6 @@ import lombok.Data;
 public class DomandaModel {
 
 	private Long id;
-	private Long fk_contraente;
 	private Date dataProtocollo;
 	private String numeroProtocolloDomanda;
 	private String tipologia;
@@ -43,6 +42,7 @@ public class DomandaModel {
 	private Contratti contratto;
 	private PostiDTO posto;
 	private AssegnatariDTO assegnatario;
+	private ContraentiDTO contraente;
 	private String dataNascita;
 	
 }
