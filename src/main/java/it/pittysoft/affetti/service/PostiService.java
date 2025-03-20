@@ -10,6 +10,7 @@ import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Contratti;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.entity.Posti;
+import it.pittysoft.affetti.entity.PostiDTO;
 import it.pittysoft.affetti.model.PostiModel;
 import it.pittysoft.affetti.model.PostiRequest;
 import it.pittysoft.affetti.model.PostiResponse;
@@ -37,6 +38,15 @@ public class PostiService {
 
     public List<Posti> getPosti() {
         return postiRepository.findAll();
+    }
+    
+    public static PostiDTO toDTO(Posti posto) {
+        if (posto == null) return null;
+        PostiDTO dto = new PostiDTO();
+        dto.setId(posto.getId());
+        dto.setLoculo(posto.getLoculo());
+        dto.setFornice(posto.getFornice());
+        return dto;
     }
     
     public PostiResponse savePosto(PostiRequest postiRequest) {

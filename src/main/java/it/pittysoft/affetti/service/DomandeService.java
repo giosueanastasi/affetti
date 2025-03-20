@@ -78,8 +78,8 @@ public class DomandeService {
 			 DomandaModel dm = new DomandaModel();
 			 
 			 dm.setId(domanda.getId());
-			 dm.setFk_posto(domanda.getPosto().getId());
 			 dm.setFk_assegnatario(domanda.getAssegnatario().getId());
+			 dm.setFk_contraente(domanda.getContraente().getId());
 			 dm.setDataProtocollo(domanda.getData_protocollo());
 			 dm.setNumeroProtocolloDomanda(domanda.getProtocollo());
 			 dm.setTipologia(domanda.getTipologia());
@@ -100,13 +100,14 @@ public class DomandeService {
 			 dm.setTelefono(domanda.getContraente().getTelefono());
 			 dm.setEmail(domanda.getContraente().getEmail());
 			 dm.setNote(domanda.getContraente().getNote());
-			 dm.setLoculo(domanda.getPosto().getLoculo());
-			 dm.setFornice(domanda.getPosto().getFornice());
+			 //dm.setLoculo(domanda.getPosto().getLoculo());
+			 //dm.setFornice(domanda.getPosto().getFornice());
 			 dm.setComuneDecesso(domanda.getAssegnatario().getComune_decesso());
 			 dm.setDataDecesso(domanda.getAssegnatario().getData_decesso());
 			 dm.setNomeAss(domanda.getAssegnatario().getNome());
 			 dm.setCognomeAss(domanda.getAssegnatario().getCognome());
 			 dm.setContratto(domanda.getContratto());
+			 dm.setPosto(PostiService.toDTO(domanda.getPosto()));
 			 dm.setDataNascita(domanda.getContraente().getData_nascita());
 			 
 			 response.getDomande().add(dm);
