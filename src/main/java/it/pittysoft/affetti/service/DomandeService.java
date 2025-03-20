@@ -78,7 +78,6 @@ public class DomandeService {
 			 DomandaModel dm = new DomandaModel();
 			 
 			 dm.setId(domanda.getId());
-			 dm.setFk_assegnatario(domanda.getAssegnatario().getId());
 			 dm.setFk_contraente(domanda.getContraente().getId());
 			 dm.setDataProtocollo(domanda.getData_protocollo());
 			 dm.setNumeroProtocolloDomanda(domanda.getProtocollo());
@@ -108,6 +107,7 @@ public class DomandeService {
 			 dm.setCognomeAss(domanda.getAssegnatario().getCognome());
 			 dm.setContratto(domanda.getContratto());
 			 dm.setPosto(PostiService.toDTO(domanda.getPosto()));
+			 dm.setAssegnatario(AssegnatariService.toDTO(domanda.getAssegnatario()));
 			 dm.setDataNascita(domanda.getContraente().getData_nascita());
 			 
 			 response.getDomande().add(dm);

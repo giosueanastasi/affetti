@@ -29,8 +29,6 @@ export class Domanda {
   data: Date;
   data_decesso: Date;
   comune_decesso: string;
-  fk_posto: number;
-  fk_assegnatario: number;
   fk_contraente: number;
   posto: Posto;
   assegnatario: Assegnatario;

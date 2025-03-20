@@ -79,17 +79,12 @@ export class DomandeComponent implements OnInit, OnDestroy {
   editDomandaRequest(item: any) {
     let domanda = new Domanda;
 	
-	const assegnatario = new Assegnatario();
-	assegnatario.id = item.fk_assegnatario;
-	assegnatario.nome = item.nomeAss;
-	assegnatario.cognome = item.cognomeAss;
-	
 	const contraente = new Contraente();
 	contraente.id = item.fk_contraente;
 	contraente.contratti = [];
 
 	domanda.id = item.id;
-	domanda.assegnatario = assegnatario;
+	domanda.assegnatario = item.assegnatario;
 	domanda.posto = item.posto;
     domanda.data_protocollo = item.dataProtocollo;
     domanda.protocollo = item.numeroProtocolloDomanda;

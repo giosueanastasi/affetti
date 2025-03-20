@@ -124,7 +124,9 @@ export class AppService {
     domanda.data_protocollo = domandaFullForm.data_protocollo;
     domanda.stato = 'APERTA';
     domanda.tipologia = domandaFullForm.tipologia;
-    domanda.fk_posto = domandaFullForm.fk_posto;
+	
+	//TODO: controllare che il posto venga correttamente salvato aggiungendo una nuova domanda
+    domanda.posto = domandaFullForm.posto;
    
 
     let  df = new DomandaFull();
