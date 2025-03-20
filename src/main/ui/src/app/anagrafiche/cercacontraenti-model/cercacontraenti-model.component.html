@@ -93,9 +93,6 @@
               <th>Comune Residenza</th>
               <th>Via Residenza</th>
               <th>Provincia Residenza</th>
-              <th>Nome Assegnatario</th>
-              <th>Cognome Assegnatario</th>
-              <th>Contratto</th>
             </tr>
           </thead>
           <tbody>
@@ -108,13 +105,10 @@
               <td>{{contraentiTab.comune_residenza}}</td>
               <td>{{contraentiTab.via_residenza}}</td>
               <td>{{contraentiTab.provincia_residenza}}</td>
-              <td>{{contraentiTab.nomeAss}}</td>
-              <td>{{contraentiTab.cognomeAss}}</td>
-              <td>{{contraentiTab.protocolloC}}</td>
             </tr>
             </tbody>
           </table></div>
-          <button class="btn btn-primary" (click)="assegnaContraente(contraenti)">Seleziona</button>
+          <div class="d-inline-block m-3 ms-auto"><button class="btn btn-primary " (click)="assegnaContraente(contraenti)">Seleziona</button></div>
       </div>
   </div>
 </div>
