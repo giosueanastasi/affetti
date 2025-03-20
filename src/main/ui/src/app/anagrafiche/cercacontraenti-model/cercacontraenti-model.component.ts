@@ -56,4 +56,16 @@ export class CercacontraentiModelComponent {
         
       
       }
+
+      //Funzione per impedire di selezionare più di un checkbox
+      setCheckboxes(isChecked: boolean, id: string){
+        if(isChecked){
+          for(var contraente of this.contraenti){
+            if(contraente.id != id)
+              contraente.checked = false;
+          }
+        }
+      }
+
+      
   }
