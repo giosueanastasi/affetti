@@ -11,6 +11,7 @@ public class DomandaModel {
 
 	private Long id;
 	private Long fk_posto;
+	private Long fk_assegnatario;
 	private Date dataProtocollo;
 	private String numeroProtocolloDomanda;
 	private String tipologia;
