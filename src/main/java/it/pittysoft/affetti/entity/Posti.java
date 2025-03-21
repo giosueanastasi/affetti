@@ -18,6 +18,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 import lombok.Data;
 
@@ -57,7 +58,8 @@ public class Posti {
     private String fk_user_modifier;
     
 
-    @OneToMany(mappedBy = "posto")
+    @OneToMany(mappedBy = "posto", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference(value="domanda-posto")
     private List<Domande> domande  = new ArrayList<>();
    
 

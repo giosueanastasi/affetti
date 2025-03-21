@@ -3,8 +3,10 @@ package it.pittysoft.affetti.entity;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -93,6 +95,7 @@ public class Contraenti {
     @Column
     private String data_update;
         
-    @OneToMany(mappedBy = "contraente")
+    @OneToMany(mappedBy = "contraente", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference(value="domanda-contraente")
     private List<Domande> domande  = new ArrayList<>();
 }

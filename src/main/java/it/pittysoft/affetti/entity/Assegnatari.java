@@ -18,6 +18,8 @@ import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Null;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Data;
 
 @Entity
@@ -56,7 +58,8 @@ public class Assegnatari {
 //    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER,mappedBy="assegnatario")
 //    private Set<Domande> domande;
     
-    @OneToMany(mappedBy = "assegnatario")
+    @OneToMany(mappedBy = "assegnatario", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonManagedReference(value="domanda-assegnatario")
     private List<Domande> domande  = new ArrayList<>();
     
 

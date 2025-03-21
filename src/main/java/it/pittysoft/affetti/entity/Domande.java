@@ -19,6 +19,8 @@ import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Cascade;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import lombok.Data;
 
 @Entity
@@ -57,14 +59,17 @@ public class Domande {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_posto")
+    @JsonBackReference(value="domanda-posto") // Impedisce la serializzazione ciclica
     private Posti posto;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_assegnatario")
+    @JsonBackReference(value="domanda-assegnatario") // Impedisce la serializzazione ciclica
     private Assegnatari assegnatario;
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_contraente")
+    @JsonBackReference(value="domanda-contraente") // Impedisce la serializzazione ciclica
     private Contraenti contraente;
     
     
