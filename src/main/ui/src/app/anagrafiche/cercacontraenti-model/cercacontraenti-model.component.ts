@@ -28,7 +28,7 @@ export class CercacontraentiModelComponent {
 
     //Elementi tabella material
     dataSource = new MatTableDataSource<Contraente1>([]);
-    displayedColumns: string[] = ['nome', 'cognome','codice fiscale', 'comune residenza', 'via residenza' , 'provincia residenza'];
+    displayedColumns: string[] = ['checkbox' , 'nome' , 'cognome','codice fiscale', 'comune residenza', 'via residenza' , 'provincia residenza'];
     
     //Elementi paginator
     totalElements = 0;
@@ -46,6 +46,7 @@ export class CercacontraentiModelComponent {
       this.appService.cercaCercacontraenti(contraenteForm, this.paginator.pageIndex, this.paginator.pageSize).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
         this.dataSource = data.contraenti.content;
         this.totalElements = data.contraenti.totalElements;
+        this.contraenti = data.contraenti.content;
         });
     }
   

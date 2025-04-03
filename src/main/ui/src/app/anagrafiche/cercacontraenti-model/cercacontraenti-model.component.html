@@ -83,8 +83,16 @@
           </form>
           
           <h2>Contraenti</h2>
-           <div class="mat-elevation-z8">
+           <div >
             <table mat-table [dataSource]="dataSource">
+
+                <!-- Colonna checkbox -->
+                <ng-container matColumnDef="checkbox">
+                    <th mat-header-cell *matHeaderCellDef>  </th>
+                    <td mat-cell *matCellDef="let element">
+                         <input type="checkbox"  [(ngModel)]="element.checked" [id]="'checkbox-' + element.id" (change)="setCheckboxes($event.target.checked, element.id)">
+                    </td>
+                </ng-container>
 
                 <!-- Colonna nome -->
                 <ng-container matColumnDef="nome">
