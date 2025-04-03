@@ -7,6 +7,8 @@ import java.util.Optional;
 
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -171,9 +173,14 @@ public class ControllerPrincipale {
 	
 	
 	@PostMapping(path = ContraenteLinks.SEARCH_CONTRAENTI)
-    public ResponseEntity<?> searchContraenti(@RequestBody ContraentiRequest contraenti) {
+    public ResponseEntity<?> searchContraenti(@RequestBody ContraentiRequest contraenti,
+    		@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size) {
+		
+		Pageable pageable = PageRequest.of(page, size);
+		
         log.info("ApiController:  search contraenti");
-        ContraentiResponse resource = contraentiService.getContraenti(contraenti);
+        ContraentiResponse resource = (ContraentiResponse) contraentiService.getContraenti(contraenti, pageable);
         if (resource.getReturnCode()==Response.OK) {
         	return ResponseEntity.ok(resource);
         } else  {

@@ -26,7 +26,7 @@ export class CercacontraentiModelComponent {
   
   
     filtraCercacontraenti(contraenteForm: Contraente1) {
-      this.appService.cercaCercacontraenti(contraenteForm).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+      this.appService.cercaCercacontraenti(contraenteForm, 0 , 10).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
         this.cercacontraenteCount =data.length;
         this.contraenti = data.contraenti;
         });

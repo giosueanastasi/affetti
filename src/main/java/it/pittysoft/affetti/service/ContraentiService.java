@@ -1,8 +1,13 @@
 package it.pittysoft.affetti.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
+
 
 import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Domande;
@@ -34,9 +39,11 @@ public class ContraentiService {
     	return contraentiRepository.save(contraenti);
     }
 	
-	 public ContraentiResponse getContraenti(ContraentiRequest contraenti) {
+	 public ContraentiResponse getContraenti(ContraentiRequest contraenti, Pageable pageable) {
 		 List<Contraenti> findContraentiByCognomeAndNome = contraentiRepository.findContraentiByCognomeAndNome(contraenti);
 		 ContraentiResponse response = new ContraentiResponse();
+		 //Lista di contraenti model che verrà preparata ed usata per impostare l'oggetto di tipo page della response
+		 List<ContraentiModel> listaContraenti = new ArrayList<>();
 		 
 		 for (Contraenti contraente : findContraentiByCognomeAndNome) {
 
@@ -73,9 +80,17 @@ public class ContraentiService {
 			 }
 			
 			 
-			 response.getContraenti().add(pm);
+			 listaContraenti.add(pm);
 			 
 		 }
+		 
+		 //Impostiamo l'oggetto di tipo page della response
+		 final int start = (int)pageable.getOffset();
+	     final int end = Math.min((start + pageable.getPageSize()), listaContraenti.size());
+	     final Page<ContraentiModel> page = new PageImpl<>(listaContraenti.subList(start, end), pageable, listaContraenti.size());
+		 
+		 response.setContraenti(page);
+		 
 		return response;
 	}
 }
