@@ -76,8 +76,6 @@ filtraContraenti() {
   contraenteFiltrato.protocolloC = this.contraenteForm.controls['protocollo'].value;
 
   this.appService.cercaCercacontraenti(contraenteFiltrato, this.paginator.pageIndex, this.paginator.pageSize).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-    // this.contraenteCount =data.length;
-    // this.contraenti = data.contraenti.content;
     this.dataSource = data.contraenti.content;
     this.totalElements = data.contraenti.totalElements;
     });
