@@ -199,14 +199,12 @@ export class DomandaFullComponent  {
     $('#popUpModal').modal('show');
   }
 
-  nuovoProtocolloDomanda: any  ;
-  valoreProtocolloDomanda: String = "";
   protocolloGenerato: boolean = false;
 
    generaProtocollo(){
     this.appService.getNuovoProtocolloDomanda().pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-      this.valoreProtocolloDomanda = data.protocolloDomanda.protocollo;
       this.protocolloGenerato = data.protocolloDomanda.generato;
+      this.domandaFullForm.controls['protocollo'].setValue(data.protocolloDomanda.protocollo);
   });
   }
 }
