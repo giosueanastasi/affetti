@@ -56,28 +56,34 @@
 
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <img 
-      width="40"
-      alt="logo comune s.egidio"
-      src="https://upload.wikimedia.org/wikipedia/it/0/04/Sant%27Egidio_alla_Vibrata-Stemma.png"
-      style="margin-right: 20px;"
-      />
+    <a mat-button [routerLink]="'/home'">  
+      <img 
+        width="40"
+        alt="logo comune s.egidio"
+        src="https://upload.wikimedia.org/wikipedia/it/0/04/Sant%27Egidio_alla_Vibrata-Stemma.png"
+        style="margin-right: 20px;"
+        />
+    </a>
     <!-- <button mat-icon-button>
       <mat-icon (click)="sidenav.toggle()">menu</mat-icon>
     </button> -->
     <span class="menu-spacer"></span>
 
-    <h1>Affetti</h1>
+    <h1 class="my-auto me-3">Affetti</h1>
     <!-- <span class="menu-spacer"></span> -->
-    <!-- <div>
-      <a mat-button [routerLink]="'/accounts'"> Accounts </a>
+    <div>
+      <a mat-button [routerLink]="'/home'"> Home </a>
+      <a mat-button [routerLink]="'/register'"> Registrati </a>
+      <a mat-button [routerLink]="'/login'"> Accedi </a>
+      <a mat-button [routerLink]="'/'" class="ms-auto"> Logout </a>
+      <!-- <a mat-button [routerLink]="'/accounts'"> Accounts </a>
       <a mat-button [routerLink]="'/create-account'"> Create Account </a>
       <a mat-button [routerLink]="'/contacts'"> Contacts </a>
       <a mat-button [routerLink]="'/create-contact'"> Create Contact </a>
       <a mat-button [routerLink]="'/activities'"> Activities </a>
-      <a mat-button [routerLink]="'/create-activity'"> Create Activity </a>
+      <a mat-button [routerLink]="'/create-activity'"> Create Activity </a> -->
 
-    </div> -->
+    </div>
   </mat-toolbar-row>
 
   <!-- <mat-toolbar-row>
@@ -107,5 +113,3 @@
 </mat-sidenav-container>
 
 
-
-<!-- <router-outlet></router-outlet> -->

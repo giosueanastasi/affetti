@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DomandaFull } from './app-state/models/domandaFull.model';
 import { Domanda, Posto1 } from './app-state/models';
 import { DomandaSearch } from './app-state/models/domandaSearch.model';
@@ -18,6 +18,8 @@ export class AppService {
   constructor(private http: HttpClient) { }
 
   rootURL = '/api';
+
+  authenticated = false;
 
   getUsers() {
     return this.http.get(this.rootURL + '/users');
@@ -192,4 +194,21 @@ export class AppService {
   getNuovoProtocolloDomanda(){
     return this.http.get(this.rootURL + '/genera_protocollo_domanda');
   }
+
+  //Metedo per controllare se l'utente è già autenticato
+  authenticate(credentials, callback) {
+
+        const headers = new HttpHeaders(credentials ? {
+            authorization : 'Basic ' + btoa(credentials.username + ':' + credentials.password)
+        } : {});
+
+        this.http.get(this.rootURL + '/user', {headers: headers}).subscribe(response => {
+            if (response['name']) {
+                this.authenticated = true;
+            } else {
+                this.authenticated = false;
+            }
+            return callback && callback();
+        });
+      }
 }
