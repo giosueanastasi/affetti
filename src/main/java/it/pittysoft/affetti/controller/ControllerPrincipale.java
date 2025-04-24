@@ -1,19 +1,24 @@
 package it.pittysoft.affetti.controller;
 
 import java.io.IOException;
+import java.security.Key;
+import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,47 +30,51 @@ import org.springframework.web.bind.annotation.RestController;
 import com.lowagie.text.DocumentException;
 
 import freemarker.template.TemplateException;
-import it.pittysoft.affetti.entity.Comuni;
-import it.pittysoft.affetti.entity.Contraenti;
-import it.pittysoft.affetti.entity.Posti;
-import it.pittysoft.affetti.entity.Users;
-import it.pittysoft.affetti.links.ComuneLinks;
-import it.pittysoft.affetti.links.ContraenteLinks;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.security.Keys;
 import it.pittysoft.affetti.entity.Assegnatari;
 import it.pittysoft.affetti.entity.Cap;
+import it.pittysoft.affetti.entity.Comuni;
+import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Contratti;
 import it.pittysoft.affetti.entity.Domande;
+import it.pittysoft.affetti.entity.Posti;
+import it.pittysoft.affetti.entity.Users;
+import it.pittysoft.affetti.links.AssegnatarioLinks;
+import it.pittysoft.affetti.links.CapLinks;
+import it.pittysoft.affetti.links.ComuneLinks;
+import it.pittysoft.affetti.links.ContraenteLinks;
+import it.pittysoft.affetti.links.ContrattoLinks;
+import it.pittysoft.affetti.links.DomandaLinks;
 import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
-import it.pittysoft.affetti.model.ContrattoSearchRequest;
-import it.pittysoft.affetti.model.ContrattoSearchResponse;
-import it.pittysoft.affetti.model.DomandaModel;
-import it.pittysoft.affetti.model.ProtocolloDomandaResponse;
 import it.pittysoft.affetti.model.CapResponse;
 import it.pittysoft.affetti.model.ComuniSelectResponse;
 import it.pittysoft.affetti.model.ContraentiRequest;
 import it.pittysoft.affetti.model.ContraentiResponse;
 import it.pittysoft.affetti.model.ContrattoModel;
+import it.pittysoft.affetti.model.ContrattoSearchRequest;
+import it.pittysoft.affetti.model.ContrattoSearchResponse;
 import it.pittysoft.affetti.model.DomandaRequest;
 import it.pittysoft.affetti.model.DomandaRequestSearch;
 import it.pittysoft.affetti.model.DomandaResponse;
 import it.pittysoft.affetti.model.DomandaResponseSearch;
 import it.pittysoft.affetti.model.PostiRequest;
 import it.pittysoft.affetti.model.PostiResponse;
+import it.pittysoft.affetti.model.ProtocolloDomandaResponse;
 import it.pittysoft.affetti.model.Response;
 import it.pittysoft.affetti.model.UserRequest;
 import it.pittysoft.affetti.model.UserResponse;
+import it.pittysoft.affetti.security.AuthRequest;
+import it.pittysoft.affetti.security.AuthResponse;
+import it.pittysoft.affetti.service.AssegnatariService;
 import it.pittysoft.affetti.service.ComuniService;
 import it.pittysoft.affetti.service.ContraentiService;
-import it.pittysoft.affetti.links.ContrattoLinks;
-import it.pittysoft.affetti.links.DomandaLinks;
-import it.pittysoft.affetti.links.AssegnatarioLinks;
-import it.pittysoft.affetti.links.CapLinks;
-import it.pittysoft.affetti.service.PostiService;
-import it.pittysoft.affetti.service.UsersService;
 import it.pittysoft.affetti.service.ContrattiService;
 import it.pittysoft.affetti.service.DomandeService;
-import it.pittysoft.affetti.service.AssegnatariService;
+import it.pittysoft.affetti.service.PostiService;
+import it.pittysoft.affetti.service.UsersService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -94,7 +103,11 @@ public class ControllerPrincipale {
 	@Autowired
 	DomandeService domandeService;
 	
-
+    @Autowired
+    AuthenticationManager authenticationManager;
+    
+	
+    private final Key key = Keys.hmacShaKeyFor("mia-chiave-super-segreta-da-almeno-256-bit".getBytes());
 	
 	
 	@GetMapping(path = UserLinks.LIST_USERS)
@@ -338,5 +351,25 @@ public class ControllerPrincipale {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+	
+	@RequestMapping("/user")
+	public Principal user(Principal user) {
+	    return user;
+	  }
+	  
+	@PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+        String jwt = Jwts.builder()
+                .setSubject(authRequest.getUsername())
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + 3600000)) // 1 ora
+                .signWith(SignatureAlgorithm.HS256, key)
+                .compact();
+
+        return ResponseEntity.ok(new AuthResponse(jwt));
+
+	}
 	
 }

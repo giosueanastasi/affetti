@@ -12586,6 +12586,21 @@ INSERT INTO comuni ( nome, COD_COMUNE_ISTAT,  COD_CATAST_COMUNE, provincia, COD_
 ('Villaputzu','111103','L998','SU','111','SUD SARDEGNA','20','SARDEGNA','Italia'),
 ('Villasor','111106','M025','SU','111','SUD SARDEGNA','20','SARDEGNA','Italia'),
 ('Villaspeciosa','111107','M026','SU','111','SUD SARDEGNA','20','SARDEGNA','Italia'); 
+
+
+DROP TABLE IF EXISTS role_users;
+
+DROP TABLE IF EXISTS role;
+
+CREATE TABLE role (
+  id INT NOT NULL IDENTITY,
+  ruolo VARCHAR(10) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+INSERT INTO role (ruolo) VALUES
+  ('admin'),
+  ('user'); 
   
   DROP TABLE IF EXISTS users;
 
@@ -12593,16 +12608,18 @@ CREATE TABLE users (
   id INT NOT NULL IDENTITY,
   username VARCHAR(20) NOT NULL,
   password VARCHAR(50) NOT NULL,
-  ruolo VARCHAR(10) NOT NULL,
+  fk_ruolo int NOT NULL,
   fk_comune int NOT NULL,
   PRIMARY KEY (id),
-  foreign key (fk_comune) references comuni (id)
+  foreign key (fk_comune) references comuni (id),
+  foreign key (fk_ruolo) references role (id)
 );
 
-INSERT INTO users ( username,password,ruolo,fk_comune) VALUES
-  (' Antonio90','dcunwencwebci', 'utente',188),
-  ( 'Stefano24', 'qecwebckw','utente',4530),
-  ( 'Giovanna98', 'ugcywie', 'utente',4518); 
+INSERT INTO users ( username,password,fk_ruolo,fk_comune) VALUES
+  (' Antonio90','dcunwencwebci', 2 ,188),
+  ( 'Stefano24', 'qecwebckw', 2 ,4530),
+  ( 'Giovanna98', 'ugcywie', 2 ,4518),
+  ( 'user', 'password', 2 ,1); 
   
   
 DROP TABLE IF EXISTS contratti; 
