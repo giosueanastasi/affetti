@@ -17,6 +17,6 @@ public class Role {
 	
 	@Column
     @NotNull(message="{NotNull.User.ruolo}")
-    private String ruolo;
+    private String role;
 
 }

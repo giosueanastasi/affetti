@@ -1,6 +1,7 @@
 package it.pittysoft.affetti.controller;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,13 +28,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import javax.crypto.spec.SecretKeySpec;
 
 import com.lowagie.text.DocumentException;
 
 import freemarker.template.TemplateException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import io.jsonwebtoken.security.Keys;
 import it.pittysoft.affetti.entity.Assegnatari;
 import it.pittysoft.affetti.entity.Cap;
 import it.pittysoft.affetti.entity.Comuni;
@@ -107,7 +109,8 @@ public class ControllerPrincipale {
     AuthenticationManager authenticationManager;
     
 	
-    private final Key key = Keys.hmacShaKeyFor("mia-chiave-super-segreta-da-almeno-256-bit".getBytes());
+    String key = "chiave-segreta-temporanea-abbastanza-lunga-0123456789"; 
+    Key signingKey = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), SignatureAlgorithm.HS256.getJcaName());
 	
 	
 	@GetMapping(path = UserLinks.LIST_USERS)
@@ -359,17 +362,23 @@ public class ControllerPrincipale {
 	  
 	@PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
-        Authentication authentication = authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
-        String jwt = Jwts.builder()
-                .setSubject(authRequest.getUsername())
-                .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + 3600000)) // 1 ora
-                .signWith(SignatureAlgorithm.HS256, key)
-                .compact();
+		try {
+			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword());	
+			Authentication authentication = authenticationManager.authenticate(token);
+			System.out.print("Stampa di prova\n" + authentication.toString() + "\n****************************" );
+	        SecurityContextHolder.getContext().setAuthentication(authentication);
+	        String jwt = Jwts.builder()
+	                .setSubject(authRequest.getUsername())
+	                .setIssuedAt(new Date())
+	                .setExpiration(new Date(System.currentTimeMillis() + 3600000))
+	                .signWith(signingKey)
+	                .compact();
 
         return ResponseEntity.ok(new AuthResponse(jwt));
-
+		 
+		}catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+	    }
 	}
 	
 }

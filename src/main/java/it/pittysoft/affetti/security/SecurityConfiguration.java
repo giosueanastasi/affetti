@@ -6,6 +6,7 @@ import javax.crypto.spec.SecretKeySpec;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -24,11 +25,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
             .csrf().disable()
             .authorizeRequests()
-            	.antMatchers("/api/auth/**").permitAll()
+            	.antMatchers("/api/login", "/h2-console/**").permitAll()
             	.anyRequest().authenticated()
 	        .and()
+	        .headers().frameOptions().sameOrigin()
+	        .and()
 	        .oauth2ResourceServer().jwt()
-	        	.decoder(jwtDecoder());;
+	        	.decoder(jwtDecoder());
+        	
 
 
     }
@@ -45,8 +49,23 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     
     @Bean
     public JwtDecoder jwtDecoder() {
-        SecretKey secretKey = new SecretKeySpec("my-secret-key".getBytes(), "HmacSHA256");
+        SecretKey secretKey = new SecretKeySpec("chiave-segreta-temporanea-abbastanza-lunga-0123456789".getBytes(), "HmacSHA256");
         return NimbusJwtDecoder.withSecretKey(secretKey).build();
     }
+    
+    @Bean
+	protected DatabaseUserDetailsService userDetailsService() {
+		return new DatabaseUserDetailsService();
+	}
+    
+    @Bean
+	DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+		
+		authProvider.setUserDetailsService(userDetailsService());
+		authProvider.setPasswordEncoder(passwordEncoder());
+		
+		return authProvider;
+	}
 
 }

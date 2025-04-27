@@ -26,7 +26,7 @@ public class DatabaseUserDetails implements UserDetails{
 		
 		authorities = new HashSet<GrantedAuthority>();
 		for(Role role : user.getRoles()) {
-			authorities.add(new SimpleGrantedAuthority(role.getRuolo()));
+			authorities.add(new SimpleGrantedAuthority(role.getRole()));
 		}
 	}
 
@@ -49,32 +49,32 @@ public class DatabaseUserDetails implements UserDetails{
 		return this.username;
 	}
 
-
+	//Da cambiare se si desidera gestire la scadenza dell'account
 	@Override
 	public boolean isAccountNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
-
+	//Da cambiare se si desidera gestire il blocco dell'account
 	@Override
 	public boolean isAccountNonLocked() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
-
+	//Da cambiare se si desidera gestire la scadenza delle credenziali dell'account
 	@Override
 	public boolean isCredentialsNonExpired() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
-
+	//Da cambiare se si desidera gestire l'attivazione dell'account
 	@Override
 	public boolean isEnabled() {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 }

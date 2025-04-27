@@ -29,9 +29,9 @@ public class Users {
     @NotNull(message="{NotNull.User.password}")
     private String password;
     
-    @Column
-    @NotNull(message="{NotNull.User.fk_ruolo}")
-    private String  fk_ruolo;
+//    @Column
+//    @NotNull(message="{NotNull.User.fk_ruolo}")
+//    private String  fk_ruolo;
     
     @Column
     @NotNull(message="{NotNull.User.fk_comune}")
@@ -40,8 +40,8 @@ public class Users {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
     		name = "role_users",
-    		joinColumns = @JoinColumn(name = "id"),
-    		inverseJoinColumns = @JoinColumn(name = "ruolo_id")
+    		joinColumns = @JoinColumn(name = "user_id"),
+    		inverseJoinColumns = @JoinColumn(name = "role_id")
     		)
 	private Set<Role> roles;
 

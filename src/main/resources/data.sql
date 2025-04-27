@@ -12589,16 +12589,15 @@ INSERT INTO comuni ( nome, COD_COMUNE_ISTAT,  COD_CATAST_COMUNE, provincia, COD_
 
 
 DROP TABLE IF EXISTS role_users;
-
 DROP TABLE IF EXISTS role;
 
 CREATE TABLE role (
   id INT NOT NULL IDENTITY,
-  ruolo VARCHAR(10) NOT NULL,
+  role VARCHAR(10) NOT NULL,
   PRIMARY KEY (id)
 );
 
-INSERT INTO role (ruolo) VALUES
+INSERT INTO role (role) VALUES
   ('admin'),
   ('user'); 
   
@@ -12607,19 +12606,32 @@ INSERT INTO role (ruolo) VALUES
 CREATE TABLE users (
   id INT NOT NULL IDENTITY,
   username VARCHAR(20) NOT NULL,
-  password VARCHAR(50) NOT NULL,
-  fk_ruolo int NOT NULL,
+  password VARCHAR(100) NOT NULL,
   fk_comune int NOT NULL,
   PRIMARY KEY (id),
-  foreign key (fk_comune) references comuni (id),
-  foreign key (fk_ruolo) references role (id)
+  foreign key (fk_comune) references comuni (id)
 );
 
-INSERT INTO users ( username,password,fk_ruolo,fk_comune) VALUES
-  (' Antonio90','dcunwencwebci', 2 ,188),
-  ( 'Stefano24', 'qecwebckw', 2 ,4530),
-  ( 'Giovanna98', 'ugcywie', 2 ,4518),
-  ( 'user', 'password', 2 ,1); 
+INSERT INTO users ( username,password,fk_comune) VALUES
+  (' Antonio90','dcunwencwebci', 188),
+  ( 'Stefano24', 'qecwebckw', 4530),
+  ( 'Giovanna98', 'ugcywie', 4518),
+  ( 'user', '{$2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36W0R1VoOGQBhI5dZVY6rUy', 1),
+  ( 'admin', '$2a$12$D56Q42PcA1BH4eaAJW3gyORGCk0B9oX9RJGRj9OqCE6.fCnb0WtDG', 1);
+  
+CREATE TABLE role_users(
+	role_id int NULL,
+	user_id int NULL,
+	FOREIGN key(role_id ) references role (id),
+	FOREIGN key(user_id) references users (id)
+	);
+	
+INSERT INTO role_users(role_id, user_id ) VALUES
+('2','1'),
+('2','2'),
+('2','3'),
+('2','4'),
+('1','5');
   
   
 DROP TABLE IF EXISTS contratti; 
