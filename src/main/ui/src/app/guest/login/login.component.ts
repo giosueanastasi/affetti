@@ -1,7 +1,6 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AppService } from 'src/app/app.service';
+import { AuthService } from 'src/app/security/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -11,15 +10,21 @@ import { AppService } from 'src/app/app.service';
 export class LoginComponent implements OnInit {
 
   credentials = {username: '', password: ''};
+  errorMessage: string = '';
 
-  constructor(private app: AppService, private http: HttpClient, private router: Router) {
+  constructor(private authService: AuthService, private router: Router) {
   }
 
   login() {
-    this.app.authenticate(this.credentials, () => {
-        this.router.navigateByUrl('/');
-    });
-    return false;
+    this.authService.login(this.credentials.username, this.credentials.password).subscribe(
+      (response) => {
+        this.authService.setToken(response.token);
+        this.router.navigate(['/']);
+      },
+      (error) => {
+        this.errorMessage = 'Credenziali non valide!';
+      }
+    );
   }
 
   ngOnInit(): void {

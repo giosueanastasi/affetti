@@ -195,20 +195,5 @@ export class AppService {
     return this.http.get(this.rootURL + '/genera_protocollo_domanda');
   }
 
-  //Metedo per controllare se l'utente è già autenticato
-  authenticate(credentials, callback) {
 
-        const headers = new HttpHeaders(credentials ? {
-            authorization : 'Basic ' + btoa(credentials.username + ':' + credentials.password)
-        } : {});
-
-        this.http.get(this.rootURL + '/user', {headers: headers}).subscribe(response => {
-            if (response['name']) {
-                this.authenticated = true;
-            } else {
-                this.authenticated = false;
-            }
-            return callback && callback();
-        });
-      }
 }

@@ -12613,10 +12613,10 @@ CREATE TABLE users (
 );
 
 INSERT INTO users ( username,password,fk_comune) VALUES
-  (' Antonio90','dcunwencwebci', 188),
-  ( 'Stefano24', 'qecwebckw', 4530),
-  ( 'Giovanna98', 'ugcywie', 4518),
-  ( 'user', '{$2a$10$EixZaYVK1fsbw1ZfbX3OXePaWxn96p36W0R1VoOGQBhI5dZVY6rUy', 1),
+  ('Antonio90','$2a$12$flO.rGaJdEWoOltiRQDFTe6tFJnk4KV.ZevNtoYxzDDM07JZMBW3.', 188),
+  ( 'Stefano24', '$2a$12$fj5mxtQd8ULv80QW.ZWvVOQzZn/gkewSwYwgssuHOV7D3vis5AY7y', 4530),
+  ( 'Giovanna98', '$2a$12$kz6dsCL/wx0VA8.AytV3cOpaJ9gMl.FNG4woC3rQaedBbaeoS1ED.', 4518),
+  ( 'user', '$2a$12$9XsiPJIVC46JkEznSENbmeH4nvYZVJGRLnctca2j114Rj2dyDEi3S', 1),
   ( 'admin', '$2a$12$D56Q42PcA1BH4eaAJW3gyORGCk0B9oX9RJGRj9OqCE6.fCnb0WtDG', 1);
   
 CREATE TABLE role_users(

@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { MatListModule } from '@angular/material/list';
@@ -14,7 +14,7 @@ import { MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule} from '@angular/material/paginator';
 
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
@@ -42,6 +42,8 @@ import { PopupComponent } from './popup/popup.component';
 import { PostoEditComponent } from './anagrafiche/posto-edit/posto-edit.component';
 import { DomandaModelComponent } from './anagrafiche/domanda-model/domanda-model.component';
 import { ContrattoModelComponent } from './anagrafiche/contratto-model/contratto-model.component';
+import { AppService } from './app.service';
+import { AuthInterceptor } from './security/auth.interceptor';
 
 
 // state related imports
@@ -78,6 +80,7 @@ import { ContrattoModelComponent } from './anagrafiche/contratto-model/contratto
     PopupComponent,
     PostoEditComponent,
     DomandaModelComponent,
+    
     
     
     
@@ -138,7 +141,15 @@ import { ContrattoModelComponent } from './anagrafiche/contratto-model/contratto
      * See: https://github.com/ngrx/platform/blob/master/docs/effects/api.md#forroot
      */
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+    ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+

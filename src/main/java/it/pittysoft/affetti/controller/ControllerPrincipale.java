@@ -5,6 +5,7 @@ import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +21,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -365,13 +367,17 @@ public class ControllerPrincipale {
 		try {
 			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword());	
 			Authentication authentication = authenticationManager.authenticate(token);
-			System.out.print("Stampa di prova\n" + authentication.toString() + "\n****************************" );
+			List<String> roles = new ArrayList<String>();
+			for(GrantedAuthority auth : authentication.getAuthorities()) {
+				roles.add(auth.getAuthority().toString());
+			}
 	        SecurityContextHolder.getContext().setAuthentication(authentication);
 	        String jwt = Jwts.builder()
 	                .setSubject(authRequest.getUsername())
+	                .claim("roles", roles)
 	                .setIssuedAt(new Date())
 	                .setExpiration(new Date(System.currentTimeMillis() + 3600000))
-	                .signWith(signingKey)
+	                .signWith(signingKey, SignatureAlgorithm.HS256)
 	                .compact();
 
         return ResponseEntity.ok(new AuthResponse(jwt));

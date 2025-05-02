@@ -5,6 +5,7 @@ import { finalize, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { AuthService } from './security/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -13,17 +14,19 @@ import { Router } from '@angular/router';
 })
 export class AppComponent  {
 
-  constructor(private app: AppService, private http: HttpClient, private router: Router) {
-    this.app.authenticate(undefined, undefined);
+  isLoggedIn : boolean;
+  userName: string;
+
+  constructor(public app: AppService, private router: Router, public authService: AuthService ) {}
+
+  onInit() {
+    this.userName = this.authService.getToken();
   }
 
   logout() {
-    this.http.post('logout', {}).pipe(
-      finalize(() => {
-        this.app.authenticated = false;
-        this.router.navigateByUrl('/login');
-      })
-    ).subscribe();
+    localStorage.removeItem('jwt');
+    this.isLoggedIn = false;
+    this.router.navigate(['/home']);
   }
 
   title = 'angular-nodejs-example';

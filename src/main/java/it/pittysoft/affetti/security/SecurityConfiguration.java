@@ -11,10 +11,13 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 
 @Configuration
 @EnableWebSecurity
@@ -23,15 +26,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	@Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+	        .sessionManagement()
+	        	.sessionCreationPolicy(SessionCreationPolicy.STATELESS) //Impostato come su STATELESS evita che si tenga conto del coockie JSESSION per l'autenticazione
+	        .and()
             .csrf().disable()
             .authorizeRequests()
             	.antMatchers("/api/login", "/h2-console/**").permitAll()
-            	.anyRequest().authenticated()
+            	.anyRequest().authenticated() //Da modificare in base a come si gestiranno i ruoli. N.B. Ogni ruolo ha il prefisso 'ROLE_' ed è maiuscolo
 	        .and()
 	        .headers().frameOptions().sameOrigin()
 	        .and()
 	        .oauth2ResourceServer().jwt()
-	        	.decoder(jwtDecoder());
+	        	.decoder(jwtDecoder())
+	        	.jwtAuthenticationConverter(jwtAuthenticationConverter());
         	
 
 
@@ -67,5 +74,17 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 		
 		return authProvider;
 	}
+    
+    @Bean
+    public JwtAuthenticationConverter jwtAuthenticationConverter() {
+        JwtGrantedAuthoritiesConverter grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
+        grantedAuthoritiesConverter.setAuthoritiesClaimName("roles");
+        grantedAuthoritiesConverter.setAuthorityPrefix("ROLE_");
+
+        JwtAuthenticationConverter jwtConverter = new JwtAuthenticationConverter();
+        jwtConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
+        return jwtConverter;
+    }
+
 
 }
