@@ -14,18 +14,19 @@ import { AuthService } from './security/auth.service';
 })
 export class AppComponent  {
 
-  isLoggedIn : boolean;
-  userName: string;
-
   constructor(public app: AppService, private router: Router, public authService: AuthService ) {}
 
-  onInit() {
-    this.userName = this.authService.getToken();
+  get isLoggedIn(): boolean {
+    return this.authService.isAuthenticated();
+  }
+
+  get username(): string | null {
+    return this.authService.getUsername();
   }
 
   logout() {
     localStorage.removeItem('jwt');
-    this.isLoggedIn = false;
+    //this.isLoggedIn = false;
     this.router.navigate(['/home']);
   }
 

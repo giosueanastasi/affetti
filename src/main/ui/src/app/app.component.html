@@ -77,8 +77,8 @@
       <a mat-button [routerLink]="'/login'"> Accedi </a>
       <a mat-button class="ms-auto" (click)="logout()"> Logout </a>
       
-      <small class="mx-2 fw-lighter">Utente loggato</small>
-      <small class="mx-2 fw-lighter" *ngIf="isLoggedIn">Nessun utente loggato</small>
+      <small class="mx-2 fw-lighter" *ngIf="isLoggedIn">{{username}}</small>
+      <small class="mx-2 fw-lighter" *ngIf="!isLoggedIn">Nessun utente loggato</small>
       
       <!-- <a mat-button [routerLink]="'/accounts'"> Accounts </a>
       <a mat-button [routerLink]="'/create-account'"> Create Account </a>

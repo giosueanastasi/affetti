@@ -30,4 +30,19 @@ export class AuthService {
   isAuthenticated(): boolean {
     return this.getToken() !== null;
   }
+
+  getUsername(){
+    const token = this.getToken();
+    if (token) {
+      const payload = token.split('.')[1];
+      const decodedPayload = window.atob(payload);
+      const user = JSON.parse(decodedPayload);
+      return user?.sub;
+    }else{
+      return null;
+    }
+
+
+  }
+
 }
