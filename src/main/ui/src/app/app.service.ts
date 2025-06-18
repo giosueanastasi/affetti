@@ -3,8 +3,10 @@ import { HttpClient } from '@angular/common/http';
 import { DomandaFull } from './app-state/models/domandaFull.model';
 import { Domanda, Posto1 } from './app-state/models';
 import { DomandaSearch } from './app-state/models/domandaSearch.model';
-import { ContrattiSearch } from './app-state/models/contrattiSearch.model';
+import { ContrattiSearch } from './app-state/models/contrattiSearch.model';     
+import {HttpParams} from "@angular/common/http";
 
+    
 
 
 @Injectable({
@@ -35,8 +37,12 @@ export class AppService {
     return this.http.post(this.rootURL + '/search_posti',posti1);
   }
 
-  cercaCercacontraenti(contraenti1: any) {
-    return this.http.post(this.rootURL + '/search_contraenti',contraenti1);
+  cercaCercacontraenti(contraenti1: any, page: number, size: number) {
+    const options = 
+    { params: new HttpParams().set(('page'), page)
+                              .set(('size'), size)
+     };
+    return this.http.post(this.rootURL + '/search_contraenti' ,contraenti1, options);
   }
 
   getPosti() {
@@ -174,5 +180,16 @@ export class AppService {
   //Metodo per recuperare la lista di codici cap di un determinato comune
   getCapListByComune(idComune: number){
     return this.http.post(this.rootURL + '/get_lista_cap',idComune);
+  }
+
+  //Metodo per recuperare il contratto di una specifica domanda tramite numero di protocollo
+  getContrattoByProtocollo(numProtocollo: String){
+    return this.http.post(this.rootURL + '/get_contratto_by_protocollo',numProtocollo);
+
+  }
+
+  //Metodo per recuperare un nuovo numero di protocollo per le domande
+  getNuovoProtocolloDomanda(){
+    return this.http.get(this.rootURL + '/genera_protocollo_domanda');
   }
 }

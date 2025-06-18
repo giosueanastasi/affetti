@@ -76,23 +76,25 @@ public class PostiService {
 		 PostiResponse response = new PostiResponse();
 		 
 		 for (Posti postiFiltrati : findtPostiByLoculoAndFornice) {
-
-			 postiFiltrati.getDomande().size();
-			
-			 for (Domande domanda : postiFiltrati.getDomande()) {
-				 PostiModel pm = new PostiModel();
-				 pm.setId(postiFiltrati.getId());
-				 pm.setIdDomanda(domanda.getId());
-				 pm.setCognome(domanda.getAssegnatario().getCognome());
-				 pm.setNome(domanda.getAssegnatario().getNome());
-				 pm.setLoculo(postiFiltrati.getLoculo());
-				 pm.setFornice(postiFiltrati.getFornice());
-				 pm.setStato(postiFiltrati.getStato());
-				 pm.setScadenza(domanda.getContratto().getData_scadenza());
-				 response.getPosti().add(pm);
-				
-			 }
 			 
+			 PostiModel pm = new PostiModel();
+			 pm.setId(postiFiltrati.getId());
+			 pm.setLoculo(postiFiltrati.getLoculo());
+			 pm.setFornice(postiFiltrati.getFornice());
+			 pm.setStato(postiFiltrati.getStato());
+			 
+			 if(!postiFiltrati.getDomande().isEmpty()) {
+				 for (Domande domanda : postiFiltrati.getDomande()) {
+					 pm.setIdDomanda(domanda.getId());
+					 pm.setCognome(domanda.getAssegnatario().getCognome());
+					 pm.setNome(domanda.getAssegnatario().getNome());
+					 pm.setScadenza(domanda.getContratto().getData_scadenza());
+					 pm.setProtocolloContratto(domanda.getContratto().getProtocollo());
+				 }
+			 }
+			
+			 
+			  response.getPosti().add(pm);
 		 }
 		return response;
 	}

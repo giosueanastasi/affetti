@@ -10,8 +10,8 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule} from '@angular/material/select';
-
-
+import { MatTableModule} from '@angular/material/table';
+import { MatPaginatorModule} from '@angular/material/paginator';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -77,8 +77,8 @@ import { ContrattoModelComponent } from './anagrafiche/contratto-model/contratto
     ContrattoModelComponent,
     PopupComponent,
     PostoEditComponent,
-
     DomandaModelComponent,
+    
     
     
 
@@ -99,9 +99,9 @@ import { ContrattoModelComponent } from './anagrafiche/contratto-model/contratto
     MatIconModule,
     MatInputModule,
     MatAutocompleteModule,
-    MatSelectModule
-
-
+    MatSelectModule,
+    MatTableModule,
+    MatPaginatorModule
     
 
     /**

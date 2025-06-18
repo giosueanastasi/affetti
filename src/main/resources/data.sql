@@ -12627,7 +12627,12 @@ CREATE TABLE posti (
   ( 15, 150, 'intermedia','LIBERO' ,'2023-09-25','2023-09-25',1),
   ( 1, 8, 'monumentale','PRENOTATO' ,'2023-03-04','2020-02-8',2),
   ( 14, 150, 'intermedia','DA_LIBERARE' ,'2023-09-25','2023-09-25',1),
-  ( 8,120, 'nuova', 'OCCUPATO','2023-04-8','2023-04-8',3); 
+  ( 8,120, 'nuova', 'OCCUPATO','2023-04-8','2023-04-8',3),
+  ( 10,120, 'nuova', 'LIBERO','2023-04-8','2023-04-8',3),
+  ( 2,10, 'nuova', 'LIBERO','2023-04-8','2023-04-8',1),
+  ( 3,11, 'nuova', 'LIBERO','2023-04-8','2023-04-8',1),
+  ( 4,12, 'nuova', 'LIBERO','2023-04-8','2023-04-8',1),
+  ( 5,13, 'nuova', 'LIBERO','2023-04-8','2023-04-8',1);
   
 	DROP TABLE IF EXISTS assegnatari;
 
@@ -12647,7 +12652,8 @@ CREATE TABLE posti (
 INSERT INTO assegnatari ( nome,cognome,data_decesso,comune_decesso,data_update,data_insert,fk_user_modifier ) VALUES
   ( 'Stefano', 'Rossi','2023-09-20','Sant Egidio alla Vibrata', '2023-09-20','2023-09-25',1),
   ( 'Vincenzo','D Auri', '2020-02-4','Ascoli Piceno','2023-03-5','2020-02-8',3),
-  ( 'Samuel','Feliciani', '2023-04-5','Giulianova', '2023-04-8','2023-04-8',2); 
+  ( 'Samuel','Feliciani', '2023-04-5','Giulianova', '2023-04-8','2023-04-8',2),
+  ( 'Antonio','Rizzo', '2023-04-5','Giulianova', '2023-04-8','2023-04-8',2);
 	
 
 DROP TABLE IF EXISTS contraenti;
@@ -12716,7 +12722,8 @@ CREATE TABLE domande (
   INSERT INTO domande (protocollo,data_protocollo,stato, tipologia,fk_posto,fk_assegnatario,fk_contraente,fk_user_modifier ,data_insert,data_update) VALUES
   (506,'2023-09-25','APERTA','LOCULO',2,1,3,2, '2023-09-25','2023-09-25'),
   (204, '2023-03-04','CHIUSA','TENUTA_DISPOSIZIONE',1,2,1,3,'2023-03-04','2020-02-8'),
-  (890, '2023-04-8', 'APERTA','LOCULO',3,3,2,1, '2023-04-8','2023-04-8'); 
+  (890, '2023-04-8', 'APERTA','LOCULO',3,3,2,1, '2023-04-8','2023-04-8'),
+  (100,'2023-09-25','APERTA','LOCULO',4,4,1,1, '2023-09-25','2023-09-25');
   
 	
 	
@@ -12737,7 +12744,8 @@ CREATE TABLE domande (
 INSERT INTO contratti ( protocollo,data_inizio,data_scadenza,stato,fk_domanda,fk_user_modifier,data_insert,data_update) VALUES
   (106,'2023-09-25','2058-09-25','IN_ATTESA_PAGAMENTO',3,1, '2023-09-25','2023-09-25'),
   (405, '2023-03-4','2058-03-4','PAGATO',2,2,'2023-03-04','2020-02-8'),
-  ( 450, '2023-04-8', '2058-04-8','IN_ATTESA_PAGAMENTO',1,3, '2023-04-08','2023-04-8'); 
+  ( 450, '2023-04-8', '2058-04-8','IN_ATTESA_PAGAMENTO',1,3, '2023-04-08','2023-04-8'), 
+  ( 1, '2023-04-8', '2058-04-8','IN_ATTESA_PAGAMENTO',4,1, '2023-04-08','2023-04-8'); 
   
 DROP TABLE IF EXISTS cap_comuni;
 

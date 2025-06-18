@@ -1,3 +1,6 @@
+import { Posto } from "./posto.model";
+import { Assegnatario } from "./assegnatario.model";
+
 export class Domanda {
   id: number;
   protocollo: string;
@@ -26,5 +29,8 @@ export class Domanda {
   data_decesso: Date;
   comune_decesso: string;
   fk_posto: number;
+  fk_assegnatario: number;
+  posto: Posto;
+  assegnatario: Assegnatario;
 }
 

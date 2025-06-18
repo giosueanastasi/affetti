@@ -6,6 +6,7 @@ import { Observable, Subject } from 'rxjs';
 import { FormControl } from '@angular/forms';
 import {startWith, map} from 'rxjs/operators';
 import { Utils } from 'src/app/app-state/shared/utils';
+import CodiceFiscale from 'codice-fiscale-js';
 declare var $ : any;
 
 @Component({
@@ -39,7 +40,7 @@ export class ContraentiModelComponent  {
     debugger;
     //Il blocco di istruzioni per salvare i dati del contraente viene eseguito solo se 
     //i valori anagrafici inseriti sono validi
-    if(this.controllaSelezioniComuni()) {
+    if(this.controllaSelezioniComuni() && this.controllaCodFiscale(this.contraente.codice_fiscale.toString())) {
       this.appService.saveContraente(this.contraente).pipe().subscribe(data => {
         this.save.emit(data);
         $('#contraentiModal').modal('hide');
@@ -103,7 +104,7 @@ export class ContraentiModelComponent  {
     return this.comuni.filter(comune => this.utils.normalizeValue(comune.nome).includes(valoreFiltro));
    }
 
-   //Funzione che controlla se i valori nei campi relativi ai comuni sono stati 
+   //Funzione che controlla se i valori nei campi relativi ai comuni sono stati inseriti correttamente
    private controllaSelezioniComuni(): boolean{
     let valoriComuniValidi = true;
      let nomiComuni = this.comuni.map(nomeComune => nomeComune.nome);
@@ -125,6 +126,23 @@ export class ContraentiModelComponent  {
      return valoriComuniValidi;
    }
   
+   //Funzione per controllare la validità del codice fiscale 
+   private controllaCodFiscale(codFiscale: string): boolean{
 
+    try{
+      const codFiscaleDaVerificare = new CodiceFiscale(codFiscale);
+      if(codFiscaleDaVerificare.isValid){
+        return true;
+      }
+
+      this.errorMessage = "Il codice fiscale inserito non è valido";
+      return false;
+    }catch(error){
+      this.errorMessage = "Il codice fiscale inserito non è valido";
+      return false;
+    }
+
+    
+   }
 
 }

@@ -13,6 +13,8 @@ declare var $ : any;
 export class DomandaModelComponent {
   @Input() domanda: Domanda = new Domanda();
   @Output() save = new EventEmitter<any>();
+  @Output() print = new EventEmitter<any>();
+
 
   constructor(private appService: AppService) { }
 
@@ -27,6 +29,10 @@ export class DomandaModelComponent {
       this.save.emit(data.domanda[0]);
       $('#domandaModal').modal('hide');
     });
+  }
+
+  printDomandaModal() {
+    window.open("/api/stampa_domanda/" + this.domanda.id, "_blank");
   }
 
 }

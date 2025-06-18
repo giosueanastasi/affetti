@@ -1,8 +1,10 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Output, ViewChild } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { AppService } from 'src/app/app.service';
 import { Contraente1 } from 'src/app/app-state/models';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 declare var $ : any;
 
 @Component({
@@ -23,12 +25,28 @@ export class CercacontraentiModelComponent {
     constructor(private appService: AppService) { }
   
     contraenti: any[] = [];
+
+    //Elementi tabella material
+    dataSource = new MatTableDataSource<Contraente1>([]);
+    displayedColumns: string[] = ['checkbox' , 'nome' , 'cognome','codice fiscale', 'comune residenza', 'via residenza' , 'provincia residenza'];
+    
+    //Elementi paginator
+    totalElements = 0;
+    pageSize ;
+    currentPage = 0;
+    
+    @ViewChild(MatPaginator) paginator: MatPaginator;
+    
+    ngAfterViewInit() {
+       this.dataSource.paginator = this.paginator;
+     }
   
   
     filtraCercacontraenti(contraenteForm: Contraente1) {
-      this.appService.cercaCercacontraenti(contraenteForm).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-        this.cercacontraenteCount =data.length;
-        this.contraenti = data.contraenti;
+      this.appService.cercaCercacontraenti(contraenteForm, this.paginator.pageIndex, this.paginator.pageSize).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+        this.dataSource = data.contraenti.content;
+        this.totalElements = data.contraenti.totalElements;
+        this.contraenti = data.contraenti.content;
         });
     }
   
@@ -55,5 +73,17 @@ export class CercacontraentiModelComponent {
         $('#cercacontraentiModal').modal('hide');
         
       
+      }
+
+      //Funzione per impedire di selezionare più di un checkbox
+      setCheckboxes(isChecked: boolean, id: string){
+        isChecked && this.contraenti.forEach(contraente => {
+          if (contraente.id !== id) contraente.checked = false;
+        });
+      }
+
+      //Metodo per gestire il cambio di pagina del paginator
+      onPageChange(event: any){
+        this.filtraCercacontraenti(this.contraente1);
       }
   }

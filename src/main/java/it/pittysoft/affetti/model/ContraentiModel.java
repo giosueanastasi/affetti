@@ -1,5 +1,8 @@
 package it.pittysoft.affetti.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import lombok.Data;
 
 @Data
@@ -8,7 +11,7 @@ public class ContraentiModel {
 	private String nome;
 	private String cognome;
 	private String codice_fiscale;
-	private String protocolloC;
+	private List<ProtocolloContrattoConAssegnatario> contratti = new ArrayList<>();
 	private String comune_nascita;
 	private String provincia_nascita;
 	private String stato_nascita;
@@ -20,8 +23,7 @@ public class ContraentiModel {
 	private String cap_residenza;
 	private String email;
 	private String note;
-	private String nomeAss;
-	private String cognomeAss;
-
+	
+	private String protocolloSelezionato;
 	private Boolean checked = false; 
 }

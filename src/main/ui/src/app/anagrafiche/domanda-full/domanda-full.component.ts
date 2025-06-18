@@ -198,4 +198,13 @@ export class DomandaFullComponent  {
   showPopuoModal(){
     $('#popUpModal').modal('show');
   }
+
+  protocolloGenerato: boolean = false;
+
+   generaProtocollo(){
+    this.appService.getNuovoProtocolloDomanda().pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+      this.protocolloGenerato = data.protocolloDomanda.generato;
+      this.domandaFullForm.controls['protocollo'].setValue(data.protocolloDomanda.protocollo);
+  });
+  }
 }

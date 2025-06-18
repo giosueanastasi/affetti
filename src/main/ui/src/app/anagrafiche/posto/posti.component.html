@@ -87,7 +87,11 @@
         <td>{{postoTab.cognome}} {{postoTab.nome}}</td>
         <td>{{postoTab.scadenza| date:'dd-MM-YYYY'}}</td>
         <td>
-          <button class="btn btn-primary me-1" >Dettaglio</button>
+          <button 
+            class="btn btn-primary me-1"
+            (click)="showContrattoByProtocollo(postoTab.protocolloContratto)" 
+            [ngClass] = "{'disabled' : !postoTab.protocolloContratto }"
+             >Dettaglio</button>
         </td>
         <td>
           <button class="btn btn-primary me-1" (click)="editPostoRequest(postoTab)" >Edit</button>
@@ -97,3 +101,4 @@
     </table>
  </div>
  <app-posto-edit [posto1]="selectedPosto" (save)="savePostoWatcher($event)"></app-posto-edit>
+ <app-contratto-model [contratto]="contratto" ></app-contratto-model>

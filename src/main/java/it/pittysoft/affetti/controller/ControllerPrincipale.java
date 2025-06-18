@@ -1,18 +1,30 @@
 package it.pittysoft.affetti.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.core.io.ByteArrayResource;
+import org.springframework.core.io.Resource;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.lowagie.text.DocumentException;
+
+import freemarker.template.TemplateException;
 import it.pittysoft.affetti.entity.Comuni;
 import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Posti;
@@ -27,6 +39,8 @@ import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
 import it.pittysoft.affetti.model.ContrattoSearchRequest;
 import it.pittysoft.affetti.model.ContrattoSearchResponse;
+import it.pittysoft.affetti.model.DomandaModel;
+import it.pittysoft.affetti.model.ProtocolloDomandaResponse;
 import it.pittysoft.affetti.model.CapResponse;
 import it.pittysoft.affetti.model.ComuniSelectResponse;
 import it.pittysoft.affetti.model.ContraentiRequest;
@@ -79,6 +93,8 @@ public class ControllerPrincipale {
 	
 	@Autowired
 	DomandeService domandeService;
+	
+
 	
 	
 	@GetMapping(path = UserLinks.LIST_USERS)
@@ -157,9 +173,14 @@ public class ControllerPrincipale {
 	
 	
 	@PostMapping(path = ContraenteLinks.SEARCH_CONTRAENTI)
-    public ResponseEntity<?> searchContraenti(@RequestBody ContraentiRequest contraenti) {
+    public ResponseEntity<?> searchContraenti(@RequestBody ContraentiRequest contraenti,
+    		@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size) {
+		
+		Pageable pageable = PageRequest.of(page, size);
+		
         log.info("ApiController:  search contraenti");
-        ContraentiResponse resource = contraentiService.getContraenti(contraenti);
+        ContraentiResponse resource = (ContraentiResponse) contraentiService.getContraenti(contraenti, pageable);
         if (resource.getReturnCode()==Response.OK) {
         	return ResponseEntity.ok(resource);
         } else  {
@@ -276,5 +297,46 @@ public class ControllerPrincipale {
 		
 		return ResponseEntity.ok(resource);
 	}
+	
+	
+	@GetMapping(path = DomandaLinks.GENERA_PROTOCOLLO)
+	public ResponseEntity<?> getNewProtocolloDomanda(){
+		ProtocolloDomandaResponse resource = domandeService.generaProtocollo();
+		 if (resource.getReturnCode()==Response.OK) {
+	        	return ResponseEntity.ok(resource);
+	        } else  {
+	        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+	                    .body("Errore imprevisto, contattare l'assistenza");
+			}
+	}
+	
+	@PostMapping(path = ContrattoLinks.GET_CONTRATTO_BY_PROTOCOLLO)
+	public ResponseEntity<?> getContrattoByProtocollo(@RequestBody String numProtocollo){
+		
+		ContrattoSearchResponse resource = contrattiService.getContrattoByProtocollo(numProtocollo);
+        if (resource.getReturnCode()==Response.OK) {
+        	return ResponseEntity.ok(resource);
+        } else  {
+        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Errore imprevisto, contattare l'assistenza");
+		}
+	}
+	
+	@GetMapping(path = DomandaLinks.STAMPA_DOMANDA)
+    public ResponseEntity<Resource> generaPdfDomanda(@PathVariable Long idDomanda) {
+        try {
+            byte[] pdfDomanda = domandeService.generaPdfDomanda(idDomanda);
+            
+            ByteArrayResource resource = new ByteArrayResource(pdfDomanda);
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=domanda_report.pdf")
+                    .header(HttpHeaders.CONTENT_TYPE, "application/pdf")
+                    .contentLength(pdfDomanda.length)
+                    .body(resource);
+        } catch (IOException | TemplateException | DocumentException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 	
 }
