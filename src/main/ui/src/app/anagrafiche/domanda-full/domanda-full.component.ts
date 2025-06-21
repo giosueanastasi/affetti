@@ -18,7 +18,7 @@ declare var $: any;
   templateUrl: "./domanda-full.component.html",
   styleUrls: ["./domanda-full.component.css"],
 })
-export class DomandaFullComponent {
+export class DomandaFullComponent implements OnInit {
   @ViewChild(PopupComponent) childPopUp: PopupComponent | undefined;
   @ViewChild(ContraentiModelComponent) child:
     | ContraentiModelComponent
@@ -29,98 +29,46 @@ export class DomandaFullComponent {
     | undefined;
 
   constructor(private appService: AppService, private router: Router) {}
+  ngOnInit(): void {
+    this.inputValidation();
+  }
 
   domandaFullForm = new FormGroup({
-    fk_contraente: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
-    nome: new FormControl("", Validators.nullValidator && Validators.required),
-    cognome: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
-    comune_nascita: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
-    provincia_nascita: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
-    stato_nascita: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
-    data_nascita: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
-    tipologia: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
-    comune_residenza: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
-    provincia_residenza: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
-    via_residenza: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
-    civico_residenza: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
-    cap_residenza: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
-    codice_fiscale: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
-    email: new FormControl("", Validators.nullValidator),
-    note: new FormControl("", Validators.nullValidator),
+    fk_contraente: new FormControl("", Validators.required),
+    nome: new FormControl("", Validators.required),
+    cognome: new FormControl("", Validators.required),
+    comune_nascita: new FormControl("", Validators.required),
+    provincia_nascita: new FormControl("", Validators.required),
+    stato_nascita: new FormControl("", Validators.required),
+    data_nascita: new FormControl("", Validators.required),
+    tipologia: new FormControl("", Validators.required),
+    comune_residenza: new FormControl("", Validators.required),
+    provincia_residenza: new FormControl("", Validators.required),
+    via_residenza: new FormControl("", Validators.required),
+    civico_residenza: new FormControl("", Validators.required),
+    cap_residenza: new FormControl("", Validators.required),
+    codice_fiscale: new FormControl("", Validators.required),
+    email: new FormControl("", [Validators.required, Validators.email]),
+    note: new FormControl(""),
 
-    protocollo: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
-    data_protocollo: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
+    protocollo: new FormControl("", Validators.required),
+    data_protocollo: new FormControl("", Validators.required),
 
-    loculo: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
-    fornice: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
+    loculo: new FormControl("", Validators.required),
+    fornice: new FormControl("", Validators.required),
 
-    nomeAss: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
-    cognomeAss: new FormControl(
-      "",
-      Validators.nullValidator && Validators.required
-    ),
+    nomeAss: new FormControl("", Validators.required),
+    cognomeAss: new FormControl("", Validators.required),
 
-    comune_decesso: new FormControl("", Validators.nullValidator),
-    data_decesso: new FormControl("", Validators.nullValidator),
+    comune_decesso: new FormControl("", Validators.required),
+    data_decesso: new FormControl("", Validators.required),
   });
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   addDomanda() {
+    //this.inputValidation();
+
     this.appService
       .addDomandaFull(this.domandaFullForm.value)
       .pipe(takeUntil(this.destroy$))
@@ -135,6 +83,37 @@ export class DomandaFullComponent {
         }, 5000);
       });
   }
+
+  inputValidation() {
+    //prendi tutti gli elementi FormControl dalla proprietà domandaFullForm di DomandaFullComponent, in un formato simile ad un literal object (key:value)
+    const formControls = this.domandaFullForm.controls;
+    //prendi l'elemento del DOM con id domanda-full-form (l'intero form)
+    const formElement = document.getElementById("domanda-full-form");
+
+    //verifica che l'oggetto formElement esista (non null o undefined)
+    if (!formElement) return;
+
+    //itera su tutte le chiavi dell'oggetto formControls
+    for (let key in formControls) {
+      //dichiara due variabili per prendere la proprietà di Angular (control) e il corrispondente oggetto del DOM (input)
+      const control = formControls[key];
+      const input = formElement.querySelector("#" + key);
+
+      // Verifica che l'oggetto del DOM esista, abbia la proprietà 'classList' e che non sia la textarea 'note' (non richiede validazione)
+      if (input && "classList" in input && key != "note") {
+        //rimuove le classi precedentemente applicate
+        input.classList.remove("is-invalid", "is-valid");
+
+        //verifica la validità di control (Angular) e applica le proprietà 'is-valid' o 'is-invalid' di bootstrap di conseguenza
+        if (control.invalid) {
+          input.classList.add("is-invalid");
+        } else {
+          input.classList.add("is-valid");
+        }
+      }
+    }
+  }
+
   creaContraente() {
     this.child?.showContraentiModal();
   }
