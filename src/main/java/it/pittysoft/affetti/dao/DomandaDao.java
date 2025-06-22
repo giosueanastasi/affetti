@@ -95,7 +95,7 @@ public class DomandaDao {
 		                               .innerJoin(qDomande.contraente,qContraenti)
 		                               .innerJoin(qDomande.contratto,qContratti)
 		                               .where(builder
-		                            		    ).fetch();
+		                            		    ).orderBy(qDomande.protocollo.desc()).fetch();
 		
 		return domandePlayer;
 	}	
