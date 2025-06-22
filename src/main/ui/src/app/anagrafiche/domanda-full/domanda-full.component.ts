@@ -79,8 +79,8 @@ export class DomandaFullComponent implements OnInit {
         setTimeout(() => {
           this.childPopUp?.hidePopupModal();
           console.log("chiamato hide");
-          this.router.navigate(["/"]);
-        }, 5000);
+          this.router.navigate(["/domanda"]);
+        }, 3000);
       });
   }
 
