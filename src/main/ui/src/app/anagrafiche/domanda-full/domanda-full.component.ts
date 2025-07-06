@@ -30,7 +30,7 @@ export class DomandaFullComponent implements OnInit {
 
   constructor(private appService: AppService, private router: Router) {}
   ngOnInit(): void {
-    this.inputValidation();
+    //this.inputValidation();
   }
 
   domandaFullForm = new FormGroup({
@@ -84,6 +84,8 @@ export class DomandaFullComponent implements OnInit {
       });
   }
 
+  //funzione di validazione onInit. Non più utilizzata.
+  //La validazione è gestita direttamente nell'HTML attraverso l'aggiunta condizionale della classe "is-invalid" sui singoli input
   inputValidation() {
     //prendi tutti gli elementi FormControl dalla proprietà domandaFullForm di DomandaFullComponent, in un formato simile ad un literal object (key:value)
     const formControls = this.domandaFullForm.controls;

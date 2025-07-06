@@ -10,12 +10,14 @@
           <div class="col-12 mb-3 d-flex gap-3 flex-wrap">
             <label class="col-2 col-md-1" for="Numero">Numero</label>
             <div class="form-group col-9 col-sm-8 col-md-3">
+              <!--[class.is-invalid] aggiunge la classe "is-invalid" di bootstrap all'input sulla base del suo stato-->
               <input
                 type="text"
                 class="form-control"
                 formControlName="protocollo"
                 id="protocollo"
                 aria-describedby="protocollolHelp"
+                [class.is-invalid]="domandaFullForm.controls.protocollo.invalid"
               />
             </div>
             <label class="col-md-1 col-2" for="Data">Data</label>
@@ -27,6 +29,9 @@
                 formControlName="data_protocollo"
                 id="data_protocollo"
                 aria-describedby="data_protocollolHelp"
+                [class.is-invalid]="
+                  domandaFullForm.controls.data_protocollo.invalid
+                "
               />
             </div>
             <div
@@ -92,6 +97,7 @@
                 id="nome"
                 aria-describedby="nomelHelp"
                 readonly
+                [class.is-invalid]="domandaFullForm.controls.nome.invalid"
               />
             </div>
             <label class="col-md-1 col-2 order-md-0 order-1" for="cognome"
@@ -105,6 +111,7 @@
                 id="cognome"
                 aria-describedby="cognomelHelp"
                 readonly
+                [class.is-invalid]="domandaFullForm.controls.cognome.invalid"
               />
             </div>
             <div
@@ -127,6 +134,9 @@
                 id="comune_nascita"
                 aria-describedby="comune_nascitalHelp"
                 readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.comune_nascita.invalid
+                "
               />
             </div>
             <label class="col-md-1 col-2" for="provincia_nascita"
@@ -140,6 +150,9 @@
                 id="provincia_nascita"
                 aria-describedby="provincia_nascitalHelp"
                 readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.provincia_nascita.invalid
+                "
               />
             </div>
             <label class="col-md-1 col-2 flex-shrink-1" for="stato_nascita"
@@ -153,6 +166,9 @@
                 id="stato_nascita"
                 aria-describedby="stato_nascitalHelp"
                 readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.stato_nascita.invalid
+                "
               />
             </div>
             <label class="col-md-1 col-2 flex-shrink-1" for="data_nascita"
@@ -166,6 +182,9 @@
                 id="data_nascita"
                 aria-describedby="data_nascitalHelp"
                 readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.data_nascita.invalid
+                "
               />
             </div>
           </div>
@@ -181,6 +200,9 @@
                 id="comune_residenza"
                 aria-describedby="comune_residenzalHelp"
                 readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.comune_residenza.invalid
+                "
               />
             </div>
             <label class="col-md-1 col-2" for="provincia_residenza"
@@ -194,6 +216,9 @@
                 id="provincia_residenza"
                 aria-describedby="provincia_residenzalHelp"
                 readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.provincia_residenza.invalid
+                "
               />
             </div>
             <label class="col-md-1 col-2" for="via_residenza">Indirizzo</label>
@@ -205,6 +230,9 @@
                 id="via_residenza"
                 aria-describedby="via_residenzalHelp"
                 readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.via_residenza.invalid
+                "
               />
             </div>
           </div>
@@ -218,6 +246,9 @@
                 id="civico_residenza"
                 aria-describedby="civico_residenzalHelp"
                 readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.civico_residenza.invalid
+                "
               />
             </div>
             <label class="col-sm-1" for="cap_residenza">Cap</label>
@@ -229,6 +260,9 @@
                 id="cap_residenza"
                 aria-describedby="cap_residenzalHelp"
                 readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.cap_residenza.invalid
+                "
               />
             </div>
           </div>
@@ -246,6 +280,9 @@
                 id="codice_fiscale"
                 aria-describedby="codice_fiscalelHelp"
                 readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.codice_fiscale.invalid
+                "
               />
             </div>
             <label class="col-md-1 col-2" for="email">Email</label>
@@ -257,6 +294,7 @@
                 id="email"
                 aria-describedby="emaillHelp"
                 readonly
+                [class.is-invalid]="domandaFullForm.controls.email.invalid"
               />
             </div>
           </div>
@@ -287,6 +325,7 @@
                 formControlName="loculo"
                 id="loculo"
                 aria-describedby="loculolHelp"
+                [class.is-invalid]="domandaFullForm.controls.loculo.invalid"
               />
             </div>
             <label class="col-md-1 col-2 order-md-0 order-1" for="fornice"
@@ -299,6 +338,7 @@
                 formControlName="fornice"
                 id="fornice"
                 aria-describedby="fornicelHelp"
+                [class.is-invalid]="domandaFullForm.controls.fornice.invalid"
               />
             </div>
             <div
@@ -320,6 +360,7 @@
                 formControlName="nomeAss"
                 id="nomeAss"
                 aria-describedby="nomeAssHelp"
+                [class.is-invalid]="domandaFullForm.controls.nomeAss.invalid"
               />
             </div>
             <label class="col-md-1 col-2" for="cognomeAss">Cognome</label>
@@ -330,6 +371,7 @@
                 formControlName="cognomeAss"
                 id="cognomeAss"
                 aria-describedby="cognomeAssHelp"
+                [class.is-invalid]="domandaFullForm.controls.cognomeAss.invalid"
               />
             </div>
           </div>
@@ -344,6 +386,9 @@
                 formControlName="comune_decesso"
                 id="comune_decesso"
                 aria-describedby="comune_decessoHelp"
+                [class.is-invalid]="
+                  domandaFullForm.controls.comune_decesso.invalid
+                "
               />
             </div>
             <label class="col-md-1 col-2" for="data_decesso">Data</label>
@@ -355,6 +400,9 @@
                 formControlName="data_decesso"
                 id="data_decesso"
                 aria-describedby="data_decessoHelp"
+                [class.is-invalid]="
+                  domandaFullForm.controls.data_decesso.invalid
+                "
               />
             </div>
           </div>
