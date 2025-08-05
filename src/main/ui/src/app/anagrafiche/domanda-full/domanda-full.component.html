@@ -45,36 +45,50 @@
           <!--Campi relativi alla tipologia di loculo-->
           <div class="col-12 mb-3 d-flex gap-3 flex-wrap">
             <label class="col-md-1 col-9" for="Data">Tipologia</label>
+
             <div class="form-check" class="form-group col-md-2 col-9">
               <input
                 id="loculo_radio"
+                class="form-check-input"
                 type="radio"
                 value="LOCULO"
                 name="tipologia"
                 formControlName="tipologia"
+                [class.is-invalid]="domandaFullForm.get('tipologia').invalid"
               />
               <label
                 class="custom-control-label"
-                for="loculo"
+                for="loculo_radio"
                 style="font-size: medium"
                 >Loculo</label
               >
             </div>
+
             <div class="form-check" class="form-group col-md-3 col-9 flex-fill">
               <input
                 id="tenuta_a_disposizione_radio"
+                class="form-check-input"
                 type="radio"
                 value="TENUTA_DISPOSIZIONE"
                 name="tipologia"
                 formControlName="tipologia"
+                [class.is-invalid]="domandaFullForm.get('tipologia').invalid"
               />
               <label
                 class="custom-control-label"
-                for="tenuta_a_disposizione"
+                for="tenuta_a_disposizione_radio"
                 style="font-size: medium"
                 >Tenuta a disposizione</label
               >
             </div>
+
+            <div
+              class="invalid-feedback d-block"
+              *ngIf="domandaFullForm.get('tipologia').invalid"
+            >
+              Seleziona una tipologia
+            </div>
+            
           </div>
           <!--Pulsante crea nuovo contraente-->
           <div class="col-12 text-end">
