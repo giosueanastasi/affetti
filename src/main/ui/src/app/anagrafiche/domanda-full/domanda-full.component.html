@@ -403,7 +403,19 @@
                 [class.is-invalid]="
                   domandaFullForm.controls.comune_decesso.invalid
                 "
-              />
+                matInput
+                [matAutocomplete]="autoDec"
+              >
+              <mat-autocomplete requireSelection #autoDec="matAutocomplete">
+              <mat-option 
+                *ngFor="let comune of comuniDecessoFiltrati | async" 
+                [value]="comune.nome"
+                (onSelectionChange)="onComuneDecSelect(comune)"
+              >
+                {{comune.nome}} 
+              </mat-option>
+              </mat-autocomplete>                
+          
             </div>
             <label class="col-md-1 col-2" for="data_decesso">Data</label>
             <div class="form-group col-md-3 col-sm-8 col-9">
