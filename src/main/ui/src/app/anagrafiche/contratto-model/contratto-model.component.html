@@ -34,6 +34,7 @@
                                         name="dataProtocolloContratto"
                                         class="form-control mx-3 notEdit" 
                                         [(ngModel)]="contratto.dataProtocolloContratto"
+                                        [ngModel]="contratto.dataProtocolloContratto | date:'dd/MM/yyyy'" 
                                         #dataProtocolloContratto="ngModel"
                                         readonly
                                         >
@@ -47,6 +48,7 @@
                                     name="dataScadenzaContratto"
                                     class="form-control mx-3 notEdit" 
                                     [(ngModel)]="contratto.dataScadenzaContratto"
+                                    [ngModel]="contratto.dataScadenzaContratto | date:'dd/MM/yyyy'" 
                                     #dataScadenzaContratto="ngModel"
                                     readonly
                                     >
@@ -140,6 +142,7 @@
                                         name="data_nascita"
                                         class="form-control mx-3 notEdit" 
                                         [(ngModel)]="contratto.data_nascita"
+                                        [ngModel]="contratto.data_nascita | date:'dd/MM/yyyy'" 
                                         #data_nascita="ngModel"
                                         readonly
                                     >
@@ -359,6 +362,7 @@
                                         name="data_decesso"
                                         class="form-control mx-3 notEdit" 
                                         [(ngModel)]="contratto.data_decesso"
+                                        [ngModel]="contratto.data_decesso | date:'dd/MM/yyyy'" 
                                         #data_decesso="ngModel"
                                         readonly
                                     >
@@ -394,6 +398,7 @@
                                         name="dataProtocolloDomanda"
                                         class="form-control mx-3 notEdit" 
                                         [(ngModel)]="contratto.dataProtocolloDomanda"
+                                        [ngModel]="contratto.dataProtocolloDomanda | date:'dd/MM/yyyy'" 
                                         #dataProtocolloDomanda="ngModel"
                                         readonly
                                     >
