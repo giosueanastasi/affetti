@@ -1,7 +1,7 @@
 import { Component, ContentChild, OnInit, ViewChild } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { Subject } from "rxjs";
-import { takeUntil } from "rxjs/operators";
+import { Observable, Subject } from "rxjs";
+import { map, startWith, takeUntil } from "rxjs/operators";
 import { AppService } from "src/app/app.service";
 import { ContraentiModelComponent } from "../contraenti-model/contraenti-model.component";
 import { Contraente, Posto1 } from "src/app/app-state/models";
@@ -11,6 +11,8 @@ import { each } from "jquery";
 import { CercacontraentiModelComponent } from "../cercacontraenti-model/cercacontraenti-model.component";
 import { PopupComponent } from "src/app/popup/popup.component";
 import { Router } from "@angular/router";
+import { Comune } from "codice-fiscale-js/types/comune";
+import { Utils } from 'src/app/app-state/shared/utils';
 
 declare var $: any;
 @Component({
@@ -28,9 +30,39 @@ export class DomandaFullComponent implements OnInit {
     | CercacontraentiModelComponent
     | undefined;
 
-  constructor(private appService: AppService, private router: Router) {}
+  constructor(private appService: AppService, private router: Router, private utils: Utils) {}
+
   ngOnInit(): void {
     //this.inputValidation();
+    // Recupera tutti i comuni
+    this.getAllComuni();
+    //Inizializzazione dell'array che andrà a popolare il campo relativo al comune di decesso
+    this.comuniDecessoFiltrati = this.domandaFullForm.get('comune_decesso').valueChanges.pipe(
+      startWith(''), 
+      map(value => this.comuniFilter(value || '')) 
+    );
+  }
+
+  comuni: Comune[] = [];
+  comuniDecessoFiltrati: Observable<Comune[]>;
+
+  //Funzione per recuperare la lista con tutti i comuni
+  getAllComuni(){
+    this.appService.getComuni().pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+              this.comuni = data.comuni;
+          });
+    
+  }
+
+  //Funzione che filtra la lista dei comuni in base ad una stringa data in input
+  private comuniFilter(value: string): Comune[] {
+    const valoreFiltro =  this.utils.normalizeValue(value);
+    return this.comuni.filter(comune => this.utils.normalizeValue(comune.nome).includes(valoreFiltro));
+  }
+
+  //Funzione che imposta il valore del campo di input comune_decesso con il nome del comune selezionato
+  onComuneDecSelect(comuneDecessoSelezionato: Comune){
+    this.domandaFullForm.get('comune_decesso').setValue(comuneDecessoSelezionato.nome)
   }
 
   domandaFullForm = new FormGroup({
