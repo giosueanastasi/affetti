@@ -12602,7 +12602,10 @@ CREATE TABLE users (
 INSERT INTO users ( username,password,ruolo,fk_comune) VALUES
   (' Antonio90','dcunwencwebci', 'utente',188),
   ( 'Stefano24', 'qecwebckw','utente',4530),
-  ( 'Giovanna98', 'ugcywie', 'utente',4518); 
+  ( 'Giovanna98', 'ugcywie', 'utente',4518),
+  ('Marco1985', 'passwordMarco85', 'utente', 123),
+  ('Lucia2023', 'passwordLucia23', 'admin', 456),
+  ('Antonio55', 'passwordAntonio55', 'utente', 789);
   
   
 DROP TABLE IF EXISTS contratti; 
@@ -12632,7 +12635,11 @@ CREATE TABLE posti (
   ( 2,10, 'nuova', 'LIBERO','2023-04-8','2023-04-8',1),
   ( 3,11, 'nuova', 'LIBERO','2023-04-8','2023-04-8',1),
   ( 4,12, 'nuova', 'LIBERO','2023-04-8','2023-04-8',1),
-  ( 5,13, 'nuova', 'LIBERO','2023-04-8','2023-04-8',1);
+  ( 5,13, 'nuova', 'LIBERO','2023-04-8','2023-04-8',1),
+  (12, 150, 'intermedia', 'LIBERO', '2023-09-26', '2023-09-26', 1),
+  (8, 100, 'monumentale', 'OCCUPATO', '2023-09-24', '2023-09-24', 2),
+  (5, 200, 'nuova', 'PRENOTATO', '2023-09-25', '2023-09-25', 3),
+  (14, 250, 'intermedia', 'LIBERO', '2023-09-25', '2023-09-25', 1);
   
 	DROP TABLE IF EXISTS assegnatari;
 
@@ -12653,7 +12660,11 @@ INSERT INTO assegnatari ( nome,cognome,data_decesso,comune_decesso,data_update,d
   ( 'Stefano', 'Rossi','2023-09-20','Sant Egidio alla Vibrata', '2023-09-20','2023-09-25',1),
   ( 'Vincenzo','D Auri', '2020-02-4','Ascoli Piceno','2023-03-5','2020-02-8',3),
   ( 'Samuel','Feliciani', '2023-04-5','Giulianova', '2023-04-8','2023-04-8',2),
-  ( 'Antonio','Rizzo', '2023-04-5','Giulianova', '2023-04-8','2023-04-8',2);
+  ( 'Antonio','Rizzo', '2023-04-5','Giulianova', '2023-04-8','2023-04-8',2),
+  ('Giuseppe', 'Rossi', '2023-09-25', 'Giulianova', '2023-09-25', '2023-09-25', 1),
+  ('Maria', 'Verdi', '2023-09-20', 'Montorio al Vomano', '2023-09-21', '2023-09-21', 2),
+  ('Francesca', 'Sabatini', '2023-07-10', 'Atri', '2023-07-12', '2023-07-12', 3),
+  ('Giovanni', 'Tosti', '2023-05-15', 'Teramo', '2023-05-18', '2023-05-18', 1);
 	
 
 DROP TABLE IF EXISTS contraenti;
@@ -12697,7 +12708,10 @@ INSERT INTO contraenti (nome, cognome, comune_nascita, provincia_nascita, stato_
   ('Roberto', 'Galli', 'Ascoli Piceno', 'AP', 'Italia', '1988-09-18', 'Ascoli Piceno', 'AP', 'Via delle Marche', 9, 63100, 3471225689, 'GLLRRT88P18A470D', 'robertogalli@fastweb.it', '', 3, '2023-03-05', '2023-03-05'),
   ('Francesca', 'Pastore', 'Montorio al Vomano', 'TE', 'Italia', '1994-01-02', 'Montorio al Vomano', 'TE', 'Viale del Lavoro', 7, 64046, 3277569083, 'PSTFNC94A42D156D', 'francescapastore@libero.it', '', 2, '2023-01-20', '2023-01-20'),
   ('Giuseppe', 'Fiorini', 'Alba Adriatica', 'TE', 'Italia', '1986-04-10', 'Alba Adriatica', 'TE', 'Via delle Palme', 21, 64011, 0861882345, 'FRNGPP86D10A536Q', 'giuseppefiorini@gmail.com', '', 1, '2023-02-12', '2023-02-12'),
-  ('Simona', 'Moro', 'Teramo', 'TE', 'Italia', '1999-12-30', 'Teramo', 'TE', 'Via Manzoni', 3, 64100, 3271234567, 'MRSSMN99T30L219R', 'simonamoro@libero.it', '', 3, '2023-04-01', '2023-04-01');
+  ('Simona', 'Moro', 'Teramo', 'TE', 'Italia', '1999-12-30', 'Teramo', 'TE', 'Via Manzoni', 3, 64100, 3271234567, 'MRSSMN99T30L219R', 'simonamoro@libero.it', '', 3, '2023-04-01', '2023-04-01'),
+  ('Alessandro', 'Bianchi', 'Giulianova', 'TE', 'Italia', '1985-06-10', 'Giulianova', 'TE', 'Via Marina', 10, '64021', '3274567890', 'BNCALD85H10G377Z', 'alessandro.bianchi@libero.it', '', 1, '2023-09-25', '2023-09-25'),
+  ('Sofia', 'Lombardi', 'Montorio al Vomano', 'TE', 'Italia', '1991-02-25', 'Teramo', 'TE', 'Via della Stazione', 5, '64000', '3478956321', 'LMBSFN91B25G377B', 'sofia.lombardi@tiscali.it', '', 2, '2023-09-25', '2023-09-25'),
+  ('Roberto', 'Ferrari', 'Teramo', 'TE', 'Italia', '1970-04-15', 'Teramo', 'TE', 'Corso Italia', 8, '64100', '0861532467', 'FRRRRT70D15D377F', 'roberto.ferrari@gmail.com', '', 3, '2023-09-25', '2023-09-25');
 
 
 CREATE TABLE domande (
@@ -12723,7 +12737,11 @@ CREATE TABLE domande (
   (506,'2023-09-25','APERTA','LOCULO',2,1,3,2, '2023-09-25','2023-09-25'),
   (204, '2023-03-04','CHIUSA','TENUTA_DISPOSIZIONE',1,2,1,3,'2023-03-04','2020-02-8'),
   (890, '2023-04-8', 'APERTA','LOCULO',3,3,2,1, '2023-04-8','2023-04-8'),
-  (100,'2023-09-25','APERTA','LOCULO',4,4,1,1, '2023-09-25','2023-09-25');
+  (100,'2023-09-25','APERTA','LOCULO',4,4,1,1, '2023-09-25','2023-09-25'),
+  (890, '2023-09-25', 'APERTA', 'LOCULO', 6, 5, 8, 1, '2023-09-25', '2023-09-25'),
+  (204, '2023-09-24', 'CHIUSA', 'TENUTA_DISPOSIZIONE', 8, 6, 5, 2, '2023-09-24', '2023-09-24'),
+  (100, '2023-09-25', 'APERTA', 'LOCULO', 5, 7, 6, 3, '2023-09-25', '2023-09-25'),
+  (506, '2023-09-26', 'APERTA', 'LOCULO', 7, 8, 7, 1, '2023-09-26', '2023-09-26');
   
 	
 	
@@ -12745,7 +12763,11 @@ INSERT INTO contratti ( protocollo,data_inizio,data_scadenza,stato,fk_domanda,fk
   (106,'2023-09-25','2058-09-25','IN_ATTESA_PAGAMENTO',3,1, '2023-09-25','2023-09-25'),
   (405, '2023-03-4','2058-03-4','PAGATO',2,2,'2023-03-04','2020-02-8'),
   ( 450, '2023-04-8', '2058-04-8','IN_ATTESA_PAGAMENTO',1,3, '2023-04-08','2023-04-8'), 
-  ( 1, '2023-04-8', '2058-04-8','IN_ATTESA_PAGAMENTO',4,1, '2023-04-08','2023-04-8'); 
+  ( 1, '2023-04-8', '2058-04-8','IN_ATTESA_PAGAMENTO',4,1, '2023-04-08','2023-04-8'), 
+  (5001, '2023-09-25', '2058-09-25', 'IN_ATTESA_PAGAMENTO', 6, 1, '2023-09-25', '2023-09-25'),
+  (5002, '2023-09-24', '2058-09-24', 'PAGATO', 7, 2, '2023-09-24', '2023-09-24'),
+  (5003, '2023-09-25', '2058-09-25', 'IN_ATTESA_PAGAMENTO', 5, 3, '2023-09-25', '2023-09-25'),
+  (5004, '2023-09-26', '2058-09-26', 'IN_ATTESA_PAGAMENTO', 8, 1, '2023-09-26', '2023-09-26');
   
 DROP TABLE IF EXISTS cap_comuni;
 

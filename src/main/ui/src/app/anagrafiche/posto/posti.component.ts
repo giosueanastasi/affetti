@@ -7,6 +7,8 @@ import {  Contratto, Posto1 } from 'src/app/app-state/models';
 //import {  Posto } from 'src/app/app-state/models';
 import { PostoEditComponent } from '../posto-edit/posto-edit.component';
 import { ContrattoModelComponent } from '../contratto-model/contratto-model.component';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
 
 
 @Component({
@@ -54,6 +56,17 @@ posto1: Posto1 = new Posto1();
 
  constructor(private appService: AppService) { }
 
+  //Elementi tabella material
+  dataSource = new MatTableDataSource<Posto1>([]);
+  displayedColumns: string[] = ['id', 'stato', 'loculo', 'fornice','assegnatario', 'scadenza', 'contratto', 'modifica'];
+
+  //Elementi paginator
+  totalElements = 0;
+  pageSize ;
+  currentPage = 0;  
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
  filtraPosti() {
   let postoFiltrato = new Posto1();
   postoFiltrato.loculo = this.postoForm.controls['loculo'].value;
@@ -64,12 +77,17 @@ posto1: Posto1 = new Posto1();
   postoFiltrato.nome = this.postoForm.controls['nomeAss'].value;
   postoFiltrato.cognome = this.postoForm.controls['cognomeAss'].value;
 
-
-   this.appService.cercaPosti(postoFiltrato).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-     this.postoCount =data.length;
-     this.posti = data.posti;
+   this.appService.cercaPosti(postoFiltrato, this.paginator.pageIndex, this.paginator.pageSize).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+     this.totalElements = data.posti.totalElements;
+     this.posti = data.posti.content;
+     this.dataSource = data.posti.content;
      });
  }
+
+  //Metodo per gestire il cambio di pagina del paginator
+  onPageChange(event: any){
+  this.filtraPosti();
+  }
 
  /*createPostoRequest(){
   this.selectedPosto = new Posto1();

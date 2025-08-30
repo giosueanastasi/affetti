@@ -52,6 +52,7 @@ import it.pittysoft.affetti.model.DomandaResponse;
 import it.pittysoft.affetti.model.DomandaResponseSearch;
 import it.pittysoft.affetti.model.PostiRequest;
 import it.pittysoft.affetti.model.PostiResponse;
+import it.pittysoft.affetti.model.PostiSearchResponse;
 import it.pittysoft.affetti.model.Response;
 import it.pittysoft.affetti.model.UserRequest;
 import it.pittysoft.affetti.model.UserResponse;
@@ -202,9 +203,15 @@ public class ControllerPrincipale {
 	}
 	
 	@PostMapping(path = PostoLinks.SEARCH_POSTI)
-    public ResponseEntity<?> searchPosti(@RequestBody PostiRequest posti) {
+    public ResponseEntity<?> searchPosti(@RequestBody PostiRequest posti,
+    		@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size) {
+		
+		Pageable pageable = PageRequest.of(page, size);
+		
+		
         log.info("ApiController:  search posti");
-        PostiResponse resource = postiService.getPosti(posti);
+        PostiSearchResponse resource = postiService.getPosti(posti, pageable);
         if (resource.getReturnCode()==Response.OK) {
         	return ResponseEntity.ok(resource);
         } else  {

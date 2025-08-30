@@ -33,8 +33,12 @@ export class AppService {
     return this.http.post(this.rootURL + '/search_user', user);
   }
 
-  cercaPosti(posti1: any) {
-    return this.http.post(this.rootURL + '/search_posti',posti1);
+  cercaPosti(posti1: any, page: number, size: number) {
+    const options = 
+    {params: new HttpParams().set('page', page)
+                             .set('size', size)
+    };
+    return this.http.post(this.rootURL + '/search_posti', posti1, options);
   }
 
   cercaCercacontraenti(contraenti1: any, page: number, size: number) {

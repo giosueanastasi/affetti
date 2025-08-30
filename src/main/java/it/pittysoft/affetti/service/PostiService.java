@@ -1,18 +1,25 @@
 package it.pittysoft.affetti.service;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Component;
 
 import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Contratti;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.entity.Posti;
+import it.pittysoft.affetti.model.ContraentiModel;
 import it.pittysoft.affetti.model.PostiModel;
 import it.pittysoft.affetti.model.PostiRequest;
 import it.pittysoft.affetti.model.PostiResponse;
+import it.pittysoft.affetti.model.PostiSearchResponse;
 import it.pittysoft.affetti.repository.ContraentiRepository;
 import it.pittysoft.affetti.repository.ContrattiRepository;
 import it.pittysoft.affetti.repository.DomandeRepository;
@@ -71,9 +78,12 @@ public class PostiService {
     	return response;
     }
     
-    public PostiResponse getPosti(PostiRequest posti) {
+    public PostiSearchResponse getPosti(PostiRequest posti, Pageable pageable) {
 		 List<Posti> findtPostiByLoculoAndFornice = postiRepository.findtPostiByLoculoAndFornice(posti);
-		 PostiResponse response = new PostiResponse();
+		 PostiSearchResponse response = new PostiSearchResponse();
+		 
+		 //Lista di contraenti model che verrà preparata ed usata per impostare l'oggetto di tipo page della response
+		 List<PostiModel> listaPosti = new ArrayList<>();
 		 
 		 for (Posti postiFiltrati : findtPostiByLoculoAndFornice) {
 			 
@@ -92,10 +102,16 @@ public class PostiService {
 					 pm.setProtocolloContratto(domanda.getContratto().getProtocollo());
 				 }
 			 }
-			
 			 
-			  response.getPosti().add(pm);
+			  listaPosti.add(pm);
 		 }
+		 //Impostiamo l'oggetto di tipo page della response
+		 final int start = (int)pageable.getOffset();
+		 final int end = Math.min((start + pageable.getPageSize()), listaPosti.size());
+	     final Page<PostiModel> page = new PageImpl<>(listaPosti.subList(start, end), pageable, listaPosti.size());
+	     
+	     response.setPosti(page);
+	     
 		return response;
 	}
 
