@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -62,16 +63,38 @@ public class ContrattiService {
 	}
 
 	public ContrattoSearchResponse saveContratto(ContrattoModel contrattiRequest) {
-		ContrattoSearchResponse response = new ContrattoSearchResponse();
+	    ContrattoSearchResponse response = new ContrattoSearchResponse();
+	    Contratti contratti = new Contratti();
+	    boolean isNewContratto = false;
 
-		Contratti contratti = contrattiRepository.findById(contrattiRequest.getIdContratto());
-//		contratti.setId(contrattiRequest.getIdContratto());
-		contratti.setProtocollo(contrattiRequest.getNumeroProtocolloContratto());
+	    if (contrattiRequest.getIdContratto() != null) {
+	        contratti = contrattiRepository.findById(contrattiRequest.getIdContratto());
+	        if (contratti == null) {
+	            isNewContratto = true;
+	        }
+	    } else {
+	        isNewContratto = true;
+	    }
+
+	    if (isNewContratto) {
+	    	contratti = new Contratti();
+	        contratti.setData_inizio(contrattiRequest.getDataProtocolloContratto());
+	        contratti.setData_scadenza(contrattiRequest.getDataScadenzaContratto());
+	        contratti.setStato(contrattiRequest.getStato());
+		    
+		    if (contrattiRequest.getIdDomanda() != null) {
+		    	contratti.setDomanda(domandaRepository.findById(contrattiRequest.getIdDomanda()));
+		    }
+	    }
+
+	    contratti.setProtocollo(contrattiRequest.getNumeroProtocolloContratto());
+//		contratti.setId(contrattiRequest.getIdContratto());	
 //    	contratti.setStato(contrattiRequest.getStato());
 //    	contratti.setData_inizio(contrattiRequest.getDataProtocolloContratto());
 //    	contratti.setData_scadenza(contrattiRequest.getDataProtocolloContratto());
 
 		contrattiRepository.save(contratti);
+        contrattiRequest.setIdContratto(contratti.getId());
 
 //    	ContrattoModel contrattiModel = new ContrattoModel();
 //    	contrattiModel.setIdContratto(contrattiSaved.getId());
@@ -116,6 +139,7 @@ public class ContrattiService {
 //    	contrattiModel.setComune_decesso(assegnatari.getComune_decesso()); 
 //    	contrattiModel.setNomeA(assegnatari.getNome());
 //    	contrattiModel.setCognomeA(assegnatari.getCognome());
+		
 
 		response.getContratti().add(contrattiRequest);
 
