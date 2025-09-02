@@ -46,6 +46,7 @@ import it.pittysoft.affetti.model.ComuniSelectResponse;
 import it.pittysoft.affetti.model.ContraentiRequest;
 import it.pittysoft.affetti.model.ContraentiResponse;
 import it.pittysoft.affetti.model.ContrattoModel;
+import it.pittysoft.affetti.model.ContrattoResponse;
 import it.pittysoft.affetti.model.DomandaRequest;
 import it.pittysoft.affetti.model.DomandaRequestSearch;
 import it.pittysoft.affetti.model.DomandaResponse;
@@ -160,7 +161,7 @@ public class ControllerPrincipale {
 	@PostMapping(path = ContrattoLinks.ADD_CONTRATTO)
 	public ResponseEntity<?> saveContratto(@RequestBody ContrattoModel contratto) {
         log.info("ApiController:  list contratti");
-        ContrattoSearchResponse resource = contrattiService.saveContratto(contratto);
+        ContrattoResponse resource = contrattiService.saveContratto(contratto);
         return ResponseEntity.ok(resource);
     }
     
@@ -191,9 +192,14 @@ public class ControllerPrincipale {
         }
 	
 	@PostMapping(path = DomandaLinks.SEARCH_DOMANDE)
-    public ResponseEntity<?> searchDomande(@RequestBody DomandaRequestSearch resquestSearch) {
+    public ResponseEntity<?> searchDomande(@RequestBody DomandaRequestSearch resquestSearch,
+    		@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size) {
+		
+		Pageable pageable = PageRequest.of(page, size);
+		
         log.info("ApiController:  search domande");
-        DomandaResponseSearch resource = domandeService.getDomande(resquestSearch);
+        DomandaResponseSearch resource = domandeService.getDomande(resquestSearch, pageable);
         if (resource.getReturnCode()==Response.OK) {
         	return ResponseEntity.ok(resource);
         } else  {
@@ -221,9 +227,14 @@ public class ControllerPrincipale {
 	}
 	
 	@PostMapping(path = ContrattoLinks.SEARCH_CONTRATTO)
-    public ResponseEntity<?> searchContratto(@RequestBody ContrattoSearchRequest resquestSearch) {
+    public ResponseEntity<?> searchContratto(@RequestBody ContrattoSearchRequest contratti,
+    		@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size) {
+		
+		Pageable pageable = PageRequest.of(page, size);
+		
         log.info("ApiController:  search contratti");
-        ContrattoSearchResponse resource = contrattiService.getContratti(resquestSearch);
+        ContrattoSearchResponse resource = contrattiService.getContratti(contratti, pageable);
         if (resource.getReturnCode()==Response.OK) {
         	return ResponseEntity.ok(resource);
         } else  {
@@ -320,7 +331,7 @@ public class ControllerPrincipale {
 	@PostMapping(path = ContrattoLinks.GET_CONTRATTO_BY_PROTOCOLLO)
 	public ResponseEntity<?> getContrattoByProtocollo(@RequestBody String numProtocollo){
 		
-		ContrattoSearchResponse resource = contrattiService.getContrattoByProtocollo(numProtocollo);
+		ContrattoResponse resource = contrattiService.getContrattoByProtocollo(numProtocollo);
         if (resource.getReturnCode()==Response.OK) {
         	return ResponseEntity.ok(resource);
         } else  {

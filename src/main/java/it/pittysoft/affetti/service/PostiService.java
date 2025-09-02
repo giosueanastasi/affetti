@@ -82,7 +82,7 @@ public class PostiService {
 		 List<Posti> findtPostiByLoculoAndFornice = postiRepository.findtPostiByLoculoAndFornice(posti);
 		 PostiSearchResponse response = new PostiSearchResponse();
 		 
-		 //Lista di contraenti model che verrà preparata ed usata per impostare l'oggetto di tipo page della response
+		 //Lista di posti model che verrà preparata ed usata per impostare l'oggetto di tipo page della response
 		 List<PostiModel> listaPosti = new ArrayList<>();
 		 
 		 for (Posti postiFiltrati : findtPostiByLoculoAndFornice) {

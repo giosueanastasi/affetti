@@ -2,9 +2,13 @@ package it.pittysoft.affetti.service;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import it.pittysoft.affetti.entity.Assegnatari;
@@ -12,7 +16,9 @@ import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Contratti;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.entity.Posti;
+import it.pittysoft.affetti.model.ContraentiModel;
 import it.pittysoft.affetti.model.ContrattoModel;
+import it.pittysoft.affetti.model.ContrattoResponse;
 import it.pittysoft.affetti.model.ContrattoSearchRequest;
 import it.pittysoft.affetti.model.ContrattoSearchResponse;
 import it.pittysoft.affetti.model.PostiModel;
@@ -61,8 +67,8 @@ public class ContrattiService {
 		return contrattiRepository.save(contratti);
 	}
 
-	public ContrattoSearchResponse saveContratto(ContrattoModel contrattiRequest) {
-		ContrattoSearchResponse response = new ContrattoSearchResponse();
+	public ContrattoResponse saveContratto(ContrattoModel contrattiRequest) {
+		ContrattoResponse response = new ContrattoResponse();
 
 		Contratti contratti = contrattiRepository.findById(contrattiRequest.getIdContratto());
 //		contratti.setId(contrattiRequest.getIdContratto());
@@ -122,23 +128,40 @@ public class ContrattiService {
 		return response;
 	}
 
-	public ContrattoSearchResponse getContratti(ContrattoSearchRequest resquestSearch) {
+	public ContrattoSearchResponse getContratti(ContrattoSearchRequest resquestSearch, Pageable pageable) {
 		List<Contratti> findtContrattiByNomeAndCognome = contrattiRepository
 				.findtContrattiByNomeAndCognome(resquestSearch);
 		ContrattoSearchResponse response = new ContrattoSearchResponse();
+		
+		 //Lista di contratti model che verrà preparata ed usata per impostare l'oggetto di tipo page della response
+		 List<ContrattoModel> listaContratti = new ArrayList<>();
 
 		for (Contratti contratti : findtContrattiByNomeAndCognome) {
 			ContrattoModel cm = new ContrattoModel(contratti);
 			
-			response.getContratti().add(cm);
+			 cm.setIdContratto(contratti.getId());
+			 cm.setNumeroProtocolloContratto(contratti.getProtocollo());
+			 cm.setDataProtocolloContratto(contratti.getData_inizio());
+			 cm.setDataScadenzaContratto(contratti.getData_scadenza());
+			 cm.setStato(contratti.getStato());
+			 
+			listaContratti.add(cm);
 
 		}
+		
+		//Impostiamo l'oggetto di tipo page della response
+		final int start = (int)pageable.getOffset();
+	    final int end = Math.min((start + pageable.getPageSize()), listaContratti.size());
+	    final Page<ContrattoModel> page = new PageImpl<>(listaContratti.subList(start, end), pageable, listaContratti.size());
+		
+	    response.setContratti(page);
+	    
 		return response;
 	}
 	
-public ContrattoSearchResponse getContrattoByProtocollo(String numProtocollo) {
+public ContrattoResponse getContrattoByProtocollo(String numProtocollo) {
 		
-	ContrattoSearchResponse response = new ContrattoSearchResponse();
+	ContrattoResponse response = new ContrattoResponse();
 	Contratti contratto = contrattiRepository.findByProtocollo(numProtocollo);
 	ContrattoModel cm = new ContrattoModel(contratto);
 	

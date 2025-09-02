@@ -5,6 +5,9 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ContrattoModelComponent } from '../contratto-model/contratto-model.component';
 import { Contratto } from 'src/app/app-state/models';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { ContrattiSearch } from 'src/app/app-state/models/contrattiSearch.model';
 
 
 
@@ -22,6 +25,20 @@ export class ContrattiComponent implements OnInit {
   title = 'angular-nodejs-example';
 
   @ViewChild(ContrattoModelComponent) child: ContrattoModelComponent | undefined;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  ngAfterViewInit() {
+   this.dataSource.paginator = this.paginator;
+ }
+
+  //Elementi tabella material
+  dataSource = new MatTableDataSource<Contratto>([]);
+  displayedColumns: string[] = ['numeroProtocolloContratto', 'stato','dataProtocolloContratto', 'dataProtocolloContratto', 'contraente' , 'assegnatario', 'dettaglio'];
+
+  //Elementi paginator
+  totalElements = 0;
+  pageSize;
+  currentPage = 0;
 
   contrattoForm = new FormGroup({
     nome: new FormControl('', Validators.nullValidator),
@@ -60,9 +77,20 @@ export class ContrattiComponent implements OnInit {
     this.destroy$.unsubscribe();
   }
 
-  cercaContratti(cercaContrattiForm: FormGroup) {
-    this.appService.cercaContrattiService(cercaContrattiForm.value).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-      this.contratti = data.contratti;
+  filtraContratti() {
+      let contrattoFiltrato = new ContrattiSearch();
+      contrattoFiltrato.nome = this.contrattoForm.controls['nome'].value;
+      contrattoFiltrato.cognome = this.contrattoForm.controls['cognome'].value;
+      contrattoFiltrato.tipologia = this.contrattoForm.controls['tipologia'].value;
+      contrattoFiltrato.codiceFiscale = this.contrattoForm.controls['codice_fiscale'].value;
+      contrattoFiltrato.numeroProtocollo = this.contrattoForm.controls['numero_protocollo'].value;
+      contrattoFiltrato.stato = this.contrattoForm.controls['stato'].value;
+      contrattoFiltrato.stato = this.contrattoForm.controls['data_protocollo_iniziale'].value;
+      contrattoFiltrato.stato = this.contrattoForm.controls['data_protocollo_finale'].value;
+
+    this.appService.cercaContrattiService(contrattoFiltrato, this.paginator.pageIndex, this.paginator.pageSize).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+      this.dataSource = data.contratti.content;
+      this.totalElements = data.contratti.totalElements;
     }); 
 }
   
@@ -82,5 +110,10 @@ export class ContrattiComponent implements OnInit {
         this.contratti.push(contratto);
       }
     }
+
+  //Metodo per gestire il cambio di pagina del paginator
+  onPageChange(event: any){
+  this.filtraContratti();
+  }
 
 }

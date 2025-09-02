@@ -20,6 +20,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
@@ -33,6 +36,7 @@ import it.pittysoft.affetti.entity.Assegnatari;
 import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.entity.Posti;
+import it.pittysoft.affetti.model.ContraentiModel;
 import it.pittysoft.affetti.model.DomandaModel;
 import it.pittysoft.affetti.model.DomandaRequest;
 import it.pittysoft.affetti.model.DomandaRequestSearch;
@@ -70,9 +74,11 @@ public class DomandeService {
     
 
     
-    public DomandaResponseSearch getDomande(DomandaRequestSearch resquestSearch) {
+    public DomandaResponseSearch getDomande(DomandaRequestSearch resquestSearch, Pageable pageable) {
 		 List<Domande> findDomandeByCognomeAndNome = domandaDao.findDomandeByCognomeAndNome(resquestSearch);
 		 DomandaResponseSearch response = new DomandaResponseSearch();
+		 //Lista di domanda model che verrà preparata ed usata per impostare l'oggetto di tipo page della response
+		 List<DomandaModel> listaDomande = new ArrayList<>();
 		  
 		 for (Domande domanda : findDomandeByCognomeAndNome) {
 			 DomandaModel dm = new DomandaModel();
@@ -109,9 +115,17 @@ public class DomandeService {
 			 dm.setContratto(domanda.getContratto());
 			 dm.setDataNascita(domanda.getContraente().getData_nascita());
 			 
-			 response.getDomande().add(dm);
+			 listaDomande.add(dm);
 		 } 
- 	return response;
+		 
+		 //Impostiamo l'oggetto di tipo page della response
+		 final int start = (int)pageable.getOffset();
+	     final int end = Math.min((start + pageable.getPageSize()), listaDomande.size());
+	     final Page<DomandaModel> page = new PageImpl<>(listaDomande.subList(start, end), pageable, listaDomande.size());
+	     
+	     response.setDomande(page);
+	     
+		 return response;
 		
 	}
 

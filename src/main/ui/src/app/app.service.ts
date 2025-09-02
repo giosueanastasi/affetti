@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { DomandaFull } from './app-state/models/domandaFull.model';
-import { Domanda, Posto1 } from './app-state/models';
+import { Domanda, Posto } from './app-state/models';
 import { DomandaSearch } from './app-state/models/domandaSearch.model';
-import { ContrattiSearch } from './app-state/models/contrattiSearch.model';     
 import {HttpParams} from "@angular/common/http";
+import { ContrattiSearch } from './app-state/models/contrattiSearch.model';
 
     
 
@@ -152,7 +152,11 @@ export class AppService {
   }
 
 
-  cercaDomandeService(domandaForm: any) {
+  cercaDomandeService(domandaForm: any, page: number, size: number) {
+    const options = 
+    { params: new HttpParams().set(('page'), page)
+                              .set(('size'), size)
+    };
     let  ds = new DomandaSearch();
     ds.nome = domandaForm.nome;
     ds.cognome = domandaForm.cognome;
@@ -162,19 +166,14 @@ export class AppService {
     ds.tipologia = domandaForm.tipologia;
     ds.numeroProtocollo = domandaForm.numero_protocollo;
     ds.stato = domandaForm.stato;
-	  return this.http.post(this.rootURL + '/search_domande', ds);
+	  return this.http.post(this.rootURL + '/search_domande', ds, options);
   }
-  cercaContrattiService(contrattoForm: any) {
-    let  ds = new ContrattiSearch();
-    ds.nome = contrattoForm.nome;
-    ds.cognome = contrattoForm.cognome;
-    ds.codiceFiscale = contrattoForm.codice_fiscale;
-    ds.dataProtocolloFinale = contrattoForm.data_protocollo_finale;
-    ds.dataProtocolloIniziale = contrattoForm.data_protocollo_iniziale;
-    ds.tipologia = contrattoForm.tipologia;
-    ds.numeroProtocollo = contrattoForm.numero_protocollo;
-    ds.stato = contrattoForm.stato;
-	  return this.http.post(this.rootURL + '/search_contratti', ds);
+  cercaContrattiService(contratto1: any, page: number, size: number) {
+    const options = 
+    {params: new HttpParams().set('page', page)
+                             .set('size', size)
+    };
+	  return this.http.post(this.rootURL + '/search_contratti', contratto1, options);
   }
   //Metodo per recuperare un singolo oggetto comune tramite id
   // getComuneById(id: number) {

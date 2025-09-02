@@ -20,6 +20,9 @@ import {
 } from "src/app/app-state/models";
 import { DomandaModelComponent } from "../domanda-model/domanda-model.component";
 import { ContrattoModelComponent } from "../contratto-model/contratto-model.component";
+import { MatTableDataSource } from "@angular/material/table";
+import { DomandaSearch } from "src/app/app-state/models/domandaSearch.model";
+import { MatPaginator } from "@angular/material/paginator";
 
 @Component({
   selector: "app-domande",
@@ -56,6 +59,23 @@ export class DomandeComponent implements OnInit, OnDestroy {
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
+  domandaSearch: DomandaSearch = new DomandaSearch();
+
+  //Elementi tabella material
+  dataSource = new MatTableDataSource<DomandaSearch>([]);
+  displayedColumns: string[] = ['numeroProtocolloDomanda', 'stato','dataProtocollo', 'nomeContraente', 'cognomeContraente' , 'assegnatario', 'contratto', 'dettaglio'];
+
+  //Elementi paginator
+  totalElements = 0;
+  pageSize;
+  currentPage = 0;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  ngAfterViewInit() {
+   this.dataSource.paginator = this.paginator;
+ }
+
   getAllDomande() {
     this.appService
       .getDomande()
@@ -77,10 +97,11 @@ export class DomandeComponent implements OnInit, OnDestroy {
 
   cercaDomande(cercaDomandaForm: FormGroup) {
     this.appService
-      .cercaDomandeService(cercaDomandaForm.value)
+      .cercaDomandeService(cercaDomandaForm.value, this.paginator.pageIndex, this.paginator.pageSize)
       .pipe(takeUntil(this.destroy$))
       .subscribe((data: any) => {
-        this.domande = data.domande;
+        this.dataSource = data.domande.content;
+        this.totalElements = data.domande.totalElements;
       });
   }
 
@@ -177,5 +198,10 @@ export class DomandeComponent implements OnInit, OnDestroy {
 
     this.selectedContratto = Object.assign({}, contratto);
     this.childContratto?.showContrattoModal();
+  }
+
+  //Metodo per gestire il cambio di pagina del paginator
+  onPageChange(event: any){
+    this.cercaDomande(this.domandaForm);
   }
 }
