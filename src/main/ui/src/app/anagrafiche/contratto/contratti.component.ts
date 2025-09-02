@@ -77,20 +77,10 @@ export class ContrattiComponent implements OnInit {
     this.destroy$.unsubscribe();
   }
 
-  filtraContratti() {
-      let contrattoFiltrato = new ContrattiSearch();
-      contrattoFiltrato.nome = this.contrattoForm.controls['nome'].value;
-      contrattoFiltrato.cognome = this.contrattoForm.controls['cognome'].value;
-      contrattoFiltrato.tipologia = this.contrattoForm.controls['tipologia'].value;
-      contrattoFiltrato.codiceFiscale = this.contrattoForm.controls['codice_fiscale'].value;
-      contrattoFiltrato.numeroProtocollo = this.contrattoForm.controls['numero_protocollo'].value;
-      contrattoFiltrato.stato = this.contrattoForm.controls['stato'].value;
-      contrattoFiltrato.stato = this.contrattoForm.controls['data_protocollo_iniziale'].value;
-      contrattoFiltrato.stato = this.contrattoForm.controls['data_protocollo_finale'].value;
-
-    this.appService.cercaContrattiService(contrattoFiltrato, this.paginator.pageIndex, this.paginator.pageSize).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-      this.dataSource = data.contratti.content;
+  cercaContratti(cercaContrattiForm: FormGroup) {
+    this.appService.cercaContrattiService(cercaContrattiForm.value, this.paginator.pageIndex, this.paginator.pageSize).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
       this.totalElements = data.contratti.totalElements;
+      this.dataSource = data.contratti.content;
     }); 
 }
   
@@ -113,7 +103,7 @@ export class ContrattiComponent implements OnInit {
 
   //Metodo per gestire il cambio di pagina del paginator
   onPageChange(event: any){
-  this.filtraContratti();
+  this.cercaContratti(this.contrattoForm);
   }
 
 }

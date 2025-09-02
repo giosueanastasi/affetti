@@ -169,5 +169,5 @@
       </mat-paginator>     
     </div>
  </div>
- <app-posto-edit [posto1]="selectedPosto" (save)="savePostoWatcher($event)"></app-posto-edit>
- <app-contratto-model [contratto]="contratto" ></app-contratto-model>
+ <app-posto-edit [posto1]="selectedPosto" (save)="onPageChange($event)"></app-posto-edit>
+ <app-contratto-model [contratto]="contratto" (save)="onPageChange($event)"></app-contratto-model>

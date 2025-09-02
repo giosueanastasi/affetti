@@ -168,12 +168,21 @@ export class AppService {
     ds.stato = domandaForm.stato;
 	  return this.http.post(this.rootURL + '/search_domande', ds, options);
   }
-  cercaContrattiService(contratto1: any, page: number, size: number) {
+  cercaContrattiService(contrattoForm: any, page: number, size: number) {
     const options = 
-    {params: new HttpParams().set('page', page)
-                             .set('size', size)
+    { params: new HttpParams().set(('page'), page)
+                              .set(('size'), size)
     };
-	  return this.http.post(this.rootURL + '/search_contratti', contratto1, options);
+    let  ds = new ContrattiSearch();
+    ds.nome = contrattoForm.nome;
+    ds.cognome = contrattoForm.cognome;
+    ds.codiceFiscale = contrattoForm.codice_fiscale;
+    ds.dataProtocolloFinale = contrattoForm.data_protocollo_finale;
+    ds.dataProtocolloIniziale = contrattoForm.data_protocollo_iniziale;
+    ds.tipologia = contrattoForm.tipologia;
+    ds.numeroProtocollo = contrattoForm.numero_protocollo;
+    ds.stato = contrattoForm.stato;
+	  return this.http.post(this.rootURL + '/search_contratti', ds, options);
   }
   //Metodo per recuperare un singolo oggetto comune tramite id
   // getComuneById(id: number) {

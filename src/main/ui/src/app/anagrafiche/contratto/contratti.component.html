@@ -80,7 +80,7 @@
           </div>
           <br>
           <div class="row">
-            <button class="btn btn-info col-md-2"  (click)="filtraContratti()">Cerca</button>
+            <button class="btn btn-info col-md-2"  (click)="cercaContratti(contrattoForm)">Cerca</button>
             <div class="col-md-8"></div>
             <button input type="reset" class="btn btn-danger col-md-2" type="reset">Svuota Filtri</button>
           </div>
@@ -178,4 +178,4 @@
     </mat-paginator>
    </div>
 </div>
-<app-contratto-model [contratto]="selectedContratto" (save)="saveContrattoWatcher($event)"></app-contratto-model>
+<app-contratto-model [contratto]="selectedContratto" (save)="onPageChange($event)"></app-contratto-model>
