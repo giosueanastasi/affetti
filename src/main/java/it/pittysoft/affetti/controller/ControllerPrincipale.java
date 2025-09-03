@@ -339,4 +339,21 @@ public class ControllerPrincipale {
         }
     }
 	
+	@GetMapping(path = ContrattoLinks.STAMPA_CONTRATTO)
+    public ResponseEntity<Resource> generaPdfContratto(@PathVariable Long idContratto) {
+        try {
+            byte[] pdfContratto = contrattiService.generaPdfContratti(idContratto);
+            
+            ByteArrayResource resource = new ByteArrayResource(pdfContratto);
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=contratto_report.pdf")
+                    .header(HttpHeaders.CONTENT_TYPE, "application/pdf")
+                    .contentLength(pdfContratto.length)
+                    .body(resource);
+        } catch (IOException | TemplateException | DocumentException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+	
 }
