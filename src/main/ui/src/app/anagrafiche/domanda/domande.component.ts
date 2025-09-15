@@ -95,7 +95,11 @@ export class DomandeComponent implements OnInit, OnDestroy {
     console.log(svuotadomandeForm);
   }
 
-  cercaDomande(cercaDomandaForm: FormGroup) {
+  cercaDomande(cercaDomandaForm: FormGroup, resetPage: boolean = false) {
+    if(resetPage) {
+      this.paginator.pageIndex = 0;
+    }
+    
     this.appService
       .cercaDomandeService(cercaDomandaForm.value, this.paginator.pageIndex, this.paginator.pageSize)
       .pipe(takeUntil(this.destroy$))

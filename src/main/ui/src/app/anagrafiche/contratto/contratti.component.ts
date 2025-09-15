@@ -77,7 +77,11 @@ export class ContrattiComponent implements OnInit {
     this.destroy$.unsubscribe();
   }
 
-  cercaContratti(cercaContrattiForm: FormGroup) {
+  cercaContratti(cercaContrattiForm: FormGroup, resetPage: boolean = false) {
+    if(resetPage) {
+     this.paginator.pageIndex = 0;
+    }
+
     this.appService.cercaContrattiService(cercaContrattiForm.value, this.paginator.pageIndex, this.paginator.pageSize).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
       this.totalElements = data.contratti.totalElements;
       this.dataSource = data.contratti.content;

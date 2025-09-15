@@ -67,7 +67,7 @@ posto1: Posto1 = new Posto1();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
- filtraPosti() {
+ filtraPosti(resetPage: boolean = false) {
   let postoFiltrato = new Posto1();
   postoFiltrato.loculo = this.postoForm.controls['loculo'].value;
   postoFiltrato.fornice = this.postoForm.controls['fornice'].value;
@@ -76,6 +76,10 @@ posto1: Posto1 = new Posto1();
   postoFiltrato.data_scadenza = this.postoForm.controls['data_scadenza'].value;
   postoFiltrato.nome = this.postoForm.controls['nomeAss'].value;
   postoFiltrato.cognome = this.postoForm.controls['cognomeAss'].value;
+
+  if(resetPage) {
+    this.paginator.pageIndex = 0;
+  }
 
    this.appService.cercaPosti(postoFiltrato, this.paginator.pageIndex, this.paginator.pageSize).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
      this.totalElements = data.posti.totalElements;

@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.lowagie.text.DocumentException;
 
-import freemarker.template.TemplateException;
+import freemarker.template.TemplateException;	
 import it.pittysoft.affetti.entity.Comuni;
 import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Posti;

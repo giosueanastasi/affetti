@@ -32,8 +32,7 @@ export class CercacontraentiModelComponent {
     
     //Elementi paginator
     totalElements = 0;
-    pageSize ;
-    currentPage = 0;
+    pageSize;
     
     @ViewChild(MatPaginator) paginator: MatPaginator;
     
@@ -42,7 +41,11 @@ export class CercacontraentiModelComponent {
      }
   
   
-    filtraCercacontraenti(contraenteForm: Contraente1) {
+    filtraCercacontraenti(contraenteForm: Contraente1, resetPage: boolean = false) {
+      if(resetPage) {
+        this.paginator.pageIndex = 0;
+      }
+
       this.appService.cercaCercacontraenti(contraenteForm, this.paginator.pageIndex, this.paginator.pageSize).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
         this.dataSource = data.contraenti.content;
         this.totalElements = data.contraenti.totalElements;

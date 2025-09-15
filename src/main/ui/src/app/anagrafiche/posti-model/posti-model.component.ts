@@ -43,7 +43,10 @@ posto1: Posto1 = new Posto1();
     this.dataSource.paginator = this.paginator;
   }
 
-  filtraPosti(postoForm: Posto1) {
+  filtraPosti(postoForm: Posto1, resetPage: boolean = false) {
+    if(resetPage) {
+      this.paginator.pageIndex = 0;
+    }
     this.appService.cercaPosti(postoForm, this.paginator.pageIndex, this.paginator.pageSize).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
       this.totalElements = data.posti.totalElements;
       this.posti = data.posti.content;
