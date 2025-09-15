@@ -1,5 +1,6 @@
 import { Posto } from "./posto.model";
 import { Assegnatario } from "./assegnatario.model";
+import { Contraente } from "./contraente.model";
 
 export class Domanda {
   id: number;
@@ -30,7 +31,9 @@ export class Domanda {
   comune_decesso: string;
   fk_posto: number;
   fk_assegnatario: number;
+  fk_contraente: number;
   posto: Posto;
   assegnatario: Assegnatario;
+  contraente: Contraente;
 }
 

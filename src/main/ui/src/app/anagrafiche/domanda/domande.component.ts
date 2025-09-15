@@ -17,6 +17,7 @@ import {
   Domanda,
   Posto,
   Assegnatario,
+  Contraente,
 } from "src/app/app-state/models";
 import { DomandaModelComponent } from "../domanda-model/domanda-model.component";
 import { ContrattoModelComponent } from "../contratto-model/contratto-model.component";
@@ -127,6 +128,10 @@ export class DomandeComponent implements OnInit, OnDestroy {
     assegnatario.id = item.fk_assegnatario;
     assegnatario.nome = item.nomeAss;
     assegnatario.cognome = item.cognomeAss;
+
+    const contraente = new Contraente();
+    contraente.id = item.fk_contraente; 
+    domanda.contraente = contraente;
 
     domanda.id = item.id;
     domanda.posto = posto;

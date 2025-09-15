@@ -124,7 +124,7 @@ export class AppService {
 
   addDomanda(domanda: any, id: number) {
     domanda.id = id;
-	return this.http.post(this.rootURL + '/domanda', domanda);
+	  return this.http.post(this.rootURL + '/domanda', domanda);
   }
 
   addDomandaFull(domandaFullForm: any) {

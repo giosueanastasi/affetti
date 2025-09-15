@@ -31,6 +31,7 @@ import it.pittysoft.affetti.entity.Posti;
 import it.pittysoft.affetti.entity.Users;
 import it.pittysoft.affetti.links.ComuneLinks;
 import it.pittysoft.affetti.links.ContraenteLinks;
+import it.pittysoft.affetti.dto.DomandeDto;
 import it.pittysoft.affetti.entity.Assegnatari;
 import it.pittysoft.affetti.entity.Cap;
 import it.pittysoft.affetti.entity.Contratti;
@@ -275,8 +276,10 @@ public class ControllerPrincipale {
 	@PostMapping(path = DomandaLinks.ADD_DOMANDA)
 	public ResponseEntity<?> saveDomanda(@RequestBody Domande domanda) {
         log.info("ApiController:  list domande");
-        Domande resource = domandeService.saveDomanda(domanda);
-        return ResponseEntity.ok(resource);
+        Domande savedDomanda = domandeService.saveDomanda(domanda);
+        
+        DomandeDto dto = domandeService.convertToDTO(savedDomanda);
+        return ResponseEntity.ok(dto);
         
         /*
          * 	@PostMapping(path = PostoLinks.ADD_POSTO)

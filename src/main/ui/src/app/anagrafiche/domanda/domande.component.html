@@ -186,6 +186,6 @@
    </div>
      </div>
 
-     <app-domanda-model [domanda]="selectedDomanda" (save)="saveDomandaWatcher($event)"></app-domanda-model>
+     <app-domanda-model [domanda]="selectedDomanda" (save)="onPageChange($event)"></app-domanda-model>
      <app-contratto-model *ngIf="selectedContratto" [contratto]="selectedContratto" ></app-contratto-model>
      
