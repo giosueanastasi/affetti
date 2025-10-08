@@ -40,6 +40,7 @@ import it.pittysoft.affetti.entity.Assegnatari;
 import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.entity.Posti;
+import it.pittysoft.affetti.mapper.DomandeMapper;
 import it.pittysoft.affetti.model.ContraentiModel;
 import it.pittysoft.affetti.model.DomandaModel;
 import it.pittysoft.affetti.model.DomandaRequest;
@@ -65,6 +66,14 @@ public class DomandeService {
 	@Autowired
     Configuration freemarkerConfig;
 	
+//    private final DomandeMapper domandeMapper;
+//    @Autowired
+//    public DomandeService(DomandeMapper domandeMapper) {
+//        this.domandeMapper = domandeMapper;
+//    }
+	
+    @Autowired
+    private DomandeMapper domandeMapper;
 
 
 	public List<Domande> getDomande() {
@@ -74,62 +83,10 @@ public class DomandeService {
     public Domande saveDomanda(Domande domande) {
     	return domandeRepository.save(domande);
     }
-    
-    public DomandeDto convertToDTO(Domande domanda) {
-        if (domanda == null) return null;
 
-        DomandeDto dto = new DomandeDto();
-
-        dto.setId(domanda.getId());
-        dto.setProtocollo(domanda.getProtocollo());
-        dto.setData_protocollo(domanda.getData_protocollo());
-        dto.setStato(domanda.getStato());
-        dto.setTipologia(domanda.getTipologia());
-
-        if (domanda.getPosto() != null) {
-            PostiDto postoDTO = new PostiDto();
-            postoDTO.setId(domanda.getPosto().getId());
-            postoDTO.setFornice(domanda.getPosto().getFornice());
-            postoDTO.setLoculo(domanda.getPosto().getLoculo());
-            postoDTO.setTipo(domanda.getPosto().getTipo());
-            postoDTO.setStato(domanda.getPosto().getStato());
-            dto.setPosto(postoDTO);
-        }
-
-        if (domanda.getAssegnatario() != null) {
-            AssegnatariDto assegnatarioDTO = new AssegnatariDto();
-            assegnatarioDTO.setId(domanda.getAssegnatario().getId());
-            assegnatarioDTO.setNome(domanda.getAssegnatario().getNome());
-            assegnatarioDTO.setCognome(domanda.getAssegnatario().getCognome());
-            assegnatarioDTO.setComune_decesso(domanda.getAssegnatario().getComune_decesso());
-            assegnatarioDTO.setData_decesso(domanda.getAssegnatario().getData_decesso());
-            dto.setAssegnatario(assegnatarioDTO);
-        }
-
-        if (domanda.getContraente() != null) {
-            ContraentiDto contraenteDTO = new ContraentiDto();
-            contraenteDTO.setId(domanda.getContraente().getId());
-            contraenteDTO.setNome(domanda.getContraente().getNome());
-            contraenteDTO.setCognome(domanda.getContraente().getCognome());
-            contraenteDTO.setComune_nascita(domanda.getContraente().getComune_nascita());
-            contraenteDTO.setProvincia_nascita(domanda.getContraente().getProvincia_nascita());
-            contraenteDTO.setStato_nascita(domanda.getContraente().getStato_nascita());
-            contraenteDTO.setData_nascita(domanda.getContraente().getData_nascita());
-            contraenteDTO.setComune_residenza(domanda.getContraente().getComune_residenza());
-            contraenteDTO.setProvincia_residenza(domanda.getContraente().getProvincia_residenza());
-            contraenteDTO.setVia_residenza(domanda.getContraente().getVia_residenza());
-            contraenteDTO.setCivico_residenza(domanda.getContraente().getCivico_residenza());
-            contraenteDTO.setCap_residenza(domanda.getContraente().getCap_residenza());
-            contraenteDTO.setTelefono(domanda.getContraente().getTelefono());
-            contraenteDTO.setCodice_fiscale(domanda.getContraente().getCodice_fiscale());
-            contraenteDTO.setEmail(domanda.getContraente().getEmail());
-            contraenteDTO.setNote(domanda.getContraente().getNote());
-            dto.setContraente(contraenteDTO);
-        }
-
-        return dto;
+    public DomandeDto convertToDto(Domande domanda) {
+         return domandeMapper.toDto(domanda);
     }
-
     
     public DomandaResponseSearch getDomande(DomandaRequestSearch resquestSearch, Pageable pageable) {
 		 List<Domande> findDomandeByCognomeAndNome = domandaDao.findDomandeByCognomeAndNome(resquestSearch);

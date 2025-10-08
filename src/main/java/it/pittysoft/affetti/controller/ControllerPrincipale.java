@@ -278,17 +278,17 @@ public class ControllerPrincipale {
         log.info("ApiController:  list domande");
         Domande savedDomanda = domandeService.saveDomanda(domanda);
         
-        DomandeDto dto = domandeService.convertToDTO(savedDomanda);
+        DomandeDto dto = domandeService.convertToDto(savedDomanda);
         return ResponseEntity.ok(dto);
-        
-        /*
-         * 	@PostMapping(path = PostoLinks.ADD_POSTO)
-	public ResponseEntity<?> savePosto(@RequestBody PostiRequest posto) {
-        log.info("ApiController:  list posti");
-        PostiResponse resource = postiService.savePosto(posto);
-        return ResponseEntity.ok(resource);
-         */
     }
+	
+    /*
+     * 	@PostMapping(path = PostoLinks.ADD_POSTO)
+	public ResponseEntity<?> savePosto(@RequestBody PostiRequest posto) {
+    log.info("ApiController:  list posti");
+    PostiResponse resource = postiService.savePosto(posto);
+    return ResponseEntity.ok(resource);
+     */
 	
 	@PostMapping(path = DomandaLinks.ADD_DOMANDA_FULL)
 	public ResponseEntity<?> addDomandaFull(@RequestBody DomandaRequest request) {
