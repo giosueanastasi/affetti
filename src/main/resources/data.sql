@@ -12769,6 +12769,37 @@ INSERT INTO contratti ( protocollo,data_inizio,data_scadenza,stato,fk_domanda,fk
   (5003, '2023-09-25', '2058-09-25', 'IN_ATTESA_PAGAMENTO', 5, 3, '2023-09-25', '2023-09-25'),
   (5004, '2023-09-26', '2058-09-26', 'IN_ATTESA_PAGAMENTO', 8, 1, '2023-09-26', '2023-09-26');
   
+CREATE TABLE defunti (
+  id int NOT NULL IDENTITY,  
+  nome varchar(100) NOT NULL,
+  cognome varchar(100) NOT NULL, 
+  data_nascita date NOT NULL,
+  provincia_nascita varchar(100) NULL,
+  citta_nascita varchar(100) NULL,  
+  data_decesso date NOT NULL,
+  provincia_decesso varchar(100) NULL,
+  citta_decesso varchar(100) NULL, 
+  immagine_url varchar(255) NULL,
+  elogio_funebre varchar(1000) NULL,  
+  data_update date NULL,
+  data_insert date NULL
+);
+
+INSERT INTO defunti (
+    nome, cognome, data_nascita, provincia_nascita, citta_nascita,
+    data_decesso, provincia_decesso, citta_decesso, elogio_funebre
+) VALUES
+('Giovanni', 'Rossi', '1940-05-12', 'Milano', 'Sesto San Giovanni', '2020-11-01', 'Varese', 'Varese', 'Persona gentile e amata da tutti.'),
+('Maria', 'Bianchi', '1955-08-23', 'Torino', 'Moncalieri', '2019-07-15', 'Cuneo', 'Bra', 'Una donna forte e coraggiosa.'),
+('Luca', 'Verdi', '1932-02-10', 'Roma', 'Fiumicino', '2018-03-20', 'Roma', 'Frascati', 'Sempre disponibile con il prossimo.'),
+('Anna', 'Neri', '1960-12-05', 'Firenze', 'Scandicci', '2021-09-10', 'Arezzo', 'Cortona', 'Il suo sorriso rimarrà nel cuore di tutti.'),
+('Marco', 'Russo', '1948-11-30', 'Napoli', 'Pozzuoli', '2017-06-25', 'Caserta', 'Aversa', 'Un uomo di grande onestà e umiltà.'),
+('Elena', 'Fontana', '1972-07-14', 'Bologna', 'Imola', '2022-01-05', 'Ravenna', 'Faenza', 'La sua gentilezza illuminava le giornate.'),
+('Paolo', 'Galli', '1938-09-09', 'Genova', 'Chiavari', '2016-12-12', 'Savona', 'Albenga', 'Amato da amici e famiglia.'),
+('Sofia', 'Conti', '1950-04-28', 'Padova', 'Este', '2020-08-30', 'Vicenza', 'Thiene', 'Un’anima gentile e generosa.'),
+('Alessandro', 'Marini', '1945-10-15', 'Perugia', 'Foligno', '2019-05-22', 'Terni', 'Orvieto', 'Uomo di grande cultura e passione.'),
+('Laura', 'Ricci', '1968-03-18', 'Lecce', 'Gallipoli', '2021-11-11', 'Brindisi', 'Ostuni', 'Sempre vicina agli amici e alla famiglia.');
+  
 DROP TABLE IF EXISTS cap_comuni;
 
 CREATE TABLE cap_comuni(
