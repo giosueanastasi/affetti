@@ -10,6 +10,8 @@ import { ContrattiComponent } from './anagrafiche/contratto/contratti.component'
 import { AssegnatariComponent } from './anagrafiche/assegnatario/assegnatari.component';
 import { DomandeComponent } from './anagrafiche/domanda/domande.component';
 import { DomandaFullComponent } from './anagrafiche/domanda-full/domanda-full.component';
+import { CercadefuntiComponent } from './anagrafiche/cercadefunti/cercadefunti.component';
+import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/dettaglio-defunto.component';
 
 
 const routes: Routes = [
@@ -22,7 +24,9 @@ const routes: Routes = [
   {path:'assegnatario', component: AssegnatariComponent},
   {path:'contratto', component: ContrattiComponent},
   {path:'domanda', component: DomandeComponent},
-  {path:'domandaFull', component: DomandaFullComponent}
+  {path:'domandaFull', component: DomandaFullComponent},
+  {path:'cercadefunti', component: CercadefuntiComponent},
+  {path:'defunti/:id', component: DettaglioDefuntoComponent},
 ];
 
 @NgModule({

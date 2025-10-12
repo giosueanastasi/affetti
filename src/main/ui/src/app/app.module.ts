@@ -42,6 +42,8 @@ import { PopupComponent } from './popup/popup.component';
 import { PostoEditComponent } from './anagrafiche/posto-edit/posto-edit.component';
 import { DomandaModelComponent } from './anagrafiche/domanda-model/domanda-model.component';
 import { ContrattoModelComponent } from './anagrafiche/contratto-model/contratto-model.component';
+import { CercadefuntiComponent } from './anagrafiche/cercadefunti/cercadefunti.component';
+import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/dettaglio-defunto.component';
 
 
 // state related imports
@@ -78,6 +80,8 @@ import { ContrattoModelComponent } from './anagrafiche/contratto-model/contratto
     PopupComponent,
     PostoEditComponent,
     DomandaModelComponent,
+    CercadefuntiComponent,
+    DettaglioDefuntoComponent,
     
     
     

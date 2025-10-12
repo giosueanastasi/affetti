@@ -1,0 +1,26 @@
+<div class="container mt-5">
+  <div class="card shadow-lg rounded">
+    <div class="card-body">
+      <div class="text-center mb-4">
+        <h1>{{ defunto.nome }} {{ defunto.cognome }}</h1>
+
+        <div class="text-center my-5">
+        <img 
+            [src]="defunto.immagine_url || 'assets/default-user.webp'" 
+            alt="{{ defunto.nome }}" 
+            class="img-fluid rounded-circle mx-auto d-block w-25">
+        </div>
+
+        <p class="lead">{{ defunto.data_nascita | date: 'dd MMMM yyyy' }} - {{ defunto.data_decesso | date: 'dd MMMM yyyy' }}</p>
+        <p class="text-muted">Nato a {{ defunto.comune_nascita }}, {{ defunto.provincia_nascita }}</p>
+        <p class="text-muted">Deceduto a {{ defunto.comune_decesso }}, {{ defunto.provincia_decesso }}</p>
+      </div>
+
+      <div class="mb-4 text-center">
+        <h5 class="text-primary">Elogio Funebre:</h5>
+        <p>{{ defunto.elogio_funebre || 'Nessun elogio disponibile' }}</p>
+      </div>
+      
+    </div>
+  </div>
+</div>
