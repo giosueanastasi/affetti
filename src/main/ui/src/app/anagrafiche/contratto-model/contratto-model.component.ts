@@ -30,6 +30,6 @@ export class ContrattoModelComponent {
   }
 
   printContrattoModal() {
-    window.open("/api/stampa_contratto/" + this.contratto.id, "_blank");
+    window.open("/api/stampa_contratto/" + this.contratto.idContratto, "_blank");
   }
 }
