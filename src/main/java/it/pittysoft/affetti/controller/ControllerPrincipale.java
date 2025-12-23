@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 import com.lowagie.text.DocumentException;
 
 import freemarker.template.TemplateException;	
@@ -35,11 +36,13 @@ import it.pittysoft.affetti.dto.DomandeDto;
 import it.pittysoft.affetti.entity.Assegnatari;
 import it.pittysoft.affetti.entity.Cap;
 import it.pittysoft.affetti.entity.Contratti;
+import it.pittysoft.affetti.entity.Defunti;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
 import it.pittysoft.affetti.model.ContrattoSearchRequest;
 import it.pittysoft.affetti.model.ContrattoSearchResponse;
+import it.pittysoft.affetti.model.DefuntiRequest;
 import it.pittysoft.affetti.model.DomandaModel;
 import it.pittysoft.affetti.model.ProtocolloDomandaResponse;
 import it.pittysoft.affetti.model.CapResponse;
@@ -58,6 +61,7 @@ import it.pittysoft.affetti.model.PostiSearchResponse;
 import it.pittysoft.affetti.model.Response;
 import it.pittysoft.affetti.model.UserRequest;
 import it.pittysoft.affetti.model.UserResponse;
+import it.pittysoft.affetti.repository.DefuntiRepository;
 import it.pittysoft.affetti.service.ComuniService;
 import it.pittysoft.affetti.service.ContraentiService;
 import it.pittysoft.affetti.links.ContrattoLinks;
@@ -67,8 +71,10 @@ import it.pittysoft.affetti.links.CapLinks;
 import it.pittysoft.affetti.service.PostiService;
 import it.pittysoft.affetti.service.UsersService;
 import it.pittysoft.affetti.service.ContrattiService;
+import it.pittysoft.affetti.service.DefuntiService;
 import it.pittysoft.affetti.service.DomandeService;
 import it.pittysoft.affetti.service.AssegnatariService;
+import it.pittysoft.affetti.links.DefuntoLinks;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -96,6 +102,9 @@ public class ControllerPrincipale {
 	
 	@Autowired
 	DomandeService domandeService;
+	
+	@Autowired
+	DefuntiService defuntiService;
 	
 
 	
@@ -320,16 +329,16 @@ public class ControllerPrincipale {
 	}
 	
 	
-	@GetMapping(path = DomandaLinks.GENERA_PROTOCOLLO)
-	public ResponseEntity<?> getNewProtocolloDomanda(){
-		ProtocolloDomandaResponse resource = domandeService.generaProtocollo();
-		 if (resource.getReturnCode()==Response.OK) {
-	        	return ResponseEntity.ok(resource);
-	        } else  {
-	        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-	                    .body("Errore imprevisto, contattare l'assistenza");
-			}
-	}
+		@GetMapping(path = DomandaLinks.GENERA_PROTOCOLLO)
+		public ResponseEntity<?> getNewProtocolloDomanda(){
+			ProtocolloDomandaResponse resource = domandeService.generaProtocollo();
+			 if (resource.getReturnCode()==Response.OK) {
+		        	return ResponseEntity.ok(resource);
+		        } else  {
+		        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+		                    .body("Errore imprevisto, contattare l'assistenza");
+				}
+		}
 	
 	@PostMapping(path = ContrattoLinks.GET_CONTRATTO_BY_PROTOCOLLO)
 	public ResponseEntity<?> getContrattoByProtocollo(@RequestBody String numProtocollo){
@@ -359,5 +368,27 @@ public class ControllerPrincipale {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+	
+	
+	@PostMapping(path = DefuntoLinks.SEARCH_DEFUNTI)
+	public ResponseEntity<List<Defunti>> ricercaDefunti(@RequestBody DefuntiRequest request) {
+	    System.out.println("Ricerca ricevuta: " + request);
+		List<Defunti> defuntiFiltrati = defuntiService.getDefunti(request);
+		
+		return ResponseEntity.ok(defuntiFiltrati);
+	}
+	
+	@GetMapping(path = DefuntoLinks.SEARCH_DEFUNTO)
+	public ResponseEntity<?> getDefuntoById(@PathVariable Long id){
+		Optional<Defunti> defuntoOptional = defuntiService.getDefuntiById(id);
+		
+		if(defuntoOptional.isPresent()) {
+			return ResponseEntity.ok(defuntoOptional.get());
+		} else {
+        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Errore imprevisto, contattare l'assistenza");
+		}
+	} 
+
 	
 }

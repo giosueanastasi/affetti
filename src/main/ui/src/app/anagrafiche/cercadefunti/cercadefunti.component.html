@@ -1,0 +1,36 @@
+<div class="container d-flex justify-content-center mt-5">
+  <div class="col-md-6">
+      <input class="col-md-6"
+        type="text" 
+        [formControl]="ricerca" 
+        class="form-control" 
+        placeholder="Inserisci nome defunto" 
+      >
+  </div>
+</div>
+
+<div *ngIf="defunti.length > 0" class="container d-flex justify-content-center mt-5">
+  <div class="col-md-8">
+    <ul class="list-group">
+      <li 
+        *ngFor="let defunto of defunti" 
+        (click)="dettaglio(defunto.id)" 
+        class="list-group-item d-flex justify-content-between align-items-center cursor-pointer"
+      >
+        <div>
+          <strong>{{ defunto.nome }} {{ defunto.cognome }}</strong>
+          <div class="text-muted">{{ defunto.data_decesso | date:'dd-MM-yyyy' }}</div>
+        </div>
+        
+        <button class="btn btn-info btn-sm">Dettaglio</button>
+      </li>
+    </ul>
+  </div>
+</div>
+
+
+<div *ngIf="defunti.length === 0 && ricercaAvviata" class="container d-flex justify-content-center mt-5">
+  <div class="col-md-8 alert alert-warning ">
+        Nessun risultato trovato.
+  </div>
+</div>

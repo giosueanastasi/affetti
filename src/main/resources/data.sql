@@ -12769,6 +12769,49 @@ INSERT INTO contratti ( protocollo,data_inizio,data_scadenza,stato,fk_domanda,fk
   (5003, '2023-09-25', '2058-09-25', 'IN_ATTESA_PAGAMENTO', 5, 3, '2023-09-25', '2023-09-25'),
   (5004, '2023-09-26', '2058-09-26', 'IN_ATTESA_PAGAMENTO', 8, 1, '2023-09-26', '2023-09-26');
   
+CREATE TABLE IF NOT EXISTS defunti (
+  id int NOT NULL IDENTITY,  
+  nome varchar(100) NOT NULL,
+  cognome varchar(100) NOT NULL, 
+  data_nascita date NOT NULL,
+  provincia_nascita varchar(100) NOT NULL,
+  comune_nascita varchar(100) NOT NULL,  
+  data_decesso date NOT NULL,
+  provincia_decesso varchar(100) NOT NULL,
+  comune_decesso varchar(100) NOT NULL, 
+  immagine_url varchar(255) NULL,
+  elogio_funebre varchar(1000) NULL,  
+  data_update date NULL,
+  data_insert date NULL
+);
+
+INSERT INTO defunti (
+    nome, cognome, data_nascita, provincia_nascita, comune_nascita,
+    data_decesso, provincia_decesso, comune_decesso, elogio_funebre
+) VALUES
+('Giovanni', 'Rossi', '1940-05-12', 'Milano', 'Sesto San Giovanni', '2020-11-01', 'Varese', 'Varese', 'Persona gentile e amata da tutti.'),
+('Maria', 'Bianchi', '1955-08-23', 'Torino', 'Moncalieri', '2019-07-15', 'Cuneo', 'Bra', 'Una donna forte e coraggiosa.'),
+('Luca', 'Verdi', '1932-02-10', 'Roma', 'Fiumicino', '2018-03-20', 'Roma', 'Frascati', 'Sempre disponibile con il prossimo.'),
+('Anna', 'Neri', '1960-12-05', 'Firenze', 'Scandicci', '2021-09-10', 'Arezzo', 'Cortona', 'Il suo sorriso rimarrà nel cuore di tutti.'),
+('Marco', 'Russo', '1948-11-30', 'Napoli', 'Pozzuoli', '2017-06-25', 'Caserta', 'Aversa', 'Un uomo di grande onestà e umiltà.'),
+('Elena', 'Fontana', '1972-07-14', 'Bologna', 'Imola', '2022-01-05', 'Ravenna', 'Faenza', 'La sua gentilezza illuminava le giornate.'),
+('Paolo', 'Galli', '1938-09-09', 'Genova', 'Chiavari', '2016-12-12', 'Savona', 'Albenga', 'Amato da amici e famiglia.'),
+('Sofia', 'Conti', '1950-04-28', 'Padova', 'Este', '2020-08-30', 'Vicenza', 'Thiene', 'Un’anima gentile e generosa.'),
+('Alessandro', 'Marini', '1945-10-15', 'Perugia', 'Foligno', '2019-05-22', 'Terni', 'Orvieto', 'Uomo di grande cultura e passione.'),
+('Laura', 'Ricci', '1968-03-18', 'Lecce', 'Gallipoli', '2021-11-11', 'Brindisi', 'Ostuni', 'Sempre vicina agli amici e alla famiglia.'),
+('Maria Antonietta', 'Di Giacomo', '1942-03-15', 'Napoli', 'Torre Annunziata', '2021-04-18', 'Salerno', 'Nocera Inferiore', 'Donna di grande cuore e forza.'),
+('Giuseppe', 'D''Angelo', '1930-11-02', 'Palermo', 'Bagheria', '2015-02-14', 'Trapani', 'Marsala', 'Amato da tutti, ha lasciato un segno profondo.'),
+('Lorenzo', 'd''Amico', '1951-06-25', 'Roma', 'Ostia', '2023-10-09', 'Latina', 'Aprilia', 'Intellettuale e spirito libero.'),
+('Anna Maria', 'De Luca', '1965-01-30', 'Bari', 'Altamura', '2020-02-28', 'Bari', 'Trani', 'Sempre presente con il suo sorriso.'),
+('Luigi', 'Lo Monaco', '1944-07-17', 'Catania', 'Acireale', '2019-12-05', 'Catania', 'Giarre', 'Esempio di bontà e dedizione.'),
+('Francesca', 'Dell''Oro', '1957-09-08', 'Como', 'Cantù', '2022-06-11', 'Lecco', 'Merate', 'Una madre e moglie amorevole.'),
+('Andrea', 'Sanna', '1946-10-19', 'Cagliari', 'Iglesias', '2017-08-03', 'Oristano', 'Cabras', 'Persona onesta, lavoratore instancabile.'),
+('Elisabetta', 'De Santis', '1939-12-22', 'Roma', 'Pomezia', '2021-07-20', 'Roma', 'Ciampino', 'La sua dolcezza rimarrà con noi per sempre.'),
+('Giulia', 'L''Abbate', '1962-05-03', 'Taranto', 'Martina Franca', '2020-09-14', 'Brindisi', 'Fasano', 'Energia contagiosa e cuore generoso.'),
+('Vincenzo', 'Sant''Anna', '1959-03-11', 'Reggio Calabria', 'Siderno', '2023-03-21', 'Catanzaro', 'Lamezia Terme', 'Ha donato amore in ogni gesto.');
+
+
+  
 DROP TABLE IF EXISTS cap_comuni;
 
 CREATE TABLE cap_comuni(

@@ -49,6 +49,14 @@ export class AppService {
     return this.http.post(this.rootURL + '/search_contraenti' ,contraenti1, options);
   }
 
+  cercaDefunti(ricerca: string) {
+    return this.http.post(this.rootURL + '/search_defunti', { ricerca: ricerca });
+  }
+
+  cercaDefuntoById(id: number) {
+    return this.http.get(this.rootURL + '/defunto/' + id);
+  }
+
   getPosti() {
     return this.http.get(this.rootURL + '/posti');
   }
