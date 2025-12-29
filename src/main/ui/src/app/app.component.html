@@ -111,16 +111,21 @@
   <div class="container-fluid">
     <div class="row">
       <div class="col-12 text-center">
-        <strong>Pittysoft</strong> - Pellizza da Volpedo 24, BOLOGNA (BO) |
-        <a href="mailto:info@pittysoft.it" class="text-dark">info@pittysoft.it</a> |
-        <a href="tel:+390511234567" class="text-dark">+39 051 123 4567</a>
+        <strong>Pittysoft srl</strong> - Pellizza da Volpedo 24, 40139 Bologna (BO)
+      </div>
+    </div>
+    <div class="row mt-1">
+      <div class="col-12 text-center">
+        <a href="mailto:info@pittysoft.it" class="text-dark">info@pittysoft.net</a> |
+        <a href="tel:+390511234567" class="text-dark">+39 3519832829</a> |
+        <span>P.IVA 04286601200</span>
       </div>
     </div>
     <div class="row mt-3">
       <div class="col-12 text-center">
         <small>
-          <a href="#" class="text-dark">Privacy Policy</a> |
-          <a href="#" class="text-dark">Termini e Condizioni</a> |
+          <a [routerLink]="['/privacy-policy']" class="text-dark">Privacy Policy</a> |
+          <a [routerLink]="['/termini-condizioni']" class="text-dark">Termini e Condizioni</a> |
           &copy; {{ currentYear }} Pittysoft. Tutti i diritti riservati.
         </small>
       </div>

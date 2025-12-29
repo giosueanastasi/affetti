@@ -12,6 +12,8 @@ import { DomandeComponent } from './anagrafiche/domanda/domande.component';
 import { DomandaFullComponent } from './anagrafiche/domanda-full/domanda-full.component';
 import { CercadefuntiComponent } from './anagrafiche/cercadefunti/cercadefunti.component';
 import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/dettaglio-defunto.component';
+import { PrivacyPolicyComponent } from './legal/privacy-policy/privacy-policy.component';
+import { TerminiCondizioniComponent } from './legal/termini-condizioni/termini-condizioni.component';
 
 
 const routes: Routes = [
@@ -27,6 +29,8 @@ const routes: Routes = [
   {path:'domandaFull', component: DomandaFullComponent},
   {path:'cercadefunti', component: CercadefuntiComponent},
   {path:'defunti/:id', component: DettaglioDefuntoComponent},
+  {path:'privacy-policy', component: PrivacyPolicyComponent},
+  {path:'termini-condizioni', component: TerminiCondizioniComponent},
 ];
 
 @NgModule({

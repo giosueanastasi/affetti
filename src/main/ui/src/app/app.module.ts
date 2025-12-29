@@ -44,6 +44,8 @@ import { DomandaModelComponent } from './anagrafiche/domanda-model/domanda-model
 import { ContrattoModelComponent } from './anagrafiche/contratto-model/contratto-model.component';
 import { CercadefuntiComponent } from './anagrafiche/cercadefunti/cercadefunti.component';
 import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/dettaglio-defunto.component';
+import { PrivacyPolicyComponent } from './legal/privacy-policy/privacy-policy.component';
+import { TerminiCondizioniComponent } from './legal/termini-condizioni/termini-condizioni.component';
 
 
 // state related imports
@@ -82,6 +84,8 @@ import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/detta
     DomandaModelComponent,
     CercadefuntiComponent,
     DettaglioDefuntoComponent,
+    PrivacyPolicyComponent,
+    TerminiCondizioniComponent,
     
     
     
