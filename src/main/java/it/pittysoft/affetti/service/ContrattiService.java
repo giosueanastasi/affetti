@@ -70,8 +70,6 @@ public class ContrattiService {
 
 	public ContrattoResponse saveContratto(ContrattoModel contrattiRequest) {
 		ContrattoResponse response = new ContrattoResponse();
-	public ContrattoSearchResponse saveContratto(ContrattoModel contrattiRequest) {
-	    ContrattoSearchResponse response = new ContrattoSearchResponse();
 	    Contratti contratti = new Contratti();
 	    boolean isNewContratto = false;
 
