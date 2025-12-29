@@ -14,6 +14,7 @@ export class AppComponent  {
   constructor() {}
 
   title = 'angular-nodejs-example';
+  currentYear = new Date().getFullYear();
 
   
 
