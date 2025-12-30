@@ -49,8 +49,8 @@ export class AppService {
     return this.http.post(this.rootURL + '/search_contraenti' ,contraenti1, options);
   }
 
-  cercaDefunti(ricerca: string) {
-    return this.http.post(this.rootURL + '/search_defunti', { ricerca: ricerca });
+  cercaDefunti(ricerca: string, page: number = 0, size: number = 10) {
+    return this.http.post(this.rootURL + '/search_defunti', { ricerca: ricerca, page: page, size: size });
   }
 
   cercaDefuntoById(id: number) {

@@ -17,6 +17,10 @@ export class CercadefuntiComponent implements OnInit{
   ricerca = new FormControl('');
   defunti: Defunto[] = [];
   ricercaAvviata: boolean = false;
+  currentPage: number = 0;
+  pageSize: number = 10;
+  fetchSize: number = 11;
+  hasMore: boolean = true;
 
   constructor(private appService: AppService, private router: Router){ };
 
@@ -27,20 +31,38 @@ export class CercadefuntiComponent implements OnInit{
         switchMap(ricerca => {
           if(ricerca.trim()) {
             this.ricercaAvviata = true;
-            return this.appService.cercaDefunti(ricerca.trim());
+            this.currentPage = 0;
+            this.defunti = [];
+            return this.appService.cercaDefunti(ricerca.trim(), this.currentPage, this.fetchSize);
           } else {
             this.ricercaAvviata = false;
+            this.defunti = [];
+            this.hasMore = true;
             return [];
           }
         }),
-      ).subscribe((data: Defunto[]) => {this.defunti = data;
+      ).subscribe((data: Defunto[]) => {
+        this.hasMore = data.length > this.pageSize;
+        this.defunti = data.slice(0, this.pageSize);
       })
   }
 
+  caricaAltri(): void {
+    this.currentPage++;
+    const ricercaCorrente = this.ricerca.value?.trim();
+    if (ricercaCorrente) {
+      this.appService.cercaDefunti(ricercaCorrente, this.currentPage, this.fetchSize)
+        .subscribe((data: Defunto[]) => {
+          this.hasMore = data.length > this.pageSize;
+          const nuoviDefunti = data.slice(0, this.pageSize);
+          this.defunti = [...this.defunti, ...nuoviDefunti];
+        });
+    }
+  }
 
-  dettaglio(defuntoId: number): void { 
+  dettaglio(defuntoId: number): void {
     this.router.navigate(['/defunti', defuntoId])
-  } 
+  }
 
 
 }
