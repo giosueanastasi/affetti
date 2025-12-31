@@ -28,7 +28,7 @@ const routes: Routes = [
   {path:'domanda', component: DomandeComponent},
   {path:'domandaFull', component: DomandaFullComponent},
   {path:'login', component: LoginComponent},
-  {path:'register', component: RegisterComponent}
+  {path:'register', component: RegisterComponent},
   {path:'cercadefunti', component: CercadefuntiComponent},
   {path:'defunti/:id', component: DettaglioDefuntoComponent},
 ];
