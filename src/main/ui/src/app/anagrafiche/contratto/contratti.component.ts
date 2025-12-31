@@ -5,6 +5,9 @@ import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { ContrattoModelComponent } from '../contratto-model/contratto-model.component';
 import { Contratto } from 'src/app/app-state/models';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { ContrattiSearch } from 'src/app/app-state/models/contrattiSearch.model';
 
 
 
@@ -22,6 +25,20 @@ export class ContrattiComponent implements OnInit {
   title = 'angular-nodejs-example';
 
   @ViewChild(ContrattoModelComponent) child: ContrattoModelComponent | undefined;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  ngAfterViewInit() {
+   this.dataSource.paginator = this.paginator;
+ }
+
+  //Elementi tabella material
+  dataSource = new MatTableDataSource<Contratto>([]);
+  displayedColumns: string[] = ['numeroProtocolloContratto', 'stato','dataProtocolloContratto', 'dataProtocolloContratto', 'contraente' , 'assegnatario', 'dettaglio'];
+
+  //Elementi paginator
+  totalElements = 0;
+  pageSize;
+  currentPage = 0;
 
   contrattoForm = new FormGroup({
     nome: new FormControl('', Validators.nullValidator),
@@ -60,9 +77,14 @@ export class ContrattiComponent implements OnInit {
     this.destroy$.unsubscribe();
   }
 
-  cercaContratti(cercaContrattiForm: FormGroup) {
-    this.appService.cercaContrattiService(cercaContrattiForm.value).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-      this.contratti = data.contratti;
+  cercaContratti(cercaContrattiForm: FormGroup, resetPage: boolean = false) {
+    if(resetPage) {
+     this.paginator.pageIndex = 0;
+    }
+
+    this.appService.cercaContrattiService(cercaContrattiForm.value, this.paginator.pageIndex, this.paginator.pageSize).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+      this.totalElements = data.contratti.totalElements;
+      this.dataSource = data.contratti.content;
     }); 
 }
   
@@ -82,5 +104,10 @@ export class ContrattiComponent implements OnInit {
         this.contratti.push(contratto);
       }
     }
+
+  //Metodo per gestire il cambio di pagina del paginator
+  onPageChange(event: any){
+  this.cercaContratti(this.contrattoForm);
+  }
 
 }

@@ -32,16 +32,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import javax.crypto.spec.SecretKeySpec;
 
+import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 import com.lowagie.text.DocumentException;
 
 import freemarker.template.TemplateException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import freemarker.template.TemplateException;	
+import it.pittysoft.affetti.entity.Comuni;
+import it.pittysoft.affetti.entity.Contraenti;
+import it.pittysoft.affetti.entity.Posti;
+import it.pittysoft.affetti.entity.Users;
+import it.pittysoft.affetti.links.ComuneLinks;
+import it.pittysoft.affetti.links.ContraenteLinks;
+import it.pittysoft.affetti.dto.DomandeDto;
 import it.pittysoft.affetti.entity.Assegnatari;
 import it.pittysoft.affetti.entity.Cap;
 import it.pittysoft.affetti.entity.Comuni;
 import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Contratti;
+import it.pittysoft.affetti.entity.Defunti;
 import it.pittysoft.affetti.entity.Domande;
 import it.pittysoft.affetti.entity.Posti;
 import it.pittysoft.affetti.entity.Users;
@@ -53,6 +63,11 @@ import it.pittysoft.affetti.links.ContrattoLinks;
 import it.pittysoft.affetti.links.DomandaLinks;
 import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
+import it.pittysoft.affetti.model.ContrattoSearchRequest;
+import it.pittysoft.affetti.model.ContrattoSearchResponse;
+import it.pittysoft.affetti.model.DefuntiRequest;
+import it.pittysoft.affetti.model.DomandaModel;
+import it.pittysoft.affetti.model.ProtocolloDomandaResponse;
 import it.pittysoft.affetti.model.CapResponse;
 import it.pittysoft.affetti.model.ComuniSelectResponse;
 import it.pittysoft.affetti.model.ContraentiRequest;
@@ -60,6 +75,7 @@ import it.pittysoft.affetti.model.ContraentiResponse;
 import it.pittysoft.affetti.model.ContrattoModel;
 import it.pittysoft.affetti.model.ContrattoSearchRequest;
 import it.pittysoft.affetti.model.ContrattoSearchResponse;
+import it.pittysoft.affetti.model.ContrattoResponse;
 import it.pittysoft.affetti.model.DomandaRequest;
 import it.pittysoft.affetti.model.DomandaRequestSearch;
 import it.pittysoft.affetti.model.DomandaResponse;
@@ -73,12 +89,20 @@ import it.pittysoft.affetti.model.UserResponse;
 import it.pittysoft.affetti.security.AuthRequest;
 import it.pittysoft.affetti.security.AuthResponse;
 import it.pittysoft.affetti.service.AssegnatariService;
+import it.pittysoft.affetti.model.PostiSearchResponse;
+import it.pittysoft.affetti.model.Response;
+import it.pittysoft.affetti.model.UserRequest;
+import it.pittysoft.affetti.model.UserResponse;
+import it.pittysoft.affetti.repository.DefuntiRepository;
 import it.pittysoft.affetti.service.ComuniService;
 import it.pittysoft.affetti.service.ContraentiService;
 import it.pittysoft.affetti.service.ContrattiService;
+import it.pittysoft.affetti.service.DefuntiService;
 import it.pittysoft.affetti.service.DomandeService;
 import it.pittysoft.affetti.service.PostiService;
 import it.pittysoft.affetti.service.UsersService;
+import it.pittysoft.affetti.service.AssegnatariService;
+import it.pittysoft.affetti.links.DefuntoLinks;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -113,6 +137,10 @@ public class ControllerPrincipale {
 	
     String key = "chiave-segreta-temporanea-abbastanza-lunga-0123456789"; 
     Key signingKey = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), SignatureAlgorithm.HS256.getJcaName());
+	@Autowired
+	DefuntiService defuntiService;
+	
+
 	
 	
 	@GetMapping(path = UserLinks.LIST_USERS)
@@ -177,7 +205,7 @@ public class ControllerPrincipale {
 	@PostMapping(path = ContrattoLinks.ADD_CONTRATTO)
 	public ResponseEntity<?> saveContratto(@RequestBody ContrattoModel contratto) {
         log.info("ApiController:  list contratti");
-        ContrattoSearchResponse resource = contrattiService.saveContratto(contratto);
+        ContrattoResponse resource = contrattiService.saveContratto(contratto);
         return ResponseEntity.ok(resource);
     }
     
@@ -208,9 +236,14 @@ public class ControllerPrincipale {
         }
 	
 	@PostMapping(path = DomandaLinks.SEARCH_DOMANDE)
-    public ResponseEntity<?> searchDomande(@RequestBody DomandaRequestSearch resquestSearch) {
+    public ResponseEntity<?> searchDomande(@RequestBody DomandaRequestSearch resquestSearch,
+    		@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size) {
+		
+		Pageable pageable = PageRequest.of(page, size);
+		
         log.info("ApiController:  search domande");
-        DomandaResponseSearch resource = domandeService.getDomande(resquestSearch);
+        DomandaResponseSearch resource = domandeService.getDomande(resquestSearch, pageable);
         if (resource.getReturnCode()==Response.OK) {
         	return ResponseEntity.ok(resource);
         } else  {
@@ -220,9 +253,15 @@ public class ControllerPrincipale {
 	}
 	
 	@PostMapping(path = PostoLinks.SEARCH_POSTI)
-    public ResponseEntity<?> searchPosti(@RequestBody PostiRequest posti) {
+    public ResponseEntity<?> searchPosti(@RequestBody PostiRequest posti,
+    		@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size) {
+		
+		Pageable pageable = PageRequest.of(page, size);
+		
+		
         log.info("ApiController:  search posti");
-        PostiResponse resource = postiService.getPosti(posti);
+        PostiSearchResponse resource = postiService.getPosti(posti, pageable);
         if (resource.getReturnCode()==Response.OK) {
         	return ResponseEntity.ok(resource);
         } else  {
@@ -232,9 +271,14 @@ public class ControllerPrincipale {
 	}
 	
 	@PostMapping(path = ContrattoLinks.SEARCH_CONTRATTO)
-    public ResponseEntity<?> searchContratto(@RequestBody ContrattoSearchRequest resquestSearch) {
+    public ResponseEntity<?> searchContratto(@RequestBody ContrattoSearchRequest contratti,
+    		@RequestParam(defaultValue = "0") int page,
+			@RequestParam(defaultValue = "10") int size) {
+		
+		Pageable pageable = PageRequest.of(page, size);
+		
         log.info("ApiController:  search contratti");
-        ContrattoSearchResponse resource = contrattiService.getContratti(resquestSearch);
+        ContrattoSearchResponse resource = contrattiService.getContratti(contratti, pageable);
         if (resource.getReturnCode()==Response.OK) {
         	return ResponseEntity.ok(resource);
         } else  {
@@ -275,17 +319,19 @@ public class ControllerPrincipale {
 	@PostMapping(path = DomandaLinks.ADD_DOMANDA)
 	public ResponseEntity<?> saveDomanda(@RequestBody Domande domanda) {
         log.info("ApiController:  list domande");
-        Domande resource = domandeService.saveDomanda(domanda);
-        return ResponseEntity.ok(resource);
+        Domande savedDomanda = domandeService.saveDomanda(domanda);
         
-        /*
-         * 	@PostMapping(path = PostoLinks.ADD_POSTO)
-	public ResponseEntity<?> savePosto(@RequestBody PostiRequest posto) {
-        log.info("ApiController:  list posti");
-        PostiResponse resource = postiService.savePosto(posto);
-        return ResponseEntity.ok(resource);
-         */
+        DomandeDto dto = domandeService.convertToDto(savedDomanda);
+        return ResponseEntity.ok(dto);
     }
+	
+    /*
+     * 	@PostMapping(path = PostoLinks.ADD_POSTO)
+	public ResponseEntity<?> savePosto(@RequestBody PostiRequest posto) {
+    log.info("ApiController:  list posti");
+    PostiResponse resource = postiService.savePosto(posto);
+    return ResponseEntity.ok(resource);
+     */
 	
 	@PostMapping(path = DomandaLinks.ADD_DOMANDA_FULL)
 	public ResponseEntity<?> addDomandaFull(@RequestBody DomandaRequest request) {
@@ -317,21 +363,21 @@ public class ControllerPrincipale {
 	}
 	
 	
-	@GetMapping(path = DomandaLinks.GENERA_PROTOCOLLO)
-	public ResponseEntity<?> getNewProtocolloDomanda(){
-		ProtocolloDomandaResponse resource = domandeService.generaProtocollo();
-		 if (resource.getReturnCode()==Response.OK) {
-	        	return ResponseEntity.ok(resource);
-	        } else  {
-	        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-	                    .body("Errore imprevisto, contattare l'assistenza");
-			}
-	}
+		@GetMapping(path = DomandaLinks.GENERA_PROTOCOLLO)
+		public ResponseEntity<?> getNewProtocolloDomanda(){
+			ProtocolloDomandaResponse resource = domandeService.generaProtocollo();
+			 if (resource.getReturnCode()==Response.OK) {
+		        	return ResponseEntity.ok(resource);
+		        } else  {
+		        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+		                    .body("Errore imprevisto, contattare l'assistenza");
+				}
+		}
 	
 	@PostMapping(path = ContrattoLinks.GET_CONTRATTO_BY_PROTOCOLLO)
 	public ResponseEntity<?> getContrattoByProtocollo(@RequestBody String numProtocollo){
 		
-		ContrattoSearchResponse resource = contrattiService.getContrattoByProtocollo(numProtocollo);
+		ContrattoResponse resource = contrattiService.getContrattoByProtocollo(numProtocollo);
         if (resource.getReturnCode()==Response.OK) {
         	return ResponseEntity.ok(resource);
         } else  {
@@ -386,5 +432,27 @@ public class ControllerPrincipale {
 	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
 	    }
 	}
+	
+	
+	@PostMapping(path = DefuntoLinks.SEARCH_DEFUNTI)
+	public ResponseEntity<List<Defunti>> ricercaDefunti(@RequestBody DefuntiRequest request) {
+	    System.out.println("Ricerca ricevuta: " + request);
+		List<Defunti> defuntiFiltrati = defuntiService.getDefunti(request);
+		
+		return ResponseEntity.ok(defuntiFiltrati);
+	}
+	
+	@GetMapping(path = DefuntoLinks.SEARCH_DEFUNTO)
+	public ResponseEntity<?> getDefuntoById(@PathVariable Long id){
+		Optional<Defunti> defuntoOptional = defuntiService.getDefuntiById(id);
+		
+		if(defuntoOptional.isPresent()) {
+			return ResponseEntity.ok(defuntoOptional.get());
+		} else {
+        	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Errore imprevisto, contattare l'assistenza");
+		}
+	} 
+
 	
 }

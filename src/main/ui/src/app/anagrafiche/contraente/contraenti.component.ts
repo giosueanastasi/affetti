@@ -68,12 +68,16 @@ getAllContraenti() {
   });
 }
 
-filtraContraenti() {
+filtraContraenti(resetPage: boolean = false) {
   let contraenteFiltrato = new Contraente1();
   contraenteFiltrato.nome = this.contraenteForm.controls['nome'].value;
   contraenteFiltrato.cognome = this.contraenteForm.controls['cognome'].value;
   contraenteFiltrato.codice_fiscale = this.contraenteForm.controls['codice_fiscale'].value;
   contraenteFiltrato.protocolloC = this.contraenteForm.controls['protocollo'].value;
+
+  if(resetPage) {
+    this.paginator.pageIndex = 0;
+  }
 
   this.appService.cercaCercacontraenti(contraenteFiltrato, this.paginator.pageIndex, this.paginator.pageSize).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
     this.dataSource = data.contraenti.content;

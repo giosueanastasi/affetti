@@ -12661,7 +12661,11 @@ CREATE TABLE posti (
   ( 2,10, 'nuova', 'LIBERO','2023-04-8','2023-04-8',1),
   ( 3,11, 'nuova', 'LIBERO','2023-04-8','2023-04-8',1),
   ( 4,12, 'nuova', 'LIBERO','2023-04-8','2023-04-8',1),
-  ( 5,13, 'nuova', 'LIBERO','2023-04-8','2023-04-8',1);
+  ( 5,13, 'nuova', 'LIBERO','2023-04-8','2023-04-8',1),
+  (12, 150, 'intermedia', 'LIBERO', '2023-09-26', '2023-09-26', 1),
+  (8, 100, 'monumentale', 'OCCUPATO', '2023-09-24', '2023-09-24', 2),
+  (5, 200, 'nuova', 'PRENOTATO', '2023-09-25', '2023-09-25', 3),
+  (14, 250, 'intermedia', 'LIBERO', '2023-09-25', '2023-09-25', 1);
   
 	DROP TABLE IF EXISTS assegnatari;
 
@@ -12682,7 +12686,11 @@ INSERT INTO assegnatari ( nome,cognome,data_decesso,comune_decesso,data_update,d
   ( 'Stefano', 'Rossi','2023-09-20','Sant Egidio alla Vibrata', '2023-09-20','2023-09-25',1),
   ( 'Vincenzo','D Auri', '2020-02-4','Ascoli Piceno','2023-03-5','2020-02-8',3),
   ( 'Samuel','Feliciani', '2023-04-5','Giulianova', '2023-04-8','2023-04-8',2),
-  ( 'Antonio','Rizzo', '2023-04-5','Giulianova', '2023-04-8','2023-04-8',2);
+  ( 'Antonio','Rizzo', '2023-04-5','Giulianova', '2023-04-8','2023-04-8',2),
+  ('Giuseppe', 'Rossi', '2023-09-25', 'Giulianova', '2023-09-25', '2023-09-25', 1),
+  ('Maria', 'Verdi', '2023-09-20', 'Montorio al Vomano', '2023-09-21', '2023-09-21', 2),
+  ('Francesca', 'Sabatini', '2023-07-10', 'Atri', '2023-07-12', '2023-07-12', 3),
+  ('Giovanni', 'Tosti', '2023-05-15', 'Teramo', '2023-05-18', '2023-05-18', 1);
 	
 
 DROP TABLE IF EXISTS contraenti;
@@ -12726,7 +12734,10 @@ INSERT INTO contraenti (nome, cognome, comune_nascita, provincia_nascita, stato_
   ('Roberto', 'Galli', 'Ascoli Piceno', 'AP', 'Italia', '1988-09-18', 'Ascoli Piceno', 'AP', 'Via delle Marche', 9, 63100, 3471225689, 'GLLRRT88P18A470D', 'robertogalli@fastweb.it', '', 3, '2023-03-05', '2023-03-05'),
   ('Francesca', 'Pastore', 'Montorio al Vomano', 'TE', 'Italia', '1994-01-02', 'Montorio al Vomano', 'TE', 'Viale del Lavoro', 7, 64046, 3277569083, 'PSTFNC94A42D156D', 'francescapastore@libero.it', '', 2, '2023-01-20', '2023-01-20'),
   ('Giuseppe', 'Fiorini', 'Alba Adriatica', 'TE', 'Italia', '1986-04-10', 'Alba Adriatica', 'TE', 'Via delle Palme', 21, 64011, 0861882345, 'FRNGPP86D10A536Q', 'giuseppefiorini@gmail.com', '', 1, '2023-02-12', '2023-02-12'),
-  ('Simona', 'Moro', 'Teramo', 'TE', 'Italia', '1999-12-30', 'Teramo', 'TE', 'Via Manzoni', 3, 64100, 3271234567, 'MRSSMN99T30L219R', 'simonamoro@libero.it', '', 3, '2023-04-01', '2023-04-01');
+  ('Simona', 'Moro', 'Teramo', 'TE', 'Italia', '1999-12-30', 'Teramo', 'TE', 'Via Manzoni', 3, 64100, 3271234567, 'MRSSMN99T30L219R', 'simonamoro@libero.it', '', 3, '2023-04-01', '2023-04-01'),
+  ('Alessandro', 'Bianchi', 'Giulianova', 'TE', 'Italia', '1985-06-10', 'Giulianova', 'TE', 'Via Marina', 10, '64021', '3274567890', 'BNCALD85H10G377Z', 'alessandro.bianchi@libero.it', '', 1, '2023-09-25', '2023-09-25'),
+  ('Sofia', 'Lombardi', 'Montorio al Vomano', 'TE', 'Italia', '1991-02-25', 'Teramo', 'TE', 'Via della Stazione', 5, '64000', '3478956321', 'LMBSFN91B25G377B', 'sofia.lombardi@tiscali.it', '', 2, '2023-09-25', '2023-09-25'),
+  ('Roberto', 'Ferrari', 'Teramo', 'TE', 'Italia', '1970-04-15', 'Teramo', 'TE', 'Corso Italia', 8, '64100', '0861532467', 'FRRRRT70D15D377F', 'roberto.ferrari@gmail.com', '', 3, '2023-09-25', '2023-09-25');
 
 
 CREATE TABLE domande (
@@ -12752,7 +12763,11 @@ CREATE TABLE domande (
   (506,'2023-09-25','APERTA','LOCULO',2,1,3,2, '2023-09-25','2023-09-25'),
   (204, '2023-03-04','CHIUSA','TENUTA_DISPOSIZIONE',1,2,1,3,'2023-03-04','2020-02-8'),
   (890, '2023-04-8', 'APERTA','LOCULO',3,3,2,1, '2023-04-8','2023-04-8'),
-  (100,'2023-09-25','APERTA','LOCULO',4,4,1,1, '2023-09-25','2023-09-25');
+  (100,'2023-09-25','APERTA','LOCULO',4,4,1,1, '2023-09-25','2023-09-25'),
+  (890, '2023-09-25', 'APERTA', 'LOCULO', 6, 5, 8, 1, '2023-09-25', '2023-09-25'),
+  (204, '2023-09-24', 'CHIUSA', 'TENUTA_DISPOSIZIONE', 8, 6, 5, 2, '2023-09-24', '2023-09-24'),
+  (100, '2023-09-25', 'APERTA', 'LOCULO', 5, 7, 6, 3, '2023-09-25', '2023-09-25'),
+  (506, '2023-09-26', 'APERTA', 'LOCULO', 7, 8, 7, 1, '2023-09-26', '2023-09-26');
   
 	
 	
@@ -12774,7 +12789,54 @@ INSERT INTO contratti ( protocollo,data_inizio,data_scadenza,stato,fk_domanda,fk
   (106,'2023-09-25','2058-09-25','IN_ATTESA_PAGAMENTO',3,1, '2023-09-25','2023-09-25'),
   (405, '2023-03-4','2058-03-4','PAGATO',2,2,'2023-03-04','2020-02-8'),
   ( 450, '2023-04-8', '2058-04-8','IN_ATTESA_PAGAMENTO',1,3, '2023-04-08','2023-04-8'), 
-  ( 1, '2023-04-8', '2058-04-8','IN_ATTESA_PAGAMENTO',4,1, '2023-04-08','2023-04-8'); 
+  ( 1, '2023-04-8', '2058-04-8','IN_ATTESA_PAGAMENTO',4,1, '2023-04-08','2023-04-8'), 
+  (5001, '2023-09-25', '2058-09-25', 'IN_ATTESA_PAGAMENTO', 6, 1, '2023-09-25', '2023-09-25'),
+  (5002, '2023-09-24', '2058-09-24', 'PAGATO', 7, 2, '2023-09-24', '2023-09-24'),
+  (5003, '2023-09-25', '2058-09-25', 'IN_ATTESA_PAGAMENTO', 5, 3, '2023-09-25', '2023-09-25'),
+  (5004, '2023-09-26', '2058-09-26', 'IN_ATTESA_PAGAMENTO', 8, 1, '2023-09-26', '2023-09-26');
+  
+CREATE TABLE IF NOT EXISTS defunti (
+  id int NOT NULL IDENTITY,  
+  nome varchar(100) NOT NULL,
+  cognome varchar(100) NOT NULL, 
+  data_nascita date NOT NULL,
+  provincia_nascita varchar(100) NOT NULL,
+  comune_nascita varchar(100) NOT NULL,  
+  data_decesso date NOT NULL,
+  provincia_decesso varchar(100) NOT NULL,
+  comune_decesso varchar(100) NOT NULL, 
+  immagine_url varchar(255) NULL,
+  elogio_funebre varchar(1000) NULL,  
+  data_update date NULL,
+  data_insert date NULL
+);
+
+INSERT INTO defunti (
+    nome, cognome, data_nascita, provincia_nascita, comune_nascita,
+    data_decesso, provincia_decesso, comune_decesso, elogio_funebre
+) VALUES
+('Giovanni', 'Rossi', '1940-05-12', 'Milano', 'Sesto San Giovanni', '2020-11-01', 'Varese', 'Varese', 'Persona gentile e amata da tutti.'),
+('Maria', 'Bianchi', '1955-08-23', 'Torino', 'Moncalieri', '2019-07-15', 'Cuneo', 'Bra', 'Una donna forte e coraggiosa.'),
+('Luca', 'Verdi', '1932-02-10', 'Roma', 'Fiumicino', '2018-03-20', 'Roma', 'Frascati', 'Sempre disponibile con il prossimo.'),
+('Anna', 'Neri', '1960-12-05', 'Firenze', 'Scandicci', '2021-09-10', 'Arezzo', 'Cortona', 'Il suo sorriso rimarrà nel cuore di tutti.'),
+('Marco', 'Russo', '1948-11-30', 'Napoli', 'Pozzuoli', '2017-06-25', 'Caserta', 'Aversa', 'Un uomo di grande onestà e umiltà.'),
+('Elena', 'Fontana', '1972-07-14', 'Bologna', 'Imola', '2022-01-05', 'Ravenna', 'Faenza', 'La sua gentilezza illuminava le giornate.'),
+('Paolo', 'Galli', '1938-09-09', 'Genova', 'Chiavari', '2016-12-12', 'Savona', 'Albenga', 'Amato da amici e famiglia.'),
+('Sofia', 'Conti', '1950-04-28', 'Padova', 'Este', '2020-08-30', 'Vicenza', 'Thiene', 'Un’anima gentile e generosa.'),
+('Alessandro', 'Marini', '1945-10-15', 'Perugia', 'Foligno', '2019-05-22', 'Terni', 'Orvieto', 'Uomo di grande cultura e passione.'),
+('Laura', 'Ricci', '1968-03-18', 'Lecce', 'Gallipoli', '2021-11-11', 'Brindisi', 'Ostuni', 'Sempre vicina agli amici e alla famiglia.'),
+('Maria Antonietta', 'Di Giacomo', '1942-03-15', 'Napoli', 'Torre Annunziata', '2021-04-18', 'Salerno', 'Nocera Inferiore', 'Donna di grande cuore e forza.'),
+('Giuseppe', 'D''Angelo', '1930-11-02', 'Palermo', 'Bagheria', '2015-02-14', 'Trapani', 'Marsala', 'Amato da tutti, ha lasciato un segno profondo.'),
+('Lorenzo', 'd''Amico', '1951-06-25', 'Roma', 'Ostia', '2023-10-09', 'Latina', 'Aprilia', 'Intellettuale e spirito libero.'),
+('Anna Maria', 'De Luca', '1965-01-30', 'Bari', 'Altamura', '2020-02-28', 'Bari', 'Trani', 'Sempre presente con il suo sorriso.'),
+('Luigi', 'Lo Monaco', '1944-07-17', 'Catania', 'Acireale', '2019-12-05', 'Catania', 'Giarre', 'Esempio di bontà e dedizione.'),
+('Francesca', 'Dell''Oro', '1957-09-08', 'Como', 'Cantù', '2022-06-11', 'Lecco', 'Merate', 'Una madre e moglie amorevole.'),
+('Andrea', 'Sanna', '1946-10-19', 'Cagliari', 'Iglesias', '2017-08-03', 'Oristano', 'Cabras', 'Persona onesta, lavoratore instancabile.'),
+('Elisabetta', 'De Santis', '1939-12-22', 'Roma', 'Pomezia', '2021-07-20', 'Roma', 'Ciampino', 'La sua dolcezza rimarrà con noi per sempre.'),
+('Giulia', 'L''Abbate', '1962-05-03', 'Taranto', 'Martina Franca', '2020-09-14', 'Brindisi', 'Fasano', 'Energia contagiosa e cuore generoso.'),
+('Vincenzo', 'Sant''Anna', '1959-03-11', 'Reggio Calabria', 'Siderno', '2023-03-21', 'Catanzaro', 'Lamezia Terme', 'Ha donato amore in ogni gesto.');
+
+
   
 DROP TABLE IF EXISTS cap_comuni;
 

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DomandaFull } from './app-state/models/domandaFull.model';
-import { Domanda, Posto1 } from './app-state/models';
+import { Domanda, Posto } from './app-state/models';
 import { DomandaSearch } from './app-state/models/domandaSearch.model';
-import { ContrattiSearch } from './app-state/models/contrattiSearch.model';     
 import {HttpParams} from "@angular/common/http";
+import { ContrattiSearch } from './app-state/models/contrattiSearch.model';
 
     
 
@@ -35,8 +35,12 @@ export class AppService {
     return this.http.post(this.rootURL + '/search_user', user);
   }
 
-  cercaPosti(posti1: any) {
-    return this.http.post(this.rootURL + '/search_posti',posti1);
+  cercaPosti(posti1: any, page: number, size: number) {
+    const options = 
+    {params: new HttpParams().set('page', page)
+                             .set('size', size)
+    };
+    return this.http.post(this.rootURL + '/search_posti', posti1, options);
   }
 
   cercaCercacontraenti(contraenti1: any, page: number, size: number) {
@@ -45,6 +49,14 @@ export class AppService {
                               .set(('size'), size)
      };
     return this.http.post(this.rootURL + '/search_contraenti' ,contraenti1, options);
+  }
+
+  cercaDefunti(ricerca: string) {
+    return this.http.post(this.rootURL + '/search_defunti', { ricerca: ricerca });
+  }
+
+  cercaDefuntoById(id: number) {
+    return this.http.get(this.rootURL + '/defunto/' + id);
   }
 
   getPosti() {
@@ -122,7 +134,7 @@ export class AppService {
 
   addDomanda(domanda: any, id: number) {
     domanda.id = id;
-	return this.http.post(this.rootURL + '/domanda', domanda);
+	  return this.http.post(this.rootURL + '/domanda', domanda);
   }
 
   addDomandaFull(domandaFullForm: any) {
@@ -150,7 +162,11 @@ export class AppService {
   }
 
 
-  cercaDomandeService(domandaForm: any) {
+  cercaDomandeService(domandaForm: any, page: number, size: number) {
+    const options = 
+    { params: new HttpParams().set(('page'), page)
+                              .set(('size'), size)
+    };
     let  ds = new DomandaSearch();
     ds.nome = domandaForm.nome;
     ds.cognome = domandaForm.cognome;
@@ -160,9 +176,13 @@ export class AppService {
     ds.tipologia = domandaForm.tipologia;
     ds.numeroProtocollo = domandaForm.numero_protocollo;
     ds.stato = domandaForm.stato;
-	  return this.http.post(this.rootURL + '/search_domande', ds);
+	  return this.http.post(this.rootURL + '/search_domande', ds, options);
   }
-  cercaContrattiService(contrattoForm: any) {
+  cercaContrattiService(contrattoForm: any, page: number, size: number) {
+    const options = 
+    { params: new HttpParams().set(('page'), page)
+                              .set(('size'), size)
+    };
     let  ds = new ContrattiSearch();
     ds.nome = contrattoForm.nome;
     ds.cognome = contrattoForm.cognome;
@@ -172,7 +192,7 @@ export class AppService {
     ds.tipologia = contrattoForm.tipologia;
     ds.numeroProtocollo = contrattoForm.numero_protocollo;
     ds.stato = contrattoForm.stato;
-	  return this.http.post(this.rootURL + '/search_contratti', ds);
+	  return this.http.post(this.rootURL + '/search_contratti', ds, options);
   }
   //Metodo per recuperare un singolo oggetto comune tramite id
   // getComuneById(id: number) {

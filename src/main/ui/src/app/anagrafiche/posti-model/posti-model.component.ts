@@ -1,5 +1,7 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatTableDataSource } from '@angular/material/table';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import {  Posto1 } from 'src/app/app-state/models';
@@ -26,11 +28,29 @@ posto1: Posto1 = new Posto1();
 
   posti: any[] = [];
 
+  //Elementi tabella material
+  dataSource = new MatTableDataSource<Posto1>([]);
+  displayedColumns: string[] = ['checkbox', 'stato', 'loculo', 'fornice', 'nome', 'cognome', 'scadenza'];
 
-  filtraPosti(postoForm: Posto1) {
-    this.appService.cercaPosti(postoForm).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-      this.postoCount =data.length;
-      this.posti = data.posti;
+  //Elementi paginator
+  totalElements = 0;
+  pageSize;
+  currentPage = 0;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+  }
+
+  filtraPosti(postoForm: Posto1, resetPage: boolean = false) {
+    if(resetPage) {
+      this.paginator.pageIndex = 0;
+    }
+    this.appService.cercaPosti(postoForm, this.paginator.pageIndex, this.paginator.pageSize).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
+      this.totalElements = data.posti.totalElements;
+      this.posti = data.posti.content;
+      this.dataSource = data.posti.content;
       });
   }
 
@@ -57,5 +77,17 @@ posto1: Posto1 = new Posto1();
       $('#postiModal').modal('hide');
       
     
+    }
+
+    //Funzione per impedire di selezionare più di un checkbox
+    setCheckboxes(isChecked: boolean, id: string){
+      isChecked && this.posti.forEach(posti => {
+        if (posti.id !== id) posti.checked = false;
+      });
+    }
+
+    //Metodo per gestire il cambio di pagina del paginator
+    onPageChange(event: any){
+      this.filtraPosti(this.posto1);
     }
 }

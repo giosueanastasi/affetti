@@ -12,6 +12,8 @@ import { DomandeComponent } from './anagrafiche/domanda/domande.component';
 import { DomandaFullComponent } from './anagrafiche/domanda-full/domanda-full.component';
 import { LoginComponent } from './guest/login/login.component';
 import { RegisterComponent } from './guest/register/register.component';
+import { CercadefuntiComponent } from './anagrafiche/cercadefunti/cercadefunti.component';
+import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/dettaglio-defunto.component';
 
 
 const routes: Routes = [
@@ -27,6 +29,8 @@ const routes: Routes = [
   {path:'domandaFull', component: DomandaFullComponent},
   {path:'login', component: LoginComponent},
   {path:'register', component: RegisterComponent}
+  {path:'cercadefunti', component: CercadefuntiComponent},
+  {path:'defunti/:id', component: DettaglioDefuntoComponent},
 ];
 
 @NgModule({

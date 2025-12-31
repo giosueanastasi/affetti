@@ -84,7 +84,7 @@
             </div>
             <br>
             <div class="row">
-              <button class="btn btn-info col-md-2"  (click)="cercaDomande(domandaForm)">Cerca</button>
+              <button class="btn btn-info col-md-2"  (click)="cercaDomande(domandaForm, true)">Cerca</button>
               <div class="col-md-8"></div>
               <button input type="reset" class="btn btn-danger col-md-2" type="reset">Svuota Filtri</button>
             </div>
@@ -93,7 +93,7 @@
     <br>
      </div>
       <h2>Domande</h2>
-      <table class="table table-bordered">
+      <!-- <table class="table table-bordered">
       <thead>
         <tr>
           <th>N.Protocollo</th>
@@ -118,9 +118,74 @@
           <td><button class="btn btn-primary me-1" (click)="editDomandaRequest(domanda)" >Dettaglio</button></td>
         </tr>
       </tbody>
-      </table>
+      </table> -->
+
+      <div class="mat-elevation-z8">
+        <table mat-table [dataSource]="dataSource">
+
+        <!-- Colonna nome -->
+        <ng-container matColumnDef="numeroProtocolloDomanda">
+          <th mat-header-cell *matHeaderCellDef> N.Protocollo </th>
+          <td mat-cell *matCellDef="let element"> {{element.numeroProtocolloDomanda}} </td>
+        </ng-container>
+
+        <!-- Colonna stato -->
+        <ng-container matColumnDef="stato">
+          <th mat-header-cell *matHeaderCellDef> Stato </th>
+          <td mat-cell *matCellDef="let element"> {{element.stato}} </td>
+        </ng-container>
+
+        <!-- Colonna dataProtocollo -->
+        <ng-container matColumnDef="dataProtocollo">
+          <th mat-header-cell *matHeaderCellDef> Data Protocollo </th>
+          <td mat-cell *matCellDef="let element"> {{element.dataProtocollo | date: 'dd/MM/YYYY'}} </td>
+        </ng-container>
+
+        <!-- Colonna nomeContraente -->
+        <ng-container matColumnDef="nomeContraente">
+          <th mat-header-cell *matHeaderCellDef> Nome Contraente </th>
+          <td mat-cell *matCellDef="let element"> {{element.nomeContraente}} </td>
+        </ng-container>
+
+        <!-- Colonna cognomeContraente -->
+        <ng-container matColumnDef="cognomeContraente">
+          <th mat-header-cell *matHeaderCellDef> Cognome Contraente </th>
+          <td mat-cell *matCellDef="let element"> {{element.cognomeContraente}} </td>
+        </ng-container>
+
+        <!-- Colonna assegnatario -->
+        <ng-container matColumnDef="assegnatario">
+          <th mat-header-cell *matHeaderCellDef> Assegnatario </th>
+          <td mat-cell *matCellDef="let element"> {{element.cognomeAss}} {{element.nomeAss}} </td>
+        </ng-container>
+
+        <!-- Colonna contratto -->
+        <ng-container matColumnDef="contratto">
+          <th mat-header-cell *matHeaderCellDef> Contratto </th>
+          <td mat-cell *matCellDef="let element"> <button class="btn btn-primary me-1" (click)="showContratto(element)" >Dettaglio</button> </td>
+        </ng-container>
+
+        <!-- Colonna dettaglio -->
+        <ng-container matColumnDef="dettaglio">
+          <th mat-header-cell *matHeaderCellDef> Dettaglio </th>
+          <td mat-cell *matCellDef="let element"> <button class="btn btn-primary me-1" (click)="editDomandaRequest(element)" >Dettaglio</button> </td>
+        </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                    showFirstLastButtons
+                    [length]="totalElements"
+                    [pageSize]="pageSize"
+                    (page)="onPageChange($event)"
+                    
+                    aria-label="Seleziona la pagina dei contraenti">
+    </mat-paginator>
+   </div>
      </div>
 
-     <app-domanda-model [domanda]="selectedDomanda" (save)="saveDomandaWatcher($event)"></app-domanda-model>
-     <app-contratto-model *ngIf="selectedContratto" [contratto]="selectedContratto" ></app-contratto-model>
+     <app-domanda-model [domanda]="selectedDomanda" (save)="onPageChange($event)"></app-domanda-model>
+     <app-contratto-model *ngIf="selectedContratto" [contratto]="selectedContratto" (save)="onPageChange($event)"></app-contratto-model>
      

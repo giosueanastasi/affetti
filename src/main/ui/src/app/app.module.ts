@@ -44,6 +44,8 @@ import { DomandaModelComponent } from './anagrafiche/domanda-model/domanda-model
 import { ContrattoModelComponent } from './anagrafiche/contratto-model/contratto-model.component';
 import { AppService } from './app.service';
 import { AuthInterceptor } from './security/auth.interceptor';
+import { CercadefuntiComponent } from './anagrafiche/cercadefunti/cercadefunti.component';
+import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/dettaglio-defunto.component';
 
 
 // state related imports
@@ -80,6 +82,8 @@ import { AuthInterceptor } from './security/auth.interceptor';
     PopupComponent,
     PostoEditComponent,
     DomandaModelComponent,
+    CercadefuntiComponent,
+    DettaglioDefuntoComponent,
     
     
     
@@ -151,5 +155,4 @@ import { AuthInterceptor } from './security/auth.interceptor';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
 

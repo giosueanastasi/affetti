@@ -1,182 +1,460 @@
 <div class="container">
-    <div class="row">
-      <div class=" mrgnbtm">
-        <h2>Creazione Nuova Domanda</h2>
-        
-        <form  [formGroup]="domandaFullForm" >
-          <div class="row ">
-            <h4>Protocollo </h4>
-            <!--Campi relativi al Protocollo-->
-            <div class="col-12 mb-3 d-flex gap-3 flex-wrap">
-              <label class="col-2 col-md-1 " for="Numero">Numero</label>
-              <div class="form-group col-9 col-sm-8 col-md-3 ">
-                <input type="text" class="form-control" formControlName="protocollo" id="protocollo" aria-describedby="protocollolHelp"  >
-              </div>
-              <label class="col-md-1 col-2 "for="Data">Data</label>
-              <div class="form-group col-md-3 col-sm-8 col-9">
-                <input ng-model="answers.dob" type="date" class="form-control" formControlName="data_protocollo" id="data_protocollo" aria-describedby="data_protocollolHelp" >
-              </div>
-              <div class="form-group ms-auto col-12 col-md-2 text-end order-md-1 order-0" >
-                <button  class="btn btn-info" (click)="generaProtocollo()" >Genera Protocollo</button>
-              </div>
+  <div class="row">
+    <div class="mrgnbtm">
+      <h2>Creazione Nuova Domanda</h2>
+
+      <form [formGroup]="domandaFullForm" id="domanda-full-form">
+        <div class="row">
+          <h4>Protocollo</h4>
+          <!--Campi relativi al Protocollo-->
+          <div class="col-12 mb-3 d-flex gap-3 flex-wrap">
+            <label class="col-2 col-md-1" for="Numero">Numero</label>
+            <div class="form-group col-9 col-sm-8 col-md-3">
+              <!--[class.is-invalid] aggiunge la classe "is-invalid" di bootstrap all'input sulla base del suo stato-->
+              <input
+                type="text"
+                class="form-control"
+                formControlName="protocollo"
+                id="protocollo"
+                aria-describedby="protocollolHelp"
+                [class.is-invalid]="domandaFullForm.controls.protocollo.invalid"
+              />
             </div>
-            <!--Campi relativi alla tipologia di loculo-->
-            <div class="col-12 mb-3 d-flex gap-3 flex-wrap">
-              <label class="col-md-1 col-9 "for="Data">Tipologia</label>
-              <div class="form-check" class="form-group col-md-2 col-9">
-                <input
-                  id="loculo"
-                  type="radio"
-                  value="LOCULO"
-                  name="tipologia"
-                  formControlName="tipologia"
-                />
-                <label class="custom-control-label" for="loculo" style="font-size: medium;">Loculo</label>
-              </div>
-              <div class="form-check" class="form-group col-md-3 col-9 flex-fill">
-                <input
-                  id="tenuta_a_disposizione"
-                  type="radio"
-                  value="TENUTA_DISPOSIZIONE"
-                  name="tipologia"
-                  formControlName="tipologia"
-                />
-                <label class="custom-control-label" for="tenuta_a_disposizione" style="font-size: medium;">Tenuta a disposizione</label>
-              </div>
+            <label class="col-md-1 col-2" for="Data">Data</label>
+            <div class="form-group col-md-3 col-sm-8 col-9">
+              <input
+                ng-model="answers.dob"
+                type="date"
+                class="form-control"
+                formControlName="data_protocollo"
+                id="data_protocollo"
+                aria-describedby="data_protocollolHelp"
+                [class.is-invalid]="
+                  domandaFullForm.controls.data_protocollo.invalid
+                "
+              />
             </div>
+            <div
+              class="form-group ms-auto col-12 col-md-2 text-end order-md-1 order-0"
+            >
+              <button class="btn btn-info" (click)="generaProtocollo()">
+                Genera Protocollo
+              </button>
+            </div>
+          </div>
+          <!--Campi relativi alla tipologia di loculo-->
+          <div class="col-12 mb-3 d-flex gap-3 flex-wrap">
+            <label class="col-md-1 col-9" for="Data">Tipologia</label>
+
+            <div class="form-check" class="form-group col-md-2 col-9">
+              <input
+                id="loculo_radio"
+                class="form-check-input"
+                type="radio"
+                value="LOCULO"
+                name="tipologia"
+                formControlName="tipologia"
+                [class.is-invalid]="domandaFullForm.get('tipologia').invalid"
+              />
+              <label
+                class="custom-control-label"
+                for="loculo_radio"
+                style="font-size: medium"
+                >Loculo</label
+              >
+            </div>
+
+            <div class="form-check" class="form-group col-md-3 col-9 flex-fill">
+              <input
+                id="tenuta_a_disposizione_radio"
+                class="form-check-input"
+                type="radio"
+                value="TENUTA_DISPOSIZIONE"
+                name="tipologia"
+                formControlName="tipologia"
+                [class.is-invalid]="domandaFullForm.get('tipologia').invalid"
+              />
+              <label
+                class="custom-control-label"
+                for="tenuta_a_disposizione_radio"
+                style="font-size: medium"
+                >Tenuta a disposizione</label
+              >
+            </div>
+
+            <div
+              class="invalid-feedback d-block"
+              *ngIf="domandaFullForm.get('tipologia').invalid"
+            >
+              Seleziona una tipologia
+            </div>
+            
+          </div>
           <!--Pulsante crea nuovo contraente-->
           <div class="col-12 text-end">
-            <button class="btn btn-info mx-auto" (click)="creaContraente()">Nuovo Contraente</button>
+            <button class="btn btn-info mx-auto" (click)="creaContraente()">
+              Nuovo Contraente
+            </button>
           </div>
           <h4>Dati Contraente</h4>
           <!--Campi relativi ai dati anagrafici del contraente-->
           <div class="col-12 d-flex gap-3 flex-wrap">
-            <label class="col-md-1 col-2 order-md-0 order-1"for="nome">Nome</label>
+            <label class="col-md-1 col-2 order-md-0 order-1" for="nome"
+              >Nome</label
+            >
             <div class="form-group col-md-3 col-sm-8 col-9 order-md-0 order-1">
               <!-- <input  type="text" class="form-control notEdit" formControlName="fk_contraente" id="fk_contraente" > -->
-              <input  type="text" class="form-control notEdit" formControlName="nome" id="nome" aria-describedby="nomelHelp"  readonly>
+              <input
+                type="text"
+                class="form-control notEdit"
+                formControlName="nome"
+                id="nome"
+                aria-describedby="nomelHelp"
+                readonly
+                [class.is-invalid]="domandaFullForm.controls.nome.invalid"
+              />
             </div>
-            <label class="col-md-1 col-2 order-md-0 order-1"for="cognome">Cognome</label>
+            <label class="col-md-1 col-2 order-md-0 order-1" for="cognome"
+              >Cognome</label
+            >
             <div class="form-group col-md-3 col-sm-8 col-9 order-md-0 order-1">
-              <input type="text" class="form-control notEdit" formControlName="cognome" id="cognome" aria-describedby="cognomelHelp"  readonly>
+              <input
+                type="text"
+                class="form-control notEdit"
+                formControlName="cognome"
+                id="cognome"
+                aria-describedby="cognomelHelp"
+                readonly
+                [class.is-invalid]="domandaFullForm.controls.cognome.invalid"
+              />
             </div>
-            <div class="form-group ms-auto col-12 col-md-2 text-end order-md-1 order-0"  ><button  class="btn btn-info" (click)="cercaContraente()" >Cerca Contraente</button></div>
+            <div
+              class="form-group ms-auto col-12 col-md-2 text-end order-md-1 order-0"
+            >
+              <button class="btn btn-info" (click)="cercaContraente()">
+                Cerca Contraente
+              </button>
+            </div>
           </div>
           <h4>Dati Nascita</h4>
           <!--Campi relativi alla data di nascita-->
           <div class="col-12 d-flex gap-3 flex-wrap flex-lg-nowrap">
-            <label class="col-md-1 col-2"for="comune_nascita">Comune</label>
+            <label class="col-md-1 col-2" for="comune_nascita">Comune</label>
             <div class="form-group col-lg-3 col-md-3 col-sm-8 col-9">
-              <input type="text" class="form-control notEdit" formControlName="comune_nascita" id="comune_nascita" aria-describedby="comune_nascitalHelp"  readonly>
+              <input
+                type="text"
+                class="form-control notEdit"
+                formControlName="comune_nascita"
+                id="comune_nascita"
+                aria-describedby="comune_nascitalHelp"
+                readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.comune_nascita.invalid
+                "
+              />
             </div>
-            <label class="col-md-1 col-2"for="provincia_nascita">Provincia</label>
+            <label class="col-md-1 col-2" for="provincia_nascita"
+              >Provincia</label
+            >
             <div class="form-group col-lg-1 col-md-2 col-sm-8 col-9">
-              <input type="text" class="form-control notEdit" formControlName="provincia_nascita" id="provincia_nascita" aria-describedby="provincia_nascitalHelp"  readonly>
+              <input
+                type="text"
+                class="form-control notEdit"
+                formControlName="provincia_nascita"
+                id="provincia_nascita"
+                aria-describedby="provincia_nascitalHelp"
+                readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.provincia_nascita.invalid
+                "
+              />
             </div>
-            <label class="col-md-1 col-2 flex-shrink-1" for="stato_nascita">Stato</label>
+            <label class="col-md-1 col-2 flex-shrink-1" for="stato_nascita"
+              >Stato</label
+            >
             <div class="form-group col-lg-2 col-md-2 col-sm-8 col-9">
-              <input type="text" class="form-control notEdit" formControlName="stato_nascita" id="stato_nascita" aria-describedby="stato_nascitalHelp"  readonly>
+              <input
+                type="text"
+                class="form-control notEdit"
+                formControlName="stato_nascita"
+                id="stato_nascita"
+                aria-describedby="stato_nascitalHelp"
+                readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.stato_nascita.invalid
+                "
+              />
             </div>
-            <label class="col-md-1 col-2 flex-shrink-1"for="data_nascita">Data</label>
+            <label class="col-md-1 col-2 flex-shrink-1" for="data_nascita"
+              >Data</label
+            >
             <div class="form-group col-lg-2 col-md-3 col-sm-8 col-9">
-              <input  type="text" class="form-control notEdit" formControlName="data_nascita" id="data_nascita" aria-describedby="data_nascitalHelp"  readonly>
+              <input
+                type="text"
+                class="form-control notEdit"
+                formControlName="data_nascita"
+                id="data_nascita"
+                aria-describedby="data_nascitalHelp"
+                readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.data_nascita.invalid
+                "
+              />
             </div>
           </div>
           <h4>Dati Residenza</h4>
           <!--Campi relativi alla residenza-->
-          <div class="col-12 d-flex gap-3 mb-3 flex-md-nowrap flex-wrap ">
-            <label class="col-md-1 col-2"for="comune_residenza">Comune</label>
+          <div class="col-12 d-flex gap-3 mb-3 flex-md-nowrap flex-wrap">
+            <label class="col-md-1 col-2" for="comune_residenza">Comune</label>
             <div class="form-group col-md-3 col-sm-8 col-9">
-              <input type="text" class="form-control notEdit" formControlName="comune_residenza" id="comune_residenza" aria-describedby="comune_residenzalHelp"  readonly>
+              <input
+                type="text"
+                class="form-control notEdit"
+                formControlName="comune_residenza"
+                id="comune_residenza"
+                aria-describedby="comune_residenzalHelp"
+                readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.comune_residenza.invalid
+                "
+              />
             </div>
-            <label class="col-md-1 col-2"for="provincia_residenza">Provincia</label>
+            <label class="col-md-1 col-2" for="provincia_residenza"
+              >Provincia</label
+            >
             <div class="form-group col-md-1 col-sm-8 col-9">
-              <input type="text" class="form-control notEdit" formControlName="provincia_residenza" id="provincia_residenza" aria-describedby="provincia_residenzalHelp"  readonly>
+              <input
+                type="text"
+                class="form-control notEdit"
+                formControlName="provincia_residenza"
+                id="provincia_residenza"
+                aria-describedby="provincia_residenzalHelp"
+                readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.provincia_residenza.invalid
+                "
+              />
             </div>
-            <label class="col-md-1 col-2"for="via_residenza">Indirizzo</label>
+            <label class="col-md-1 col-2" for="via_residenza">Indirizzo</label>
             <div class="form-group col-md-3 col-sm-8 col-9">
-              <input type="text" class="form-control notEdit" formControlName="via_residenza" id="via_residenza" aria-describedby="via_residenzalHelp"  readonly>
+              <input
+                type="text"
+                class="form-control notEdit"
+                formControlName="via_residenza"
+                id="via_residenza"
+                aria-describedby="via_residenzalHelp"
+                readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.via_residenza.invalid
+                "
+              />
             </div>
           </div>
           <div class="col-12 d-flex gap-3">
-            <label class="col-sm-1 "for="civico_residenza">Civico</label>
+            <label class="col-sm-1" for="civico_residenza">Civico</label>
             <div class="form-group col-sm-1">
-              <input type="text" class="form-control notEdit" formControlName="civico_residenza" id="civico_residenza" aria-describedby="civico_residenzalHelp"  readonly>
+              <input
+                type="text"
+                class="form-control notEdit"
+                formControlName="civico_residenza"
+                id="civico_residenza"
+                aria-describedby="civico_residenzalHelp"
+                readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.civico_residenza.invalid
+                "
+              />
             </div>
-            <label class="col-sm-1 "for="cap_residenza">Cap</label>
+            <label class="col-sm-1" for="cap_residenza">Cap</label>
             <div class="form-group col-sm-2">
-              <input type="text" class="form-control notEdit" formControlName="cap_residenza" id="cap_residenza" aria-describedby="cap_residenzalHelp"  readonly>
+              <input
+                type="text"
+                class="form-control notEdit"
+                formControlName="cap_residenza"
+                id="cap_residenza"
+                aria-describedby="cap_residenzalHelp"
+                readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.cap_residenza.invalid
+                "
+              />
             </div>
           </div>
           <!--Campi relativi agli altri dati-->
-          <h4>Altri Dati </h4>
+          <h4>Altri Dati</h4>
           <div class="col-12 d-flex gap-3 mb-3 flex-wrap">
-            <label class="col-md-1 col-2"for="codice_fiscale">Cod. Fiscale</label>
-            <div class="form-group col-md-3 col-sm-8 col-9 ">
-              <input type="text" class="form-control notEdit" formControlName="codice_fiscale" id="codice_fiscale" aria-describedby="codice_fiscalelHelp"  readonly>
+            <label class="col-md-1 col-2" for="codice_fiscale"
+              >Cod. Fiscale</label
+            >
+            <div class="form-group col-md-3 col-sm-8 col-9">
+              <input
+                type="text"
+                class="form-control notEdit"
+                formControlName="codice_fiscale"
+                id="codice_fiscale"
+                aria-describedby="codice_fiscalelHelp"
+                readonly
+                [class.is-invalid]="
+                  domandaFullForm.controls.codice_fiscale.invalid
+                "
+              />
             </div>
-            <label class="col-md-1 col-2 "for="email">Email</label>
-            <div class="form-group col-md-3 col-sm-8 col-9 ">
-              <input type="text" class="form-control notEdit" formControlName="email" id="email" aria-describedby="emaillHelp"  readonly>
+            <label class="col-md-1 col-2" for="email">Email</label>
+            <div class="form-group col-md-3 col-sm-8 col-9">
+              <input
+                type="text"
+                class="form-control notEdit"
+                formControlName="email"
+                id="email"
+                aria-describedby="emaillHelp"
+                readonly
+                [class.is-invalid]="domandaFullForm.controls.email.invalid"
+              />
             </div>
           </div>
           <!--Textarea per le note-->
           <div class="col-12 mb-3">
-            <label class="col-sm-1 "for="note">Note</label>
+            <label class="col-sm-1" for="note">Note</label>
             <div class="form-group col-lg">
-              <textarea class="form-control" formControlName="note" id="note" rows="3" aria-describedby="notelHelp" readonly ></textarea>
+              <textarea
+                class="form-control"
+                formControlName="note"
+                id="note"
+                rows="3"
+                aria-describedby="notelHelp"
+                readonly
+              ></textarea>
             </div>
           </div>
-          <h4>Dati Posto </h4>
+          <h4>Dati Posto</h4>
           <!--Campi relativi ai dati del post-->
           <div class="col-12 d-flex gap-3 flex-wrap">
-            <label class="col-md-1 col-2 order-md-0 order-1" for="loculo">Loculo</label>
-              <div class="form-group col-md-3 col-sm-8 col-9 order-md-0 order-1">
-              <input type="text" class="form-control" formControlName="loculo" id="loculo" aria-describedby="loculolHelp" >
+            <label class="col-md-1 col-2 order-md-0 order-1" for="loculo"
+              >Loculo</label
+            >
+            <div class="form-group col-md-3 col-sm-8 col-9 order-md-0 order-1">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="loculo"
+                id="loculo"
+                aria-describedby="loculolHelp"
+                [class.is-invalid]="domandaFullForm.controls.loculo.invalid"
+              />
             </div>
-            <label class="col-md-1 col-2 order-md-0 order-1 "for="fornice">Fornice</label>
-            <div class="form-group col-md-3 col-sm-8 col-9 order-md-0 order-1 ">
-             <input type="text" class="form-control" formControlName="fornice" id="fornice" aria-describedby="fornicelHelp" >
+            <label class="col-md-1 col-2 order-md-0 order-1" for="fornice"
+              >Fornice</label
+            >
+            <div class="form-group col-md-3 col-sm-8 col-9 order-md-0 order-1">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="fornice"
+                id="fornice"
+                aria-describedby="fornicelHelp"
+                [class.is-invalid]="domandaFullForm.controls.fornice.invalid"
+              />
             </div>
-            <div class="form-group ms-auto col-12 col-md-2 text-end order-md-1 order-0" ><button class="btn btn-info" (click)="cercaPosto()">Cerca Posto</button></div>
+            <div
+              class="form-group ms-auto col-12 col-md-2 text-end order-md-1 order-0"
+            >
+              <button class="btn btn-info" (click)="cercaPosto()">
+                Cerca Posto
+              </button>
+            </div>
           </div>
-          <h4>Assegnatario </h4>
+          <h4>Assegnatario</h4>
           <!--Campi relativi all'assegnatario-->
           <div class="col-12 d-flex gap-3 flex-wrap">
-            <label class="col-md-1 col-2"for="nomeAss">Nome</label>
-            <div class="form-group col-md-3 col-sm-8 col-9 ">
-                 <input type="text" class="form-control" formControlName="nomeAss" id="nomeAss" aria-describedby="nomeAssHelp" >
+            <label class="col-md-1 col-2" for="nomeAss">Nome</label>
+            <div class="form-group col-md-3 col-sm-8 col-9">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="nomeAss"
+                id="nomeAss"
+                aria-describedby="nomeAssHelp"
+                [class.is-invalid]="domandaFullForm.controls.nomeAss.invalid"
+              />
             </div>
-            <label class="col-md-1 col-2"for="cognomeAss">Cognome</label>
-            <div class="form-group col-md-3 col-sm-8 col-9 ">
-                 <input type="text" class="form-control" formControlName="cognomeAss" id="cognomeAss" aria-describedby="cognomeAssHelp" >
+            <label class="col-md-1 col-2" for="cognomeAss">Cognome</label>
+            <div class="form-group col-md-3 col-sm-8 col-9">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="cognomeAss"
+                id="cognomeAss"
+                aria-describedby="cognomeAssHelp"
+                [class.is-invalid]="domandaFullForm.controls.cognomeAss.invalid"
+              />
             </div>
           </div>
-          <h4>Dati Decesso </h4>
+          <h4>Dati Decesso</h4>
           <!--Campi relativi ai dati del decesso-->
           <div class="col-12 d-flex mb-3 gap-3 flex-wrap">
-            <label class="col-md-1 col-2"for="comune_decesso">Comune</label>
-            <div class="form-group col-md-3 col-sm-8 col-9 ">
-                 <input type="text" class="form-control" formControlName="comune_decesso" id="comune_decesso" aria-describedby="comune_decessoHelp" >
+            <label class="col-md-1 col-2" for="comune_decesso">Comune</label>
+            <div class="form-group col-md-3 col-sm-8 col-9">
+              <input
+                type="text"
+                class="form-control"
+                formControlName="comune_decesso"
+                id="comune_decesso"
+                aria-describedby="comune_decessoHelp"
+                [class.is-invalid]="
+                  domandaFullForm.controls.comune_decesso.invalid
+                "
+                matInput
+                [matAutocomplete]="autoDec"
+              >
+              <mat-autocomplete requireSelection #autoDec="matAutocomplete">
+              <mat-option 
+                *ngFor="let comune of comuniDecessoFiltrati | async" 
+                [value]="comune.nome"
+                (onSelectionChange)="onComuneDecSelect(comune)"
+              >
+                {{comune.nome}} 
+              </mat-option>
+              </mat-autocomplete>                
+          
             </div>
             <label class="col-md-1 col-2" for="data_decesso">Data</label>
-            <div class="form-group col-md-3 col-sm-8 col-9 ">
-              <input  ng-model="answers.dob" type="date" class="form-control" formControlName="data_decesso" id="data_decesso" aria-describedby="data_decessoHelp" >
+            <div class="form-group col-md-3 col-sm-8 col-9">
+              <input
+                ng-model="answers.dob"
+                type="date"
+                class="form-control"
+                formControlName="data_decesso"
+                id="data_decesso"
+                aria-describedby="data_decessoHelp"
+                [class.is-invalid]="
+                  domandaFullForm.controls.data_decesso.invalid
+                "
+              />
             </div>
           </div>
         </div>
-          <div class="text-end">
-              <button  input type="reset" value="cancella" class="btn btn-info me-1" >Annulla</button>
-           <button  (click)="addDomanda()" [disabled]="!domandaFullForm.valid" class="btn btn-danger">Salva</button>
+        <div class="text-end">
+          <button input type="reset" value="cancella" class="btn btn-info me-1">
+            Annulla
+          </button>
+          <button
+            (click)="addDomanda()"
+            [disabled]="!domandaFullForm.valid"
+            class="btn btn-danger"
+          >
+            Salva
+          </button>
         </div>
-          </form>
-        </div>
-        <div class="col-md-4 mrgnbtm">
-        </div>
-     </div>
-      
+      </form>
+    </div>
+    <div class="col-md-4 mrgnbtm"></div>
+  </div>
 </div>
 <app-popup></app-popup>
-<app-cercacontraenti-model (save)="assegnaContraenteWatcher($event)"></app-cercacontraenti-model>
-<app-contraenti-model (save)="saveContraenteWatcher($event)"></app-contraenti-model>
+<app-cercacontraenti-model
+  (save)="assegnaContraenteWatcher($event)"
+></app-cercacontraenti-model>
+<app-contraenti-model
+  (save)="saveContraenteWatcher($event)"
+></app-contraenti-model>
 <app-posti-model (save)="assegnaPostoWatcher($event)"></app-posti-model>

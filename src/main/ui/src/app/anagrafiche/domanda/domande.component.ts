@@ -1,57 +1,90 @@
-import { Component, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { AppService } from '../../app.service';
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
-import { ContraentiModelComponent } from '../contraenti-model/contraenti-model.component';
-import { Contratto, Domanda, Posto, Assegnatario } from 'src/app/app-state/models';
-import { DomandaModelComponent } from '../domanda-model/domanda-model.component';
-import { ContrattoModelComponent } from '../contratto-model/contratto-model.component';
-
-
+import {
+  Component,
+  EventEmitter,
+  Input,
+  OnDestroy,
+  OnInit,
+  Output,
+  ViewChild,
+} from "@angular/core";
+import { FormGroup, FormControl, Validators } from "@angular/forms";
+import { AppService } from "../../app.service";
+import { takeUntil } from "rxjs/operators";
+import { Subject } from "rxjs";
+import { ContraentiModelComponent } from "../contraenti-model/contraenti-model.component";
+import {
+  Contratto,
+  Domanda,
+  Posto,
+  Assegnatario,
+  Contraente,
+} from "src/app/app-state/models";
+import { DomandaModelComponent } from "../domanda-model/domanda-model.component";
+import { ContrattoModelComponent } from "../contratto-model/contratto-model.component";
+import { MatTableDataSource } from "@angular/material/table";
+import { DomandaSearch } from "src/app/app-state/models/domandaSearch.model";
+import { MatPaginator } from "@angular/material/paginator";
 
 @Component({
-  selector: 'app-domande',
-  templateUrl: './domande.component.html',
-  styleUrls: ['./domande.component.css']
+  selector: "app-domande",
+  templateUrl: "./domande.component.html",
+  styleUrls: ["./domande.component.css"],
 })
-
 export class DomandeComponent implements OnInit, OnDestroy {
-
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService) {}
 
   @ViewChild(DomandaModelComponent) child: DomandaModelComponent | undefined;
-  @ViewChild(ContrattoModelComponent) childContratto: ContrattoModelComponent | undefined;
-
+  @ViewChild(ContrattoModelComponent) childContratto:
+    | ContrattoModelComponent
+    | undefined;
 
   selectedDomanda: Domanda = new Domanda();
 
-  title = 'angular-nodejs-example';
+  title = "angular-nodejs-example";
 
   domandaForm = new FormGroup({
-    nome: new FormControl('', Validators.nullValidator),
-    cognome: new FormControl('', Validators.nullValidator),
-    tipologia: new FormControl('', Validators.nullValidator),
-    codice_fiscale: new FormControl('', Validators.nullValidator),
-    numero_protocollo: new FormControl('', Validators.nullValidator),
-    data_protocollo_iniziale: new FormControl('', Validators.nullValidator),
-    data_protocollo_finale: new FormControl('', Validators.nullValidator),
-    stato: new FormControl('', Validators.nullValidator)
+    nome: new FormControl("", Validators.nullValidator),
+    cognome: new FormControl("", Validators.nullValidator),
+    tipologia: new FormControl("", Validators.nullValidator),
+    codice_fiscale: new FormControl("", Validators.nullValidator),
+    numero_protocollo: new FormControl("", Validators.nullValidator),
+    data_protocollo_iniziale: new FormControl("", Validators.nullValidator),
+    data_protocollo_finale: new FormControl("", Validators.nullValidator),
+    stato: new FormControl("", Validators.nullValidator),
   });
 
   domande: any[] = [];
   domandaCount = 0;
 
-  selectedContratto: Contratto = new Contratto;
+  selectedContratto: Contratto = new Contratto();
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
+  domandaSearch: DomandaSearch = new DomandaSearch();
+
+  //Elementi tabella material
+  dataSource = new MatTableDataSource<DomandaSearch>([]);
+  displayedColumns: string[] = ['numeroProtocolloDomanda', 'stato','dataProtocollo', 'nomeContraente', 'cognomeContraente' , 'assegnatario', 'contratto', 'dettaglio'];
+
+  //Elementi paginator
+  totalElements = 0;
+  pageSize;
+  currentPage = 0;
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
+  ngAfterViewInit() {
+   this.dataSource.paginator = this.paginator;
+ }
 
   getAllDomande() {
-    this.appService.getDomande().pipe(takeUntil(this.destroy$)).subscribe((domande: any[]) => {
-      this.domandaCount = domande.length;
-      this.domande = domande;
-    });
+    this.appService
+      .getDomande()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((domande: any[]) => {
+        this.domandaCount = domande.length;
+        this.domande = domande;
+      });
   }
 
   ngOnDestroy() {
@@ -63,35 +96,46 @@ export class DomandeComponent implements OnInit, OnDestroy {
     console.log(svuotadomandeForm);
   }
 
-  cercaDomande(cercaDomandaForm: FormGroup) {
-    this.appService.cercaDomandeService(cercaDomandaForm.value).pipe(takeUntil(this.destroy$)).subscribe((data: any) => {
-      this.domande = data.domande;
-    });
+  cercaDomande(cercaDomandaForm: FormGroup, resetPage: boolean = false) {
+    if(resetPage) {
+      this.paginator.pageIndex = 0;
+    }
+    
+    this.appService
+      .cercaDomandeService(cercaDomandaForm.value, this.paginator.pageIndex, this.paginator.pageSize)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe((data: any) => {
+        this.dataSource = data.domande.content;
+        this.totalElements = data.domande.totalElements;
+      });
   }
 
-
-
   ngOnInit() {
-    console.log('esegui all domande on init');
+    console.log("esegui all domande on init");
+    this.cercaDomande(this.domandaForm);
     // this.getAllDomande();
   }
 
   editDomandaRequest(item: any) {
-    let domanda = new Domanda;
-	
-	const posto = new Posto();
-	posto.id = item.fk_posto;
-	posto.fornice = item.fornice;
-	posto.loculo = item.loculo;
-	
-	const assegnatario = new Assegnatario();
-	assegnatario.id = item.fk_assegnatario;
-	assegnatario.nome = item.nomeAss;
-	assegnatario.cognome = item.cognomeAss;
-	
-	domanda.id = item.id;
-	domanda.posto = posto;
-	domanda.assegnatario = assegnatario;
+    let domanda = new Domanda();
+
+    const posto = new Posto();
+    posto.id = item.fk_posto;
+    posto.fornice = item.fornice;
+    posto.loculo = item.loculo;
+
+    const assegnatario = new Assegnatario();
+    assegnatario.id = item.fk_assegnatario;
+    assegnatario.nome = item.nomeAss;
+    assegnatario.cognome = item.cognomeAss;
+
+    const contraente = new Contraente();
+    contraente.id = item.fk_contraente; 
+    domanda.contraente = contraente;
+
+    domanda.id = item.id;
+    domanda.posto = posto;
+    domanda.assegnatario = assegnatario;
     domanda.data_protocollo = item.dataProtocollo;
     domanda.protocollo = item.numeroProtocolloDomanda;
     domanda.tipologia = item.tipologia;
@@ -122,8 +166,7 @@ export class DomandeComponent implements OnInit, OnDestroy {
   }
 
   saveDomandaWatcher(domanda: Domanda) {
-
-    let domandaIndex = this.domande.findIndex(item => item.id === domanda.id);
+    let domandaIndex = this.domande.findIndex((item) => item.id === domanda.id);
     if (domandaIndex !== -1) {
       this.domande[domandaIndex] = domanda;
     } else {
@@ -135,8 +178,10 @@ export class DomandeComponent implements OnInit, OnDestroy {
   showContratto(item: any) {
     let contratto = new Contratto();
 
+    contratto.idContratto = item.contratto.id;  
     contratto.numeroProtocolloContratto = item.contratto.protocollo;
     contratto.dataProtocolloContratto = item.contratto.data_inizio;
+    contratto.stato = item.contratto.stato;
     contratto.dataScadenzaContratto = item.contratto.data_scadenza;
     contratto.dataProtocolloContratto = item.contratto.data_inizio;
     contratto.nomeC = item.nomeContraente;
@@ -166,5 +211,8 @@ export class DomandeComponent implements OnInit, OnDestroy {
     this.childContratto?.showContrattoModal();
   }
 
-
+  //Metodo per gestire il cambio di pagina del paginator
+  onPageChange(event: any){
+    this.cercaDomande(this.domandaForm);
+  }
 }

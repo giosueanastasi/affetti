@@ -1,6 +1,7 @@
 package it.pittysoft.affetti.entity;
 
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +11,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.validation.constraints.NotNull;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Data;
 
@@ -43,10 +47,21 @@ public class Contratti {
     private String fk_user_modifier;
     
     @Column
-    private String data_update;
+    private LocalDateTime data_update;
     
     @Column
-    private String data_insert;
+    private LocalDateTime data_insert;
+    
+    @PrePersist
+    private void onSave() {
+        data_insert = LocalDateTime.now();
+        data_update = LocalDateTime.now();
+    }
+
+    @PreUpdate
+    private void onUpdate() {
+        data_update = LocalDateTime.now();
+    }
     
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "fk_domanda")

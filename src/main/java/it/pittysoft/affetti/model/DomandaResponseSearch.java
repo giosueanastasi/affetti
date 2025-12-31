@@ -3,9 +3,11 @@ package it.pittysoft.affetti.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+
 import lombok.Data;
 
 @Data
 public class DomandaResponseSearch extends Response{
-	List<DomandaModel> domande = new ArrayList<>();
+	Page<DomandaModel> domande;
 }
