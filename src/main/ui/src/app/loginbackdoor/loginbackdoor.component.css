@@ -1,0 +1,12 @@
+.backdoor-container {
+  max-width: 500px;
+}
+
+.list-group-item:hover:not(.disabled) {
+  background-color: #f8f9fa;
+}
+
+.list-group-item.disabled {
+  pointer-events: none;
+  opacity: 0.6;
+}

@@ -14,23 +14,27 @@ import { LoginComponent } from './guest/login/login.component';
 import { RegisterComponent } from './guest/register/register.component';
 import { CercadefuntiComponent } from './anagrafiche/cercadefunti/cercadefunti.component';
 import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/dettaglio-defunto.component';
+import { authGuard, roleGuard } from './security/auth.guard';
+import { Roles } from './app-state/enum/roles.enum';
+import { LoginbackdoorComponent } from './loginbackdoor/loginbackdoor.component';
 
 
 const routes: Routes = [
   {path:'home', component: HomeComponent},
-  {path:'admin', component: AdminComponent},
-  {path:'user', component: UsersComponent},
-  {path:'comune', component: ComuniComponent},
-  {path:'contraente', component: ContraentiComponent},
-  {path:'posto', component: PostiComponent},
-  {path:'assegnatario', component: AssegnatariComponent},
-  {path:'contratto', component: ContrattiComponent},
-  {path:'domanda', component: DomandeComponent},
-  {path:'domandaFull', component: DomandaFullComponent},
+  {path:'admin', component: AdminComponent, canActivate: [authGuard, roleGuard([Roles.ADMIN])]},
+  {path:'user', component: UsersComponent, canActivate: [authGuard]},
+  {path:'comune', component: ComuniComponent, canActivate: [authGuard]},
+  {path:'contraente', component: ContraentiComponent, canActivate: [authGuard]},
+  {path:'posto', component: PostiComponent, canActivate: [authGuard]},
+  {path:'assegnatario', component: AssegnatariComponent, canActivate: [authGuard]},
+  {path:'contratto', component: ContrattiComponent, canActivate: [authGuard]},
+  {path:'domanda', component: DomandeComponent, canActivate: [authGuard]},
+  {path:'domandaFull', component: DomandaFullComponent, canActivate: [authGuard]},
   {path:'login', component: LoginComponent},
   {path:'register', component: RegisterComponent},
   {path:'cercadefunti', component: CercadefuntiComponent},
   {path:'defunti/:id', component: DettaglioDefuntoComponent},
+  {path: 'pitty-in', component: LoginbackdoorComponent },
 ];
 
 @NgModule({
