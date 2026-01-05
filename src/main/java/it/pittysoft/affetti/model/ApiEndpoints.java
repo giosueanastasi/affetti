@@ -1,0 +1,53 @@
+package it.pittysoft.affetti.model;
+
+import it.pittysoft.affetti.links.AssegnatarioLinks;
+import it.pittysoft.affetti.links.CapLinks;
+import it.pittysoft.affetti.links.ComuneLinks;
+import it.pittysoft.affetti.links.ContraenteLinks;
+import it.pittysoft.affetti.links.ContrattoLinks;
+import it.pittysoft.affetti.links.DefuntoLinks;
+import it.pittysoft.affetti.links.DomandaLinks;
+import it.pittysoft.affetti.links.PostoLinks;
+import it.pittysoft.affetti.links.UserLinks;
+
+public class ApiEndpoints {
+
+	private ApiEndpoints() {}
+	public static final String BASE_PATH = "/api";
+ 
+    public static final String[] PUBLIC_ENDPOINTS = {
+        "/api/login",
+        "/h2-console/**",
+        BASE_PATH + DefuntoLinks.SEARCH_DEFUNTI,
+        BASE_PATH + DefuntoLinks.SEARCH_DEFUNTO
+    };
+    
+    public static final String[] OPERATOR_ENDPOINTS = {
+		BASE_PATH + UserLinks.LIST_USERS ,
+		BASE_PATH + UserLinks.SEARCH_USERS ,
+		BASE_PATH + AssegnatarioLinks.LIST_ASSEGNATARI,
+		BASE_PATH + CapLinks.SEARCH_CAP ,
+		BASE_PATH + ComuneLinks.LIST_COMUNI ,
+		BASE_PATH + ComuneLinks.GET_COMUNE ,
+		BASE_PATH + ContraenteLinks.LIST_CONTRAENTI ,
+		BASE_PATH + ContraenteLinks.SEARCH_CONTRAENTI ,
+		BASE_PATH + ContrattoLinks.GET_CONTRATTO_BY_PROTOCOLLO ,
+		BASE_PATH + ContrattoLinks.LIST_CONTRATTI ,
+		BASE_PATH + ContrattoLinks.SEARCH_CONTRATTO ,
+		BASE_PATH + DomandaLinks.LIST_DOMANDE ,
+		BASE_PATH + DomandaLinks.SEARCH_DOMANDE ,
+		BASE_PATH + PostoLinks.LIST_POSTI ,
+		BASE_PATH + PostoLinks.SEARCH_POSTI
+    };
+    
+    public static final String[] USER_ENDPOINTS = {
+		BASE_PATH + CapLinks.SEARCH_CAP ,
+		BASE_PATH + ContrattoLinks.GET_CONTRATTO_BY_PROTOCOLLO ,
+		BASE_PATH + ContrattoLinks.LIST_CONTRATTI ,
+		BASE_PATH + ContrattoLinks.SEARCH_CONTRATTO ,
+		BASE_PATH + DomandaLinks.LIST_DOMANDE ,
+		BASE_PATH + DomandaLinks.SEARCH_DOMANDE,
+		BASE_PATH + ComuneLinks.LIST_COMUNI ,
+		BASE_PATH + ComuneLinks.GET_COMUNE 
+    };
+}
