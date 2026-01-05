@@ -48,6 +48,7 @@ import { CercadefuntiComponent } from './anagrafiche/cercadefunti/cercadefunti.c
 import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/dettaglio-defunto.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { HasRoleDirective } from './security/has-role.directive';
+import { LoginbackdoorComponent } from './loginbackdoor/loginbackdoor.component';
 
 
 // state related imports
@@ -87,7 +88,8 @@ import { HasRoleDirective } from './security/has-role.directive';
     CercadefuntiComponent,
     DettaglioDefuntoComponent,
     SideBarComponent,
-    HasRoleDirective
+    HasRoleDirective,
+    LoginbackdoorComponent
     
     
     
