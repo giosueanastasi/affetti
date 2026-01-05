@@ -18,32 +18,37 @@ import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
+import org.springframework.security.web.SecurityFilterChain;
+
+import it.pittysoft.affetti.model.ApiEndpoints;
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
+public class SecurityConfiguration {
 	
-	@Override
-    protected void configure(HttpSecurity http) throws Exception {
+	@Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-	        .sessionManagement()
-	        	.sessionCreationPolicy(SessionCreationPolicy.STATELESS) //Impostato come su STATELESS evita che si tenga conto del coockie JSESSION per l'autenticazione
-	        .and()
-            .csrf().disable()
-            .authorizeRequests()
-            	.antMatchers("/api/login", "/h2-console/**", "/api/search_defunti").permitAll()
-             	//.antMatchers().hasAnyRole("ADMIN", "USER")
-            	.antMatchers("/api/**").hasRole("ADMIN")
-            	.anyRequest().authenticated() //Da modificare in base a come si gestiranno i ruoli.
-	        .and()
-	        .headers().frameOptions().sameOrigin()
-	        .and()
-	        .oauth2ResourceServer().jwt()
-	        	.decoder(jwtDecoder())
-	        	.jwtAuthenticationConverter(jwtAuthenticationConverter());
-        	
-
-
+            .sessionManagement(session -> session
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .csrf(csrf -> csrf.disable())
+            .authorizeHttpRequests(auth -> auth
+                .antMatchers(ApiEndpoints.PUBLIC_ENDPOINTS).permitAll()
+                .antMatchers(ApiEndpoints.USER_ENDPOINTS).hasAnyRole("ADMIN","OPERATOR","USER")
+                .antMatchers(ApiEndpoints.OPERATOR_ENDPOINTS).hasAnyRole("ADMIN","OPERATOR")
+                .antMatchers("/api/**").hasRole("ADMIN")
+                .anyRequest().authenticated()
+            )
+            .headers(headers -> headers
+                .frameOptions(frame -> frame.sameOrigin()))
+            .oauth2ResourceServer(oauth2 -> oauth2
+                .jwt(jwt -> jwt
+                    .decoder(jwtDecoder())
+                    .jwtAuthenticationConverter(jwtAuthenticationConverter())
+                )
+            );
+        
+        return http.build();
     }
 
     @Bean
