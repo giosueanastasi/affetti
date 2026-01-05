@@ -31,8 +31,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	        .and()
             .csrf().disable()
             .authorizeRequests()
-            	.antMatchers("/api/login", "/h2-console/**").permitAll()
-            	.anyRequest().authenticated() //Da modificare in base a come si gestiranno i ruoli. N.B. Ogni ruolo ha il prefisso 'ROLE_' ed è maiuscolo
+            	.antMatchers("/api/login", "/h2-console/**", "/api/search_defunti").permitAll()
+             	//.antMatchers().hasAnyRole("ADMIN", "USER")
+            	.antMatchers("/api/**").hasRole("ADMIN")
+            	.anyRequest().authenticated() //Da modificare in base a come si gestiranno i ruoli.
 	        .and()
 	        .headers().frameOptions().sameOrigin()
 	        .and()

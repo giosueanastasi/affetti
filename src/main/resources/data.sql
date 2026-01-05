@@ -12599,7 +12599,8 @@ CREATE TABLE role (
 
 INSERT INTO role (role) VALUES
   ('admin'),
-  ('user'); 
+  ('user'), 
+  ('operator'); 
   
   DROP TABLE IF EXISTS users;
 
@@ -12617,7 +12618,8 @@ INSERT INTO users ( username,password,fk_comune) VALUES
   ( 'Stefano24', '$2a$12$fj5mxtQd8ULv80QW.ZWvVOQzZn/gkewSwYwgssuHOV7D3vis5AY7y', 4530),
   ( 'Giovanna98', '$2a$12$kz6dsCL/wx0VA8.AytV3cOpaJ9gMl.FNG4woC3rQaedBbaeoS1ED.', 4518),
   ( 'user', '$2a$12$9XsiPJIVC46JkEznSENbmeH4nvYZVJGRLnctca2j114Rj2dyDEi3S', 1),
-  ( 'admin', '$2a$12$D56Q42PcA1BH4eaAJW3gyORGCk0B9oX9RJGRj9OqCE6.fCnb0WtDG', 1);
+  ( 'admin', '$2a$12$D56Q42PcA1BH4eaAJW3gyORGCk0B9oX9RJGRj9OqCE6.fCnb0WtDG', 1),
+  ( 'operator', '$2a$12$B4kLU8xA5OhhblEeqWLNBexnVAC92o.dOUTA7EuY0/OpLM0xxB912', 1);
   
 CREATE TABLE role_users(
 	role_id int NULL,
@@ -12631,7 +12633,8 @@ INSERT INTO role_users(role_id, user_id ) VALUES
 ('2','2'),
 ('2','3'),
 ('2','4'),
-('1','5');
+('1','5'),
+('3','6');
   
   
 DROP TABLE IF EXISTS contratti; 
