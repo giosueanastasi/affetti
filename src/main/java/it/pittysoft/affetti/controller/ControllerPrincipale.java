@@ -1,19 +1,28 @@
 package it.pittysoft.affetti.controller;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
+import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,10 +30,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import javax.crypto.spec.SecretKeySpec;
 
 import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 import com.lowagie.text.DocumentException;
 
+import freemarker.template.TemplateException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import freemarker.template.TemplateException;	
 import it.pittysoft.affetti.entity.Comuni;
 import it.pittysoft.affetti.entity.Contraenti;
@@ -35,9 +48,19 @@ import it.pittysoft.affetti.links.ContraenteLinks;
 import it.pittysoft.affetti.dto.DomandeDto;
 import it.pittysoft.affetti.entity.Assegnatari;
 import it.pittysoft.affetti.entity.Cap;
+import it.pittysoft.affetti.entity.Comuni;
+import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Contratti;
 import it.pittysoft.affetti.entity.Defunti;
 import it.pittysoft.affetti.entity.Domande;
+import it.pittysoft.affetti.entity.Posti;
+import it.pittysoft.affetti.entity.Users;
+import it.pittysoft.affetti.links.AssegnatarioLinks;
+import it.pittysoft.affetti.links.CapLinks;
+import it.pittysoft.affetti.links.ComuneLinks;
+import it.pittysoft.affetti.links.ContraenteLinks;
+import it.pittysoft.affetti.links.ContrattoLinks;
+import it.pittysoft.affetti.links.DomandaLinks;
 import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
 import it.pittysoft.affetti.model.ContrattoSearchRequest;
@@ -50,6 +73,8 @@ import it.pittysoft.affetti.model.ComuniSelectResponse;
 import it.pittysoft.affetti.model.ContraentiRequest;
 import it.pittysoft.affetti.model.ContraentiResponse;
 import it.pittysoft.affetti.model.ContrattoModel;
+import it.pittysoft.affetti.model.ContrattoSearchRequest;
+import it.pittysoft.affetti.model.ContrattoSearchResponse;
 import it.pittysoft.affetti.model.ContrattoResponse;
 import it.pittysoft.affetti.model.DomandaRequest;
 import it.pittysoft.affetti.model.DomandaRequestSearch;
@@ -61,13 +86,23 @@ import it.pittysoft.affetti.model.PostiSearchResponse;
 import it.pittysoft.affetti.model.Response;
 import it.pittysoft.affetti.model.UserRequest;
 import it.pittysoft.affetti.model.UserResponse;
+import it.pittysoft.affetti.model.ProtocolloDomandaResponse;
+import it.pittysoft.affetti.model.Response;
+import it.pittysoft.affetti.model.UserRequest;
+import it.pittysoft.affetti.model.UserResponse;
+import it.pittysoft.affetti.security.AuthRequest;
+import it.pittysoft.affetti.security.AuthResponse;
+import it.pittysoft.affetti.service.AssegnatariService;
+import it.pittysoft.affetti.model.PostiSearchResponse;
+import it.pittysoft.affetti.model.Response;
+import it.pittysoft.affetti.model.UserRequest;
+import it.pittysoft.affetti.model.UserResponse;
 import it.pittysoft.affetti.repository.DefuntiRepository;
 import it.pittysoft.affetti.service.ComuniService;
 import it.pittysoft.affetti.service.ContraentiService;
-import it.pittysoft.affetti.links.ContrattoLinks;
-import it.pittysoft.affetti.links.DomandaLinks;
-import it.pittysoft.affetti.links.AssegnatarioLinks;
-import it.pittysoft.affetti.links.CapLinks;
+import it.pittysoft.affetti.service.ContrattiService;
+import it.pittysoft.affetti.service.DefuntiService;
+import it.pittysoft.affetti.service.DomandeService;
 import it.pittysoft.affetti.service.PostiService;
 import it.pittysoft.affetti.service.UsersService;
 import it.pittysoft.affetti.service.ContrattiService;
@@ -103,6 +138,12 @@ public class ControllerPrincipale {
 	@Autowired
 	DomandeService domandeService;
 	
+    @Autowired
+    AuthenticationManager authenticationManager;
+    
+	
+    String key = "chiave-segreta-temporanea-abbastanza-lunga-0123456789"; 
+    Key signingKey = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), SignatureAlgorithm.HS256.getJcaName());
 	@Autowired
 	DefuntiService defuntiService;
 	
@@ -369,6 +410,36 @@ public class ControllerPrincipale {
         }
     }
 	
+	@RequestMapping("/user")
+	public Principal user(Principal user) {
+	    return user;
+	  }
+	  
+	@PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
+		try {
+			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword());	
+			Authentication authentication = authenticationManager.authenticate(token);
+			List<String> roles = new ArrayList<String>();
+			for(GrantedAuthority auth : authentication.getAuthorities()) {
+				roles.add(auth.getAuthority().toString());
+			}
+	        SecurityContextHolder.getContext().setAuthentication(authentication);
+	        String jwt = Jwts.builder()
+	                .setSubject(authRequest.getUsername())
+	                .claim("roles", roles)
+	                .setIssuedAt(new Date())
+	                .setExpiration(new Date(System.currentTimeMillis() + 3600000))
+	                .signWith(signingKey, SignatureAlgorithm.HS256)
+	                .compact();
+
+        return ResponseEntity.ok(new AuthResponse(jwt));
+		 
+		}catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+	    }
+	}
+	
 	
 	@PostMapping(path = DefuntoLinks.SEARCH_DEFUNTI)
 	public ResponseEntity<List<Defunti>> ricercaDefunti(@RequestBody DefuntiRequest request) {
@@ -391,4 +462,5 @@ public class ControllerPrincipale {
 	} 
 
 	
+}
 }

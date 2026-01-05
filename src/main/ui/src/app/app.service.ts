@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DomandaFull } from './app-state/models/domandaFull.model';
 import { Domanda, Posto } from './app-state/models';
 import { DomandaSearch } from './app-state/models/domandaSearch.model';
@@ -18,6 +18,8 @@ export class AppService {
   constructor(private http: HttpClient) { }
 
   rootURL = '/api';
+
+  authenticated = false;
 
   getUsers() {
     return this.http.get(this.rootURL + '/users');
@@ -212,4 +214,6 @@ export class AppService {
   getNuovoProtocolloDomanda(){
     return this.http.get(this.rootURL + '/genera_protocollo_domanda');
   }
+
+
 }

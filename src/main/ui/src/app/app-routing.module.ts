@@ -10,6 +10,8 @@ import { ContrattiComponent } from './anagrafiche/contratto/contratti.component'
 import { AssegnatariComponent } from './anagrafiche/assegnatario/assegnatari.component';
 import { DomandeComponent } from './anagrafiche/domanda/domande.component';
 import { DomandaFullComponent } from './anagrafiche/domanda-full/domanda-full.component';
+import { LoginComponent } from './guest/login/login.component';
+import { RegisterComponent } from './guest/register/register.component';
 import { CercadefuntiComponent } from './anagrafiche/cercadefunti/cercadefunti.component';
 import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/dettaglio-defunto.component';
 
@@ -25,6 +27,8 @@ const routes: Routes = [
   {path:'contratto', component: ContrattiComponent},
   {path:'domanda', component: DomandeComponent},
   {path:'domandaFull', component: DomandaFullComponent},
+  {path:'login', component: LoginComponent},
+  {path:'register', component: RegisterComponent},
   {path:'cercadefunti', component: CercadefuntiComponent},
   {path:'defunti/:id', component: DettaglioDefuntoComponent},
 ];

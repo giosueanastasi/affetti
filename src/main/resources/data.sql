@@ -12586,26 +12586,55 @@ INSERT INTO comuni ( nome, COD_COMUNE_ISTAT,  COD_CATAST_COMUNE, provincia, COD_
 ('Villaputzu','111103','L998','SU','111','SUD SARDEGNA','20','SARDEGNA','Italia'),
 ('Villasor','111106','M025','SU','111','SUD SARDEGNA','20','SARDEGNA','Italia'),
 ('Villaspeciosa','111107','M026','SU','111','SUD SARDEGNA','20','SARDEGNA','Italia'); 
+
+
+DROP TABLE IF EXISTS role_users;
+DROP TABLE IF EXISTS role;
+
+CREATE TABLE role (
+  id INT NOT NULL IDENTITY,
+  role VARCHAR(10) NOT NULL,
+  PRIMARY KEY (id)
+);
+
+INSERT INTO role (role) VALUES
+  ('admin'),
+  ('user'), 
+  ('operator'); 
   
   DROP TABLE IF EXISTS users;
 
 CREATE TABLE users (
   id INT NOT NULL IDENTITY,
   username VARCHAR(20) NOT NULL,
-  password VARCHAR(50) NOT NULL,
-  ruolo VARCHAR(10) NOT NULL,
+  password VARCHAR(100) NOT NULL,
   fk_comune int NOT NULL,
   PRIMARY KEY (id),
   foreign key (fk_comune) references comuni (id)
 );
 
-INSERT INTO users ( username,password,ruolo,fk_comune) VALUES
-  (' Antonio90','dcunwencwebci', 'utente',188),
-  ( 'Stefano24', 'qecwebckw','utente',4530),
-  ( 'Giovanna98', 'ugcywie', 'utente',4518),
-  ('Marco1985', 'passwordMarco85', 'utente', 123),
-  ('Lucia2023', 'passwordLucia23', 'admin', 456),
-  ('Antonio55', 'passwordAntonio55', 'utente', 789);
+INSERT INTO users ( username,password,fk_comune) VALUES
+  ('Antonio90','$2a$12$flO.rGaJdEWoOltiRQDFTe6tFJnk4KV.ZevNtoYxzDDM07JZMBW3.', 188),
+  ( 'Stefano24', '$2a$12$fj5mxtQd8ULv80QW.ZWvVOQzZn/gkewSwYwgssuHOV7D3vis5AY7y', 4530),
+  ( 'Giovanna98', '$2a$12$kz6dsCL/wx0VA8.AytV3cOpaJ9gMl.FNG4woC3rQaedBbaeoS1ED.', 4518),
+  ( 'user', '$2a$12$9XsiPJIVC46JkEznSENbmeH4nvYZVJGRLnctca2j114Rj2dyDEi3S', 1),
+  ( 'admin', '$2a$12$D56Q42PcA1BH4eaAJW3gyORGCk0B9oX9RJGRj9OqCE6.fCnb0WtDG', 1),
+  ( 'operator', '$2a$12$B4kLU8xA5OhhblEeqWLNBexnVAC92o.dOUTA7EuY0/OpLM0xxB912', 1);
+  
+CREATE TABLE role_users(
+	role_id int NULL,
+	user_id int NULL,
+	FOREIGN key(role_id ) references role (id),
+	FOREIGN key(user_id) references users (id)
+	);
+	
+INSERT INTO role_users(role_id, user_id ) VALUES
+('2','1'),
+('2','2'),
+('2','3'),
+('2','4'),
+('1','5'),
+('3','6');
   
   
 DROP TABLE IF EXISTS contratti; 

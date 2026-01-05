@@ -1,3 +1,39 @@
-<div class="header">
-  <h1>Affetti</h1>
+<div class="header-container">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <a mat-button [routerLink]="'/home'">
+        <img width="40" alt="logo comune s.egidio"
+          src="https://upload.wikimedia.org/wikipedia/it/0/04/Sant%27Egidio_alla_Vibrata-Stemma.png"
+          style="margin-right: 20px;" />
+      </a>
+      <h1 class="my-auto me-3">Affetti</h1>
+      <div class="w-100 d-flex justify-content-between">
+        <!-- TODO 374 inizia ad impostare delle decodifiche per recuperare le parti testuali. Considera se creare componenti a parte per le navbar -->
+        <a mat-button [routerLink]="'/home'"> Home </a>
+        <div class="right-options">
+          <a mat-button [routerLink]="'/register'" *ngIf="!(authState.isAuthenticated$ | async)"> Registrati </a>
+          <a mat-button [routerLink]="'/login'" *ngIf="!(authState.isAuthenticated$ | async)"> Accedi </a>
+          <a mat-button class="ms-auto" (click)="logout()" *ngIf="authState.isAuthenticated$ | async"> Logout </a>
+        
+          <!-- FIXME Elementi utili solo per debug, da eliminare -->
+          <small class="mx-2 fw-lighter" *ngIf="authState.isAuthenticated">{{authState.username$ | async}}</small>
+          <small class="mx-2 fw-lighter" *ngIf="!authState.isAuthenticated">Nessun utente loggato</small>
+        </div>
+        
+
+        <!-- TODO capire perché erano state create queste voci -->
+        <!-- <a mat-button [routerLink]="'/accounts'"> Accounts </a>
+      <a mat-button [routerLink]="'/create-account'"> Create Account </a>
+      <a mat-button [routerLink]="'/contacts'"> Contacts </a>
+      <a mat-button [routerLink]="'/create-contact'"> Create Contact </a>
+      <a mat-button [routerLink]="'/activities'"> Activities </a>
+      <a mat-button [routerLink]="'/create-activity'"> Create Activity </a> -->
+
+      </div>
+    </mat-toolbar-row>
+
+    <!-- <mat-toolbar-row>
+      <span style="font-size: 12px;">Gestionale open-source dei tuoi cari</span>
+    </mat-toolbar-row> -->
+  </mat-toolbar>
 </div>
