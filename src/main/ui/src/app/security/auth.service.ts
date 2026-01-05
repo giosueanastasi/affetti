@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { AuthStateService } from './auth-state.service';
 
 @Injectable({
   providedIn: 'root',
@@ -8,41 +9,22 @@ import { Observable } from 'rxjs';
 export class AuthService {
   private apiUrl = 'api/login';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authState: AuthStateService) {}
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post<any>(this.apiUrl, { username, password });
+    return this.http.post<any>(this.apiUrl, { username, password }).pipe(
+      tap(response => {
+        if (response.token) {
+          localStorage.setItem('jwt', response.token);
+          this.authState.setAuthenticated(response.token);
+        }
+      })
+    );
   }
 
-  setToken(token: string) {
-    localStorage.setItem('jwt', token);
-  }
-
-  getToken(): string | null {
-    return localStorage.getItem('jwt');
-  }
-
-  logout() {
+  logout(): void {
     localStorage.removeItem('jwt');
-  }
-
-
-  isAuthenticated(): boolean {
-    return this.getToken() !== null;
-  }
-
-  getUsername(){
-    const token = this.getToken();
-    if (token) {
-      const payload = token.split('.')[1];
-      const decodedPayload = window.atob(payload);
-      const user = JSON.parse(decodedPayload);
-      return user?.sub;
-    }else{
-      return null;
-    }
-
-
+    this.authState.clearAuthentication();
   }
 
 }

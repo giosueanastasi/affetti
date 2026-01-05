@@ -46,6 +46,8 @@ import { AppService } from './app.service';
 import { AuthInterceptor } from './security/auth.interceptor';
 import { CercadefuntiComponent } from './anagrafiche/cercadefunti/cercadefunti.component';
 import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/dettaglio-defunto.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { HasRoleDirective } from './security/has-role.directive';
 
 
 // state related imports
@@ -84,7 +86,8 @@ import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/detta
     DomandaModelComponent,
     CercadefuntiComponent,
     DettaglioDefuntoComponent,
-    
+    SideBarComponent,
+    HasRoleDirective
     
     
     
