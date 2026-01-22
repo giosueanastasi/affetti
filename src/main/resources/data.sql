@@ -12606,40 +12606,145 @@ INSERT INTO users ( username,password,ruolo,fk_comune) VALUES
   ('Marco1985', 'passwordMarco85', 'utente', 123),
   ('Lucia2023', 'passwordLucia23', 'admin', 456),
   ('Antonio55', 'passwordAntonio55', 'utente', 789);
-  
-  
-DROP TABLE IF EXISTS contratti; 
-DROP TABLE IF EXISTS domande;
-DROP TABLE IF EXISTS posti;
+
+DROP TABLE IF EXISTS sepolture cascade;
+DROP TABLE IF EXISTS defunti cascade;
+DROP TABLE IF EXISTS contratti cascade;
+DROP TABLE IF EXISTS domande cascade;
+DROP TABLE IF EXISTS posti cascade;
+DROP TABLE IF EXISTS strutture cascade;
+DROP TABLE IF EXISTS tipi_sepoltura cascade;
+DROP TABLE IF EXISTS aree cascade;
+DROP TABLE IF EXISTS cimiteri cascade;
+
+CREATE TABLE cimiteri (
+	id INT NOT NULL IDENTITY,
+	codice VARCHAR(50) NOT NULL UNIQUE,
+	nome VARCHAR(100) NOT NULL,
+	indirizzo VARCHAR(255),
+	fk_comune INT NOT NULL,
+	data_update date NULL,
+	data_insert date NULL,
+	fk_user_modifier int NULL,
+	latitudine DECIMAL(10,8) NULL,
+	longitudine DECIMAL(11,8) NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (fk_comune) REFERENCES comuni (id),
+	FOREIGN KEY (fk_user_modifier) REFERENCES users (id)
+);
+
+INSERT INTO cimiteri (codice, nome, indirizzo, fk_comune, data_update, data_insert, fk_user_modifier) VALUES
+  ('CIM001', 'Cimitero Comunale', 'Via del Cimitero 1', 188, '2023-09-25', '2023-09-25', 1),
+  ('CIM002', 'Cimitero Monumentale', 'Via Monumentale 10', 4530, '2023-09-25', '2023-09-25', 1);
+
+CREATE TABLE aree (
+	id INT NOT NULL IDENTITY,
+	fk_cimitero INT NOT NULL,
+	codice VARCHAR(50) NOT NULL,
+	nome VARCHAR(100),
+	descrizione TEXT,
+	latitudine DECIMAL(10,8) NULL,
+	longitudine DECIMAL(11,8) NULL,
+	attiva BOOLEAN DEFAULT TRUE,
+	data_insert date NULL,
+	data_update date NULL,
+	fk_user_modifier int NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (fk_cimitero) REFERENCES cimiteri (id),
+	FOREIGN KEY (fk_user_modifier) REFERENCES users (id),
+	UNIQUE (fk_cimitero, codice)
+);
+
+INSERT INTO aree (fk_cimitero, codice, nome, descrizione, attiva, data_insert, data_update, fk_user_modifier) VALUES
+  (1, 'A', 'Campo A', 'Settore principale', TRUE, '2023-09-25', '2023-09-25', 1),
+  (1, 'B', 'Campo B', 'Settore nord', TRUE, '2023-09-25', '2023-09-25', 1),
+  (2, 'GALLERIA-NORD', 'Galleria Nord', 'Galleria monumentale lato nord', TRUE, '2023-09-25', '2023-09-25', 1);
+
+CREATE TABLE tipi_sepoltura (
+	id INT NOT NULL IDENTITY,
+	codice VARCHAR(50) NOT NULL UNIQUE,
+	descrizione VARCHAR(255),
+	attivo BOOLEAN DEFAULT TRUE,
+	data_insert date NULL,
+	data_update date NULL,
+	PRIMARY KEY (id)
+);
+
+INSERT INTO tipi_sepoltura (codice, descrizione, attivo, data_insert, data_update) VALUES
+  ('LOCULO', 'Loculo', TRUE, '2023-09-25', '2023-09-25'),
+  ('TOMBA', 'Tomba', TRUE, '2023-09-25', '2023-09-25'),
+  ('CAPPELLA', 'Cappella', TRUE, '2023-09-25', '2023-09-25'),
+  ('OSSARIO', 'Ossario', TRUE, '2023-09-25', '2023-09-25'),
+  ('COLOMBARIO', 'Colombario', TRUE, '2023-09-25', '2023-09-25'),
+  ('SEPOLCRO', 'Sepolcro', TRUE, '2023-09-25', '2023-09-25');
+
+CREATE TABLE strutture (
+	id INT NOT NULL IDENTITY,
+	codice VARCHAR(50) NOT NULL UNIQUE,
+	nome VARCHAR(100),
+	descrizione TEXT,
+	latitudine DECIMAL(10,8) NULL,
+	longitudine DECIMAL(11,8) NULL,
+	attiva BOOLEAN DEFAULT TRUE,
+	capienza INT DEFAULT 1,
+	data_insert date NULL,
+	data_update date NULL,
+	fk_user_modifier int NULL,
+	fk_area INT NOT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (fk_area) REFERENCES aree (id),
+	FOREIGN KEY (fk_user_modifier) REFERENCES users (id)
+);
+
+INSERT INTO strutture (codice, nome, descrizione, attiva, data_insert, data_update, fk_user_modifier, fk_area) VALUES
+  ('CIM001-A-F150', 'Fornice 150', 'Fornice numero 150 del Campo A', TRUE, '2023-09-25', '2023-09-25', 1, 1),
+  ('CIM001-A-F8', 'Fornice 8', 'Fornice numero 8 del Campo A', TRUE, '2023-09-25', '2023-09-25', 1, 1),
+  ('CIM001-A-F120', 'Fornice 120', 'Fornice numero 120 del Campo A', TRUE, '2023-09-25', '2023-09-25', 1, 1),
+  ('CIM001-B-F120', 'Fornice 120', 'Fornice numero 120 del Campo B', TRUE, '2023-09-25', '2023-09-25', 1, 2),
+  ('CIM001-B-F10', 'Fornice 10', 'Fornice numero 10 del Campo B', TRUE, '2023-09-25', '2023-09-25', 1, 2),
+  ('CIM002-GALLERIA-NORD-F12', 'Fornice 12', 'Fornice numero 12 della Galleria Nord', TRUE, '2023-09-25', '2023-09-25', 1, 3);
 
 CREATE TABLE posti (
 	id INT NOT NULL IDENTITY,
+	codice VARCHAR(100) UNIQUE,
 	loculo VARCHAR(10) NOT NULL,
 	fornice VARCHAR(10) NOT NULL,
-	tipo VARCHAR (15) ,
+	fk_tipo_sepoltura INT,
 	stato VARCHAR(15) NOT NULL,
+	fila VARCHAR(10),
+	numero VARCHAR(10),
+	piano VARCHAR(10),
 	data_update date NULL,
 	data_insert date NULL,
 	fk_user_modifier  int NULL,
+	fk_cimitero int NULL,
+	fk_area int NULL,
+	fk_struttura int NULL,
+	latitudine DECIMAL(10,8) NULL,
+	longitudine DECIMAL(11,8) NULL,
 	PRIMARY KEY (id),
-	FOREIGN key(fk_user_modifier ) references users (id)
+	FOREIGN KEY (fk_user_modifier) REFERENCES users (id),
+	FOREIGN KEY (fk_cimitero) REFERENCES cimiteri (id),
+	FOREIGN KEY (fk_area) REFERENCES aree (id),
+	FOREIGN KEY (fk_struttura) REFERENCES strutture (id),
+	FOREIGN KEY (fk_tipo_sepoltura) REFERENCES tipi_sepoltura (id)
 );
 
 
- INSERT INTO posti ( loculo,fornice,tipo,stato,data_update,data_insert,fk_user_modifier) VALUES
-  ( 15, 150, 'intermedia','LIBERO' ,'2023-09-25','2023-09-25',1),
-  ( 1, 8, 'monumentale','PRENOTATO' ,'2023-03-04','2020-02-8',2),
-  ( 14, 150, 'intermedia','DA_LIBERARE' ,'2023-09-25','2023-09-25',1),
-  ( 8,120, 'nuova', 'OCCUPATO','2023-04-8','2023-04-8',3),
-  ( 10,120, 'nuova', 'LIBERO','2023-04-8','2023-04-8',3),
-  ( 2,10, 'nuova', 'LIBERO','2023-04-8','2023-04-8',1),
-  ( 3,11, 'nuova', 'LIBERO','2023-04-8','2023-04-8',1),
-  ( 4,12, 'nuova', 'LIBERO','2023-04-8','2023-04-8',1),
-  ( 5,13, 'nuova', 'LIBERO','2023-04-8','2023-04-8',1),
-  (12, 150, 'intermedia', 'LIBERO', '2023-09-26', '2023-09-26', 1),
-  (8, 100, 'monumentale', 'OCCUPATO', '2023-09-24', '2023-09-24', 2),
-  (5, 200, 'nuova', 'PRENOTATO', '2023-09-25', '2023-09-25', 3),
-  (14, 250, 'intermedia', 'LIBERO', '2023-09-25', '2023-09-25', 1);
+ INSERT INTO posti (codice,loculo,fornice,fk_tipo_sepoltura,stato,data_update,data_insert,fk_user_modifier,fk_area,latitudine,longitudine) VALUES
+  ('CIM001-A-LOCULO-150-15', 15, 150, 1,'LIBERO' ,'2023-09-25','2023-09-25',1, 1, 42.65890000, 13.70360000),
+  ('CIM001-A-LOCULO-8-1', 1, 8, 1,'PRENOTATO' ,'2023-03-04','2020-02-8',2, 1, 42.65895000, 13.70365000),
+  ('CIM001-A-LOCULO-150-14', 14, 150, 1,'DA_LIBERARE' ,'2023-09-25','2023-09-25',1, 1, 42.65900000, 13.70370000),
+  ('CIM001-A-LOCULO-120-8', 8,120, 1, 'OCCUPATO','2023-04-8','2023-04-8',3, 1, 42.65905000, 13.70375000),
+  ('CIM001-B-LOCULO-120-10', 10,120, 1, 'LIBERO','2023-04-8','2023-04-8',3, 2, 42.65910000, 13.70380000),
+  ('CIM001-B-LOCULO-10-2', 2,10, 1, 'LIBERO','2023-04-8','2023-04-8',1, 2, 42.65915000, 13.70385000),
+  ('CIM001-B-LOCULO-11-3', 3,11, 1, 'LIBERO','2023-04-8','2023-04-8',1, 2, 42.65920000, 13.70390000),
+  ('CIM002-GALLERIA-NORD-LOCULO-12-4', 4,12, 1, 'LIBERO','2023-04-8','2023-04-8',1, 3, 42.65925000, 13.70395000),
+  ('CIM002-GALLERIA-NORD-LOCULO-13-5', 5,13, 1, 'LIBERO','2023-04-8','2023-04-8',1, 3, 42.65930000, 13.70400000),
+  ('CIM001-A-LOCULO-150-12', 12, 150, 1, 'LIBERO', '2023-09-26', '2023-09-26', 1, 1, NULL, NULL),
+  ('CIM002-GALLERIA-NORD-LOCULO-100-8', 8, 100, 1, 'OCCUPATO', '2023-09-24', '2023-09-24', 2, 3, NULL, NULL),
+  ('CIM001-B-LOCULO-200-5', 5, 200, 1, 'PRENOTATO', '2023-09-25', '2023-09-25', 3, 2, NULL, NULL),
+  ('CIM001-A-LOCULO-250-14', 14, 250, 1, 'LIBERO', '2023-09-25', '2023-09-25', 1, 1, NULL, NULL);
   
 	DROP TABLE IF EXISTS assegnatari;
 
@@ -12665,7 +12770,7 @@ INSERT INTO assegnatari ( nome,cognome,data_decesso,comune_decesso,data_update,d
   ('Maria', 'Verdi', '2023-09-20', 'Montorio al Vomano', '2023-09-21', '2023-09-21', 2),
   ('Francesca', 'Sabatini', '2023-07-10', 'Atri', '2023-07-12', '2023-07-12', 3),
   ('Giovanni', 'Tosti', '2023-05-15', 'Teramo', '2023-05-18', '2023-05-18', 1);
-	
+
 
 DROP TABLE IF EXISTS contraenti;
 
@@ -12732,8 +12837,8 @@ CREATE TABLE domande (
 	FOREIGN key(fk_posto) references posti (id),
 	FOREIGN key(fk_contraente) references contraenti (id)
 	);
-	
-  INSERT INTO domande (protocollo,data_protocollo,stato, tipologia,fk_posto,fk_assegnatario,fk_contraente,fk_user_modifier ,data_insert,data_update) VALUES
+
+INSERT INTO domande (protocollo,data_protocollo,stato, tipologia,fk_posto,fk_assegnatario,fk_contraente,fk_user_modifier ,data_insert,data_update) VALUES
   (506,'2023-09-25','APERTA','LOCULO',2,1,3,2, '2023-09-25','2023-09-25'),
   (204, '2023-03-04','CHIUSA','TENUTA_DISPOSIZIONE',1,2,1,3,'2023-03-04','2020-02-8'),
   (890, '2023-04-8', 'APERTA','LOCULO',3,3,2,1, '2023-04-8','2023-04-8'),
@@ -12742,9 +12847,7 @@ CREATE TABLE domande (
   (204, '2023-09-24', 'CHIUSA', 'TENUTA_DISPOSIZIONE', 8, 6, 5, 2, '2023-09-24', '2023-09-24'),
   (100, '2023-09-25', 'APERTA', 'LOCULO', 5, 7, 6, 3, '2023-09-25', '2023-09-25'),
   (506, '2023-09-26', 'APERTA', 'LOCULO', 7, 8, 7, 1, '2023-09-26', '2023-09-26');
-  
-	
-	
+
 	CREATE TABLE contratti (
 	id int NOT NULL IDENTITY,
 	protocollo varchar(256) NULL,
@@ -12762,56 +12865,76 @@ CREATE TABLE domande (
 INSERT INTO contratti ( protocollo,data_inizio,data_scadenza,stato,fk_domanda,fk_user_modifier,data_insert,data_update) VALUES
   (106,'2023-09-25','2058-09-25','IN_ATTESA_PAGAMENTO',3,1, '2023-09-25','2023-09-25'),
   (405, '2023-03-4','2058-03-4','PAGATO',2,2,'2023-03-04','2020-02-8'),
-  ( 450, '2023-04-8', '2058-04-8','IN_ATTESA_PAGAMENTO',1,3, '2023-04-08','2023-04-8'), 
-  ( 1, '2023-04-8', '2058-04-8','IN_ATTESA_PAGAMENTO',4,1, '2023-04-08','2023-04-8'), 
+  ( 450, '2023-04-8', '2058-04-8','IN_ATTESA_PAGAMENTO',1,3, '2023-04-08','2023-04-8'),
+  ( 1, '2023-04-8', '2058-04-8','IN_ATTESA_PAGAMENTO',4,1, '2023-04-08','2023-04-8'),
   (5001, '2023-09-25', '2058-09-25', 'IN_ATTESA_PAGAMENTO', 6, 1, '2023-09-25', '2023-09-25'),
   (5002, '2023-09-24', '2058-09-24', 'PAGATO', 7, 2, '2023-09-24', '2023-09-24'),
   (5003, '2023-09-25', '2058-09-25', 'IN_ATTESA_PAGAMENTO', 5, 3, '2023-09-25', '2023-09-25'),
   (5004, '2023-09-26', '2058-09-26', 'IN_ATTESA_PAGAMENTO', 8, 1, '2023-09-26', '2023-09-26');
-  
+
 CREATE TABLE IF NOT EXISTS defunti (
-  id int NOT NULL IDENTITY,  
+  id int NOT NULL IDENTITY,
+  codice varchar(50) UNIQUE,
   nome varchar(100) NOT NULL,
-  cognome varchar(100) NOT NULL, 
+  cognome varchar(100) NOT NULL,
   data_nascita date NOT NULL,
   provincia_nascita varchar(100) NOT NULL,
-  comune_nascita varchar(100) NOT NULL,  
+  comune_nascita varchar(100) NOT NULL,
   data_decesso date NOT NULL,
   provincia_decesso varchar(100) NOT NULL,
-  comune_decesso varchar(100) NOT NULL, 
+  comune_decesso varchar(100) NOT NULL,
   immagine_url varchar(255) NULL,
-  elogio_funebre varchar(1000) NULL,  
+  elogio_funebre varchar(1000) NULL,
   data_update date NULL,
-  data_insert date NULL
+  data_insert date NULL,
+  fk_posto int NULL,
+  fk_assegnatario int NULL,
+  FOREIGN KEY (fk_posto) REFERENCES posti (id),
+  FOREIGN KEY (fk_assegnatario) REFERENCES assegnatari (id)
 );
 
 INSERT INTO defunti (
-    nome, cognome, data_nascita, provincia_nascita, comune_nascita,
-    data_decesso, provincia_decesso, comune_decesso, elogio_funebre
+    codice, nome, cognome, data_nascita, provincia_nascita, comune_nascita,
+    data_decesso, provincia_decesso, comune_decesso, elogio_funebre, fk_assegnatario, fk_posto
 ) VALUES
-('Giovanni', 'Rossi', '1940-05-12', 'Milano', 'Sesto San Giovanni', '2020-11-01', 'Varese', 'Varese', 'Persona gentile e amata da tutti.'),
-('Maria', 'Bianchi', '1955-08-23', 'Torino', 'Moncalieri', '2019-07-15', 'Cuneo', 'Bra', 'Una donna forte e coraggiosa.'),
-('Luca', 'Verdi', '1932-02-10', 'Roma', 'Fiumicino', '2018-03-20', 'Roma', 'Frascati', 'Sempre disponibile con il prossimo.'),
-('Anna', 'Neri', '1960-12-05', 'Firenze', 'Scandicci', '2021-09-10', 'Arezzo', 'Cortona', 'Il suo sorriso rimarrà nel cuore di tutti.'),
-('Marco', 'Russo', '1948-11-30', 'Napoli', 'Pozzuoli', '2017-06-25', 'Caserta', 'Aversa', 'Un uomo di grande onestà e umiltà.'),
-('Elena', 'Fontana', '1972-07-14', 'Bologna', 'Imola', '2022-01-05', 'Ravenna', 'Faenza', 'La sua gentilezza illuminava le giornate.'),
-('Paolo', 'Galli', '1938-09-09', 'Genova', 'Chiavari', '2016-12-12', 'Savona', 'Albenga', 'Amato da amici e famiglia.'),
-('Sofia', 'Conti', '1950-04-28', 'Padova', 'Este', '2020-08-30', 'Vicenza', 'Thiene', 'Un’anima gentile e generosa.'),
-('Alessandro', 'Marini', '1945-10-15', 'Perugia', 'Foligno', '2019-05-22', 'Terni', 'Orvieto', 'Uomo di grande cultura e passione.'),
-('Laura', 'Ricci', '1968-03-18', 'Lecce', 'Gallipoli', '2021-11-11', 'Brindisi', 'Ostuni', 'Sempre vicina agli amici e alla famiglia.'),
-('Maria Antonietta', 'Di Giacomo', '1942-03-15', 'Napoli', 'Torre Annunziata', '2021-04-18', 'Salerno', 'Nocera Inferiore', 'Donna di grande cuore e forza.'),
-('Giuseppe', 'D''Angelo', '1930-11-02', 'Palermo', 'Bagheria', '2015-02-14', 'Trapani', 'Marsala', 'Amato da tutti, ha lasciato un segno profondo.'),
-('Lorenzo', 'd''Amico', '1951-06-25', 'Roma', 'Ostia', '2023-10-09', 'Latina', 'Aprilia', 'Intellettuale e spirito libero.'),
-('Anna Maria', 'De Luca', '1965-01-30', 'Bari', 'Altamura', '2020-02-28', 'Bari', 'Trani', 'Sempre presente con il suo sorriso.'),
-('Luigi', 'Lo Monaco', '1944-07-17', 'Catania', 'Acireale', '2019-12-05', 'Catania', 'Giarre', 'Esempio di bontà e dedizione.'),
-('Francesca', 'Dell''Oro', '1957-09-08', 'Como', 'Cantù', '2022-06-11', 'Lecco', 'Merate', 'Una madre e moglie amorevole.'),
-('Andrea', 'Sanna', '1946-10-19', 'Cagliari', 'Iglesias', '2017-08-03', 'Oristano', 'Cabras', 'Persona onesta, lavoratore instancabile.'),
-('Elisabetta', 'De Santis', '1939-12-22', 'Roma', 'Pomezia', '2021-07-20', 'Roma', 'Ciampino', 'La sua dolcezza rimarrà con noi per sempre.'),
-('Giulia', 'L''Abbate', '1962-05-03', 'Taranto', 'Martina Franca', '2020-09-14', 'Brindisi', 'Fasano', 'Energia contagiosa e cuore generoso.'),
-('Vincenzo', 'Sant''Anna', '1959-03-11', 'Reggio Calabria', 'Siderno', '2023-03-21', 'Catanzaro', 'Lamezia Terme', 'Ha donato amore in ogni gesto.');
+('DEF2023-001', 'Stefano', 'Rossi', '1950-05-12', 'Teramo', 'Teramo', '2023-09-20', 'Teramo', 'Sant Egidio alla Vibrata', 'Persona gentile e amata da tutti.', 1, 2),
+('DEF2020-001', 'Vincenzo', 'D''Auri', '1945-08-23', 'Ascoli Piceno', 'Ascoli Piceno', '2020-02-04', 'Ascoli Piceno', 'Ascoli Piceno', 'Una persona forte e coraggiosa.', 2, 1),
+('DEF2023-002', 'Samuel', 'Feliciani', '1955-02-10', 'Teramo', 'Giulianova', '2023-04-05', 'Teramo', 'Giulianova', 'Sempre disponibile con il prossimo.', 3, 3),
+('DEF2023-003', 'Antonio', 'Rizzo', '1948-12-05', 'Teramo', 'Teramo', '2023-04-05', 'Teramo', 'Giulianova', 'Il suo impegno rimarrà nel cuore di tutti.', 4, 4),
+('DEF2023-004', 'Giuseppe', 'Rossi', '1950-11-30', 'Teramo', 'Giulianova', '2023-09-25', 'Teramo', 'Giulianova', 'Un uomo di grande onestà e umiltà.', 5, 6),
+('DEF2023-005', 'Maria', 'Verdi', '1958-07-14', 'Teramo', 'Montorio al Vomano', '2023-09-20', 'Teramo', 'Montorio al Vomano', 'La sua gentilezza illuminava le giornate.', 6, 8),
+('DEF2023-006', 'Francesca', 'Sabatini', '1960-09-09', 'Teramo', 'Atri', '2023-07-10', 'Teramo', 'Atri', 'Amata da amici e famiglia.', 7, 5),
+('DEF2023-007', 'Giovanni', 'Tosti', '1952-04-28', 'Teramo', 'Teramo', '2023-05-15', 'Teramo', 'Teramo', 'Un''anima gentile e generosa.', 8, 7),
+('DEF2019-001', 'Alessandro', 'Marini', '1945-10-15', 'Perugia', 'Foligno', '2019-05-22', 'Terni', 'Orvieto', 'Uomo di grande cultura e passione.', NULL, NULL),
+('DEF2021-001', 'Laura', 'Ricci', '1968-03-18', 'Lecce', 'Gallipoli', '2021-11-11', 'Brindisi', 'Ostuni', 'Sempre vicina agli amici e alla famiglia.', NULL, NULL),
+('DEF2021-002', 'Maria Antonietta', 'Di Giacomo', '1942-03-15', 'Napoli', 'Torre Annunziata', '2021-04-18', 'Salerno', 'Nocera Inferiore', 'Donna di grande cuore e forza.', NULL, NULL),
+('DEF2015-001', 'Giuseppe', 'D''Angelo', '1930-11-02', 'Palermo', 'Bagheria', '2015-02-14', 'Trapani', 'Marsala', 'Amato da tutti, ha lasciato un segno profondo.', NULL, NULL),
+('DEF2023-008', 'Lorenzo', 'd''Amico', '1951-06-25', 'Roma', 'Ostia', '2023-10-09', 'Latina', 'Aprilia', 'Intellettuale e spirito libero.', NULL, NULL),
+('DEF2020-002', 'Anna Maria', 'De Luca', '1965-01-30', 'Bari', 'Altamura', '2020-02-28', 'Bari', 'Trani', 'Sempre presente con il suo sorriso.', NULL, NULL),
+('DEF2019-002', 'Luigi', 'Lo Monaco', '1944-07-17', 'Catania', 'Acireale', '2019-12-05', 'Catania', 'Giarre', 'Esempio di bontà e dedizione.', NULL, NULL),
+('DEF2022-001', 'Francesca', 'Dell''Oro', '1957-09-08', 'Como', 'Cantù', '2022-06-11', 'Lecco', 'Merate', 'Una madre e moglie amorevole.', NULL, NULL),
+('DEF2017-001', 'Andrea', 'Sanna', '1946-10-19', 'Cagliari', 'Iglesias', '2017-08-03', 'Oristano', 'Cabras', 'Persona onesta, lavoratore instancabile.', NULL, NULL),
+('DEF2021-003', 'Elisabetta', 'De Santis', '1939-12-22', 'Roma', 'Pomezia', '2021-07-20', 'Roma', 'Ciampino', 'La sua dolcezza rimarrà con noi per sempre.', NULL, NULL),
+('DEF2020-003', 'Giulia', 'L''Abbate', '1962-05-03', 'Taranto', 'Martina Franca', '2020-09-14', 'Brindisi', 'Fasano', 'Energia contagiosa e cuore generoso.', NULL, NULL),
+('DEF2023-009', 'Vincenzo', 'Sant''Anna', '1959-03-11', 'Reggio Calabria', 'Siderno', '2023-03-21', 'Catanzaro', 'Lamezia Terme', 'Ha donato amore in ogni gesto.', NULL, NULL);
 
+CREATE TABLE sepolture (
+	id INT NOT NULL IDENTITY,
+	fk_defunto INT NOT NULL,
+	fk_posto INT NOT NULL,
+	data_inizio DATE NOT NULL,
+	data_fine DATE NULL,
+	tipo_operazione VARCHAR(50) NOT NULL,
+	note TEXT,
+	data_insert DATE NULL,
+	data_update DATE NULL,
+	fk_user_modifier INT NULL,
+	PRIMARY KEY (id),
+	FOREIGN KEY (fk_defunto) REFERENCES defunti (id),
+	FOREIGN KEY (fk_posto) REFERENCES posti (id),
+	FOREIGN KEY (fk_user_modifier) REFERENCES users (id)
+);
 
-  
 DROP TABLE IF EXISTS cap_comuni;
 
 CREATE TABLE cap_comuni(

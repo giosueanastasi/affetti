@@ -12,6 +12,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule} from '@angular/material/select';
 import { MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule} from '@angular/material/paginator';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
@@ -44,6 +45,7 @@ import { DomandaModelComponent } from './anagrafiche/domanda-model/domanda-model
 import { ContrattoModelComponent } from './anagrafiche/contratto-model/contratto-model.component';
 import { CercadefuntiComponent } from './anagrafiche/cercadefunti/cercadefunti.component';
 import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/dettaglio-defunto.component';
+import { CoordinateMapModalComponent } from './anagrafiche/coordinate-map-modal/coordinate-map-modal.component';
 
 
 // state related imports
@@ -82,6 +84,7 @@ import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/detta
     DomandaModelComponent,
     CercadefuntiComponent,
     DettaglioDefuntoComponent,
+    CoordinateMapModalComponent,
     
     
     
@@ -105,8 +108,9 @@ import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/detta
     MatAutocompleteModule,
     MatSelectModule,
     MatTableModule,
-    MatPaginatorModule
-    
+    MatPaginatorModule,
+    LeafletModule
+
 
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer

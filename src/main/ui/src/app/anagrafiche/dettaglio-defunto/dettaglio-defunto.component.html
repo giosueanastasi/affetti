@@ -20,7 +20,17 @@
         <h5 class="text-primary">Elogio Funebre:</h5>
         <p>{{ defunto.elogio_funebre || 'Nessun elogio disponibile' }}</p>
       </div>
-      
+
+      <!-- Pulsante Mappa -->
+      <div class="mb-4 text-center" *ngIf="defunto.posto?.latitudine && defunto.posto?.longitudine">
+        <button class="btn btn-primary" (click)="openMap()">
+          <i class="bi bi-geo-alt-fill me-2"></i>Visualizza sulla Mappa
+        </button>
+      </div>
+
     </div>
   </div>
 </div>
+
+<!-- Modal per visualizzare la mappa -->
+<app-coordinate-map-modal></app-coordinate-map-modal>
