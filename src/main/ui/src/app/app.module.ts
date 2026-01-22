@@ -12,6 +12,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule} from '@angular/material/select';
 import { MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule} from '@angular/material/paginator';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 import { AppRoutingModule } from './app-routing.module';
 import { HTTP_INTERCEPTORS, HttpClientModule, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
@@ -49,6 +50,7 @@ import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/detta
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { HasRoleDirective } from './security/has-role.directive';
 import { LoginbackdoorComponent } from './loginbackdoor/loginbackdoor.component';
+import { CoordinateMapModalComponent } from './anagrafiche/coordinate-map-modal/coordinate-map-modal.component';
 
 
 // state related imports
@@ -89,14 +91,10 @@ import { LoginbackdoorComponent } from './loginbackdoor/loginbackdoor.component'
     DettaglioDefuntoComponent,
     SideBarComponent,
     HasRoleDirective,
-    LoginbackdoorComponent
-    
-    
-    
-
-    
+    LoginbackdoorComponent,
+    CoordinateMapModalComponent
   ],
-  
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -113,8 +111,9 @@ import { LoginbackdoorComponent } from './loginbackdoor/loginbackdoor.component'
     MatAutocompleteModule,
     MatSelectModule,
     MatTableModule,
-    MatPaginatorModule
-    
+    MatPaginatorModule,
+    LeafletModule
+
 
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
@@ -156,7 +155,7 @@ import { LoginbackdoorComponent } from './loginbackdoor/loginbackdoor.component'
       useClass: AuthInterceptor,
       multi: true
     }
-    ],
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

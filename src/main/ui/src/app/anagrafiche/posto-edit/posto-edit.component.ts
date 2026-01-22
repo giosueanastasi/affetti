@@ -1,6 +1,7 @@
-import { Component,EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { Posto1 } from 'src/app/app-state/models';
 import { AppService } from 'src/app/app.service';
+import { CoordinateMapModalComponent } from '../coordinate-map-modal/coordinate-map-modal.component';
 
 declare var $ : any;
 
@@ -13,6 +14,7 @@ export class PostoEditComponent {
 
   @Input() posto1: Posto1 = new Posto1();
   @Output() save = new EventEmitter<any>();
+  @ViewChild(CoordinateMapModalComponent) coordinateMapModal: CoordinateMapModalComponent | undefined;
 
   constructor(private appService: AppService) { }
 
@@ -29,6 +31,17 @@ export class PostoEditComponent {
     });
   }
 
-
+  openCoordinateModal() {
+    this.coordinateMapModal?.showMapModal(
+      this.posto1.latitudine,
+      this.posto1.longitudine
+    );
   }
+
+  savePostoCoordinates(coordinates: {latitudine: number, longitudine: number}) {
+    this.posto1.latitudine = coordinates.latitudine;
+    this.posto1.longitudine = coordinates.longitudine;
+  }
+
+}
 

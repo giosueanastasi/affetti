@@ -1,0 +1,82 @@
+<div class="modal fade" id="coordinateModal" tabindex="-1">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">{{ readOnly ? 'Visualizza Posizione' : 'Seleziona Coordinate' }}</h2>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="alert alert-info" *ngIf="!readOnly">
+          <strong>Istruzioni:</strong> Usa la barra di ricerca per trovare una località, oppure clicca direttamente sulla mappa per selezionare la posizione del posto.
+        </div>
+
+        <!-- Barra di ricerca con suggerimenti -->
+        <div class="mb-3 position-relative" *ngIf="!readOnly">
+          <label for="searchInput" class="form-label"><strong>Cerca Località:</strong></label>
+          <input
+            type="text"
+            id="searchInput"
+            class="form-control"
+            [(ngModel)]="searchQuery"
+            (input)="onSearchInput(searchQuery)"
+            placeholder="Digita città, provincia, località o CAP..."
+            autocomplete="off">
+          <small class="text-muted d-block mt-1">
+            <span *ngIf="!isSearching && searchQuery.length > 0 && searchQuery.length < 2">
+              Inserisci almeno 2 caratteri
+            </span>
+            <span *ngIf="isSearching">
+              <span class="spinner-border spinner-border-sm me-1"></span>
+              Ricerca in corso...
+            </span>
+          </small>
+
+          <!-- Dropdown suggerimenti -->
+          <div class="autocomplete-suggestions" *ngIf="searchResults.length > 0 && searchQuery.length >= 2">
+            <button
+              type="button"
+              class="autocomplete-item"
+              *ngFor="let result of searchResults"
+              (click)="goToLocation(result)">
+              <div class="autocomplete-main">{{ result.display_name }}</div>
+              <div class="autocomplete-detail" *ngIf="result.address">
+                <span *ngIf="result.address.postcode">CAP: {{ result.address.postcode }}</span>
+                <span *ngIf="result.address.province"> • {{ result.address.province }}</span>
+              </div>
+            </button>
+          </div>
+        </div>
+
+        <!-- Contenitore mappa -->
+        <div
+          leaflet
+          [leafletOptions]="options"
+          (leafletMapReady)="onMapReady($event)"
+          style="height: 500px; width: 100%;">
+        </div>
+
+        <!-- Display coordinate selezionate -->
+        <div class="mt-3" *ngIf="selectedLat !== null && selectedLng !== null">
+          <h5>Coordinate Selezionate:</h5>
+          <p>
+            <strong>Latitudine:</strong> {{ selectedLat | number:'1.8-8' }}<br>
+            <strong>Longitudine:</strong> {{ selectedLng | number:'1.8-8' }}
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          {{ readOnly ? 'Chiudi' : 'Annulla' }}
+        </button>
+        <button
+          *ngIf="!readOnly"
+          type="button"
+          class="btn btn-primary"
+          (click)="saveCoordinates()"
+          [disabled]="selectedLat === null || selectedLng === null">
+          Salva Coordinate
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

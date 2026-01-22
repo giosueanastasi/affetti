@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -17,7 +20,10 @@ public class Defunti {
 	@Column
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
+
+	@Column(unique = true)
+	private String codice;
+
 	@Column
 	@NotNull(message="{NotNull.Defunto.nome}")
 	private String nome;
@@ -61,7 +67,13 @@ public class Defunti {
     
     @Column
     private String data_update;
-	
-	
-	
+
+    @ManyToOne
+    @JoinColumn(name = "fk_posto")
+    private Posti posto;
+
+    @OneToOne
+    @JoinColumn(name = "fk_assegnatario")
+    private Assegnatari assegnatario;
+
 }
