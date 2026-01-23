@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import javax.persistence.Lob;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -56,6 +57,7 @@ public class Defunti {
 	@NotNull(message="{NotNull.Defunto.provincia_decesso}")
 	private String provincia_decesso;
 	
+	@Lob
 	@Column
 	private String immagine_url;
 	
