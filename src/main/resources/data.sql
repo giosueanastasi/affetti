@@ -1,3 +1,17 @@
+-- Tabella Tenant
+DROP TABLE IF EXISTS tenant cascade;
+
+CREATE TABLE tenant(
+	id int NOT NULL IDENTITY,
+	descrizione varchar(255) NOT NULL,
+	PRIMARY KEY (id)
+);
+
+INSERT INTO TENANT(ID, DESCRIZIONE) VALUES
+(1, 'Comune di Roma'),
+(2, 'Comune di Milano'),
+(3, 'Comune di Napoli');
+
 DROP TABLE IF EXISTS cap cascade;
 
 CREATE TABLE cap(
@@ -21317,4 +21331,8 @@ CREATE TABLE cap_comuni(
 ('462','4430'),
 ('448','7900'),
 ('424','7901');
- 
+
+-- Aggiungi FK_TENANT alle tabelle esistenti
+ALTER TABLE USERS ADD COLUMN IF NOT EXISTS FK_TENANT BIGINT;
+ALTER TABLE POSTI ADD COLUMN IF NOT EXISTS FK_TENANT BIGINT;
+

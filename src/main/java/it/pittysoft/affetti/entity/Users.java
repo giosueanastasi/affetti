@@ -2,7 +2,10 @@ package it.pittysoft.affetti.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 
@@ -31,6 +34,10 @@ public class Users {
     @Column
     @NotNull(message="{NotNull.User.fk_comune}")
     private String fk_comune;
+    
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_tenant")
+	private Tenant tenant;
 
 
 }
