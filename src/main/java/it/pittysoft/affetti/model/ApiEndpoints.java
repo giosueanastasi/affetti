@@ -34,8 +34,10 @@ public class ApiEndpoints {
 		BASE_PATH + ContrattoLinks.GET_CONTRATTO_BY_PROTOCOLLO ,
 		BASE_PATH + ContrattoLinks.LIST_CONTRATTI ,
 		BASE_PATH + ContrattoLinks.SEARCH_CONTRATTO ,
+		BASE_PATH + ContrattoLinks.STAMPA_CONTRATTO ,
 		BASE_PATH + DomandaLinks.LIST_DOMANDE ,
 		BASE_PATH + DomandaLinks.SEARCH_DOMANDE ,
+		BASE_PATH + DomandaLinks.STAMPA_DOMANDA ,
 		BASE_PATH + PostoLinks.LIST_POSTI ,
 		BASE_PATH + PostoLinks.SEARCH_POSTI
     };
@@ -45,8 +47,10 @@ public class ApiEndpoints {
 		BASE_PATH + ContrattoLinks.GET_CONTRATTO_BY_PROTOCOLLO ,
 		BASE_PATH + ContrattoLinks.LIST_CONTRATTI ,
 		BASE_PATH + ContrattoLinks.SEARCH_CONTRATTO ,
+		BASE_PATH + ContrattoLinks.STAMPA_CONTRATTO ,
 		BASE_PATH + DomandaLinks.LIST_DOMANDE ,
 		BASE_PATH + DomandaLinks.SEARCH_DOMANDE,
+		BASE_PATH + DomandaLinks.STAMPA_DOMANDA ,
 		BASE_PATH + ComuneLinks.LIST_COMUNI ,
 		BASE_PATH + ComuneLinks.GET_COMUNE 
     };

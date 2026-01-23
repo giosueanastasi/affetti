@@ -30,6 +30,14 @@ export class ContrattoModelComponent {
   }
 
   printContrattoModal() {
-    window.open("/api/stampa_contratto/" + this.contratto.idContratto, "_blank");
+    this.appService.stampaContratto(this.contratto.idContratto).subscribe({
+      next: (blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        window.open(url, '_blank');
+      },
+      error: (err) => {
+        console.error('Errore durante la stampa del contratto:', err);
+      }
+    });
   }
 }

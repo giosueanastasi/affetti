@@ -215,5 +215,18 @@ export class AppService {
     return this.http.get(this.rootURL + '/genera_protocollo_domanda');
   }
 
+  //Metodo per scaricare il PDF del contratto
+  stampaContratto(idContratto: number) {
+    return this.http.get(this.rootURL + '/stampa_contratto/' + idContratto, {
+      responseType: 'blob'
+    });
+  }
+
+  //Metodo per scaricare il PDF della domanda
+  stampaDomanda(idDomanda: number) {
+    return this.http.get(this.rootURL + '/stampa_domanda/' + idDomanda, {
+      responseType: 'blob'
+    });
+  }
 
 }
