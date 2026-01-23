@@ -1,17 +1,31 @@
 package it.pittysoft.affetti.service;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.StringWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
-import org.springframework.stereotype.Component;
+import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.xhtmlrenderer.pdf.ITextRenderer;
+
+import com.lowagie.text.DocumentException;
+
+import freemarker.template.Configuration;
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
+import it.pittysoft.affetti.config.FreeMarkerConfig;
 import it.pittysoft.affetti.entity.Assegnatari;
 import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Contratti;
@@ -36,6 +50,9 @@ import lombok.Data;
 
 @Component
 public class ContrattiService {
+	
+	@Autowired
+    Configuration freemarkerConfig;
 
 	private ContrattiRepository contrattiRepository;
 
@@ -195,5 +212,56 @@ public ContrattoResponse getContrattoByProtocollo(String numProtocollo) {
 
 	
 	}
+
+public  byte[] generaPdfContratti(Long idContratto) throws IOException, TemplateException, DocumentException {
+	
+	Contratti contratto = contrattiRepository.findById(idContratto);
+	Map<String, Object> dati = new HashMap<>();
+	dati.put("protocollo",contratto.getProtocollo());
+	Map<String,String> contrattoMap = new HashMap<>();
+	contrattoMap.put("dataInizio",contratto.getData_inizio().toString()); 
+	contrattoMap.put("dataFine",contratto.getData_scadenza().toString()); 
+	contrattoMap.put("nomeContraente",contratto.getDomanda().getContraente().getNome());
+	contrattoMap.put("cognomeContraente",contratto.getDomanda().getContraente().getCognome());
+	contrattoMap.put("comuneNascita",contratto.getDomanda().getContraente().getComune_nascita());
+	contrattoMap.put("provinciaNascita",contratto.getDomanda().getContraente().getProvincia_nascita());
+	contrattoMap.put("statoNascita",contratto.getDomanda().getContraente().getStato_nascita());
+	contrattoMap.put("dataNascita",contratto.getDomanda().getContraente().getData_nascita().toString());
+	contrattoMap.put("comuneResidenza",contratto.getDomanda().getContraente().getComune_residenza());
+	contrattoMap.put("provinciaResidenza",contratto.getDomanda().getContraente().getProvincia_residenza());
+	contrattoMap.put("viaResidenza",contratto.getDomanda().getContraente().getVia_residenza());
+	contrattoMap.put("capResidenza",contratto.getDomanda().getContraente().getCap_residenza());
+	contrattoMap.put("codiceFiscale",contratto.getDomanda().getContraente().getCodice_fiscale());
+	contrattoMap.put("email",contratto.getDomanda().getContraente().getEmail());
+	contrattoMap.put("telefono",contratto.getDomanda().getContraente().getTelefono());
+	contrattoMap.put("note",contratto.getDomanda().getContraente().getNote());
+	contrattoMap.put("loculo",contratto.getDomanda().getPosto().getLoculo());
+	contrattoMap.put("fornice",contratto.getDomanda().getPosto().getFornice());
+	contrattoMap.put("nomeAssegnatario",contratto.getDomanda().getAssegnatario().getNome());
+	contrattoMap.put("cognomeAssegnatario",contratto.getDomanda().getAssegnatario().getCognome());
+	contrattoMap.put("comuneDecesso",contratto.getDomanda().getAssegnatario().getComune_decesso());
+	contrattoMap.put("dataDecesso",contratto.getDomanda().getAssegnatario().getData_decesso().toString());
+	contrattoMap.put("protocolloDomanda",contratto.getDomanda().getProtocollo());
+	contrattoMap.put("dataDomanda",contratto.getDomanda().getData_protocollo().toString());
+
+	 dati.put("dati", contrattoMap);
+	 
+	
+    // Carica il template
+    Template template = freemarkerConfig.getTemplate("/contratto/contratto.ftl");
+
+    // Genera HTML
+    StringWriter writer = new StringWriter();
+    template.process(dati, writer);
+    String htmlContent = writer.toString();
+
+	 ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+     ITextRenderer renderer = new ITextRenderer();
+     renderer.setDocumentFromString(htmlContent);
+     renderer.layout();
+     renderer.createPDF(outputStream);
+    
+     return outputStream.toByteArray();	
+}
 
 }

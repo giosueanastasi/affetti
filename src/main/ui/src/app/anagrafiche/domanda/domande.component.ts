@@ -178,7 +178,8 @@ export class DomandeComponent implements OnInit, OnDestroy {
   showContratto(item: any) {
     let contratto = new Contratto();
 
-    contratto.idContratto = item.contratto.id;  
+    contratto.id = item.contratto.id;
+    contratto.idContratto = item.contratto.id;
     contratto.numeroProtocolloContratto = item.contratto.protocollo;
     contratto.dataProtocolloContratto = item.contratto.data_inizio;
     contratto.stato = item.contratto.stato;

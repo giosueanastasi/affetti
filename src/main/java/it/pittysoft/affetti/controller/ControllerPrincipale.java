@@ -410,15 +410,15 @@ public class ControllerPrincipale {
         }
     }
 	
-	@RequestMapping("/user")
+@RequestMapping("/user")
 	public Principal user(Principal user) {
 	    return user;
 	  }
-	  
+
 	@PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
 		try {
-			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword());	
+			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword());
 			Authentication authentication = authenticationManager.authenticate(token);
 			List<String> roles = new ArrayList<String>();
 			for(GrantedAuthority auth : authentication.getAuthorities()) {
@@ -434,32 +434,48 @@ public class ControllerPrincipale {
 	                .compact();
 
         return ResponseEntity.ok(new AuthResponse(jwt));
-		 
+
 		}catch (Exception e) {
 	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
 	    }
 	}
-	
-	
+
+
 	@PostMapping(path = DefuntoLinks.SEARCH_DEFUNTI)
 	public ResponseEntity<List<Defunti>> ricercaDefunti(@RequestBody DefuntiRequest request) {
 	    System.out.println("Ricerca ricevuta: " + request);
 		List<Defunti> defuntiFiltrati = defuntiService.getDefunti(request);
-		
+
 		return ResponseEntity.ok(defuntiFiltrati);
 	}
-	
+
 	@GetMapping(path = DefuntoLinks.SEARCH_DEFUNTO)
 	public ResponseEntity<?> getDefuntoById(@PathVariable Long id){
 		Optional<Defunti> defuntoOptional = defuntiService.getDefuntiById(id);
-		
+
 		if(defuntoOptional.isPresent()) {
 			return ResponseEntity.ok(defuntoOptional.get());
 		} else {
         	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Errore imprevisto, contattare l'assistenza");
 		}
-	} 
+	}
 
+	@GetMapping(path = ContrattoLinks.STAMPA_CONTRATTO)
+    public ResponseEntity<Resource> generaPdfContratto(@PathVariable Long idContratto) {
+        try {
+            byte[] pdfContratto = contrattiService.generaPdfContratti(idContratto);
+
+            ByteArrayResource resource = new ByteArrayResource(pdfContratto);
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=contratto_report.pdf")
+                    .header(HttpHeaders.CONTENT_TYPE, "application/pdf")
+                    .contentLength(pdfContratto.length)
+                    .body(resource);
+        } catch (IOException | TemplateException | DocumentException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 	
 }
