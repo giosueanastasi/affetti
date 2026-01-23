@@ -17,5 +17,6 @@ export class AppComponent  {
   constructor(public app: AppService, private router: Router, public authService: AuthService ) {}
 
   title = 'angular-nodejs-example';
+  currentYear = new Date().getFullYear();
 
 }

@@ -47,6 +47,8 @@ import { AppService } from './app.service';
 import { AuthInterceptor } from './security/auth.interceptor';
 import { CercadefuntiComponent } from './anagrafiche/cercadefunti/cercadefunti.component';
 import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/dettaglio-defunto.component';
+import { PrivacyPolicyComponent } from './legal/privacy-policy/privacy-policy.component';
+import { TerminiCondizioniComponent } from './legal/termini-condizioni/termini-condizioni.component';
 import { SideBarComponent } from './side-bar/side-bar.component';
 import { HasRoleDirective } from './security/has-role.directive';
 import { LoginbackdoorComponent } from './loginbackdoor/loginbackdoor.component';
@@ -89,6 +91,8 @@ import { CoordinateMapModalComponent } from './anagrafiche/coordinate-map-modal/
     DomandaModelComponent,
     CercadefuntiComponent,
     DettaglioDefuntoComponent,
+    PrivacyPolicyComponent,
+    TerminiCondizioniComponent,
     SideBarComponent,
     HasRoleDirective,
     LoginbackdoorComponent,

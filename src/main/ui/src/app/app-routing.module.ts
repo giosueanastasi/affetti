@@ -14,6 +14,8 @@ import { LoginComponent } from './guest/login/login.component';
 import { RegisterComponent } from './guest/register/register.component';
 import { CercadefuntiComponent } from './anagrafiche/cercadefunti/cercadefunti.component';
 import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/dettaglio-defunto.component';
+import { PrivacyPolicyComponent } from './legal/privacy-policy/privacy-policy.component';
+import { TerminiCondizioniComponent } from './legal/termini-condizioni/termini-condizioni.component';
 import { authGuard, roleGuard } from './security/auth.guard';
 import { Roles } from './app-state/enum/roles.enum';
 import { LoginbackdoorComponent } from './loginbackdoor/loginbackdoor.component';
@@ -34,6 +36,8 @@ const routes: Routes = [
   {path:'register', component: RegisterComponent},
   {path:'cercadefunti', component: CercadefuntiComponent},
   {path:'defunti/:id', component: DettaglioDefuntoComponent},
+  {path:'privacy-policy', component: PrivacyPolicyComponent},
+  {path:'termini-condizioni', component: TerminiCondizioniComponent},
   {path: 'pitty-in', component: LoginbackdoorComponent },
 ];
 
