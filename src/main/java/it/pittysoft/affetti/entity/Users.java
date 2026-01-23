@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -44,6 +45,10 @@ public class Users {
     		inverseJoinColumns = @JoinColumn(name = "role_id")
     		)
 	private Set<Role> roles;
+
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "fk_tenant")
+	private Tenant tenant;
 
 
 }
