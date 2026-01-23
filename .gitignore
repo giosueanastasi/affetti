@@ -5,6 +5,7 @@
 .springBeans
 .sts4-cache
 .angular/cache
+.factorypath
 !**/src/main/ui/.angular/cache
 src/main/ui/.angular/
 
