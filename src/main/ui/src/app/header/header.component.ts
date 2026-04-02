@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AppService } from '../app.service';
 import { AuthService } from '../security/auth.service';
 import { AuthStateService } from '../security/auth-state.service';
+import { Roles } from '../app-state/enum/roles.enum';
 
 @Component({
   selector: 'app-header',
@@ -11,7 +12,7 @@ import { AuthStateService } from '../security/auth-state.service';
 })
 export class HeaderComponent implements OnInit {
 
-
+  Roles = Roles;
 
   constructor(public app: AppService, private router: Router, public authService: AuthService, public authState: AuthStateService) { }
 
