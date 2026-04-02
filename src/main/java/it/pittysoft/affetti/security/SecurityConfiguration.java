@@ -3,6 +3,7 @@ package it.pittysoft.affetti.security;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -25,7 +26,10 @@ import it.pittysoft.affetti.model.ApiEndpoints;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-	
+
+    @Value("${jwt.secret}")
+    private String jwtSecret;
+
 	@Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
@@ -34,9 +38,9 @@ public class SecurityConfiguration {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .antMatchers(ApiEndpoints.PUBLIC_ENDPOINTS).permitAll()
-                .antMatchers(ApiEndpoints.USER_ENDPOINTS).hasAnyRole("ADMIN","OPERATOR","USER")
-                .antMatchers(ApiEndpoints.OPERATOR_ENDPOINTS).hasAnyRole("ADMIN","OPERATOR")
-                .antMatchers("/api/**").hasRole("ADMIN")
+                .antMatchers(ApiEndpoints.USER_ENDPOINTS).hasAnyRole("SUPERADMIN","ADMIN","OPERATOR","USER")
+                .antMatchers(ApiEndpoints.OPERATOR_ENDPOINTS).hasAnyRole("SUPERADMIN","ADMIN","OPERATOR")
+                .antMatchers("/api/**").hasAnyRole("SUPERADMIN","ADMIN")
                 .anyRequest().authenticated()
             )
             .headers(headers -> headers
@@ -63,7 +67,7 @@ public class SecurityConfiguration {
     
     @Bean
     public JwtDecoder jwtDecoder() {
-        SecretKey secretKey = new SecretKeySpec("chiave-segreta-temporanea-abbastanza-lunga-0123456789".getBytes(), "HmacSHA256");
+        SecretKey secretKey = new SecretKeySpec(jwtSecret.getBytes(), "HmacSHA256");
         return NimbusJwtDecoder.withSecretKey(secretKey).build();
     }
     
