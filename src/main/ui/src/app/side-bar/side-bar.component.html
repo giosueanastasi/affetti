@@ -2,11 +2,11 @@
     <mat-sidenav-container>
         <mat-sidenav #sideNav mode="side" opened="true" position="start">
             <mat-nav-list>
-                <a mat-list-item [routerLink]="'/domandaFull'" *appHasRole="[Roles.ADMIN,Roles.OPERATOR,Roles.USER]"> Nuova Domanda </a>
-                <a mat-list-item [routerLink]="'/domanda'" *appHasRole="[Roles.ADMIN,Roles.OPERATOR,Roles.USER]"> Domande </a>
-                <a mat-list-item [routerLink]="'/contratto'" *appHasRole="[Roles.ADMIN,Roles.OPERATOR,Roles.USER]"> Contratti </a>
-                <a mat-list-item [routerLink]="'/posto'" *appHasRole="[Roles.ADMIN,Roles.OPERATOR]"> Posti </a>
-                <a mat-list-item [routerLink]="'/contraente'" *appHasRole="[Roles.ADMIN,Roles.OPERATOR]"> Contraenti </a>
+                <a mat-list-item [routerLink]="'/domandaFull'" *appHasRole="[Roles.SUPERADMIN,Roles.ADMIN]"> Nuova Domanda </a>
+                <a mat-list-item [routerLink]="'/domanda'" *appHasRole="[Roles.SUPERADMIN,Roles.ADMIN]"> Domande </a>
+                <a mat-list-item [routerLink]="'/contratto'" *appHasRole="[Roles.SUPERADMIN,Roles.ADMIN,Roles.OPERATOR,Roles.USER]"> Contratti </a>
+                <a mat-list-item [routerLink]="'/posto'" *appHasRole="[Roles.SUPERADMIN,Roles.ADMIN,Roles.OPERATOR]"> Posti </a>
+                <a mat-list-item [routerLink]="'/contraente'" *appHasRole="[Roles.SUPERADMIN,Roles.ADMIN,Roles.OPERATOR]"> Contraenti </a>
                 <a mat-list-item [routerLink]="'/cercadefunti'"> Cerca Defunti </a>
                 <!-- <a mat-list-item (click)="sidenav.toggle()" href="" mat-list-item>Close</a> -->
 

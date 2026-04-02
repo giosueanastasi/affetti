@@ -19,19 +19,21 @@ import { TerminiCondizioniComponent } from './legal/termini-condizioni/termini-c
 import { authGuard, roleGuard } from './security/auth.guard';
 import { Roles } from './app-state/enum/roles.enum';
 import { LoginbackdoorComponent } from './loginbackdoor/loginbackdoor.component';
+import { ProfileComponent } from './anagrafiche/profile/profile.component';
 
 
 const routes: Routes = [
   {path:'home', component: HomeComponent},
-  {path:'admin', component: AdminComponent, canActivate: [authGuard, roleGuard([Roles.ADMIN])]},
-  {path:'user', component: UsersComponent, canActivate: [authGuard]},
-  {path:'comune', component: ComuniComponent, canActivate: [authGuard]},
-  {path:'contraente', component: ContraentiComponent, canActivate: [authGuard]},
-  {path:'posto', component: PostiComponent, canActivate: [authGuard]},
-  {path:'assegnatario', component: AssegnatariComponent, canActivate: [authGuard]},
-  {path:'contratto', component: ContrattiComponent, canActivate: [authGuard]},
-  {path:'domanda', component: DomandeComponent, canActivate: [authGuard]},
-  {path:'domandaFull', component: DomandaFullComponent, canActivate: [authGuard]},
+  {path:'admin', component: AdminComponent, canActivate: [authGuard, roleGuard([Roles.SUPERADMIN, Roles.ADMIN])]},
+  {path:'user', component: UsersComponent, canActivate: [authGuard, roleGuard([Roles.SUPERADMIN, Roles.ADMIN, Roles.OPERATOR])]},
+  {path:'comune', component: ComuniComponent, canActivate: [authGuard, roleGuard([Roles.SUPERADMIN, Roles.ADMIN, Roles.OPERATOR])]},
+  {path:'contraente', component: ContraentiComponent, canActivate: [authGuard, roleGuard([Roles.SUPERADMIN, Roles.ADMIN, Roles.OPERATOR])]},
+  {path:'posto', component: PostiComponent, canActivate: [authGuard, roleGuard([Roles.SUPERADMIN, Roles.ADMIN, Roles.OPERATOR])]},
+  {path:'assegnatario', component: AssegnatariComponent, canActivate: [authGuard, roleGuard([Roles.SUPERADMIN, Roles.ADMIN, Roles.OPERATOR])]},
+  {path:'contratto', component: ContrattiComponent, canActivate: [authGuard, roleGuard([Roles.SUPERADMIN, Roles.ADMIN, Roles.OPERATOR, Roles.USER])]},
+  {path:'domanda', component: DomandeComponent, canActivate: [authGuard, roleGuard([Roles.SUPERADMIN, Roles.ADMIN])]},
+  {path:'domandaFull', component: DomandaFullComponent, canActivate: [authGuard, roleGuard([Roles.SUPERADMIN, Roles.ADMIN])]},
+  {path:'profile', component: ProfileComponent, canActivate: [authGuard]},
   {path:'login', component: LoginComponent},
   {path:'register', component: RegisterComponent},
   {path:'cercadefunti', component: CercadefuntiComponent},
