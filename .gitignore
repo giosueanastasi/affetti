@@ -35,3 +35,6 @@ src/main/ui/dist/
 hs_err_pid8613.log
 
 *.log
+
+### Claude Code ###
+CLAUDE.md
