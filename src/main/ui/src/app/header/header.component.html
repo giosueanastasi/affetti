@@ -1,3 +1,44 @@
-<div class="header">
-  <h1>Affetti</h1>
+<div class="header-container">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <a mat-button [routerLink]="'/home'">
+        <img width="40" alt="logo comune s.egidio"
+          src="https://upload.wikimedia.org/wikipedia/it/0/04/Sant%27Egidio_alla_Vibrata-Stemma.png"
+          style="margin-right: 20px;" />
+      </a>
+      <h1 class="my-auto me-3">Affetti</h1>
+      <div class="w-100 d-flex justify-content-between">
+        <a mat-button [routerLink]="'/home'"> Home </a>
+        <div class="right-options">
+          <a mat-button [routerLink]="'/register'" *ngIf="!(authState.isAuthenticated$ | async)"> Registrati </a>
+          <a mat-button [routerLink]="'/login'" *ngIf="!(authState.isAuthenticated$ | async)"> Accedi </a>
+
+          <ng-container *ngIf="authState.isAuthenticated$ | async">
+            <button mat-button [matMenuTriggerFor]="userMenu">
+              <mat-icon>account_circle</mat-icon>
+              <span class="ms-1">{{authState.username$ | async}}</span>
+            </button>
+            <mat-menu #userMenu="matMenu">
+              <a mat-menu-item [routerLink]="'/profile'">
+                <mat-icon>person</mat-icon>
+                <span>Profilo</span>
+              </a>
+              <a mat-menu-item [routerLink]="'/admin'" *appHasRole="[Roles.SUPERADMIN,Roles.ADMIN]">
+                <mat-icon>admin_panel_settings</mat-icon>
+                <span>Admin</span>
+              </a>
+              <mat-divider></mat-divider>
+              <button mat-menu-item (click)="logout()">
+                <mat-icon>logout</mat-icon>
+                <span>Logout</span>
+              </button>
+            </mat-menu>
+          </ng-container>
+
+          <!-- FIXME Elementi utili solo per debug, da eliminare -->
+          <small class="mx-2 fw-lighter" *ngIf="!authState.isAuthenticated">Nessun utente loggato</small>
+        </div>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
 </div>

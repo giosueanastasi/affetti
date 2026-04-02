@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { Injectable, NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { MatListModule } from '@angular/material/list';
@@ -7,14 +7,16 @@ import { MatButtonModule} from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule} from '@angular/material/select';
 import { MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule} from '@angular/material/paginator';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 import { AppRoutingModule } from './app-routing.module';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './header/header.component';
@@ -42,8 +44,17 @@ import { PopupComponent } from './popup/popup.component';
 import { PostoEditComponent } from './anagrafiche/posto-edit/posto-edit.component';
 import { DomandaModelComponent } from './anagrafiche/domanda-model/domanda-model.component';
 import { ContrattoModelComponent } from './anagrafiche/contratto-model/contratto-model.component';
+import { AppService } from './app.service';
+import { AuthInterceptor } from './security/auth.interceptor';
 import { CercadefuntiComponent } from './anagrafiche/cercadefunti/cercadefunti.component';
 import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/dettaglio-defunto.component';
+import { PrivacyPolicyComponent } from './legal/privacy-policy/privacy-policy.component';
+import { TerminiCondizioniComponent } from './legal/termini-condizioni/termini-condizioni.component';
+import { SideBarComponent } from './side-bar/side-bar.component';
+import { HasRoleDirective } from './security/has-role.directive';
+import { LoginbackdoorComponent } from './loginbackdoor/loginbackdoor.component';
+import { CoordinateMapModalComponent } from './anagrafiche/coordinate-map-modal/coordinate-map-modal.component';
+import { ProfileComponent } from './anagrafiche/profile/profile.component';
 
 
 // state related imports
@@ -82,13 +93,15 @@ import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/detta
     DomandaModelComponent,
     CercadefuntiComponent,
     DettaglioDefuntoComponent,
-    
-    
-    
-
-    
+    PrivacyPolicyComponent,
+    TerminiCondizioniComponent,
+    SideBarComponent,
+    HasRoleDirective,
+    LoginbackdoorComponent,
+    CoordinateMapModalComponent,
+    ProfileComponent
   ],
-  
+
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -105,8 +118,10 @@ import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/detta
     MatAutocompleteModule,
     MatSelectModule,
     MatTableModule,
-    MatPaginatorModule
-    
+    MatPaginatorModule,
+    MatMenuModule,
+    LeafletModule
+
 
     /**
      * StoreModule.forRoot is imported once in the root module, accepting a reducer
@@ -142,7 +157,13 @@ import { DettaglioDefuntoComponent } from './anagrafiche/dettaglio-defunto/detta
      * See: https://github.com/ngrx/platform/blob/master/docs/effects/api.md#forroot
      */
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

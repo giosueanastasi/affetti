@@ -5,6 +5,7 @@
 .springBeans
 .sts4-cache
 .angular/cache
+.factorypath
 !**/src/main/ui/.angular/cache
 src/main/ui/.angular/
 
@@ -34,3 +35,6 @@ src/main/ui/dist/
 hs_err_pid8613.log
 
 *.log
+
+### Claude Code ###
+CLAUDE.md

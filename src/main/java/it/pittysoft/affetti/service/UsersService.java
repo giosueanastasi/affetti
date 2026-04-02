@@ -1,6 +1,7 @@
 package it.pittysoft.affetti.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,7 @@ import it.pittysoft.affetti.repository.UsersRepository;
 
 @Component
 public class UsersService {
-	
+
 	private UsersRepository usersRepository;
 
     public UsersService(UsersRepository usersRepository) {
@@ -22,15 +23,19 @@ public class UsersService {
     public List<Users> getUsers() {
         return usersRepository.findAll();
     }
-    
+
     public UserResponse getUsers(UserRequest user) {
     	UserResponse response = new UserResponse();
     	response.setUtenti(usersRepository.findAll());
         return response;
     }
-    
+
     public Users saveUser(Users users) {
     	return usersRepository.save(users);
+    }
+
+    public Optional<Users> findByUsername(String username) {
+        return usersRepository.findByUsername(username);
     }
 
 }

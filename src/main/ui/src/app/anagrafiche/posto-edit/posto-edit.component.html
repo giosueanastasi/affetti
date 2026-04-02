@@ -93,6 +93,37 @@
                             >       
 
                     </div>
+
+                    <!-- Sezione Coordinate -->
+                    <h3>Coordinate Posizione</h3>
+                    <div class="form-group">
+                        <label for="latitudine">Latitudine</label>
+                        <input
+                            type="text"
+                            id="latitudine"
+                            class="form-control notEdit"
+                            [(ngModel)]="posto1.latitudine"
+                            name="latitudine"
+                            readonly
+                            placeholder="Non impostata">
+                    </div>
+                    <div class="form-group">
+                        <label for="longitudine">Longitudine</label>
+                        <input
+                            type="text"
+                            id="longitudine"
+                            class="form-control notEdit"
+                            [(ngModel)]="posto1.longitudine"
+                            name="longitudine"
+                            readonly
+                            placeholder="Non impostata">
+                    </div>
+                    <button
+                        type="button"
+                        class="btn btn-secondary mt-4 mb-3"
+                        (click)="openCoordinateModal()">
+                        📍 Seleziona Coordinate sulla Mappa
+                    </button>
                 </div>
 
                 <div class="modal-footer">
@@ -105,3 +136,5 @@
     </div>
 </div>
 
+<!-- Componente modale mappa -->
+<app-coordinate-map-modal (save)="savePostoCoordinates($event)"></app-coordinate-map-modal>

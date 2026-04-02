@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { DomandaFull } from './app-state/models/domandaFull.model';
 import { Domanda, Posto } from './app-state/models';
 import { DomandaSearch } from './app-state/models/domandaSearch.model';
@@ -18,6 +18,8 @@ export class AppService {
   constructor(private http: HttpClient) { }
 
   rootURL = '/api';
+
+  authenticated = false;
 
   getUsers() {
     return this.http.get(this.rootURL + '/users');
@@ -49,8 +51,8 @@ export class AppService {
     return this.http.post(this.rootURL + '/search_contraenti' ,contraenti1, options);
   }
 
-  cercaDefunti(ricerca: string) {
-    return this.http.post(this.rootURL + '/search_defunti', { ricerca: ricerca });
+  cercaDefunti(ricerca: string, page: number = 0, size: number = 10) {
+    return this.http.post(this.rootURL + '/search_defunti', { ricerca: ricerca, page: page, size: size });
   }
 
   cercaDefuntoById(id: number) {
@@ -212,4 +214,19 @@ export class AppService {
   getNuovoProtocolloDomanda(){
     return this.http.get(this.rootURL + '/genera_protocollo_domanda');
   }
+
+  //Metodo per scaricare il PDF del contratto
+  stampaContratto(idContratto: number) {
+    return this.http.get(this.rootURL + '/stampa_contratto/' + idContratto, {
+      responseType: 'blob'
+    });
+  }
+
+  //Metodo per scaricare il PDF della domanda
+  stampaDomanda(idDomanda: number) {
+    return this.http.get(this.rootURL + '/stampa_domanda/' + idDomanda, {
+      responseType: 'blob'
+    });
+  }
+
 }

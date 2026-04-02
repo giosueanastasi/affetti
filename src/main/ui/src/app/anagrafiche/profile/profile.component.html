@@ -1,0 +1,51 @@
+<div class="container py-4 mx-auto w-75">
+    <h3>Profilo Utente</h3>
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Informazioni</h5>
+            <div class="mb-3">
+                <label class="form-label"><strong>Username:</strong></label>
+                <input type="text" class="form-control" [value]="username" disabled>
+            </div>
+            <div class="mb-3">
+                <label class="form-label"><strong>Ruoli:</strong></label>
+                <input type="text" class="form-control" [value]="roles.join(', ')" disabled>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label"><strong>Email:</strong></label>
+                <input type="email" class="form-control" id="email" [(ngModel)]="email">
+            </div>
+            <div class="alert" [ngClass]="emailError ? 'alert-danger' : 'alert-success'" *ngIf="emailMessage">
+                {{emailMessage}}
+            </div>
+            <div class="text-end">
+                <button class="btn btn-primary" (click)="saveEmail()">Salva Email</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Cambio Password</h5>
+            <div class="mb-3">
+                <label for="oldPassword" class="form-label">Password attuale:</label>
+                <input type="password" class="form-control" id="oldPassword" [(ngModel)]="oldPassword">
+            </div>
+            <div class="mb-3">
+                <label for="newPassword" class="form-label">Nuova password:</label>
+                <input type="password" class="form-control" id="newPassword" [(ngModel)]="newPassword">
+            </div>
+            <div class="mb-3">
+                <label for="confirmPassword" class="form-label">Conferma nuova password:</label>
+                <input type="password" class="form-control" id="confirmPassword" [(ngModel)]="confirmPassword">
+            </div>
+            <div class="alert" [ngClass]="passwordError ? 'alert-danger' : 'alert-success'" *ngIf="passwordMessage">
+                {{passwordMessage}}
+            </div>
+            <div class="text-end">
+                <button class="btn btn-primary" (click)="changePassword()">Cambia Password</button>
+            </div>
+        </div>
+    </div>
+</div>

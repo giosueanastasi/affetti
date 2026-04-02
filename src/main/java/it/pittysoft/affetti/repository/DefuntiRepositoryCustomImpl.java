@@ -39,11 +39,18 @@ public class DefuntiRepositoryCustomImpl implements DefuntiRepositoryCustom {
 	        }
 	    }
 
-	    return new JPAQuery<Defunti>(em)
+	    JPAQuery<Defunti> query = new JPAQuery<Defunti>(em)
 	            .select(qDefunti)
 	            .from(qDefunti)
 	            .where(builder)
-	            .fetch();
+	            .orderBy(qDefunti.id.asc());
+
+	    if (request.getPage() != null && request.getSize() != null) {
+	        query.offset((long) request.getPage() * request.getSize())
+	             .limit(request.getSize());
+	    }
+
+	    return query.fetch();
 	}
 
 

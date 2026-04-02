@@ -1,30 +1,46 @@
 package it.pittysoft.affetti.controller;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.security.Key;
+import java.security.Principal;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import javax.crypto.spec.SecretKeySpec;
 
 import com.itextpdf.text.pdf.PdfStructTreeController.returnType;
 import com.lowagie.text.DocumentException;
 
+import freemarker.template.TemplateException;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import freemarker.template.TemplateException;	
 import it.pittysoft.affetti.entity.Comuni;
 import it.pittysoft.affetti.entity.Contraenti;
@@ -35,9 +51,19 @@ import it.pittysoft.affetti.links.ContraenteLinks;
 import it.pittysoft.affetti.dto.DomandeDto;
 import it.pittysoft.affetti.entity.Assegnatari;
 import it.pittysoft.affetti.entity.Cap;
+import it.pittysoft.affetti.entity.Comuni;
+import it.pittysoft.affetti.entity.Contraenti;
 import it.pittysoft.affetti.entity.Contratti;
 import it.pittysoft.affetti.entity.Defunti;
 import it.pittysoft.affetti.entity.Domande;
+import it.pittysoft.affetti.entity.Posti;
+import it.pittysoft.affetti.entity.Users;
+import it.pittysoft.affetti.links.AssegnatarioLinks;
+import it.pittysoft.affetti.links.CapLinks;
+import it.pittysoft.affetti.links.ComuneLinks;
+import it.pittysoft.affetti.links.ContraenteLinks;
+import it.pittysoft.affetti.links.ContrattoLinks;
+import it.pittysoft.affetti.links.DomandaLinks;
 import it.pittysoft.affetti.links.PostoLinks;
 import it.pittysoft.affetti.links.UserLinks;
 import it.pittysoft.affetti.model.ContrattoSearchRequest;
@@ -50,6 +76,8 @@ import it.pittysoft.affetti.model.ComuniSelectResponse;
 import it.pittysoft.affetti.model.ContraentiRequest;
 import it.pittysoft.affetti.model.ContraentiResponse;
 import it.pittysoft.affetti.model.ContrattoModel;
+import it.pittysoft.affetti.model.ContrattoSearchRequest;
+import it.pittysoft.affetti.model.ContrattoSearchResponse;
 import it.pittysoft.affetti.model.ContrattoResponse;
 import it.pittysoft.affetti.model.DomandaRequest;
 import it.pittysoft.affetti.model.DomandaRequestSearch;
@@ -61,13 +89,29 @@ import it.pittysoft.affetti.model.PostiSearchResponse;
 import it.pittysoft.affetti.model.Response;
 import it.pittysoft.affetti.model.UserRequest;
 import it.pittysoft.affetti.model.UserResponse;
+import it.pittysoft.affetti.model.ProtocolloDomandaResponse;
+import it.pittysoft.affetti.model.Response;
+import it.pittysoft.affetti.model.UserRequest;
+import it.pittysoft.affetti.model.UserResponse;
+import it.pittysoft.affetti.entity.Role;
+import it.pittysoft.affetti.model.ChangeEmailRequest;
+import it.pittysoft.affetti.model.ChangePasswordRequest;
+import it.pittysoft.affetti.model.ProfileResponse;
+import it.pittysoft.affetti.model.RegisterRequest;
+import it.pittysoft.affetti.repository.RoleRepository;
+import it.pittysoft.affetti.security.AuthRequest;
+import it.pittysoft.affetti.security.AuthResponse;
+import it.pittysoft.affetti.service.AssegnatariService;
+import it.pittysoft.affetti.model.PostiSearchResponse;
+import it.pittysoft.affetti.model.Response;
+import it.pittysoft.affetti.model.UserRequest;
+import it.pittysoft.affetti.model.UserResponse;
 import it.pittysoft.affetti.repository.DefuntiRepository;
 import it.pittysoft.affetti.service.ComuniService;
 import it.pittysoft.affetti.service.ContraentiService;
-import it.pittysoft.affetti.links.ContrattoLinks;
-import it.pittysoft.affetti.links.DomandaLinks;
-import it.pittysoft.affetti.links.AssegnatarioLinks;
-import it.pittysoft.affetti.links.CapLinks;
+import it.pittysoft.affetti.service.ContrattiService;
+import it.pittysoft.affetti.service.DefuntiService;
+import it.pittysoft.affetti.service.DomandeService;
 import it.pittysoft.affetti.service.PostiService;
 import it.pittysoft.affetti.service.UsersService;
 import it.pittysoft.affetti.service.ContrattiService;
@@ -103,6 +147,19 @@ public class ControllerPrincipale {
 	@Autowired
 	DomandeService domandeService;
 	
+    @Autowired
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
+    RoleRepository roleRepository;
+    
+	
+    @Value("${jwt.secret}")
+    String jwtSecret;
+
 	@Autowired
 	DefuntiService defuntiService;
 	
@@ -369,26 +426,150 @@ public class ControllerPrincipale {
         }
     }
 	
-	
+@RequestMapping("/user")
+	public Principal user(Principal user) {
+	    return user;
+	  }
+
+	@GetMapping(path = UserLinks.PROFILE)
+	public ResponseEntity<?> getProfile() {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Optional<Users> userOpt = usersService.findByUsername(username);
+		if (userOpt.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utente non trovato");
+		}
+		Users user = userOpt.get();
+		ProfileResponse response = new ProfileResponse();
+		response.setUsername(user.getUsername());
+		response.setEmail(user.getEmail());
+		List<String> roles = new ArrayList<>();
+		for (Role role : user.getRoles()) {
+			roles.add(role.getRole());
+		}
+		response.setRoles(roles);
+		return ResponseEntity.ok(response);
+	}
+
+	@PutMapping(path = UserLinks.PROFILE_PASSWORD)
+	public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Optional<Users> userOpt = usersService.findByUsername(username);
+		if (userOpt.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utente non trovato");
+		}
+		Users user = userOpt.get();
+		if (!passwordEncoder.matches(request.getOldPassword(), user.getPassword())) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password attuale non corretta");
+		}
+		if (request.getNewPassword() == null || request.getNewPassword().length() < 8) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La nuova password deve essere di almeno 8 caratteri");
+		}
+		user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+		usersService.saveUser(user);
+		return ResponseEntity.ok("Password aggiornata con successo");
+	}
+
+	@PutMapping(path = UserLinks.PROFILE_EMAIL)
+	public ResponseEntity<?> changeEmail(@RequestBody ChangeEmailRequest request) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Optional<Users> userOpt = usersService.findByUsername(username);
+		if (userOpt.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utente non trovato");
+		}
+		Users user = userOpt.get();
+		user.setEmail(request.getEmail());
+		usersService.saveUser(user);
+		return ResponseEntity.ok("Email aggiornata con successo");
+	}
+
+	@PostMapping("/register")
+	public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
+		if (request.getUsername() == null || request.getUsername().isBlank()) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username obbligatorio");
+		}
+		if (request.getPassword() == null || request.getPassword().length() < 8) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La password deve essere di almeno 8 caratteri");
+		}
+		Optional<Users> existing = usersService.findByUsername(request.getUsername());
+		if (existing.isPresent()) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("Username gia' in uso");
+		}
+		Optional<Role> userRole = roleRepository.findByRole("user");
+		if (userRole.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errore di configurazione ruoli");
+		}
+		Users newUser = new Users();
+		newUser.setUsername(request.getUsername());
+		newUser.setPassword(passwordEncoder.encode(request.getPassword()));
+		newUser.setEmail(request.getEmail());
+		newUser.setFk_comune(String.valueOf(request.getFkComune()));
+		newUser.setRoles(java.util.Set.of(userRole.get()));
+		usersService.saveUser(newUser);
+		return ResponseEntity.status(HttpStatus.CREATED).body("Registrazione completata con successo");
+	}
+
+	@PostMapping("/login")
+    public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
+		try {
+			UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword());
+			Authentication authentication = authenticationManager.authenticate(token);
+			List<String> roles = new ArrayList<String>();
+			for(GrantedAuthority auth : authentication.getAuthorities()) {
+				roles.add(auth.getAuthority().toString());
+			}
+	        SecurityContextHolder.getContext().setAuthentication(authentication);
+	        Key signingKey = new SecretKeySpec(jwtSecret.getBytes(StandardCharsets.UTF_8), SignatureAlgorithm.HS256.getJcaName());
+	        String jwt = Jwts.builder()
+	                .setSubject(authRequest.getUsername())
+	                .claim("roles", roles)
+	                .setIssuedAt(new Date())
+	                .setExpiration(new Date(System.currentTimeMillis() + 3600000))
+	                .signWith(signingKey, SignatureAlgorithm.HS256)
+	                .compact();
+
+        return ResponseEntity.ok(new AuthResponse(jwt));
+
+		}catch (Exception e) {
+	        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+	    }
+	}
+
+
 	@PostMapping(path = DefuntoLinks.SEARCH_DEFUNTI)
 	public ResponseEntity<List<Defunti>> ricercaDefunti(@RequestBody DefuntiRequest request) {
 	    System.out.println("Ricerca ricevuta: " + request);
 		List<Defunti> defuntiFiltrati = defuntiService.getDefunti(request);
-		
+
 		return ResponseEntity.ok(defuntiFiltrati);
 	}
-	
+
 	@GetMapping(path = DefuntoLinks.SEARCH_DEFUNTO)
 	public ResponseEntity<?> getDefuntoById(@PathVariable Long id){
 		Optional<Defunti> defuntoOptional = defuntiService.getDefuntiById(id);
-		
+
 		if(defuntoOptional.isPresent()) {
 			return ResponseEntity.ok(defuntoOptional.get());
 		} else {
         	return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Errore imprevisto, contattare l'assistenza");
 		}
-	} 
+	}
 
+	@GetMapping(path = ContrattoLinks.STAMPA_CONTRATTO)
+    public ResponseEntity<Resource> generaPdfContratto(@PathVariable Long idContratto) {
+        try {
+            byte[] pdfContratto = contrattiService.generaPdfContratti(idContratto);
+
+            ByteArrayResource resource = new ByteArrayResource(pdfContratto);
+
+            return ResponseEntity.ok()
+                    .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=contratto_report.pdf")
+                    .header(HttpHeaders.CONTENT_TYPE, "application/pdf")
+                    .contentLength(pdfContratto.length)
+                    .body(resource);
+        } catch (IOException | TemplateException | DocumentException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 	
 }

@@ -8,5 +8,9 @@ public class UserLinks {
 	public static final String SEARCH_USERS = "/search_user";
 	public static final String LIST_USERS = "/users";
     public static final String ADD_USER = "/user";
+    public static final String PROFILE = "/profile";
+    public static final String PROFILE_PASSWORD = "/profile/password";
+    public static final String PROFILE_EMAIL = "/profile/email";
+    public static final String REGISTER = "/register";
 
 }

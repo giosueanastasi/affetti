@@ -23,10 +23,21 @@ export class ContrattoModelComponent {
   }
 
   saveContratto() {
-    debugger;
     this.appService.saveContratto(this.contratto).pipe().subscribe((data:any) => {
       this.save.emit(data.contratti[0]);
       $('#contrattoModal').modal('hide');
+    });
+  }
+
+  printContrattoModal() {
+    this.appService.stampaContratto(this.contratto.idContratto).subscribe({
+      next: (blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        window.open(url, '_blank');
+      },
+      error: (err) => {
+        console.error('Errore durante la stampa del contratto:', err);
+      }
     });
   }
 }

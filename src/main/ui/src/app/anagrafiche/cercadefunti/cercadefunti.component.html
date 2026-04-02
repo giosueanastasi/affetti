@@ -1,36 +1,84 @@
-<div class="container d-flex justify-content-center mt-5">
-  <div class="col-md-6">
-      <input class="col-md-6"
-        type="text" 
-        [formControl]="ricerca" 
-        class="form-control" 
-        placeholder="Inserisci nome defunto" 
-      >
-  </div>
-</div>
+<div class="banner-header mb-5">
+  <div class="banner-overlay">
+    <div class="container py-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+          <h1 class="display-4 fw-semibold text-white mb-3">Ricerca Defunti</h1>
+          <p class="fs-5 text-white-50 mb-4">Cerca tra i registri del cimitero</p>
 
-<div *ngIf="defunti.length > 0" class="container d-flex justify-content-center mt-5">
-  <div class="col-md-8">
-    <ul class="list-group">
-      <li 
-        *ngFor="let defunto of defunti" 
-        (click)="dettaglio(defunto.id)" 
-        class="list-group-item d-flex justify-content-between align-items-center cursor-pointer"
-      >
-        <div>
-          <strong>{{ defunto.nome }} {{ defunto.cognome }}</strong>
-          <div class="text-muted">{{ defunto.data_decesso | date:'dd-MM-yyyy' }}</div>
+          <div class="mb-3">
+            <input
+              type="text"
+              [formControl]="ricerca"
+              class="form-control form-control-lg shadow"
+              placeholder="Cerca defunto per nome o cognome..."
+            >
+          </div>
         </div>
-        
-        <button class="btn btn-info btn-sm">Dettaglio</button>
-      </li>
-    </ul>
+      </div>
+    </div>
   </div>
 </div>
 
+<div *ngIf="defunti.length > 0" class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="list-group shadow-sm">
+        <button
+          *ngFor="let defunto of defunti"
+          type="button"
+          (click)="dettaglio(defunto.id)"
+          class="list-group-item list-group-item-action p-3"
+        >
+          <div class="d-flex align-items-center">
+            <div class="me-3 flex-shrink-0">
+              <img
+                [src]="defunto.immagine_url || 'assets/default-user.webp'"
+                [alt]="defunto.nome + ' ' + defunto.cognome"
+                class="defunto-avatar rounded-circle"
+              >
+            </div>
 
-<div *ngIf="defunti.length === 0 && ricercaAvviata" class="container d-flex justify-content-center mt-5">
-  <div class="col-md-8 alert alert-warning ">
-        Nessun risultato trovato.
+            <div class="flex-grow-1 defunto-info">
+              <h4 class="fw-semibold text-dark mb-1">{{ defunto.cognome }} {{ defunto.nome }}</h4>
+              <div class="text-muted mb-1">
+                <span class="text-muted">N.</span> {{ defunto.data_nascita | date:'dd/M/yyyy' }} -
+                <span class="text-muted">M.</span> {{ defunto.data_decesso | date:'dd/M/yyyy' }}
+              </div>
+              <div class="fw-medium">
+                <ng-container *ngIf="defunto.comune_decesso">
+                  Cimitero {{ defunto.comune_decesso }}
+                  <ng-container *ngIf="defunto.provincia_decesso"> ({{ defunto.provincia_decesso }})</ng-container>
+                </ng-container>
+              </div>
+            </div>
+
+            <div class="ms-3 flex-shrink-0 text-muted fs-4">
+              <span class="material-icons">chevron_right</span>
+            </div>
+          </div>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="defunti.length > 0 && hasMore" class="container mt-3">
+  <div class="row justify-content-center">
+    <div class="col-md-8 text-center">
+      <button (click)="caricaAltri()" class="btn btn-primary">
+        Carica altri
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="defunti.length === 0 && ricercaAvviata" class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="alert alert-warning text-center">
+        <i class="bi bi-search"></i> Nessun risultato trovato.
+      </div>
+    </div>
   </div>
 </div>

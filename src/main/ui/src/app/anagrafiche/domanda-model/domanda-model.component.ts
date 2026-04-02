@@ -32,7 +32,15 @@ export class DomandaModelComponent {
   }
 
   printDomandaModal() {
-    window.open("/api/stampa_domanda/" + this.domanda.id, "_blank");
+    this.appService.stampaDomanda(this.domanda.id).subscribe({
+      next: (blob: Blob) => {
+        const url = window.URL.createObjectURL(blob);
+        window.open(url, '_blank');
+      },
+      error: (err) => {
+        console.error('Errore durante la stampa della domanda:', err);
+      }
+    });
   }
 
 }
