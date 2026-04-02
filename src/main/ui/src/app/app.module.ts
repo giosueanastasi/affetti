@@ -7,6 +7,7 @@ import { MatButtonModule} from '@angular/material/button';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatSelectModule} from '@angular/material/select';
@@ -53,6 +54,7 @@ import { SideBarComponent } from './side-bar/side-bar.component';
 import { HasRoleDirective } from './security/has-role.directive';
 import { LoginbackdoorComponent } from './loginbackdoor/loginbackdoor.component';
 import { CoordinateMapModalComponent } from './anagrafiche/coordinate-map-modal/coordinate-map-modal.component';
+import { ProfileComponent } from './anagrafiche/profile/profile.component';
 
 
 // state related imports
@@ -96,7 +98,8 @@ import { CoordinateMapModalComponent } from './anagrafiche/coordinate-map-modal/
     SideBarComponent,
     HasRoleDirective,
     LoginbackdoorComponent,
-    CoordinateMapModalComponent
+    CoordinateMapModalComponent,
+    ProfileComponent
   ],
 
   imports: [
@@ -116,6 +119,7 @@ import { CoordinateMapModalComponent } from './anagrafiche/coordinate-map-modal/
     MatSelectModule,
     MatTableModule,
     MatPaginatorModule,
+    MatMenuModule,
     LeafletModule
 
 
