@@ -37,6 +37,9 @@ public class Users {
     @Column
     @NotNull(message="{NotNull.User.fk_comune}")
     private String fk_comune;
+
+    @Column
+    private String email;
     
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(

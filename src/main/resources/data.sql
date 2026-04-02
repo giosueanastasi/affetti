@@ -12607,14 +12607,15 @@ DROP TABLE IF EXISTS role;
 
 CREATE TABLE role (
   id INT NOT NULL IDENTITY,
-  role VARCHAR(10) NOT NULL,
+  role VARCHAR(20) NOT NULL,
   PRIMARY KEY (id)
 );
 
 INSERT INTO role (role) VALUES
   ('admin'),
-  ('user'), 
-  ('operator'); 
+  ('user'),
+  ('operator'),
+  ('superadmin');
   
   DROP TABLE IF EXISTS users;
 
@@ -12623,17 +12624,19 @@ CREATE TABLE users (
   username VARCHAR(20) NOT NULL,
   password VARCHAR(100) NOT NULL,
   fk_comune int NOT NULL,
+  email VARCHAR(255),
   PRIMARY KEY (id),
   foreign key (fk_comune) references comuni (id)
 );
 
-INSERT INTO users ( username,password,fk_comune) VALUES
-  ('Antonio90','$2a$12$flO.rGaJdEWoOltiRQDFTe6tFJnk4KV.ZevNtoYxzDDM07JZMBW3.', 188),
-  ( 'Stefano24', '$2a$12$fj5mxtQd8ULv80QW.ZWvVOQzZn/gkewSwYwgssuHOV7D3vis5AY7y', 4530),
-  ( 'Giovanna98', '$2a$12$kz6dsCL/wx0VA8.AytV3cOpaJ9gMl.FNG4woC3rQaedBbaeoS1ED.', 4518),
-  ( 'user', '$2a$12$9XsiPJIVC46JkEznSENbmeH4nvYZVJGRLnctca2j114Rj2dyDEi3S', 1),
-  ( 'admin', '$2a$12$D56Q42PcA1BH4eaAJW3gyORGCk0B9oX9RJGRj9OqCE6.fCnb0WtDG', 1),
-  ( 'operator', '$2a$12$B4kLU8xA5OhhblEeqWLNBexnVAC92o.dOUTA7EuY0/OpLM0xxB912', 1);
+INSERT INTO users ( username,password,fk_comune,email) VALUES
+  ('Antonio90','$2a$12$flO.rGaJdEWoOltiRQDFTe6tFJnk4KV.ZevNtoYxzDDM07JZMBW3.', 188, 'antonio90@test.it'),
+  ( 'Stefano24', '$2a$12$fj5mxtQd8ULv80QW.ZWvVOQzZn/gkewSwYwgssuHOV7D3vis5AY7y', 4530, 'stefano24@test.it'),
+  ( 'Giovanna98', '$2a$12$kz6dsCL/wx0VA8.AytV3cOpaJ9gMl.FNG4woC3rQaedBbaeoS1ED.', 4518, 'giovanna98@test.it'),
+  ( 'user', '$2a$12$9XsiPJIVC46JkEznSENbmeH4nvYZVJGRLnctca2j114Rj2dyDEi3S', 1, 'user@test.it'),
+  ( 'admin', '$2a$12$D56Q42PcA1BH4eaAJW3gyORGCk0B9oX9RJGRj9OqCE6.fCnb0WtDG', 1, 'admin@test.it'),
+  ( 'operator', '$2a$12$B4kLU8xA5OhhblEeqWLNBexnVAC92o.dOUTA7EuY0/OpLM0xxB912', 1, 'operator@test.it'),
+  ( 'superadmin', '$2a$12$OojYS8movFv/KzH0RwRRludd/3GZBlO7zQ14xWW7ZM6RC5yBoUtSK', 1, 'superadmin@test.it');
 
 CREATE TABLE role_users(
 	role_id int NULL,
@@ -12648,7 +12651,8 @@ INSERT INTO role_users(role_id, user_id ) VALUES
 ('2','3'),
 ('2','4'),
 ('1','5'),
-('3','6');
+('3','6'),
+('4','7');
 
 DROP TABLE IF EXISTS sepolture cascade;
 DROP TABLE IF EXISTS defunti cascade;

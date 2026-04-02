@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.data.domain.PageRequest;
@@ -23,9 +24,11 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -90,6 +93,12 @@ import it.pittysoft.affetti.model.ProtocolloDomandaResponse;
 import it.pittysoft.affetti.model.Response;
 import it.pittysoft.affetti.model.UserRequest;
 import it.pittysoft.affetti.model.UserResponse;
+import it.pittysoft.affetti.entity.Role;
+import it.pittysoft.affetti.model.ChangeEmailRequest;
+import it.pittysoft.affetti.model.ChangePasswordRequest;
+import it.pittysoft.affetti.model.ProfileResponse;
+import it.pittysoft.affetti.model.RegisterRequest;
+import it.pittysoft.affetti.repository.RoleRepository;
 import it.pittysoft.affetti.security.AuthRequest;
 import it.pittysoft.affetti.security.AuthResponse;
 import it.pittysoft.affetti.service.AssegnatariService;
@@ -140,10 +149,17 @@ public class ControllerPrincipale {
 	
     @Autowired
     AuthenticationManager authenticationManager;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
+
+    @Autowired
+    RoleRepository roleRepository;
     
 	
-    String key = "chiave-segreta-temporanea-abbastanza-lunga-0123456789"; 
-    Key signingKey = new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), SignatureAlgorithm.HS256.getJcaName());
+    @Value("${jwt.secret}")
+    String jwtSecret;
+
 	@Autowired
 	DefuntiService defuntiService;
 	
@@ -415,6 +431,83 @@ public class ControllerPrincipale {
 	    return user;
 	  }
 
+	@GetMapping(path = UserLinks.PROFILE)
+	public ResponseEntity<?> getProfile() {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Optional<Users> userOpt = usersService.findByUsername(username);
+		if (userOpt.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utente non trovato");
+		}
+		Users user = userOpt.get();
+		ProfileResponse response = new ProfileResponse();
+		response.setUsername(user.getUsername());
+		response.setEmail(user.getEmail());
+		List<String> roles = new ArrayList<>();
+		for (Role role : user.getRoles()) {
+			roles.add(role.getRole());
+		}
+		response.setRoles(roles);
+		return ResponseEntity.ok(response);
+	}
+
+	@PutMapping(path = UserLinks.PROFILE_PASSWORD)
+	public ResponseEntity<?> changePassword(@RequestBody ChangePasswordRequest request) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Optional<Users> userOpt = usersService.findByUsername(username);
+		if (userOpt.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utente non trovato");
+		}
+		Users user = userOpt.get();
+		if (!passwordEncoder.matches(request.getOldPassword(), user.getPassword())) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Password attuale non corretta");
+		}
+		if (request.getNewPassword() == null || request.getNewPassword().length() < 8) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La nuova password deve essere di almeno 8 caratteri");
+		}
+		user.setPassword(passwordEncoder.encode(request.getNewPassword()));
+		usersService.saveUser(user);
+		return ResponseEntity.ok("Password aggiornata con successo");
+	}
+
+	@PutMapping(path = UserLinks.PROFILE_EMAIL)
+	public ResponseEntity<?> changeEmail(@RequestBody ChangeEmailRequest request) {
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Optional<Users> userOpt = usersService.findByUsername(username);
+		if (userOpt.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utente non trovato");
+		}
+		Users user = userOpt.get();
+		user.setEmail(request.getEmail());
+		usersService.saveUser(user);
+		return ResponseEntity.ok("Email aggiornata con successo");
+	}
+
+	@PostMapping("/register")
+	public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
+		if (request.getUsername() == null || request.getUsername().isBlank()) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Username obbligatorio");
+		}
+		if (request.getPassword() == null || request.getPassword().length() < 8) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("La password deve essere di almeno 8 caratteri");
+		}
+		Optional<Users> existing = usersService.findByUsername(request.getUsername());
+		if (existing.isPresent()) {
+			return ResponseEntity.status(HttpStatus.CONFLICT).body("Username gia' in uso");
+		}
+		Optional<Role> userRole = roleRepository.findByRole("user");
+		if (userRole.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errore di configurazione ruoli");
+		}
+		Users newUser = new Users();
+		newUser.setUsername(request.getUsername());
+		newUser.setPassword(passwordEncoder.encode(request.getPassword()));
+		newUser.setEmail(request.getEmail());
+		newUser.setFk_comune(String.valueOf(request.getFkComune()));
+		newUser.setRoles(java.util.Set.of(userRole.get()));
+		usersService.saveUser(newUser);
+		return ResponseEntity.status(HttpStatus.CREATED).body("Registrazione completata con successo");
+	}
+
 	@PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody AuthRequest authRequest) {
 		try {
@@ -425,6 +518,7 @@ public class ControllerPrincipale {
 				roles.add(auth.getAuthority().toString());
 			}
 	        SecurityContextHolder.getContext().setAuthentication(authentication);
+	        Key signingKey = new SecretKeySpec(jwtSecret.getBytes(StandardCharsets.UTF_8), SignatureAlgorithm.HS256.getJcaName());
 	        String jwt = Jwts.builder()
 	                .setSubject(authRequest.getUsername())
 	                .claim("roles", roles)

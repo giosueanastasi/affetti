@@ -17,9 +17,11 @@ public class ApiEndpoints {
  
     public static final String[] PUBLIC_ENDPOINTS = {
         "/api/login",
+        "/api/register",
         "/h2-console/**",
         BASE_PATH + DefuntoLinks.SEARCH_DEFUNTI,
-        BASE_PATH + DefuntoLinks.SEARCH_DEFUNTO
+        BASE_PATH + DefuntoLinks.SEARCH_DEFUNTO,
+        BASE_PATH + ComuneLinks.LIST_COMUNI
     };
     
     public static final String[] OPERATOR_ENDPOINTS = {
@@ -52,6 +54,9 @@ public class ApiEndpoints {
 		BASE_PATH + DomandaLinks.SEARCH_DOMANDE,
 		BASE_PATH + DomandaLinks.STAMPA_DOMANDA ,
 		BASE_PATH + ComuneLinks.LIST_COMUNI ,
-		BASE_PATH + ComuneLinks.GET_COMUNE 
+		BASE_PATH + ComuneLinks.GET_COMUNE ,
+		BASE_PATH + UserLinks.PROFILE ,
+		BASE_PATH + UserLinks.PROFILE_PASSWORD ,
+		BASE_PATH + UserLinks.PROFILE_EMAIL
     };
 }
