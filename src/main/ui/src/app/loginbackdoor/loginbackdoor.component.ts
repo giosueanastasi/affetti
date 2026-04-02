@@ -20,7 +20,8 @@ export class LoginbackdoorComponent {
     { username: 'Giovanna98', password: 'Giovanna98', description: 'Utente standard' },
     { username: 'user', password: 'user', description: 'Ruolo USER' },
     { username: 'admin', password: 'admin', description: 'Ruolo ADMIN' },
-    { username: 'operator', password: 'operator', description: 'Ruolo OPERATOR' }
+    { username: 'operator', password: 'operator', description: 'Ruolo OPERATOR' },
+    { username: 'superadmin', password: 'superadmin', description: 'Ruolo SUPERADMIN' }
   ];
 
   isLoading: string | null = null;
