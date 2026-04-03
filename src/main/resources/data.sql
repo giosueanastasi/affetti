@@ -8,13 +8,14 @@ CREATE TABLE tenant(
 	colore_primario varchar(7),
 	colore_secondario varchar(7),
 	slug varchar(255) UNIQUE,
+	sinossi varchar(500),
 	PRIMARY KEY (id)
 );
 
-INSERT INTO TENANT(ID, DESCRIZIONE, LOGO_URL, COLORE_PRIMARIO, COLORE_SECONDARIO, SLUG) VALUES
-(1, 'Comune di Roma', 'assets/tenants/roma-logo.png', '#7B1F3A', '#F5D76E', 'comune-di-roma'),
-(2, 'Comune di Milano', 'assets/tenants/milano-logo.png', '#CF2734', '#FFFFFF', 'comune-di-milano'),
-(3, 'Comune di Napoli', 'assets/tenants/napoli-logo.png', '#0072BB', '#FFD700', 'comune-di-napoli');
+INSERT INTO TENANT(ID, DESCRIZIONE, LOGO_URL, COLORE_PRIMARIO, COLORE_SECONDARIO, SLUG, SINOSSI) VALUES
+(1, 'Comune di Roma', 'assets/tenants/roma-logo.png', '#7B1F3A', '#F5D76E', 'comune-di-roma', 'Servizi cimiteriali del Comune di Roma. Gestione dei cimiteri comunali Verano e Flaminio.'),
+(2, 'Comune di Milano', 'assets/tenants/milano-logo.png', '#CF2734', '#FFFFFF', 'comune-di-milano', 'Servizi cimiteriali del Comune di Milano. Cimitero Monumentale e cimiteri minori.'),
+(3, 'Comune di Napoli', 'assets/tenants/napoli-logo.png', '#0072BB', '#FFD700', 'comune-di-napoli', 'Servizi cimiteriali del Comune di Napoli. Cimitero di Poggioreale e strutture annesse.');
 
 DROP TABLE IF EXISTS cap cascade;
 

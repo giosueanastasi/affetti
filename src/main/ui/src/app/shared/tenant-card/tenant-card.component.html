@@ -10,6 +10,7 @@
     <div *ngIf="!tenant.logoUrl" class="tenant-logo-placeholder mb-3" [style.background-color]="tenant.colorePrimario">
       {{ tenant.descrizione.charAt(0) }}
     </div>
-    <h5 class="card-title mb-0">{{ tenant.descrizione }}</h5>
+    <h5 class="card-title mb-1">{{ tenant.descrizione }}</h5>
+    <p class="card-text tenant-sinossi text-muted mb-0" *ngIf="tenant.sinossi">{{ tenant.sinossi }}</p>
   </div>
 </div>

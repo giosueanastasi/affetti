@@ -1,0 +1,13 @@
+.color-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.form-control-color {
+  width: 40px;
+  height: 34px;
+  padding: 2px;
+  cursor: pointer;
+}
