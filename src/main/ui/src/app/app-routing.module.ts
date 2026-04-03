@@ -21,6 +21,7 @@ import { Roles } from './app-state/enum/roles.enum';
 import { LoginbackdoorComponent } from './loginbackdoor/loginbackdoor.component';
 import { ProfileComponent } from './anagrafiche/profile/profile.component';
 import { TenantDashboardComponent } from './anagrafiche/tenant-dashboard/tenant-dashboard.component';
+import { EasterEggComponent } from './easter-egg/easter-egg.component';
 
 
 const routes: Routes = [
@@ -42,6 +43,7 @@ const routes: Routes = [
   {path:'privacy-policy', component: PrivacyPolicyComponent},
   {path:'termini-condizioni', component: TerminiCondizioniComponent},
   {path: 'pitty-in', component: LoginbackdoorComponent },
+  {path: 'pitty-in/premium', component: EasterEggComponent },
   {path: ':slug', component: TenantDashboardComponent, canActivate: [authGuard, roleGuard([Roles.SUPERADMIN, Roles.ADMIN, Roles.OPERATOR])]},
 ];
 

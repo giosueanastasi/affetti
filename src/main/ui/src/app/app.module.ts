@@ -60,6 +60,11 @@ import { TenantCardComponent } from './shared/tenant-card/tenant-card.component'
 import { DefuntoCardComponent } from './shared/defunto-card/defunto-card.component';
 import { TenantDashboardComponent } from './anagrafiche/tenant-dashboard/tenant-dashboard.component';
 import { CimiteroCardComponent } from './shared/cimitero-card/cimitero-card.component';
+import { TenantStatisticheComponent } from './anagrafiche/tenant-statistiche/tenant-statistiche.component';
+import { EasterEggComponent } from './easter-egg/easter-egg.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { AccordionModule } from 'ngx-bootstrap/accordion';
+import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 
 // state related imports
@@ -109,7 +114,9 @@ import { CimiteroCardComponent } from './shared/cimitero-card/cimitero-card.comp
     TenantCardComponent,
     DefuntoCardComponent,
     TenantDashboardComponent,
-    CimiteroCardComponent
+    CimiteroCardComponent,
+    TenantStatisticheComponent,
+    EasterEggComponent
   ],
 
   imports: [
@@ -130,7 +137,10 @@ import { CimiteroCardComponent } from './shared/cimitero-card/cimitero-card.comp
     MatTableModule,
     MatPaginatorModule,
     MatMenuModule,
-    LeafletModule
+    LeafletModule,
+    NgxChartsModule,
+    AccordionModule.forRoot(),
+    CarouselModule.forRoot()
 
 
     /**

@@ -29,6 +29,7 @@
     "@ngrx/store": "^16.3.0",
     "@ngrx/store-devtools": "^16.3.0",
     "@popperjs/core": "^2.11.7",
+    "@swimlane/ngx-charts": "^20.5.0",
     "bootstrap": "^5.2.3",
     "codice-fiscale-js": "^2.3.22",
     "jquery": "^3.6.4",

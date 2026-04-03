@@ -51,7 +51,8 @@ public class ApiEndpoints {
 		BASE_PATH + "/tenant/slug/*" ,
 		BASE_PATH + "/tenant/*/cimiteri" ,
 		BASE_PATH + "/tenant/*/search_defunti" ,
-		BASE_PATH + "/tenant/*/defunti"
+		BASE_PATH + "/tenant/*/defunti" ,
+		BASE_PATH + "/tenant/*/statistiche"
     };
     
     public static final String[] USER_ENDPOINTS = {

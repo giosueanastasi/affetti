@@ -1,0 +1,101 @@
+/* Viewport fisso per tutte le slide */
+.slide-viewport {
+  height: 420px;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-content {
+  height: 100%;
+}
+
+.slide-inner {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slide-inner > div {
+  width: 100%;
+}
+
+/* KPI cards */
+.kpi-card {
+  background: #f8f9fa;
+  border-left: 4px solid #667eea;
+  transition: transform 0.15s ease;
+}
+
+.kpi-card:hover {
+  transform: translateY(-2px);
+}
+
+.kpi-icon {
+  font-size: 28px;
+  margin-bottom: 4px;
+}
+
+.kpi-value {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.kpi-label {
+  font-size: 0.8rem;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Grafici */
+.chart-container {
+  height: 350px;
+  width: 100%;
+}
+
+/* Barra navigazione custom */
+.nav-bar {
+  background: #f8f9fa;
+}
+
+.nav-arrow {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+}
+
+.nav-arrow:disabled {
+  opacity: 0.3;
+}
+
+.nav-dot {
+  font-size: 0.75rem;
+  padding: 4px 12px;
+  border-radius: 20px;
+  border: 1px solid #dee2e6;
+  background: #fff;
+  color: #666;
+  transition: all 0.2s ease;
+}
+
+.nav-dot:hover {
+  background: #f0f0f0;
+}
+
+.nav-dot-active {
+  background: var(--dot-color, #667eea) !important;
+  border-color: var(--dot-color, #667eea) !important;
+  color: #fff !important;
+}
+
+/* Accordion */
+:host ::ng-deep .accordion-button:not(.collapsed) {
+  color: #333;
+  background-color: #f8f9fa;
+}

@@ -1,0 +1,46 @@
+<div class="easter-egg-container">
+  <!-- Confetti raining -->
+  <div class="confetti-layer">
+    <span
+      *ngFor="let c of confetti"
+      class="confetti-piece"
+      [style.left.%]="c.left"
+      [style.animation-delay.s]="c.delay"
+      [style.animation-duration.s]="c.duration"
+    >{{ c.emoji }}</span>
+  </div>
+
+  <!-- Main content -->
+  <div class="content-wrapper">
+    <div class="trophy-icon">🏆⚰️🏆</div>
+
+    <h1 class="premium-title">
+      COMPLIMENTI!<br>
+      Sei un Defunto Premium!
+    </h1>
+
+    <p class="premium-subtitle">
+      Hai sbloccato il pacchetto GOLD del riposo eterno!
+    </p>
+
+    <div class="gif-grid">
+      <img *ngFor="let gif of gifs" [src]="gif" class="party-gif" alt="Party!">
+    </div>
+
+    <div class="features-box">
+      <h3>Il tuo pacchetto include:</h3>
+      <ul>
+        <li>⚰️ Bara in mogano con WiFi integrato</li>
+        <li>💐 Fiori freschi ogni lunedi (per l'eternita)</li>
+        <li>👻 Permesso di infestare 3 case a scelta</li>
+        <li>🎶 Playlist personalizzata nell'aldila</li>
+        <li>🦴 Upgrade gratuito a scheletro luminescente</li>
+        <li>🕯️ Candela eterna che non si spegne MAI</li>
+      </ul>
+    </div>
+
+    <button class="back-button" (click)="goBack()">
+      ⬅ TORNA INDIETRO (tra i vivi)
+    </button>
+  </div>
+</div>

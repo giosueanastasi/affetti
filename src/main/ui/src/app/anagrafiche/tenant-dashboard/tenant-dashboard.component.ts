@@ -22,6 +22,7 @@ export class TenantDashboardComponent implements OnInit {
   tenant: Tenant | null = null;
   cimiteri: CimiteroSelect[] = [];
   activeCimiteroIds: Set<number> = new Set();
+  activeCimiteroIdsArray: number[] = [];
   recentDefunti: DefuntoCard[] = [];
   loading: boolean = true;
   sortBy: string = 'decesso_desc';
@@ -34,10 +35,6 @@ export class TenantDashboardComponent implements OnInit {
     private tenantService: TenantService,
     private appService: AppService
   ) { }
-
-  get activeCimiteroIdsArray(): number[] {
-    return Array.from(this.activeCimiteroIds);
-  }
 
   get sortedDefunti(): DefuntoCard[] {
     return [...this.recentDefunti].sort((a, b) => {
@@ -59,6 +56,7 @@ export class TenantDashboardComponent implements OnInit {
       this.tenantService.getCimiteriByTenant(tenant.id).subscribe(cimiteri => {
         this.cimiteri = cimiteri;
         cimiteri.forEach(c => this.activeCimiteroIds.add(c.id));
+        this.syncCimiteroIdsArray();
         this.loadRecentDefunti();
       });
     });
@@ -77,6 +75,7 @@ export class TenantDashboardComponent implements OnInit {
       this.activeCimiteroIds.add(cimiteroId);
     }
     this.activeCimiteroIds = new Set(this.activeCimiteroIds);
+    this.syncCimiteroIdsArray();
     this.loadRecentDefunti();
   }
 
@@ -169,6 +168,10 @@ export class TenantDashboardComponent implements OnInit {
     contratto.protocolloDomanda = item.numeroProtocolloDomanda;
     contratto.dataProtocolloDomanda = item.dataProtocollo;
     return contratto;
+  }
+
+  private syncCimiteroIdsArray(): void {
+    this.activeCimiteroIdsArray = Array.from(this.activeCimiteroIds);
   }
 
   private loadRecentDefunti(): void {

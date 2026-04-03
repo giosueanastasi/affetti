@@ -12,5 +12,6 @@ public class TenantLinks {
 	public static final String UPDATE_TENANT = "/tenant/{id}";
 	public static final String DELETE_TENANT = "/tenant/{id}";
 	public static final String UPLOAD_TENANT_LOGO = "/tenant/{id}/logo";
+	public static final String TENANT_STATISTICHE = "/tenant/{id}/statistiche";
 
 }

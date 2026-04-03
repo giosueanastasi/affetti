@@ -125,6 +125,7 @@ import it.pittysoft.affetti.links.CimiteroLinks;
 import it.pittysoft.affetti.links.DefuntoLinks;
 import it.pittysoft.affetti.links.TenantLinks;
 import it.pittysoft.affetti.service.CimiteriService;
+import it.pittysoft.affetti.service.TenantStatisticheService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -174,6 +175,9 @@ public class ControllerPrincipale {
 
 	@Autowired
 	CimiteriService cimiteriService;
+
+	@Autowired
+	TenantStatisticheService tenantStatisticheService;
 
 	@GetMapping(path = UserLinks.LIST_USERS)
     public ResponseEntity<?> listUsers() {
@@ -732,6 +736,13 @@ public class ControllerPrincipale {
 		log.info("ApiController: get recent defunti for tenant {}", id);
 		List<Defunti> defunti = tenantService.getRecentDefuntiByTenant(id, cimiteroIds, limit);
 		return ResponseEntity.ok(tenantService.enrichDefuntiCards(defunti));
+	}
+
+	@GetMapping(path = TenantLinks.TENANT_STATISTICHE)
+	public ResponseEntity<?> getTenantStatistiche(@PathVariable Long id,
+			@RequestParam(required = false) List<Long> cimiteroIds) {
+		log.info("ApiController: get statistiche for tenant {}", id);
+		return ResponseEntity.ok(tenantStatisticheService.getStatistiche(id, cimiteroIds));
 	}
 
 	// ==================== CIMITERI ENDPOINTS ====================

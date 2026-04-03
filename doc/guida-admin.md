@@ -12,7 +12,7 @@ E' associato a un tenant specifico tramite `fk_tenant`. Nell'header dell'applica
 
 - Visualizzazione del proprio tenant nella home page
 - Gestione cimiteri del proprio tenant (creazione, eliminazione) dal pannello admin
-- Accesso alla dashboard del proprio tenant con filtro cimiteri e ricerca defunti
+- Accesso alla dashboard del proprio tenant con filtro cimiteri, ricerca defunti e statistiche
 - Creazione e modifica domande di concessione
 - Creazione e modifica contratti
 - Gestione contraenti, posti, assegnatari

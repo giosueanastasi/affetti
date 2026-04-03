@@ -61,6 +61,7 @@ L'ordine di valutazione e': PUBLIC -> USER -> OPERATOR -> fallback ADMIN per tut
 | `/api/tenant/{id}/cimiteri` | GET | Cimiteri del tenant |
 | `/api/tenant/{id}/search_defunti` | POST | Ricerca defunti nel tenant (con filtro cimitero opzionale) |
 | `/api/tenant/{id}/defunti` | GET | Defunti recenti del tenant |
+| `/api/tenant/{id}/statistiche` | GET | Statistiche aggregate del tenant (KPI, distribuzioni, trend, confronti) |
 
 #### Endpoint ADMIN (SUPERADMIN + ADMIN)
 | Endpoint | Metodo | Descrizione |
@@ -104,20 +105,28 @@ L'ordine di valutazione e': PUBLIC -> USER -> OPERATOR -> fallback ADMIN per tut
 ## Multi-tenant
 
 ### Architettura
-- Entita' Tenant: id, descrizione, logoUrl, colorePrimario, coloreSecondario
-- Gerarchia dati: Tenant -> Cimiteri (fk_tenant) -> Aree -> Posti -> Defunti
+- Entita' Tenant: id, descrizione, logoUrl, colorePrimario, coloreSecondario, slug (unique), sinossi
+- Gerarchia dati: Tenant -> Cimiteri (fk_tenant) -> Aree (fk_cimitero) -> Strutture (fk_area) -> Posti (fk_area, fk_tenant)
 - Ogni utente (ADMIN, OPERATOR) e' associato a un tenant (Users.fk_tenant)
 - SUPERADMIN ha fk_tenant = NULL e vede tutti i tenant
+- CRUD completo tenant: creazione, modifica, eliminazione con cascading, upload logo (solo SUPERADMIN)
+- CRUD cimiteri: creazione, eliminazione (ADMIN+)
 
 ### Home page
 - Ricerca defunti globale (pubblica, in alto)
-- Card tenant (autenticati, in basso): SUPERADMIN vede tutti, ADMIN/OPERATOR vedono solo il proprio
+- Card tenant con logo, nome e sinossi (autenticati, in basso): SUPERADMIN vede tutti, ADMIN/OPERATOR vedono solo il proprio
 
-### Dashboard tenant (/tenant/:id)
-- Header colorato con logo e nome del tenant
-- Dropdown filtro cimitero (se il tenant ha piu' cimiteri)
-- Widget ricerca defunti scoped al tenant/cimitero
-- Griglia defunti recenti (4 per riga)
+### Dashboard tenant (/:slug)
+- URL basato su slug del tenant (es. /comune-di-roma)
+- Header colorato con gradient colori tenant + logo
+- Filtro cimiteri multi-select con card toggle (almeno 1 attivo)
+- Widget ricerca defunti scoped al tenant/cimiteri
+- Sezione statistiche (accordion, lazy loading): KPI, grafici donut/linea/barre con navigazione custom
+- Griglia defunti recenti (4 per riga) con sorting e bottoni azione domanda/contratto
+
+### Pannello admin (/admin)
+- Gestione tenant: lista, creazione, modifica, eliminazione (SUPERADMIN)
+- Gestione cimiteri per tenant selezionato: lista, creazione, eliminazione
 
 ### Utenti di test
 | Username | Password | Ruolo | Tenant |

@@ -43,6 +43,16 @@
     </app-cerca-defunti-widget>
   </div>
 
+  <!-- Statistiche -->
+  <div class="container mt-4">
+    <app-tenant-statistiche
+      [tenantId]="tenant.id"
+      [cimiteroIds]="activeCimiteroIdsArray"
+      [primaryColor]="tenant.colorePrimario || '#667eea'"
+      [secondaryColor]="tenant.coloreSecondario || '#764ba2'"
+    ></app-tenant-statistiche>
+  </div>
+
   <!-- Griglia defunti con ordinamento -->
   <div class="container mt-5" *ngIf="recentDefunti.length > 0">
     <div class="d-flex align-items-center justify-content-between mb-3">

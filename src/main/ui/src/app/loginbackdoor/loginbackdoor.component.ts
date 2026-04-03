@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../security/auth.service';
 
@@ -13,7 +13,7 @@ interface MockUser {
   templateUrl: './loginbackdoor.component.html',
   styleUrls: ['./loginbackdoor.component.css']
 })
-export class LoginbackdoorComponent {
+export class LoginbackdoorComponent implements OnInit {
   mockUsers: MockUser[] = [
     { username: 'Antonio90', password: 'Antonio90', description: 'Utente standard' },
     { username: 'Stefano24', password: 'Stefano24', description: 'Utente standard' },
@@ -34,7 +34,13 @@ export class LoginbackdoorComponent {
     private router: Router
   ) {}
 
+  ngOnInit(): void {}
+
   loginAs(user: MockUser): void {
+    if (Math.floor(Math.random() * 13) === 0) {
+      this.router.navigate(['/pitty-in/premium']);
+      return;
+    }
     this.isLoading = user.username;
     this.errorMessage = '';
 

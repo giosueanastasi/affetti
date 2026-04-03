@@ -1,0 +1,155 @@
+<accordion>
+  <accordion-group heading="Statistiche" [isOpen]="false" (isOpenChange)="onAccordionToggle($event)">
+
+    <!-- Loading -->
+    <div *ngIf="loading" class="text-center py-4">
+      <div class="spinner-border text-secondary" role="status"></div>
+      <p class="text-muted mt-2">Caricamento statistiche...</p>
+    </div>
+
+    <div *ngIf="!loading && stats">
+
+      <!-- Contenuto slide (altezza fissa, centrato verticalmente) -->
+      <div class="slide-viewport">
+        <div class="slide-content" [ngSwitch]="activeSlide">
+
+          <!-- SLIDE 0: KPI -->
+          <div *ngSwitchCase="0" class="slide-inner">
+            <div class="row g-3 p-3">
+              <div class="col-md-3 col-6">
+                <div class="kpi-card text-center p-3 rounded" [style.border-left-color]="primaryColor">
+                  <span class="material-icons kpi-icon" [style.color]="primaryColor">people</span>
+                  <div class="kpi-value">{{ stats.totaleDefunti }}</div>
+                  <div class="kpi-label">Totale defunti</div>
+                </div>
+              </div>
+              <div class="col-md-3 col-6">
+                <div class="kpi-card text-center p-3 rounded" [style.border-left-color]="primaryColor">
+                  <span class="material-icons kpi-icon" [style.color]="primaryColor">grid_view</span>
+                  <div class="kpi-value">{{ stats.postiLiberi }} / {{ stats.postiTotali }}</div>
+                  <div class="kpi-label">Posti liberi / totali</div>
+                </div>
+              </div>
+              <div class="col-md-3 col-6">
+                <div class="kpi-card text-center p-3 rounded" [style.border-left-color]="primaryColor">
+                  <span class="material-icons kpi-icon" [style.color]="primaryColor">description</span>
+                  <div class="kpi-value">{{ stats.domandeAperte }}</div>
+                  <div class="kpi-label">Domande aperte</div>
+                </div>
+              </div>
+              <div class="col-md-3 col-6">
+                <div class="kpi-card text-center p-3 rounded" [style.border-left-color]="secondaryColor">
+                  <span class="material-icons kpi-icon" [style.color]="secondaryColor">schedule</span>
+                  <div class="kpi-value">{{ stats.contrattiInScadenza }}</div>
+                  <div class="kpi-label">Contratti in scadenza</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SLIDE 1: Distribuzione (donut) -->
+          <div *ngSwitchCase="1" class="slide-inner">
+            <div class="p-3">
+              <div class="d-flex justify-content-end mb-2">
+                <select class="form-select form-select-sm" style="width:auto;" [(ngModel)]="distribuzioneSel">
+                  <option value="postiPerStato">Posti per stato</option>
+                  <option value="postiPerTipoSepoltura">Posti per tipo sepoltura</option>
+                  <option value="domandePerStato">Domande per stato</option>
+                  <option value="sepolturePerTipoOperazione">Sepolture per tipo operazione</option>
+                </select>
+              </div>
+              <div class="chart-container" *ngIf="distribuzioneData.length > 0">
+                <ngx-charts-pie-chart
+                  [results]="distribuzioneData"
+                  [scheme]="colorScheme"
+                  [doughnut]="true"
+                  [labels]="true"
+                  [legend]="true"
+                  [legendTitle]="''"
+                ></ngx-charts-pie-chart>
+              </div>
+              <p class="text-muted text-center py-4" *ngIf="distribuzioneData.length === 0">Nessun dato disponibile</p>
+            </div>
+          </div>
+
+          <!-- SLIDE 2: Trend temporale (linea) -->
+          <div *ngSwitchCase="2" class="slide-inner">
+            <div class="p-3">
+              <div class="d-flex justify-content-end mb-2">
+                <select class="form-select form-select-sm" style="width:auto;" [(ngModel)]="trendSel">
+                  <option value="decessiPerMese">Decessi per mese</option>
+                  <option value="domandePerMese">Domande per mese</option>
+                  <option value="contrattiPerMese">Contratti per mese</option>
+                </select>
+              </div>
+              <div class="chart-container" *ngIf="trendData.length > 0 && trendData[0]?.series?.length > 0">
+                <ngx-charts-line-chart
+                  [results]="trendData"
+                  [scheme]="colorScheme"
+                  [xAxis]="true"
+                  [yAxis]="true"
+                  [legend]="false"
+                  [showXAxisLabel]="true"
+                  [showYAxisLabel]="true"
+                  [xAxisLabel]="'Mese'"
+                  [yAxisLabel]="'Conteggio'"
+                ></ngx-charts-line-chart>
+              </div>
+              <p class="text-muted text-center py-4" *ngIf="!trendData.length || !trendData[0]?.series?.length">Nessun dato disponibile</p>
+            </div>
+          </div>
+
+          <!-- SLIDE 3: Confronto (barre) -->
+          <div *ngSwitchCase="3" class="slide-inner">
+            <div class="p-3">
+              <div class="d-flex justify-content-end mb-2">
+                <select class="form-select form-select-sm" style="width:auto;" [(ngModel)]="confrontoSel">
+                  <option value="capienzaVsOccupazione">Capienza vs occupazione per struttura</option>
+                  <option value="postiPerStatoPerCimitero">Posti per stato per cimitero</option>
+                </select>
+              </div>
+              <div class="chart-container" *ngIf="confrontoData.length > 0">
+                <ngx-charts-bar-vertical-2d
+                  [results]="confrontoData"
+                  [scheme]="colorScheme"
+                  [xAxis]="true"
+                  [yAxis]="true"
+                  [legend]="true"
+                  [legendTitle]="''"
+                  [showXAxisLabel]="false"
+                  [showYAxisLabel]="true"
+                  [yAxisLabel]="'Quantita'"
+                ></ngx-charts-bar-vertical-2d>
+              </div>
+              <p class="text-muted text-center py-4" *ngIf="confrontoData.length === 0">Nessun dato disponibile</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Barra navigazione custom -->
+      <div class="nav-bar d-flex align-items-center justify-content-center gap-3 py-3 border-top">
+        <button class="btn btn-sm btn-outline-secondary nav-arrow"
+          [disabled]="activeSlide === 0" (click)="activeSlide = activeSlide - 1">
+          <span class="material-icons">chevron_left</span>
+        </button>
+        <div class="d-flex align-items-center gap-2">
+          <button *ngFor="let label of slideLabels; let i = index"
+            class="btn btn-sm nav-dot"
+            [class.nav-dot-active]="i === activeSlide"
+            [style.--dot-color]="primaryColor"
+            (click)="activeSlide = i">
+            {{ label }}
+          </button>
+        </div>
+        <button class="btn btn-sm btn-outline-secondary nav-arrow"
+          [disabled]="activeSlide === slideLabels.length - 1" (click)="activeSlide = activeSlide + 1">
+          <span class="material-icons">chevron_right</span>
+        </button>
+      </div>
+
+    </div>
+
+  </accordion-group>
+</accordion>

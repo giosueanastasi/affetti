@@ -6,6 +6,7 @@ import { Cimitero } from '../app-state/models/cimitero.model';
 import { CimiteroSelect } from '../app-state/models/cimitero-select.model';
 import { Defunto } from '../app-state/models/defunto.model';
 import { DefuntoCard } from '../app-state/models/defunto-card.model';
+import { TenantStatistiche } from '../app-state/models/tenant-statistiche.model';
 
 @Injectable({
   providedIn: 'root'
@@ -74,6 +75,16 @@ export class TenantService {
 
   deleteCimitero(id: number): Observable<any> {
     return this.http.delete<any>(this.rootURL + '/cimitero/' + id);
+  }
+
+  getStatistiche(tenantId: number, cimiteroIds: number[]): Observable<TenantStatistiche> {
+    let params = new HttpParams();
+    if (cimiteroIds && cimiteroIds.length > 0) {
+      cimiteroIds.forEach(id => {
+        params = params.append('cimiteroIds', id.toString());
+      });
+    }
+    return this.http.get<TenantStatistiche>(this.rootURL + '/tenant/' + tenantId + '/statistiche', { params });
   }
 
   getRecentDefuntiByTenant(tenantId: number, cimiteroIds?: number[], limit: number = 20): Observable<DefuntoCard[]> {

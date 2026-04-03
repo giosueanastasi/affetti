@@ -11,7 +11,7 @@ E' associato a un tenant specifico tramite `fk_tenant`.
 ## Funzionalita' disponibili
 
 - Visualizzazione del proprio tenant nella home page
-- Accesso alla dashboard del proprio tenant con filtro cimiteri e ricerca defunti
+- Accesso alla dashboard del proprio tenant con filtro cimiteri, ricerca defunti e statistiche
 - Consultazione lista domande e contratti
 - Consultazione dettaglio domande e contratti (read-only)
 - Consultazione contraenti, posti, assegnatari, utenti
