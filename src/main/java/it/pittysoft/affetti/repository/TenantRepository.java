@@ -10,4 +10,6 @@ public interface TenantRepository extends JpaRepository<Tenant, Long> {
 
 	java.util.Optional<Tenant> findBySlug(String slug);
 
+	boolean existsBySlug(String slug);
+
 }

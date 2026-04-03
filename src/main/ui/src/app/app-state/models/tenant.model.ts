@@ -5,4 +5,5 @@ export class Tenant {
   colorePrimario: string;
   coloreSecondario: string;
   slug: string;
+  sinossi: string;
 }

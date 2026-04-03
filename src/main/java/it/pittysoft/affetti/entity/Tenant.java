@@ -37,4 +37,7 @@ public class Tenant {
 	@Column(unique = true)
 	private String slug;
 
+	@Column(length = 500)
+	private String sinossi;
+
 }

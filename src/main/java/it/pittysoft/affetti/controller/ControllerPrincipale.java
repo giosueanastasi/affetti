@@ -121,8 +121,10 @@ import it.pittysoft.affetti.service.AssegnatariService;
 import it.pittysoft.affetti.service.TenantService;
 import it.pittysoft.affetti.entity.Cimiteri;
 import it.pittysoft.affetti.entity.Tenant;
+import it.pittysoft.affetti.links.CimiteroLinks;
 import it.pittysoft.affetti.links.DefuntoLinks;
 import it.pittysoft.affetti.links.TenantLinks;
+import it.pittysoft.affetti.service.CimiteriService;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -169,10 +171,10 @@ public class ControllerPrincipale {
 
 	@Autowired
 	TenantService tenantService;
-	
 
-	
-	
+	@Autowired
+	CimiteriService cimiteriService;
+
 	@GetMapping(path = UserLinks.LIST_USERS)
     public ResponseEntity<?> listUsers() {
         log.info("ApiController:  list users");
@@ -600,6 +602,71 @@ public class ControllerPrincipale {
 
 	// ==================== TENANT ENDPOINTS ====================
 
+	@PostMapping(path = TenantLinks.ADD_TENANT)
+	public ResponseEntity<?> createTenant(@RequestBody Tenant tenant, Authentication authentication) {
+		log.info("ApiController: create tenant");
+		boolean isSuperadmin = authentication.getAuthorities().stream()
+				.anyMatch(a -> a.getAuthority().equals("ROLE_SUPERADMIN"));
+		if (!isSuperadmin) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Solo SUPERADMIN puo' creare tenant");
+		}
+		Tenant saved = tenantService.saveTenant(tenant);
+		return ResponseEntity.ok(saved);
+	}
+
+	@PutMapping(path = TenantLinks.UPDATE_TENANT)
+	public ResponseEntity<?> updateTenant(@PathVariable Long id, @RequestBody Tenant tenant, Authentication authentication) {
+		log.info("ApiController: update tenant {}", id);
+		boolean isSuperadmin = authentication.getAuthorities().stream()
+				.anyMatch(a -> a.getAuthority().equals("ROLE_SUPERADMIN"));
+		if (!isSuperadmin) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Solo SUPERADMIN puo' modificare tenant");
+		}
+		Tenant updated = tenantService.updateTenant(id, tenant);
+		return ResponseEntity.ok(updated);
+	}
+
+	@org.springframework.web.bind.annotation.DeleteMapping(path = TenantLinks.DELETE_TENANT)
+	public ResponseEntity<?> deleteTenant(@PathVariable Long id, Authentication authentication) {
+		log.info("ApiController: delete tenant {}", id);
+		boolean isSuperadmin = authentication.getAuthorities().stream()
+				.anyMatch(a -> a.getAuthority().equals("ROLE_SUPERADMIN"));
+		if (!isSuperadmin) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Solo SUPERADMIN puo' eliminare tenant");
+		}
+		Optional<Tenant> tenant = tenantService.getTenantById(id);
+		if (tenant.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tenant non trovato");
+		}
+		tenantService.deleteTenant(id);
+		return ResponseEntity.ok().build();
+	}
+
+	@PostMapping(path = TenantLinks.UPLOAD_TENANT_LOGO)
+	public ResponseEntity<?> uploadTenantLogo(@PathVariable Long id,
+			@RequestParam("file") org.springframework.web.multipart.MultipartFile file,
+			Authentication authentication) {
+		log.info("ApiController: upload logo for tenant {}", id);
+		boolean isSuperadmin = authentication.getAuthorities().stream()
+				.anyMatch(a -> a.getAuthority().equals("ROLE_SUPERADMIN"));
+		if (!isSuperadmin) {
+			return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Solo SUPERADMIN puo' caricare loghi");
+		}
+		Optional<Tenant> tenantOpt = tenantService.getTenantById(id);
+		if (tenantOpt.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tenant non trovato");
+		}
+		try {
+			String logoUrl = tenantService.saveLogoFile(id, file);
+			Tenant tenant = tenantOpt.get();
+			tenant.setLogoUrl(logoUrl);
+			tenantService.saveTenant(tenant);
+			return ResponseEntity.ok(java.util.Map.of("logoUrl", logoUrl));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Errore nel caricamento del logo");
+		}
+	}
+
 	@GetMapping(path = TenantLinks.LIST_TENANTS)
 	public ResponseEntity<?> listTenants() {
 		log.info("ApiController: list tenants");
@@ -665,6 +732,36 @@ public class ControllerPrincipale {
 		log.info("ApiController: get recent defunti for tenant {}", id);
 		List<Defunti> defunti = tenantService.getRecentDefuntiByTenant(id, cimiteroIds, limit);
 		return ResponseEntity.ok(tenantService.enrichDefuntiCards(defunti));
+	}
+
+	// ==================== CIMITERI ENDPOINTS ====================
+
+	@PostMapping(path = CimiteroLinks.ADD_CIMITERO)
+	public ResponseEntity<?> saveCimitero(@RequestBody Cimiteri cimitero) {
+		log.info("ApiController: save cimitero");
+		Cimiteri saved = cimiteriService.saveCimitero(cimitero);
+		return ResponseEntity.ok(saved);
+	}
+
+	@GetMapping(path = CimiteroLinks.GET_CIMITERO)
+	public ResponseEntity<?> getCimitero(@PathVariable Long id) {
+		log.info("ApiController: get cimitero {}", id);
+		Optional<Cimiteri> cimitero = cimiteriService.getCimiteroById(id);
+		if (cimitero.isPresent()) {
+			return ResponseEntity.ok(cimitero.get());
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cimitero non trovato");
+	}
+
+	@org.springframework.web.bind.annotation.DeleteMapping(path = CimiteroLinks.DELETE_CIMITERO)
+	public ResponseEntity<?> deleteCimitero(@PathVariable Long id) {
+		log.info("ApiController: delete cimitero {}", id);
+		Optional<Cimiteri> cimitero = cimiteriService.getCimiteroById(id);
+		if (cimitero.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cimitero non trovato");
+		}
+		cimiteriService.deleteCimitero(id);
+		return ResponseEntity.ok().build();
 	}
 
 }

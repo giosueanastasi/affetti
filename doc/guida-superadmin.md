@@ -10,7 +10,11 @@ Non e' associato a nessun tenant specifico (`fk_tenant = NULL`), il che gli cons
 
 ## Funzionalita' disponibili
 
-- Visualizzazione di tutti i tenant nella home page (card tenant)
+- Visualizzazione di tutti i tenant nella home page (card tenant con logo, nome e sinossi)
+- Creazione, modifica ed eliminazione tenant dal pannello di amministrazione
+- Upload logo per ogni tenant (file immagine o URL manuale)
+- Eliminazione tenant con cascading completo (rimuove tutti i dati collegati)
+- Gestione cimiteri per ogni tenant (creazione, eliminazione) dal pannello admin
 - Accesso alla dashboard di ogni tenant con filtro cimiteri e ricerca defunti
 - Creazione e modifica domande di concessione
 - Creazione e modifica contratti

@@ -8,6 +8,7 @@ import it.pittysoft.affetti.links.ContrattoLinks;
 import it.pittysoft.affetti.links.DefuntoLinks;
 import it.pittysoft.affetti.links.DomandaLinks;
 import it.pittysoft.affetti.links.PostoLinks;
+import it.pittysoft.affetti.links.CimiteroLinks;
 import it.pittysoft.affetti.links.TenantLinks;
 import it.pittysoft.affetti.links.UserLinks;
 
@@ -44,6 +45,7 @@ public class ApiEndpoints {
 		BASE_PATH + "/domanda/*" ,
 		BASE_PATH + PostoLinks.LIST_POSTI ,
 		BASE_PATH + PostoLinks.SEARCH_POSTI ,
+		BASE_PATH + "/cimitero/*" ,
 		BASE_PATH + TenantLinks.LIST_TENANTS ,
 		BASE_PATH + "/tenant/*" ,
 		BASE_PATH + "/tenant/slug/*" ,

@@ -55,6 +55,7 @@ L'ordine di valutazione e': PUBLIC -> USER -> OPERATOR -> fallback ADMIN per tut
 | `/api/search_contraenti` | POST | Ricerca contraenti |
 | `/api/posti` | GET | Lista posti |
 | `/api/search_posti` | POST | Ricerca posti |
+| `/api/cimitero/{id}` | GET | Dettaglio cimitero |
 | `/api/tenants` | GET | Lista tenant (SUPERADMIN: tutti, altri: solo il proprio) |
 | `/api/tenant/{id}` | GET | Dettaglio tenant |
 | `/api/tenant/{id}/cimiteri` | GET | Cimiteri del tenant |
@@ -64,6 +65,12 @@ L'ordine di valutazione e': PUBLIC -> USER -> OPERATOR -> fallback ADMIN per tut
 #### Endpoint ADMIN (SUPERADMIN + ADMIN)
 | Endpoint | Metodo | Descrizione |
 |---|---|---|
+| `/api/tenant` | POST | Crea nuovo tenant (solo SUPERADMIN, guard programmatico) |
+| `/api/tenant/{id}` | PUT | Modifica tenant (solo SUPERADMIN) |
+| `/api/tenant/{id}` | DELETE | Elimina tenant con cascading completo (solo SUPERADMIN) |
+| `/api/tenant/{id}/logo` | POST | Upload logo tenant (multipart, solo SUPERADMIN) |
+| `/api/cimitero` | POST | Crea/modifica cimitero |
+| `/api/cimitero/{id}` | DELETE | Elimina cimitero |
 | `/api/user` | POST | Crea/modifica utente |
 | `/api/domanda` | POST | Crea/modifica domanda |
 | `/api/domandaFull` | POST | Crea domanda completa |

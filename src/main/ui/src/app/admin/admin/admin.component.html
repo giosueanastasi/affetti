@@ -1,1 +1,193 @@
-<p>admin works!</p>
+<div class="container mt-4">
+  <div class="d-flex align-items-center justify-content-between mb-4">
+    <h3 class="mb-0">Pannello Amministrazione</h3>
+  </div>
+
+  <!-- ===== SEZIONE TENANT ===== -->
+  <div class="card shadow-sm mb-4">
+    <div class="card-header d-flex align-items-center justify-content-between">
+      <h5 class="mb-0">Tenant</h5>
+      <button
+        *ngIf="isSuperadmin"
+        class="btn btn-sm btn-primary"
+        (click)="showTenantForm ? closeTenantForm() : openTenantForm()"
+      >
+        <span class="material-icons" style="font-size:16px; vertical-align:middle;">{{ showTenantForm ? 'close' : 'add' }}</span>
+        {{ showTenantForm ? 'Annulla' : 'Nuovo Tenant' }}
+      </button>
+    </div>
+
+    <!-- Form creazione/modifica tenant -->
+    <div class="card-body border-bottom" *ngIf="showTenantForm">
+      <h6 class="mb-3">{{ editingTenant ? 'Modifica Tenant' : 'Nuovo Tenant' }}</h6>
+      <form [formGroup]="tenantForm" (ngSubmit)="saveTenant()">
+        <div class="row g-3">
+          <div class="col-md-6">
+            <label class="form-label">Descrizione *</label>
+            <input type="text" class="form-control" formControlName="descrizione"
+              placeholder="Es. Comune di Firenze" (input)="onDescrizioneChange()">
+          </div>
+          <div class="col-md-6">
+            <label class="form-label">Slug (URL)</label>
+            <input type="text" class="form-control" formControlName="slug"
+              placeholder="Auto-generato dalla descrizione">
+            <small class="text-muted">Lascia vuoto per generazione automatica</small>
+          </div>
+          <div class="col-md-12">
+            <label class="form-label">Sinossi</label>
+            <textarea class="form-control" formControlName="sinossi" rows="2" maxlength="500"
+              placeholder="Breve descrizione del servizio cimiteriale"></textarea>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">URL Logo (manuale)</label>
+            <input type="text" class="form-control" formControlName="logoUrl"
+              placeholder="https://... oppure assets/tenants/...">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Carica Logo</label>
+            <input type="file" class="form-control" accept="image/*" (change)="onLogoFileSelected($event)">
+            <small class="text-muted">{{ logoFile ? logoFile.name : 'Sovrascrive URL manuale dopo il salvataggio' }}</small>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">Colore primario</label>
+            <div class="d-flex align-items-center gap-2">
+              <input type="color" class="form-control form-control-color" formControlName="colorePrimario">
+              <span class="small text-muted">{{ tenantForm.get('colorePrimario')?.value }}</span>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <label class="form-label">Colore secondario</label>
+            <div class="d-flex align-items-center gap-2">
+              <input type="color" class="form-control form-control-color" formControlName="coloreSecondario">
+              <span class="small text-muted">{{ tenantForm.get('coloreSecondario')?.value }}</span>
+            </div>
+          </div>
+        </div>
+        <!-- Anteprima -->
+        <div class="mt-3 p-3 rounded" *ngIf="tenantForm.get('descrizione')?.value"
+          [style.background]="'linear-gradient(135deg, ' + tenantForm.get('colorePrimario')?.value + ' 0%, ' + tenantForm.get('coloreSecondario')?.value + ' 100%)'">
+          <span class="text-white fw-bold">Anteprima: {{ tenantForm.get('descrizione')?.value }}</span>
+        </div>
+        <div class="mt-3 d-flex gap-2">
+          <button type="submit" class="btn btn-primary" [disabled]="tenantForm.invalid || savingTenant">
+            {{ savingTenant ? (uploadingLogo ? 'Caricamento logo...' : 'Salvataggio...') : (editingTenant ? 'Salva Modifiche' : 'Crea Tenant') }}
+          </button>
+          <button type="button" class="btn btn-outline-secondary" (click)="closeTenantForm()">Annulla</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Lista tenant -->
+    <div class="card-body">
+      <div class="table-responsive" *ngIf="tenants.length > 0">
+        <table class="table table-hover align-middle mb-0">
+          <thead>
+            <tr>
+              <th style="width:40px;"></th>
+              <th>Descrizione</th>
+              <th>Slug</th>
+              <th>Sinossi</th>
+              <th *ngIf="isSuperadmin" style="width:100px;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let t of tenants" [class.table-active]="t.id === selectedTenantId" style="cursor:pointer;">
+              <td (click)="selectTenant(t.id)">
+                <div class="color-dot" [style.background-color]="t.colorePrimario || '#667eea'"></div>
+              </td>
+              <td (click)="selectTenant(t.id)" class="fw-semibold">{{ t.descrizione }}</td>
+              <td (click)="selectTenant(t.id)"><code>{{ t.slug }}</code></td>
+              <td (click)="selectTenant(t.id)" class="text-muted small">{{ t.sinossi || '-' }}</td>
+              <td *ngIf="isSuperadmin">
+                <div class="d-flex gap-1">
+                  <button class="btn btn-sm btn-outline-primary" (click)="openTenantForm(t)" title="Modifica">
+                    <span class="material-icons" style="font-size:16px; vertical-align:middle;">edit</span>
+                  </button>
+                  <button class="btn btn-sm btn-outline-danger" (click)="deleteTenant(t)" title="Elimina">
+                    <span class="material-icons" style="font-size:16px; vertical-align:middle;">delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-muted mb-0" *ngIf="tenants.length === 0">Nessun tenant configurato.</p>
+    </div>
+  </div>
+
+  <!-- ===== SEZIONE CIMITERI ===== -->
+  <div class="card shadow-sm mb-4" *ngIf="selectedTenantId">
+    <div class="card-header d-flex align-items-center justify-content-between">
+      <h5 class="mb-0">
+        Cimiteri
+        <span class="badge bg-secondary ms-2" *ngIf="selectedTenant">{{ selectedTenant.descrizione }}</span>
+      </h5>
+      <button class="btn btn-sm btn-primary" (click)="toggleCimiteroForm()">
+        <span class="material-icons" style="font-size:16px; vertical-align:middle;">{{ showCimiteroForm ? 'close' : 'add' }}</span>
+        {{ showCimiteroForm ? 'Annulla' : 'Nuovo Cimitero' }}
+      </button>
+    </div>
+
+    <!-- Form creazione cimitero -->
+    <div class="card-body border-bottom" *ngIf="showCimiteroForm">
+      <form [formGroup]="cimiteroForm" (ngSubmit)="saveCimitero()">
+        <div class="row g-3">
+          <div class="col-md-4">
+            <label class="form-label">Codice *</label>
+            <input type="text" class="form-control" formControlName="codice" placeholder="Es. CIM005">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Nome *</label>
+            <input type="text" class="form-control" formControlName="nome" placeholder="Es. Cimitero Comunale">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Indirizzo</label>
+            <input type="text" class="form-control" formControlName="indirizzo" placeholder="Es. Via del Cimitero 1">
+          </div>
+          <div class="col-md-4" formGroupName="comune">
+            <label class="form-label">ID Comune *</label>
+            <input type="number" class="form-control" formControlName="id" placeholder="ID del comune di riferimento">
+            <small class="text-muted">Inserire l'ID del comune dalla tabella comuni</small>
+          </div>
+        </div>
+        <div class="mt-3 d-flex gap-2">
+          <button type="submit" class="btn btn-primary" [disabled]="cimiteroForm.invalid || savingCimitero">
+            {{ savingCimitero ? 'Salvataggio...' : 'Crea Cimitero' }}
+          </button>
+          <button type="button" class="btn btn-outline-secondary" (click)="toggleCimiteroForm()">Annulla</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Lista cimiteri -->
+    <div class="card-body">
+      <div class="table-responsive" *ngIf="cimiteri.length > 0">
+        <table class="table table-hover align-middle mb-0">
+          <thead>
+            <tr>
+              <th>Codice</th>
+              <th>Nome</th>
+              <th>Indirizzo</th>
+              <th style="width:80px;"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let c of cimiteri">
+              <td><code>{{ c.codice }}</code></td>
+              <td class="fw-semibold">{{ c.nome }}</td>
+              <td class="text-muted">{{ c.indirizzo || '-' }}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-danger" (click)="deleteCimitero(c.id, c.nome)"
+                  title="Elimina cimitero">
+                  <span class="material-icons" style="font-size:16px; vertical-align:middle;">delete</span>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-muted mb-0" *ngIf="cimiteri.length === 0">Nessun cimitero per questo tenant.</p>
+    </div>
+  </div>
+</div>
