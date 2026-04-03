@@ -41,10 +41,12 @@ public class ApiEndpoints {
 		BASE_PATH + DomandaLinks.LIST_DOMANDE ,
 		BASE_PATH + DomandaLinks.SEARCH_DOMANDE ,
 		BASE_PATH + DomandaLinks.STAMPA_DOMANDA ,
+		BASE_PATH + "/domanda/*" ,
 		BASE_PATH + PostoLinks.LIST_POSTI ,
 		BASE_PATH + PostoLinks.SEARCH_POSTI ,
 		BASE_PATH + TenantLinks.LIST_TENANTS ,
 		BASE_PATH + "/tenant/*" ,
+		BASE_PATH + "/tenant/slug/*" ,
 		BASE_PATH + "/tenant/*/cimiteri" ,
 		BASE_PATH + "/tenant/*/search_defunti" ,
 		BASE_PATH + "/tenant/*/defunti"

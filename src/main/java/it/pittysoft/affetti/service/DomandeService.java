@@ -87,6 +87,43 @@ public class DomandeService {
     public DomandeDto convertToDto(Domande domanda) {
          return domandeMapper.toDto(domanda);
     }
+
+    public DomandaModel getDomandaModelById(Long id) {
+        Domande domanda = domandeRepository.findById(id);
+        if (domanda == null) return null;
+        DomandaModel dm = new DomandaModel();
+        dm.setId(domanda.getId());
+        dm.setFk_posto(domanda.getPosto().getId());
+        dm.setFk_assegnatario(domanda.getAssegnatario().getId());
+        dm.setFk_contraente(domanda.getContraente().getId());
+        dm.setDataProtocollo(domanda.getData_protocollo());
+        dm.setNumeroProtocolloDomanda(domanda.getProtocollo());
+        dm.setTipologia(domanda.getTipologia());
+        dm.setStato(domanda.getStato());
+        dm.setCognomeContraente(domanda.getContraente().getCognome());
+        dm.setNomeContraente(domanda.getContraente().getNome());
+        dm.setComuneDiNascita(domanda.getContraente().getComune_nascita());
+        dm.setProvinciaDiNascita(domanda.getContraente().getProvincia_nascita());
+        dm.setStatoDiNascita(domanda.getContraente().getStato_nascita());
+        dm.setComuneDiResidenza(domanda.getContraente().getComune_residenza());
+        dm.setProvinciaDiResidenza(domanda.getContraente().getProvincia_residenza());
+        dm.setViaDiResidenza(domanda.getContraente().getVia_residenza());
+        dm.setCivicoDiResidenza(domanda.getContraente().getCivico_residenza());
+        dm.setCapDiResidenza(domanda.getContraente().getCap_residenza());
+        dm.setCodiceFiscale(domanda.getContraente().getCodice_fiscale());
+        dm.setTelefono(domanda.getContraente().getTelefono());
+        dm.setEmail(domanda.getContraente().getEmail());
+        dm.setNote(domanda.getContraente().getNote());
+        dm.setLoculo(domanda.getPosto().getLoculo());
+        dm.setFornice(domanda.getPosto().getFornice());
+        dm.setComuneDecesso(domanda.getAssegnatario().getComune_decesso());
+        dm.setDataDecesso(domanda.getAssegnatario().getData_decesso());
+        dm.setNomeAss(domanda.getAssegnatario().getNome());
+        dm.setCognomeAss(domanda.getAssegnatario().getCognome());
+        dm.setContratto(domanda.getContratto());
+        dm.setDataNascita(domanda.getContraente().getData_nascita());
+        return dm;
+    }
     
     public DomandaResponseSearch getDomande(DomandaRequestSearch resquestSearch, Pageable pageable) {
 		 List<Domande> findDomandeByCognomeAndNome = domandaDao.findDomandeByCognomeAndNome(resquestSearch);

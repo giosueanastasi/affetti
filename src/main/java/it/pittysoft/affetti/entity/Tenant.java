@@ -34,4 +34,7 @@ public class Tenant {
 	@Column
 	private String coloreSecondario;
 
+	@Column(unique = true)
+	private String slug;
+
 }

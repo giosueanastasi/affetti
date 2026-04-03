@@ -4,4 +4,5 @@ export class Tenant {
   logoUrl: string;
   colorePrimario: string;
   coloreSecondario: string;
+  slug: string;
 }

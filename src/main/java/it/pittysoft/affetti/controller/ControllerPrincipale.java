@@ -346,6 +346,17 @@ public class ControllerPrincipale {
         return ResponseEntity.ok(resource);
     }
 	
+	@GetMapping(path = DomandaLinks.GET_DOMANDA)
+	public ResponseEntity<?> getDomandaById(@PathVariable Long id) {
+		log.info("ApiController: get domanda {}", id);
+		DomandaModel dm = domandeService.getDomandaModelById(id);
+		if (dm != null) {
+			return ResponseEntity.ok(dm);
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Domanda non trovata");
+		}
+	}
+
 	@PostMapping(path = DomandaLinks.ADD_DOMANDA)
 	public ResponseEntity<?> saveDomanda(@RequestBody Domande domanda) {
         log.info("ApiController:  list domande");
@@ -525,10 +536,18 @@ public class ControllerPrincipale {
 				roles.add(auth.getAuthority().toString());
 			}
 	        SecurityContextHolder.getContext().setAuthentication(authentication);
-	        Key signingKey = new SecretKeySpec(jwtSecret.getBytes(StandardCharsets.UTF_8), SignatureAlgorithm.HS256.getJcaName());
-	        String jwt = Jwts.builder()
+
+	        // Fetch tenant info for the JWT
+	        Optional<Users> userOpt = usersService.findByUsername(authRequest.getUsername());
+	        io.jsonwebtoken.JwtBuilder builder = Jwts.builder()
 	                .setSubject(authRequest.getUsername())
-	                .claim("roles", roles)
+	                .claim("roles", roles);
+	        if (userOpt.isPresent() && userOpt.get().getTenant() != null) {
+	            builder.claim("tenantId", userOpt.get().getTenant().getId());
+	            builder.claim("tenantDescrizione", userOpt.get().getTenant().getDescrizione());
+	        }
+	        Key signingKey = new SecretKeySpec(jwtSecret.getBytes(StandardCharsets.UTF_8), SignatureAlgorithm.HS256.getJcaName());
+	        String jwt = builder
 	                .setIssuedAt(new Date())
 	                .setExpiration(new Date(System.currentTimeMillis() + 3600000))
 	                .signWith(signingKey, SignatureAlgorithm.HS256)
@@ -612,6 +631,17 @@ public class ControllerPrincipale {
 		}
 	}
 
+	@GetMapping(path = TenantLinks.GET_TENANT_BY_SLUG)
+	public ResponseEntity<?> getTenantBySlug(@PathVariable String slug) {
+		log.info("ApiController: get tenant by slug {}", slug);
+		Optional<Tenant> tenant = tenantService.getTenantBySlug(slug);
+		if (tenant.isPresent()) {
+			return ResponseEntity.ok(tenant.get());
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tenant non trovato");
+		}
+	}
+
 	@GetMapping(path = TenantLinks.TENANT_CIMITERI)
 	public ResponseEntity<?> getTenantCimiteri(@PathVariable Long id) {
 		log.info("ApiController: get cimiteri for tenant {}", id);
@@ -621,19 +651,20 @@ public class ControllerPrincipale {
 
 	@PostMapping(path = TenantLinks.TENANT_SEARCH_DEFUNTI)
 	public ResponseEntity<?> searchDefuntiByTenant(@PathVariable Long id,
-			@RequestParam(required = false) Long cimiteroId,
+			@RequestParam(required = false) List<Long> cimiteroIds,
 			@RequestBody DefuntiRequest request) {
 		log.info("ApiController: search defunti for tenant {}", id);
-		List<Defunti> defunti = tenantService.searchDefuntiByTenant(id, cimiteroId, request);
-		return ResponseEntity.ok(defunti);
+		List<Defunti> defunti = tenantService.searchDefuntiByTenant(id, cimiteroIds, request);
+		return ResponseEntity.ok(tenantService.enrichDefuntiCards(defunti));
 	}
 
 	@GetMapping(path = TenantLinks.TENANT_DEFUNTI)
 	public ResponseEntity<?> getRecentDefuntiByTenant(@PathVariable Long id,
+			@RequestParam(required = false) List<Long> cimiteroIds,
 			@RequestParam(defaultValue = "20") int limit) {
 		log.info("ApiController: get recent defunti for tenant {}", id);
-		List<Defunti> defunti = tenantService.getRecentDefuntiByTenant(id, limit);
-		return ResponseEntity.ok(defunti);
+		List<Defunti> defunti = tenantService.getRecentDefuntiByTenant(id, cimiteroIds, limit);
+		return ResponseEntity.ok(tenantService.enrichDefuntiCards(defunti));
 	}
 
 }

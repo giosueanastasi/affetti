@@ -17,3 +17,19 @@
 .defunto-info {
   min-width: 0;
 }
+
+.quick-btn {
+  border-width: 1px;
+  border-style: solid;
+  font-size: 0.75rem;
+  transition: opacity 0.15s ease, filter 0.15s ease;
+}
+
+.quick-btn:not(.quick-btn-inactive):hover {
+  filter: brightness(1.15);
+}
+
+.quick-btn-inactive {
+  opacity: 0.4;
+  cursor: default;
+}

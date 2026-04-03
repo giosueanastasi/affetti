@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Location } from '@angular/common';
 import { AppService } from 'src/app/app.service';
 import { CoordinateMapModalComponent } from '../coordinate-map-modal/coordinate-map-modal.component';
 
@@ -17,7 +18,8 @@ export class DettaglioDefuntoComponent implements OnInit{
 
   constructor(
     private appService: AppService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +28,10 @@ export class DettaglioDefuntoComponent implements OnInit{
     this.appService.cercaDefuntoById(this.defuntoId).subscribe(data => {
       this.defunto = data;
     })
+  }
+
+  goBack(): void {
+    this.location.back();
   }
 
   openMap(): void {

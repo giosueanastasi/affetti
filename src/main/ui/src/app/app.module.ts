@@ -59,6 +59,7 @@ import { CercaDefuntiWidgetComponent } from './shared/cerca-defunti-widget/cerca
 import { TenantCardComponent } from './shared/tenant-card/tenant-card.component';
 import { DefuntoCardComponent } from './shared/defunto-card/defunto-card.component';
 import { TenantDashboardComponent } from './anagrafiche/tenant-dashboard/tenant-dashboard.component';
+import { CimiteroCardComponent } from './shared/cimitero-card/cimitero-card.component';
 
 
 // state related imports
@@ -107,7 +108,8 @@ import { TenantDashboardComponent } from './anagrafiche/tenant-dashboard/tenant-
     CercaDefuntiWidgetComponent,
     TenantCardComponent,
     DefuntoCardComponent,
-    TenantDashboardComponent
+    TenantDashboardComponent,
+    CimiteroCardComponent
   ],
 
   imports: [

@@ -14,6 +14,6 @@ export class TenantCardComponent {
   constructor(private router: Router) { }
 
   goToTenant(): void {
-    this.router.navigate(['/tenant', this.tenant.id]);
+    this.router.navigate(['/', this.tenant.slug]);
   }
 }

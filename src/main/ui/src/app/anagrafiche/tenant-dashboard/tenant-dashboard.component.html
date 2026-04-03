@@ -19,40 +19,58 @@
     </div>
   </div>
 
-  <!-- Filtro cimitero -->
-  <div class="container mt-4" *ngIf="cimiteri.length > 1">
-    <div class="row justify-content-center">
-      <div class="col-md-6">
-        <mat-form-field appearance="outline" class="w-100">
-          <mat-label>Filtra per cimitero</mat-label>
-          <mat-select [(value)]="selectedCimiteroId" (selectionChange)="onCimiteroChange()">
-            <mat-option [value]="null">Tutti i cimiteri</mat-option>
-            <mat-option *ngFor="let cimitero of cimiteri" [value]="cimitero.id">
-              {{ cimitero.nome }}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </div>
-    </div>
-  </div>
-
   <!-- Widget ricerca defunti scoped al tenant -->
-  <div class="container mt-3">
+  <div class="container mt-4">
     <app-cerca-defunti-widget
       [tenantId]="tenant.id"
-      [cimiteroId]="selectedCimiteroId"
+      [cimiteroIds]="activeCimiteroIdsArray"
       [showBanner]="false"
       [bannerTitle]="'Cerca in ' + tenant.descrizione"
-    ></app-cerca-defunti-widget>
+    >
+      <!-- Card cimiteri proiettate dentro il widget, tra ricerca e risultati -->
+      <div class="cimiteri-filter mt-3 mb-2" *ngIf="cimiteri.length > 0">
+        <h6 class="text-muted mb-2">Cimiteri</h6>
+        <div class="row g-2">
+          <div class="col-lg-4 col-md-6" *ngFor="let cimitero of cimiteri">
+            <app-cimitero-card
+              [cimitero]="cimitero"
+              [active]="isCimiteroActive(cimitero.id)"
+              (toggled)="toggleCimitero(cimitero.id)"
+            ></app-cimitero-card>
+          </div>
+        </div>
+      </div>
+    </app-cerca-defunti-widget>
   </div>
 
-  <!-- Defunti recenti -->
+  <!-- Griglia defunti con ordinamento -->
   <div class="container mt-5" *ngIf="recentDefunti.length > 0">
-    <h4 class="mb-3">Defunti recenti</h4>
+    <div class="d-flex align-items-center justify-content-between mb-3">
+      <h4 class="mb-0">Defunti</h4>
+      <div class="d-flex align-items-center gap-2">
+        <label class="text-muted small mb-0 me-1">Ordina per</label>
+        <select class="form-select form-select-sm" style="width: auto;" [(ngModel)]="sortBy">
+          <option value="decesso_desc">Data decesso (più recente)</option>
+          <option value="decesso_asc">Data decesso (meno recente)</option>
+          <option value="cognome_asc">Cognome A–Z</option>
+          <option value="cognome_desc">Cognome Z–A</option>
+        </select>
+      </div>
+    </div>
     <div class="row g-3">
-      <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let defunto of recentDefunti">
-        <app-defunto-card [defunto]="defunto"></app-defunto-card>
+      <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let defunto of sortedDefunti">
+        <app-defunto-card
+          [defunto]="defunto"
+          [primaryColor]="tenant.colorePrimario || '#667eea'"
+          [domandaId]="defunto.domandaId"
+          [contrattoId]="defunto.contrattoId"
+          (openDomanda)="onOpenDomanda($event)"
+          (openContratto)="onOpenContratto($event)"
+        ></app-defunto-card>
       </div>
     </div>
   </div>
 </div>
+
+<app-domanda-model [domanda]="selectedDomanda"></app-domanda-model>
+<app-contratto-model *ngIf="selectedContratto" [contratto]="selectedContratto"></app-contratto-model>

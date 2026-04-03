@@ -15,4 +15,33 @@
       </div>
     </div>
   </div>
+
+  <div *ngIf="primaryColor !== null" class="card-footer bg-transparent border-top-0 pt-0 pb-2 px-3 d-flex gap-2">
+    <button
+      class="btn btn-sm quick-btn flex-fill"
+      [class.quick-btn-inactive]="!domandaId"
+      [style.background-color]="domandaId ? primaryColor : null"
+      [style.border-color]="primaryColor"
+      [style.color]="domandaId ? '#fff' : primaryColor"
+      [disabled]="!domandaId"
+      (click)="onDomandaClick($event)"
+      title="Vai alla domanda"
+    >
+      <span class="material-icons" style="font-size:14px; vertical-align:middle;">description</span>
+      Domanda
+    </button>
+    <button
+      class="btn btn-sm quick-btn flex-fill"
+      [class.quick-btn-inactive]="!contrattoId"
+      [style.background-color]="contrattoId ? primaryColor : null"
+      [style.border-color]="primaryColor"
+      [style.color]="contrattoId ? '#fff' : primaryColor"
+      [disabled]="!contrattoId"
+      (click)="onContrattoClick($event)"
+      title="Vai al contratto"
+    >
+      <span class="material-icons" style="font-size:14px; vertical-align:middle;">assignment</span>
+      Contratto
+    </button>
+  </div>
 </div>

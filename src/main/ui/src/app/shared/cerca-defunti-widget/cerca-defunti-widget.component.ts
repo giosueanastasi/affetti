@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, OnDestroy, OnChanges, SimpleChanges } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, debounceTime, switchMap, takeUntil } from 'rxjs';
@@ -11,10 +11,10 @@ import { TenantService } from 'src/app/service/tenant.service';
   templateUrl: './cerca-defunti-widget.component.html',
   styleUrls: ['./cerca-defunti-widget.component.css']
 })
-export class CercaDefuntiWidgetComponent implements OnInit, OnDestroy {
+export class CercaDefuntiWidgetComponent implements OnInit, OnDestroy, OnChanges {
 
   @Input() tenantId: number | null = null;
-  @Input() cimiteroId: number | null = null;
+  @Input() cimiteroIds: number[] | null = null;
   @Input() showBanner: boolean = true;
   @Input() bannerTitle: string = 'Ricerca Defunti';
   @Input() bannerSubtitle: string = 'Cerca tra i registri del cimitero';
@@ -57,15 +57,33 @@ export class CercaDefuntiWidgetComponent implements OnInit, OnDestroy {
     });
   }
 
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['cimiteroIds'] && !changes['cimiteroIds'].firstChange) {
+      this.rerunSearch();
+    }
+  }
+
   ngOnDestroy(): void {
     this.destroy$.next(true);
     this.destroy$.unsubscribe();
   }
 
+  private rerunSearch(): void {
+    const ricercaCorrente = this.ricerca.value?.trim();
+    if (ricercaCorrente) {
+      this.currentPage = 0;
+      this.defunti = [];
+      this.doSearch(ricercaCorrente, 0).subscribe((data: Defunto[]) => {
+        this.hasMore = data.length > this.pageSize;
+        this.defunti = data.slice(0, this.pageSize);
+      });
+    }
+  }
+
   private doSearch(ricerca: string, page: number) {
     if (this.tenantId) {
       return this.tenantService.searchDefuntiByTenant(
-        this.tenantId, ricerca, this.cimiteroId, page, this.fetchSize
+        this.tenantId, ricerca, this.cimiteroIds, page, this.fetchSize
       );
     } else {
       return this.appService.cercaDefunti(ricerca, page, this.fetchSize);

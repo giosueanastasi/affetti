@@ -57,7 +57,7 @@ public class DefuntiRepositoryCustomImpl implements DefuntiRepositoryCustom {
 	}
 
 	@Override
-	public List<Defunti> findDefuntiByTenant(Long tenantId, Long cimiteroId, DefuntiRequest request) {
+	public List<Defunti> findDefuntiByTenant(Long tenantId, List<Long> cimiteroIds, DefuntiRequest request) {
 		QDefunti qDefunti = QDefunti.defunti;
 		QPosti qPosti = QPosti.posti;
 		QAree qAree = QAree.aree;
@@ -66,8 +66,8 @@ public class DefuntiRepositoryCustomImpl implements DefuntiRepositoryCustom {
 
 		builder.and(qCimiteri.tenant.id.eq(tenantId));
 
-		if (cimiteroId != null) {
-			builder.and(qCimiteri.id.eq(cimiteroId));
+		if (cimiteroIds != null && !cimiteroIds.isEmpty()) {
+			builder.and(qCimiteri.id.in(cimiteroIds));
 		}
 
 		if (request != null && request.getRicerca() != null && !request.getRicerca().trim().isEmpty()) {
@@ -99,11 +99,18 @@ public class DefuntiRepositoryCustomImpl implements DefuntiRepositoryCustom {
 	}
 
 	@Override
-	public List<Defunti> findRecentDefuntiByTenant(Long tenantId, int limit) {
+	public List<Defunti> findRecentDefuntiByTenant(Long tenantId, List<Long> cimiteroIds, int limit) {
 		QDefunti qDefunti = QDefunti.defunti;
 		QPosti qPosti = QPosti.posti;
 		QAree qAree = QAree.aree;
 		QCimiteri qCimiteri = QCimiteri.cimiteri;
+		BooleanBuilder builder = new BooleanBuilder();
+
+		builder.and(qCimiteri.tenant.id.eq(tenantId));
+
+		if (cimiteroIds != null && !cimiteroIds.isEmpty()) {
+			builder.and(qCimiteri.id.in(cimiteroIds));
+		}
 
 		return new JPAQuery<Defunti>(em)
 				.select(qDefunti)
@@ -111,7 +118,7 @@ public class DefuntiRepositoryCustomImpl implements DefuntiRepositoryCustom {
 				.join(qDefunti.posto, qPosti)
 				.join(qPosti.area, qAree)
 				.join(qAree.cimitero, qCimiteri)
-				.where(qCimiteri.tenant.id.eq(tenantId))
+				.where(builder)
 				.orderBy(qDefunti.id.desc())
 				.limit(limit)
 				.fetch();

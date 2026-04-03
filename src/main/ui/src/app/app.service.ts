@@ -132,6 +132,10 @@ export class AppService {
     return this.http.get(this.rootURL + '/domande');
   }
 
+  getDomandaById(id: number) {
+    return this.http.get<any>(this.rootURL + '/domanda/' + id);
+  }
+
   addDomanda(domanda: any, id: number) {
     domanda.id = id;
 	  return this.http.post(this.rootURL + '/domanda', domanda);

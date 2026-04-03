@@ -6,6 +6,8 @@ export interface AuthState {
   isAuthenticated: boolean;
   username: string | null;
   roles: string[];
+  tenantId: number | null;
+  tenantDescrizione: string | null;
 }
 
 @Injectable({
@@ -16,7 +18,9 @@ export class AuthStateService {
   private readonly authState$ = new BehaviorSubject<AuthState>({
     isAuthenticated: false,
     username: null,
-    roles: []
+    roles: [],
+    tenantId: null,
+    tenantDescrizione: null
   });
 
   constructor() {
@@ -75,6 +79,14 @@ export class AuthStateService {
     return this.roles$.pipe(map(userRoles => roles.some(r => userRoles.includes(r))));
   }
 
+  get tenantDescrizione(): string | null {
+    return this.authState$.value.tenantDescrizione;
+  }
+
+  get tenantDescrizione$(): Observable<string | null> {
+    return this.authState$.pipe(map(state => state.tenantDescrizione));
+  }
+
   // Chiamato dopo login
   setAuthenticated(token: string): void {
     const payload = this.decodeToken(token);
@@ -82,7 +94,9 @@ export class AuthStateService {
       this.authState$.next({
         isAuthenticated: true,
         username: payload.sub || null,
-        roles: payload.roles || []
+        roles: payload.roles || [],
+        tenantId: payload.tenantId || null,
+        tenantDescrizione: payload.tenantDescrizione || null
       });
     }
   }
@@ -92,7 +106,9 @@ export class AuthStateService {
     this.authState$.next({
       isAuthenticated: false,
       username: null,
-      roles: []
+      roles: [],
+      tenantId: null,
+      tenantDescrizione: null
     });
   }
 

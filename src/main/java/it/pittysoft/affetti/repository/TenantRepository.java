@@ -8,4 +8,6 @@ import it.pittysoft.affetti.entity.Tenant;
 @RepositoryRestResource()
 public interface TenantRepository extends JpaRepository<Tenant, Long> {
 
+	java.util.Optional<Tenant> findBySlug(String slug);
+
 }

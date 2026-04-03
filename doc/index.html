@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Affetti - Documentazione</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #333; line-height: 1.6; background: #f5f5f5; }
+    .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
+    header { text-align: center; margin-bottom: 40px; }
+    header h1 { font-size: 2rem; color: #1a237e; margin-bottom: 4px; }
+    header h2 { font-size: 1.1rem; font-weight: 400; color: #666; margin-bottom: 16px; }
+    .badge { display: inline-block; background: #fff3e0; color: #e65100; padding: 4px 12px; border-radius: 4px; font-size: 0.85rem; }
+    .guides { list-style: none; margin-top: 32px; }
+    .guides li { margin-bottom: 12px; }
+    .guides a { display: block; padding: 16px 20px; background: #fff; border-radius: 8px; text-decoration: none; color: #1a237e; font-weight: 500; box-shadow: 0 1px 3px rgba(0,0,0,0.1); transition: transform 0.15s ease, box-shadow 0.15s ease; }
+    .guides a:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+    .guides .role { font-size: 0.8rem; color: #888; font-weight: 400; margin-left: 8px; }
+    footer { text-align: center; margin-top: 48px; font-size: 0.85rem; color: #999; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Affetti</h1>
+      <h2>Software gestionale cari scomparsi</h2>
+      <span class="badge">Applicativo in fase di sviluppo - documentazione preliminare</span>
+    </header>
+
+    <h3>Guide per ruolo</h3>
+    <ul class="guides">
+      <li><a href="guida-superadmin.md">Guida SUPERADMIN <span class="role">Gestione completa multi-tenant</span></a></li>
+      <li><a href="guida-admin.md">Guida ADMIN <span class="role">Amministrazione tenant singolo</span></a></li>
+      <li><a href="guida-operator.md">Guida OPERATOR <span class="role">Consultazione avanzata</span></a></li>
+      <li><a href="guida-user.md">Guida USER <span class="role">Consultazione base</span></a></li>
+      <li><a href="guida-utente-non-autenticato.md">Guida Utente non autenticato <span class="role">Accesso pubblico</span></a></li>
+    </ul>
+
+    <footer>
+      <p>piTTySoft srl</p>
+    </footer>
+  </div>
+</body>
+</html>

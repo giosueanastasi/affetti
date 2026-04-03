@@ -1,0 +1,46 @@
+.cimitero-card {
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  user-select: none;
+}
+
+.cimitero-card.active {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+  border-color: #667eea;
+  background-color: #fff;
+}
+
+.cimitero-card.active:hover {
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+  transform: translateY(-2px);
+}
+
+.cimitero-card.inactive {
+  box-shadow: none;
+  background-color: #f8f9fa;
+  opacity: 0.6;
+  border-color: #e9ecef;
+}
+
+.cimitero-card.inactive:hover {
+  opacity: 0.8;
+}
+
+.check-icon .material-icons {
+  font-size: 24px;
+  transition: color 0.25s ease;
+}
+
+.cimitero-card.active .check-icon .material-icons {
+  color: #667eea;
+}
+
+.cimitero-card.inactive .check-icon .material-icons {
+  color: #adb5bd;
+}
+
+.card-title {
+  font-size: 0.95rem;
+}

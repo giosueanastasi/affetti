@@ -42,7 +42,7 @@ const routes: Routes = [
   {path:'privacy-policy', component: PrivacyPolicyComponent},
   {path:'termini-condizioni', component: TerminiCondizioniComponent},
   {path: 'pitty-in', component: LoginbackdoorComponent },
-  {path: 'tenant/:id', component: TenantDashboardComponent, canActivate: [authGuard, roleGuard([Roles.SUPERADMIN, Roles.ADMIN, Roles.OPERATOR])]},
+  {path: ':slug', component: TenantDashboardComponent, canActivate: [authGuard, roleGuard([Roles.SUPERADMIN, Roles.ADMIN, Roles.OPERATOR])]},
 ];
 
 @NgModule({
