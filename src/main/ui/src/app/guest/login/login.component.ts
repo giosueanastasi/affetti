@@ -20,7 +20,7 @@ export class LoginComponent implements OnInit {
     this.authService.login(this.credentials.username, this.credentials.password).subscribe(
       (response) => {
         this.authStateService.setAuthenticated(response.token);
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       },
       (error) => {
         this.errorMessage = 'Credenziali non valide!';

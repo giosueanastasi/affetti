@@ -20,6 +20,7 @@ import { authGuard, roleGuard } from './security/auth.guard';
 import { Roles } from './app-state/enum/roles.enum';
 import { LoginbackdoorComponent } from './loginbackdoor/loginbackdoor.component';
 import { ProfileComponent } from './anagrafiche/profile/profile.component';
+import { TenantDashboardComponent } from './anagrafiche/tenant-dashboard/tenant-dashboard.component';
 
 
 const routes: Routes = [
@@ -41,6 +42,7 @@ const routes: Routes = [
   {path:'privacy-policy', component: PrivacyPolicyComponent},
   {path:'termini-condizioni', component: TerminiCondizioniComponent},
   {path: 'pitty-in', component: LoginbackdoorComponent },
+  {path: 'tenant/:id', component: TenantDashboardComponent, canActivate: [authGuard, roleGuard([Roles.SUPERADMIN, Roles.ADMIN, Roles.OPERATOR])]},
 ];
 
 @NgModule({

@@ -1,0 +1,29 @@
+.tenant-card {
+  cursor: pointer;
+  border-top: 4px solid #667eea;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  min-height: 180px;
+}
+
+.tenant-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15) !important;
+}
+
+.tenant-logo {
+  max-height: 80px;
+  max-width: 120px;
+  object-fit: contain;
+}
+
+.tenant-logo-placeholder {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+}

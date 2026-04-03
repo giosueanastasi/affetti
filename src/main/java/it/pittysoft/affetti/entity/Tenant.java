@@ -7,10 +7,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import lombok.Data;
 
 @Entity
 @Data
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Tenant {
 
 	@Id
@@ -21,5 +24,14 @@ public class Tenant {
 	@Column
 	@NotNull(message = "{NotNull.Tenant.descrizione}")
 	private String descrizione;
+
+	@Column
+	private String logoUrl;
+
+	@Column
+	private String colorePrimario;
+
+	@Column
+	private String coloreSecondario;
 
 }

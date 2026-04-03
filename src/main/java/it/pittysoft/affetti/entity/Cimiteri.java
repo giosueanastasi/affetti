@@ -56,7 +56,11 @@ public class Cimiteri {
 	@JoinColumn(name = "fk_comune", nullable = false)
 	@NotNull(message="{NotNull.Cimitero.comune}")
 	private Comuni comune;
-	
+
+	@ManyToOne(fetch = javax.persistence.FetchType.LAZY)
+	@JoinColumn(name = "fk_tenant")
+	private Tenant tenant;
+
 	@OneToMany(mappedBy = "cimitero")
 	@JsonIgnore
 	private List<Aree> aree = new ArrayList<>();

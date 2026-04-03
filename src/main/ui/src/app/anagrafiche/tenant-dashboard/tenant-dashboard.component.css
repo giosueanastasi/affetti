@@ -1,0 +1,9 @@
+.tenant-header {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.tenant-header-logo {
+  max-height: 50px;
+  max-width: 80px;
+  object-fit: contain;
+}

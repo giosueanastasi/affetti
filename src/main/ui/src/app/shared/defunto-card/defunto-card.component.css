@@ -1,0 +1,19 @@
+.defunto-card {
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.defunto-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12) !important;
+}
+
+.defunto-avatar {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+}
+
+.defunto-info {
+  min-width: 0;
+}

@@ -55,6 +55,10 @@ import { HasRoleDirective } from './security/has-role.directive';
 import { LoginbackdoorComponent } from './loginbackdoor/loginbackdoor.component';
 import { CoordinateMapModalComponent } from './anagrafiche/coordinate-map-modal/coordinate-map-modal.component';
 import { ProfileComponent } from './anagrafiche/profile/profile.component';
+import { CercaDefuntiWidgetComponent } from './shared/cerca-defunti-widget/cerca-defunti-widget.component';
+import { TenantCardComponent } from './shared/tenant-card/tenant-card.component';
+import { DefuntoCardComponent } from './shared/defunto-card/defunto-card.component';
+import { TenantDashboardComponent } from './anagrafiche/tenant-dashboard/tenant-dashboard.component';
 
 
 // state related imports
@@ -99,7 +103,11 @@ import { ProfileComponent } from './anagrafiche/profile/profile.component';
     HasRoleDirective,
     LoginbackdoorComponent,
     CoordinateMapModalComponent,
-    ProfileComponent
+    ProfileComponent,
+    CercaDefuntiWidgetComponent,
+    TenantCardComponent,
+    DefuntoCardComponent,
+    TenantDashboardComponent
   ],
 
   imports: [

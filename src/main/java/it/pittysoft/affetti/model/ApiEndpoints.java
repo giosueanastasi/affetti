@@ -8,6 +8,7 @@ import it.pittysoft.affetti.links.ContrattoLinks;
 import it.pittysoft.affetti.links.DefuntoLinks;
 import it.pittysoft.affetti.links.DomandaLinks;
 import it.pittysoft.affetti.links.PostoLinks;
+import it.pittysoft.affetti.links.TenantLinks;
 import it.pittysoft.affetti.links.UserLinks;
 
 public class ApiEndpoints {
@@ -41,7 +42,12 @@ public class ApiEndpoints {
 		BASE_PATH + DomandaLinks.SEARCH_DOMANDE ,
 		BASE_PATH + DomandaLinks.STAMPA_DOMANDA ,
 		BASE_PATH + PostoLinks.LIST_POSTI ,
-		BASE_PATH + PostoLinks.SEARCH_POSTI
+		BASE_PATH + PostoLinks.SEARCH_POSTI ,
+		BASE_PATH + TenantLinks.LIST_TENANTS ,
+		BASE_PATH + "/tenant/*" ,
+		BASE_PATH + "/tenant/*/cimiteri" ,
+		BASE_PATH + "/tenant/*/search_defunti" ,
+		BASE_PATH + "/tenant/*/defunti"
     };
     
     public static final String[] USER_ENDPOINTS = {

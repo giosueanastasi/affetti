@@ -1,1 +1,16 @@
-<p>home works!</p>
+<!-- Ricerca defunti globale (visibile a tutti) -->
+<app-cerca-defunti-widget
+  [showBanner]="true"
+  bannerTitle="Ricerca Defunti"
+  bannerSubtitle="Cerca tra i registri dei cimiteri"
+></app-cerca-defunti-widget>
+
+<!-- Sezione tenant (solo autenticati) -->
+<div *ngIf="isAuthenticated && tenants.length > 0" class="container mt-5 mb-5">
+  <h3 class="mb-4 text-center">I tuoi comuni</h3>
+  <div class="row g-4 justify-content-center">
+    <div class="col-lg-4 col-md-6" *ngFor="let tenant of tenants">
+      <app-tenant-card [tenant]="tenant"></app-tenant-card>
+    </div>
+  </div>
+</div>

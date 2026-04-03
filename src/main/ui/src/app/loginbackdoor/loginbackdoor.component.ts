@@ -19,9 +19,11 @@ export class LoginbackdoorComponent {
     { username: 'Stefano24', password: 'Stefano24', description: 'Utente standard' },
     { username: 'Giovanna98', password: 'Giovanna98', description: 'Utente standard' },
     { username: 'user', password: 'user', description: 'Ruolo USER' },
-    { username: 'admin', password: 'admin', description: 'Ruolo ADMIN' },
+    { username: 'admin_napoli', password: 'admin_napoli', description: 'ADMIN Tenant Napoli' },
     { username: 'operator', password: 'operator', description: 'Ruolo OPERATOR' },
-    { username: 'superadmin', password: 'superadmin', description: 'Ruolo SUPERADMIN' }
+    { username: 'superadmin', password: 'superadmin', description: 'Ruolo SUPERADMIN' },
+    { username: 'admin_roma', password: 'admin_roma', description: 'ADMIN Tenant Roma' },
+    { username: 'admin_milano', password: 'admin_milano', description: 'ADMIN Tenant Milano' }
   ];
 
   isLoading: string | null = null;
@@ -38,7 +40,7 @@ export class LoginbackdoorComponent {
 
     this.authService.login(user.username, user.password).subscribe({
       next: () => {
-        this.router.navigate(['/']);
+        this.router.navigate(['/home']);
       },
       error: (error) => {
         this.isLoading = null;

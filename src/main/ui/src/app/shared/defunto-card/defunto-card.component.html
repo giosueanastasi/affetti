@@ -1,0 +1,18 @@
+<div class="card defunto-card shadow-sm h-100" (click)="dettaglio()">
+  <div class="card-body d-flex align-items-center p-3">
+    <div class="me-3 flex-shrink-0">
+      <img
+        [src]="defunto.immagine_url || 'assets/default-user.webp'"
+        [alt]="defunto.nome + ' ' + defunto.cognome"
+        class="defunto-avatar rounded-circle"
+      >
+    </div>
+    <div class="flex-grow-1 defunto-info">
+      <h6 class="fw-semibold text-dark mb-1">{{ defunto.cognome }} {{ defunto.nome }}</h6>
+      <div class="text-muted small">
+        <span>N.</span> {{ defunto.data_nascita | date:'dd/MM/yyyy' }} -
+        <span>M.</span> {{ defunto.data_decesso | date:'dd/MM/yyyy' }}
+      </div>
+    </div>
+  </div>
+</div>

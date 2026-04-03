@@ -1,0 +1,58 @@
+<div *ngIf="loading" class="container mt-5 text-center">
+  <p>Caricamento...</p>
+</div>
+
+<div *ngIf="!loading && tenant">
+  <!-- Header tenant -->
+  <div class="tenant-header py-4" [style.background]="'linear-gradient(135deg, ' + (tenant.colorePrimario || '#667eea') + ' 0%, ' + (tenant.coloreSecondario || '#764ba2') + ' 100%)'">
+    <div class="container">
+      <div class="d-flex align-items-center">
+        <img
+          *ngIf="tenant.logoUrl"
+          [src]="tenant.logoUrl"
+          [alt]="tenant.descrizione"
+          class="tenant-header-logo me-3"
+          (error)="$any($event.target).style.display='none'"
+        >
+        <h2 class="text-white mb-0 fw-bold">{{ tenant.descrizione }}</h2>
+      </div>
+    </div>
+  </div>
+
+  <!-- Filtro cimitero -->
+  <div class="container mt-4" *ngIf="cimiteri.length > 1">
+    <div class="row justify-content-center">
+      <div class="col-md-6">
+        <mat-form-field appearance="outline" class="w-100">
+          <mat-label>Filtra per cimitero</mat-label>
+          <mat-select [(value)]="selectedCimiteroId" (selectionChange)="onCimiteroChange()">
+            <mat-option [value]="null">Tutti i cimiteri</mat-option>
+            <mat-option *ngFor="let cimitero of cimiteri" [value]="cimitero.id">
+              {{ cimitero.nome }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <!-- Widget ricerca defunti scoped al tenant -->
+  <div class="container mt-3">
+    <app-cerca-defunti-widget
+      [tenantId]="tenant.id"
+      [cimiteroId]="selectedCimiteroId"
+      [showBanner]="false"
+      [bannerTitle]="'Cerca in ' + tenant.descrizione"
+    ></app-cerca-defunti-widget>
+  </div>
+
+  <!-- Defunti recenti -->
+  <div class="container mt-5" *ngIf="recentDefunti.length > 0">
+    <h4 class="mb-3">Defunti recenti</h4>
+    <div class="row g-3">
+      <div class="col-lg-3 col-md-4 col-sm-6" *ngFor="let defunto of recentDefunti">
+        <app-defunto-card [defunto]="defunto"></app-defunto-card>
+      </div>
+    </div>
+  </div>
+</div>

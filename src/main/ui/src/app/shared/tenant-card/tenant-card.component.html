@@ -1,0 +1,15 @@
+<div class="card tenant-card shadow-sm h-100" (click)="goToTenant()" [style.border-top-color]="tenant.colorePrimario">
+  <div class="card-body text-center d-flex flex-column align-items-center justify-content-center">
+    <img
+      *ngIf="tenant.logoUrl"
+      [src]="tenant.logoUrl"
+      [alt]="tenant.descrizione"
+      class="tenant-logo mb-3"
+      (error)="$any($event.target).style.display='none'"
+    >
+    <div *ngIf="!tenant.logoUrl" class="tenant-logo-placeholder mb-3" [style.background-color]="tenant.colorePrimario">
+      {{ tenant.descrizione.charAt(0) }}
+    </div>
+    <h5 class="card-title mb-0">{{ tenant.descrizione }}</h5>
+  </div>
+</div>

@@ -11,5 +11,9 @@ import it.pittysoft.affetti.model.DefuntiRequest;
 public interface DefuntiRepositoryCustom {
 	
 	List<Defunti> findDefuntiByNameAndOrSurname(DefuntiRequest request);
+
+	List<Defunti> findDefuntiByTenant(Long tenantId, Long cimiteroId, DefuntiRequest request);
+
+	List<Defunti> findRecentDefuntiByTenant(Long tenantId, int limit);
 }
 

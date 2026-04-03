@@ -118,7 +118,11 @@ import it.pittysoft.affetti.service.ContrattiService;
 import it.pittysoft.affetti.service.DefuntiService;
 import it.pittysoft.affetti.service.DomandeService;
 import it.pittysoft.affetti.service.AssegnatariService;
+import it.pittysoft.affetti.service.TenantService;
+import it.pittysoft.affetti.entity.Cimiteri;
+import it.pittysoft.affetti.entity.Tenant;
 import it.pittysoft.affetti.links.DefuntoLinks;
+import it.pittysoft.affetti.links.TenantLinks;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -162,6 +166,9 @@ public class ControllerPrincipale {
 
 	@Autowired
 	DefuntiService defuntiService;
+
+	@Autowired
+	TenantService tenantService;
 	
 
 	
@@ -571,5 +578,62 @@ public class ControllerPrincipale {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-	
+
+	// ==================== TENANT ENDPOINTS ====================
+
+	@GetMapping(path = TenantLinks.LIST_TENANTS)
+	public ResponseEntity<?> listTenants() {
+		log.info("ApiController: list tenants");
+		String username = SecurityContextHolder.getContext().getAuthentication().getName();
+		Optional<Users> userOpt = usersService.findByUsername(username);
+		if (userOpt.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Utente non trovato");
+		}
+		Users user = userOpt.get();
+		boolean isSuperadmin = user.getRoles().stream()
+				.anyMatch(r -> r.getRole().equalsIgnoreCase("superadmin"));
+		if (isSuperadmin) {
+			return ResponseEntity.ok(tenantService.getAllTenants());
+		} else if (user.getTenant() != null) {
+			return ResponseEntity.ok(List.of(user.getTenant()));
+		} else {
+			return ResponseEntity.ok(List.of());
+		}
+	}
+
+	@GetMapping(path = TenantLinks.GET_TENANT)
+	public ResponseEntity<?> getTenant(@PathVariable Long id) {
+		log.info("ApiController: get tenant {}", id);
+		Optional<Tenant> tenant = tenantService.getTenantById(id);
+		if (tenant.isPresent()) {
+			return ResponseEntity.ok(tenant.get());
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Tenant non trovato");
+		}
+	}
+
+	@GetMapping(path = TenantLinks.TENANT_CIMITERI)
+	public ResponseEntity<?> getTenantCimiteri(@PathVariable Long id) {
+		log.info("ApiController: get cimiteri for tenant {}", id);
+		List<Cimiteri> cimiteri = tenantService.getCimiteriByTenant(id);
+		return ResponseEntity.ok(cimiteri);
+	}
+
+	@PostMapping(path = TenantLinks.TENANT_SEARCH_DEFUNTI)
+	public ResponseEntity<?> searchDefuntiByTenant(@PathVariable Long id,
+			@RequestParam(required = false) Long cimiteroId,
+			@RequestBody DefuntiRequest request) {
+		log.info("ApiController: search defunti for tenant {}", id);
+		List<Defunti> defunti = tenantService.searchDefuntiByTenant(id, cimiteroId, request);
+		return ResponseEntity.ok(defunti);
+	}
+
+	@GetMapping(path = TenantLinks.TENANT_DEFUNTI)
+	public ResponseEntity<?> getRecentDefuntiByTenant(@PathVariable Long id,
+			@RequestParam(defaultValue = "20") int limit) {
+		log.info("ApiController: get recent defunti for tenant {}", id);
+		List<Defunti> defunti = tenantService.getRecentDefuntiByTenant(id, limit);
+		return ResponseEntity.ok(defunti);
+	}
+
 }
